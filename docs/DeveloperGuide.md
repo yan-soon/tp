@@ -236,13 +236,14 @@ _{Explain here how the data archiving feature will be implemented}_
 
 **Target user profile**:
 
-* has a need to manage a significant number of contacts
-* prefer desktop apps over other types
-* can type fast
-* prefers typing to mouse interactions
-* is reasonably comfortable using CLI apps
+Anybody → Students → University Students → tech savvy University student → Computer Science students
+NUS Computer Science undergraduate students, who wish to keep track of their necessary modules (how many are done, how many are left), and also the total MCs tabulation.
 
-**Value proposition**: manage contacts faster than a typical mouse/GUI driven app
+
+**Value proposition**: 
+
+Keep track of your degree progress and modules taken during your time in NUS with ease. Faster and more lightweight than traditional GUI applications, view and update your progress by issuing simple text commands. Modules are conveniently categorized into their respective groupings e.g. Unrestricted Electives, Computer Science Foundations, etc.
+
 
 
 ### User stories
@@ -251,27 +252,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 | Priority | As a …​                                    | I want to …​                     | So that I can…​                                                        |
 | -------- | ------------------------------------------ | ------------------------------ | ---------------------------------------------------------------------- |
-| `* * *`  | new user                                   | see usage instructions         | refer to instructions when I forget how to use the App                 |
-| `* * *`  | user                                       | add a new person               |                                                                        |
-| `* * *`  | user                                       | delete a person                | remove entries that I no longer need                                   |
-| `* * *`  | user                                       | find a person by name          | locate details of persons without having to go through the entire list |
-| `* *`    | user                                       | hide private contact details   | minimize chance of someone else seeing them by accident                |
-| `*`      | user with many persons in the address book | sort persons by name           | locate a person easily                                                 |
+| `* * *`  | NUS Student                                | see my total Modular Credits   | know how many more I require to graduate                 |
+| `* * *`  | NUS Student                                | see my past Modules            | know what I have taken before                                                                   |
+| `* * *`  | user                                       | delete modules                 | remove entries that I no longer need                                 |
+| `* * *`  | user                                       | add modules and MCs            | keep track of my Modular progress |
+| `* *`    | first-time user                            | access the available commands  | use the app efficiently                |
+| `* *`    | user                                     | save and load my Module data   | keep track of my Modular progress                                            |
 
 *{More to be added}*
 
 ### Use cases
 
-(For all use cases below, the **System** is the `AddressBook` and the **Actor** is the `user`, unless specified otherwise)
+(For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a person**
+**Use case: Delete a Module**
 
 **MSS**
 
-1.  User requests to list persons
-2.  AddressBook shows a list of persons
-3.  User requests to delete a specific person in the list
-4.  AddressBook deletes the person
+1.  User requests to list Modules
+2.  GradPad shows a list of Modules
+3.  User requests to delete a specific Module in the list
+4.  GradPad deletes the Module
 
     Use case ends.
 
@@ -283,9 +284,59 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 3a. The given index is invalid.
 
-    * 3a1. AddressBook shows an error message.
+    * 3a1. GradPad shows an error message.
 
       Use case resumes at step 2.
+      
+**Use case : Add a Module**
+
+**MSS**
+
+1. User requests to list Modules
+2. GradPad shows a list of Modules
+3. User requests to add a specific Module into the list
+4. GradPad adds the module
+
+    Use case ends.
+    
+**Extensions**
+
+* 2a. The list is empty.
+
+  Use case ends.
+  
+* 3a. The given module is invalid.
+
+    * 3a1. GradPad shows an error message.
+    
+      Use case resumes at step 2.
+      
+**Use case : View help**
+
+**MSS**
+
+1. User requests to view help commands
+2. GradPad shows a list of commands
+
+    Use case ends.
+    
+**Use case : view modules**
+
+**MSS**
+
+1. User requests to view current list of Modules
+2. GradPad shows current list of Modules
+
+    Use case ends.
+    
+**Use case : exit GradPad**
+
+**MSS**
+
+1. User requests to exit GradPad
+2. GradPad exits
+
+    Use case ends.
 
 *{More to be added}*
 

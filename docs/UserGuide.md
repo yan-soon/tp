@@ -27,7 +27,7 @@ title: User Guide
 
    * **`add`**`CS2103T 4` : Adds a module named `CS2103T` with `4` modular credits to the GradPad.
 
-   * **`delete`**`3` : Deletes the 3rd module shown in the current list.
+   * **`delete`**`CS2103T` : Deletes the module titled `CS2103T` in the current list.
 
    * **`exit`** : Exits the app.
 
@@ -53,7 +53,7 @@ title: User Guide
     
 1. Deleting a module
 
-    * Allows a usr to delete unwanted modules
+    * Allows a user to delete unwanted modules
     
 1. Check modular credits (MCs)
 

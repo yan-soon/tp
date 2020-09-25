@@ -89,6 +89,30 @@ title: User Guide
 
 </div>
 
+### View Added Modules : `list`
+
+List all added modules.
+
+Format: `list`
+
+Example of usage: `list`
+
+Expected outcome:
+
+<img src="images/list.png" width="550px" height="350px">
+
+### Deleting a Module : `delete`
+
+Removes a module from the current list of modules.
+
+Format: `delete MODULE`
+
+Example of usage: `delete CS2103T`
+
+Expected outcome:
+
+<img src="images/delete.png" width="550px" height="350px">
+
 ### Check Modular Credits : `checkmc`
 
 Shows current amount of Modular Credits achieved.
@@ -99,8 +123,7 @@ Example of usage: `checkmc`
 
 Expected outcome:
 
-
-![checkmc command](images/checkmc.png)
+<img src="images/checkmc.png" width="550px" height="350px">
 
 ### Save : `save`
 
@@ -112,7 +135,7 @@ Example of usage: `save`
 
 Expected outcome:
 
-![checkmc command](images/save.png)
+<img src="images/save.png" width="550px" height="350px">
 
 ### Exit : `exit`
 
@@ -124,14 +147,14 @@ Example of usage: `exit`
 
 Expected outcome:
 
-![checkmc command](images/exit.png)
+<img src="images/exit.png" width="550px" height="350px">
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GradPad home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -140,7 +163,7 @@ Expected outcome:
 Action | Format, Examples
 --------|------------------
 **Add** | `add {module description} {modular credits}` <br> e.g. `add CS2100 4`
-**Delete** | `delete {module description}`<br> e.g. `delete CS2103T`
+**Delete** | `delete {module}`<br> e.g. `delete CS2103T`
 **List** | `list`
 **Check MCs** | `checkmc`
 **Help** | `help`

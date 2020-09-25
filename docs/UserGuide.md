@@ -89,6 +89,30 @@ title: User Guide
 
 </div>
 
+### View Added Modules : `list`
+
+List all added modules.
+
+Format: `list`
+
+Example of usage: `list`
+
+Expected outcome:
+
+<img scr="images/list.png" width="500" height="350">
+
+### Deleting a Module : `delete`
+
+Deletes a module with the selected title.
+
+Format: `delete MODULE`
+
+Example of usage: `delete CS2103T`
+
+Expected outcome:
+
+<img scr="images/delete.png" width="500" height="350">
+
 ### Check Modular Credits : `checkmc`
 
 Shows current amount of Modular Credits achieved.
@@ -99,8 +123,7 @@ Example of usage: `checkmc`
 
 Expected outcome:
 
-
-![checkmc command](images/checkmc.png)
+<img scr="images/checkmc.png" width="500" height="350">
 
 ### Save : `save`
 
@@ -112,7 +135,7 @@ Example of usage: `save`
 
 Expected outcome:
 
-![checkmc command](images/save.png)
+<img scr="images/save.png" width="500" height="350">
 
 ### Exit : `exit`
 
@@ -124,14 +147,14 @@ Example of usage: `exit`
 
 Expected outcome:
 
-![checkmc command](images/exit.png)
+<img scr="images/exit.png" width="500" height="350">
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous AddressBook home folder.
+**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GradPad home folder.
 
 --------------------------------------------------------------------------------------------------------------------
 

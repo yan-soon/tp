@@ -99,11 +99,11 @@ Example of usage: `list`
 
 Expected outcome:
 
-<img scr="images/list.png" width="500" height="350">
+<img src="images/list.png" width="550px" height="350px">
 
 ### Deleting a Module : `delete`
 
-Deletes a module with the selected title.
+Removes a module from the current list of modules.
 
 Format: `delete MODULE`
 
@@ -111,7 +111,7 @@ Example of usage: `delete CS2103T`
 
 Expected outcome:
 
-<img scr="images/delete.png" width="500" height="350">
+<img src="images/delete.png" width="550px" height="350px">
 
 ### Check Modular Credits : `checkmc`
 
@@ -123,7 +123,7 @@ Example of usage: `checkmc`
 
 Expected outcome:
 
-<img scr="images/checkmc.png" width="500" height="350">
+<img src="images/checkmc.png" width="550px" height="350px">
 
 ### Save : `save`
 
@@ -135,7 +135,7 @@ Example of usage: `save`
 
 Expected outcome:
 
-<img scr="images/save.png" width="500" height="350">
+<img src="images/save.png" width="550px" height="350px">
 
 ### Exit : `exit`
 
@@ -147,7 +147,7 @@ Example of usage: `exit`
 
 Expected outcome:
 
-<img scr="images/exit.png" width="500" height="350">
+<img src="images/exit.png" width="550px" height="350px">
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -163,7 +163,7 @@ Expected outcome:
 Action | Format, Examples
 --------|------------------
 **Add** | `add {module description} {modular credits}` <br> e.g. `add CS2100 4`
-**Delete** | `delete {module description}`<br> e.g. `delete CS2103T`
+**Delete** | `delete {module}`<br> e.g. `delete CS2103T`
 **List** | `list`
 **Check MCs** | `checkmc`
 **Help** | `help`

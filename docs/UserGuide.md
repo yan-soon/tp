@@ -3,7 +3,6 @@ layout: page
 title: User Guide
 ---
 
-AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, AB3 can get your contact management tasks done faster than traditional GUI apps.
 
 * Table of Contents
 {:toc}
@@ -14,9 +13,9 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `addressbook.jar` from [here](https://github.com/se-edu/addressbook-level3/releases).
+1. Download the latest `GradPad.jar` from [here](https://github.com/AY2021S1-CS2103T-T09-1/tp/releases).
 
-1. Copy the file to the folder you want to use as the _home folder_ for your AddressBook.
+1. Copy the file to the folder you want to use as the _home folder_ for your GradPad.
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -24,19 +23,51 @@ AddressBook Level 3 (AB3) is a **desktop app for managing contacts, optimized fo
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
-   * **`list`** : Lists all contacts.
+   * **`list`** : Lists all added modules.
 
-   * **`add`**`n/John Doe p/98765432 e/johnd@example.com a/John street, block 123, #01-01` : Adds a contact named `John Doe` to the Address Book.
+   * **`add`**`CS2103T 4` : Adds a module named `CS2103T` with `4` modular credits to the GradPad.
 
-   * **`delete`**`3` : Deletes the 3rd contact shown in the current list.
-
-   * **`clear`** : Deletes all contacts.
+   * **`delete`**`3` : Deletes the 3rd module shown in the current list.
 
    * **`exit`** : Exits the app.
 
-1. Refer to the [Features](#features) below for details of each command.
+1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
+
+## Feature Summary List
+
+1. Viewing Help
+
+    * Allows user to view a list of all possible commands
+    
+1. Adding a module
+
+    * Allows user to specify module description
+    
+    * Allows user to specify no. of modular credits
+    
+1. View added modules
+
+    * Allows user to check all their added modules
+    
+1. Deleting a module
+
+    * Allows a usr to delete unwanted modules
+    
+1. Check modular credits (MCs)
+
+    * Allows user to check their accumulated modular credit score
+    
+1. Exiting the program
+
+    * Allows user to terminate the program
+    
+1. Saving the data
+
+    * Allows users to save their current list of modules on their hard disk
+    
+    Refer to [features](#features) below for details on all commands.
 
 ## Features
 

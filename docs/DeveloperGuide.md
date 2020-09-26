@@ -339,15 +339,25 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 ### Non-Functional Requirements
 
 1.  Should work on any _mainstream OS_ as long as it has Java `11` or above installed.
-2.  Should be able to hold up to 1000 persons without a noticeable sluggishness in performance for typical usage.
-3.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+2.  Should work on both 32-bit and 64-bit environments.
+3.  Should be backwards compatible with data produced by earlier versions of the application.
+4.  Should be able to hold up to 1000 modules without a noticeable sluggishness in performance for typical usage.
+5.  A user with above average typing speed for regular English text (i.e. not code, not system admin commands) should be able to accomplish most of the tasks faster using commands than using the mouse.
+6.  Should be able to respond within one seconds.
+7.  Should be usable by a novice who has never done module tracking of any sort.
+8.  The application is not required to handle module tracking by NUS students outside of the Computer Science major. 
 
 *{More to be added}*
 
 ### Glossary
 
 * **Mainstream OS**: Windows, Linux, Unix, OS-X
-* **Private contact detail**: A contact detail that is not meant to be shared with others
+* **Module Code**: Each module of study has a unique module code consisting of a two- or three-letter prefix that generally denotes the discipline, and four digits.
+   * **First digit**: Represents the level of the module, i.e., 1000 indicates a Level 1 module and 2000, a Level 2 module, etc.
+   * **Second digit**: Indicates the type of module, i.e., 1 for essential, 2 for elective, 3 for enrichment.
+* **Modular Credit (MC)**: A unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload. The MC-value of a module is derived by dividing the estimated total number of workload hours per week for that module by the credit factor of 2.5 (i.e., one MC is equivalent to 2.5 hours of study and preparation per week).
+
+*{More to be added}*
 
 --------------------------------------------------------------------------------------------------------------------
 

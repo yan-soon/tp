@@ -300,10 +300,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends.
     
 **Extensions**
-
-* 2a. The list is empty.
-
-  Use case ends.
   
 * 3a. The given module is invalid.
 

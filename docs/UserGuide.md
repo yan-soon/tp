@@ -89,6 +89,30 @@ title: User Guide
 
 </div>
 
+### Viewing Help : `help`
+
+Lists all possible commands and their functions.
+
+Format: `help`
+
+Example of usage: `help`
+
+Expected outcome:
+
+<img src="images/help.png" width="550px" height="350px">
+
+### Adding a Module : `add`
+
+Adds a new module.
+
+Format: `add {module code} {modular credits}`
+
+Example of usage: `add CS2103T 4`
+
+Expected outcome:
+
+<img src="images/add.png" width="550px" height="350px">
+
 ### View Added Modules : `list`
 
 List all added modules.
@@ -105,7 +129,7 @@ Expected outcome:
 
 Removes a module from the current list of modules.
 
-Format: `delete MODULE`
+Format: `delete {module code}`
 
 Example of usage: `delete CS2103T`
 

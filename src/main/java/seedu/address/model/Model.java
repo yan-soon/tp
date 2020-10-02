@@ -42,7 +42,7 @@ public interface Model {
     /**
      * Sets the user prefs' GradPad file path.
      */
-    void setAddressBookFilePath(Path gradPadFilePath);
+    void setGradPadFilePath(Path gradPadFilePath);
 
     /**
      * Replaces GradPad data with the data in {@code gradPad}.
@@ -74,7 +74,7 @@ public interface Model {
      * {@code target} must exist in the GradPad.
      * The module identity of {@code editedModule} must not be the same as another existing module in the GradPad.
      */
-    void setPerson(Module target, Module editedModule);
+    void setModule(Module target, Module editedModule);
 
     /** Returns an unmodifiable view of the filtered module list */
     ObservableList<Module> getFilteredModuleList();

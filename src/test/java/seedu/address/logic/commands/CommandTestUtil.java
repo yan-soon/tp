@@ -15,10 +15,10 @@ import java.util.List;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
-import seedu.address.model.AddressBook;
+import seedu.address.model.GradPad;
 import seedu.address.model.Model;
-import seedu.address.model.person.NameContainsKeywordsPredicate;
-import seedu.address.model.person.Person;
+import seedu.address.model.module.ModuleCodeContainsKeywordsPredicate;
+import seedu.address.model.module.Module;
 import seedu.address.testutil.EditPersonDescriptorBuilder;
 
 /**
@@ -111,23 +111,23 @@ public class CommandTestUtil {
     public static void assertCommandFailure(Command command, Model actualModel, String expectedMessage) {
         // we are unable to defensively copy the model for comparison later, so we can
         // only do so by copying its components.
-        AddressBook expectedAddressBook = new AddressBook(actualModel.getGradPad());
-        List<Person> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
+        GradPad expectedGradPad = new GradPad(actualModel.getGradPad());
+        List<Module> expectedFilteredList = new ArrayList<>(actualModel.getFilteredModuleList());
 
         assertThrows(CommandException.class, expectedMessage, () -> command.execute(actualModel));
-        assertEquals(expectedAddressBook, actualModel.getGradPad());
+        assertEquals(expectedGradPad, actualModel.getGradPad());
         assertEquals(expectedFilteredList, actualModel.getFilteredModuleList());
     }
     /**
      * Updates {@code model}'s filtered list to show only the person at the given {@code targetIndex} in the
      * {@code model}'s address book.
      */
-    public static void showPersonAtIndex(Model model, Index targetIndex) {
+    public static void showModuleAtIndex(Model model, Index targetIndex) {
         assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleList().size());
 
-        Person person = model.getFilteredModuleList().get(targetIndex.getZeroBased());
+        Module person = model.getFilteredModuleList().get(targetIndex.getZeroBased());
         final String[] splitName = person.getName().fullName.split("\\s+");
-        model.updateFilteredModuleList(new NameContainsKeywordsPredicate(Arrays.asList(splitName[0])));
+        model.updateFilteredModuleList(new ModuleCodeContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 
         assertEquals(1, model.getFilteredModuleList().size());
     }

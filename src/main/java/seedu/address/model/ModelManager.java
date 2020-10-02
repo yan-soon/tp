@@ -67,14 +67,14 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public Path getAddressBookFilePath() {
+    public Path getGradPadFilePath() {
         return userPrefs.getAddressBookFilePath();
     }
 
     @Override
-    public void setAddressBookFilePath(Path addressBookFilePath) {
-        requireNonNull(addressBookFilePath);
-        userPrefs.setAddressBookFilePath(addressBookFilePath);
+    public void setAddressBookFilePath(Path gradPadFilePath) {
+        requireNonNull(gradPadFilePath);
+        userPrefs.setAddressBookFilePath(gradPadFilePath);
     }
 
     //=========== AddressBook ================================================================================
@@ -85,12 +85,12 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ReadOnlyAddressBook getAddressBook() {
+    public ReadOnlyAddressBook getGradPad() {
         return addressBook;
     }
 
     @Override
-    public boolean hasPerson(Person person) {
+    public boolean hasModule(Person person) {
         requireNonNull(person);
         return addressBook.hasPerson(person);
     }
@@ -103,7 +103,7 @@ public class ModelManager implements Model {
     @Override
     public void addPerson(Person person) {
         addressBook.addPerson(person);
-        updateFilteredPersonList(PREDICATE_SHOW_ALL_PERSONS);
+        updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 
     @Override
@@ -120,7 +120,7 @@ public class ModelManager implements Model {
      * {@code versionedAddressBook}
      */
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Person> getFilteredModuleList() {
         return filteredPersons;
     }
 

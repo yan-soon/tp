@@ -21,7 +21,7 @@ public class GradPadBuilder {
     }
 
     /**
-     * Adds a new {@code Person} to the {@code GradPad} that we are building.
+     * Adds a new {@code Module} to the {@code GradPad} that we are building.
      */
     public GradPadBuilder withModule(Module module) {
         gradPad.addModule(module);

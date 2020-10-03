@@ -9,8 +9,8 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
 
 /**
- * Wraps all data at the gradpad level
- * Duplicates are not allowed (by .isSamePerson comparison)
+ * Wraps all data at the GradPad level
+ * Duplicates are not allowed (by .isSameModule comparison)
  */
 public class GradPad implements ReadOnlyGradPad {
 

@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
-import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.*;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.GuiSettings;
@@ -30,7 +30,7 @@ public class ModelManagerTest {
 
     @Test
     public void setUserPrefs_nullUserPrefs_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setUserPrefs(null));
     }
 
     @Test
@@ -49,7 +49,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setGuiSettings(null));
     }
 
     @Test
@@ -61,7 +61,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGradPadFilePath_nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.setGradPadFilePath(null));
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.setGradPadFilePath(null));
     }
 
     @Test
@@ -73,28 +73,28 @@ public class ModelManagerTest {
 
     @Test
     public void hasModule_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> modelManager.hasModule(null));
+        Assertions.assertThrows(NullPointerException.class, () -> modelManager.hasModule(null));
     }
 
     @Test
     public void hasModule_moduleNotInGradPad_returnsFalse() {
-        assertFalse(modelManager.hasModule(ALICE));
+        assertFalse(modelManager.hasModule(CS2103T));
     }
 
     @Test
     public void hasModule_moduleInGradPad_returnsTrue() {
-        modelManager.addModule(ALICE);
-        assertTrue(modelManager.hasModule(ALICE));
+        modelManager.addModule(CS2103T);
+        assertTrue(modelManager.hasModule(CS2103T));
     }
 
     @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
     }
 
     @Test
     public void equals() {
-        GradPad gradPad = new GradPadBuilder().withModule(ALICE).withModule(BENSON).build();
+        GradPad gradPad = new GradPadBuilder().withModule(CS2103T).withModule(CS3216).build();
         GradPad differentGradPad = new GradPad();
         UserPrefs userPrefs = new UserPrefs();
 
@@ -116,7 +116,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentGradPad, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = ALICE.getModuleCode().moduleCode.split("\\s+");
+        String[] keywords = CS2103T.getModuleCode().moduleCode.split("\\s+");
         modelManager.updateFilteredModuleList(new ModuleCodeContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(gradPad, userPrefs)));
 

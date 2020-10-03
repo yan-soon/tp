@@ -26,8 +26,10 @@ import seedu.address.testutil.EditPersonDescriptorBuilder;
  */
 public class CommandTestUtil {
 
+    public static final String VALID_CODE_CS2103T = "CS2103T";
     public static final String VALID_CODE_CS3216 = "CS3216";
     public static final String VALID_CODE_CS2040 = "CS2040";
+    public static final String VALID_CREDITS_CS2103T = "4";
     public static final String VALID_CREDITS_CS3216 = "5";
     public static final String VALID_CREDITS_CS2040 = "4";
     public static final String VALID_TAG_NON_CORE = "nonCore";

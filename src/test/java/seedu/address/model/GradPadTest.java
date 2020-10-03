@@ -3,13 +3,13 @@ package seedu.address.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2040;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.ALICE;
+import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.CS3216;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
@@ -18,6 +18,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.FXCollections;
@@ -37,7 +38,7 @@ public class GradPadTest {
 
     @Test
     public void resetData_null_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> gradPad.resetData(null));
+        Assertions.assertThrows(NullPointerException.class, () -> gradPad.resetData(null));
     }
 
     @Test
@@ -56,36 +57,36 @@ public class GradPadTest {
         List<Module> newModules = Arrays.asList(CS3216, editedCS3216);
         GradPadStub newData = new GradPadStub(newModules);
 
-        assertThrows(DuplicateModuleException.class, () -> gradPad.resetData(newData));
+        Assertions.assertThrows(DuplicateModuleException.class, () -> gradPad.resetData(newData));
     }
 
     @Test
     public void hasModule_nullModule_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> gradPad.hasModule(null));
+        Assertions.assertThrows(NullPointerException.class, () -> gradPad.hasModule(null));
     }
 
     @Test
     public void hasModule_moduleNotInGradPad_returnsFalse() {
-        assertFalse(gradPad.hasModule(ALICE));
+        assertFalse(gradPad.hasModule(CS2103T));
     }
 
     @Test
     public void hasModule_moduleInGradPad_returnsTrue() {
-        gradPad.addModule(ALICE);
-        assertTrue(gradPad.hasModule(ALICE));
+        gradPad.addModule(CS2103T);
+        assertTrue(gradPad.hasModule(CS2103T));
     }
 
     @Test // Still needs changing
     public void hasModule_moduleWithSameIdentityFieldsInGradPad_returnsTrue() {
-        gradPad.addModule(ALICE);
-        Module editedAlice = new ModuleBuilder(ALICE).withCode(VALID_CODE_CS2040).withTags(VALID_TAG_CORE)
+        gradPad.addModule(CS2103T);
+        Module editedModule = new ModuleBuilder(CS2103T).withCode(VALID_CODE_CS2103T).withTags(VALID_TAG_CORE)
                 .build();
-        assertTrue(gradPad.hasModule(editedAlice));
+        assertTrue(gradPad.hasModule(editedModule));
     }
 
     @Test
     public void getModuleList_modifyList_throwsUnsupportedOperationException() {
-        assertThrows(UnsupportedOperationException.class, () -> gradPad.getModuleList().remove(0));
+        Assertions.assertThrows(UnsupportedOperationException.class, () -> gradPad.getModuleList().remove(0));
     }
 
     /**

@@ -36,14 +36,14 @@ public class ModelManagerTest {
     @Test
     public void setUserPrefs_validUserPrefs_copiesUserPrefs() {
         UserPrefs userPrefs = new UserPrefs();
-        userPrefs.setGradPadFilePath(Paths.get("address/book/file/path"));
+        userPrefs.setGradPadFilePath(Paths.get("gradpad/file/path"));
         userPrefs.setGuiSettings(new GuiSettings(1, 2, 3, 4));
         modelManager.setUserPrefs(userPrefs);
         assertEquals(userPrefs, modelManager.getUserPrefs());
 
         // Modifying userPrefs should not modify modelManager's userPrefs
         UserPrefs oldUserPrefs = new UserPrefs(userPrefs);
-        userPrefs.setGradPadFilePath(Paths.get("new/address/book/file/path"));
+        userPrefs.setGradPadFilePath(Paths.get("new/gradpad/file/path"));
         assertEquals(oldUserPrefs, modelManager.getUserPrefs());
     }
 
@@ -66,7 +66,7 @@ public class ModelManagerTest {
 
     @Test
     public void setGradPadFilePath_validPath_setsGradPadFilePath() {
-        Path path = Paths.get("address/book/file/path");
+        Path path = Paths.get("gradpad/file/path");
         modelManager.setGradPadFilePath(path);
         assertEquals(path, modelManager.getGradPadFilePath());
     }
@@ -116,7 +116,7 @@ public class ModelManagerTest {
         assertFalse(modelManager.equals(new ModelManager(differentGradPad, userPrefs)));
 
         // different filteredList -> returns false
-        String[] keywords = CS2103T.getModuleCode().moduleCode.split("\\s+");
+        String[] keywords = { CS2103T.getModuleCode().moduleCode };
         modelManager.updateFilteredModuleList(new ModuleCodeContainsKeywordsPredicate(Arrays.asList(keywords)));
         assertFalse(modelManager.equals(new ModelManager(gradPad, userPrefs)));
 

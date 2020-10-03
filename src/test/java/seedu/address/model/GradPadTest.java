@@ -79,8 +79,7 @@ public class GradPadTest {
     @Test // Still needs changing
     public void hasModule_moduleWithSameIdentityFieldsInGradPad_returnsTrue() {
         gradPad.addModule(CS2103T);
-        Module editedModule = new ModuleBuilder(CS2103T).withCode(VALID_CODE_CS2103T).withTags(VALID_TAG_CORE)
-                .build();
+        Module editedModule = new ModuleBuilder(CS2103T).withTags(VALID_TAG_NON_CORE).build();
         assertTrue(gradPad.hasModule(editedModule));
     }
 

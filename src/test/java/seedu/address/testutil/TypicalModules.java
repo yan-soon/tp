@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.model.AddressBook;
+import seedu.address.model.GradPad;
 import seedu.address.model.module.Module;
 
 /**
@@ -53,17 +53,17 @@ public class TypicalModules {
     private TypicalModules() {} // prevents instantiation
 
     /**
-     * Returns an {@code AddressBook} with all the typical persons.
+     * Returns an {@code GradPad} with all the typical modules.
      */
-    public static AddressBook getTypicalAddressBook() {
-        AddressBook ab = new AddressBook();
+    public static GradPad getTypicalGradPad() {
+        GradPad ab = new GradPad();
         for (Module module: getTypicalModules()) {
-            ab.addPerson(module);
+            ab.addModule(module);
         }
         return ab;
     }
 
     public static List<Module> getTypicalModules() {
-        return new ArrayList<>(Arrays.asList(ALICE, BENSON, CARL, DANIEL, ELLE, FIONA, GEORGE));
+        return new ArrayList<>(Arrays.asList(CS2103T, CS3216));
     }
 }

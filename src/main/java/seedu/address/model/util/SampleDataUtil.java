@@ -4,15 +4,15 @@ import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-import seedu.address.model.AddressBook;
-import seedu.address.model.ReadOnlyAddressBook;
+import seedu.address.model.GradPad;
+import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Module;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code GradPad} with sample data.
  */
 public class SampleDataUtil {
     public static Module[] getSampleModules() {
@@ -32,8 +32,8 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyAddressBook getSampleAddressBook() {
-        AddressBook sampleAb = new AddressBook();
+    public static ReadOnlyGradPad getSampleAddressBook() {
+        GradPad sampleAb = new GradPad();
         for (Module sampleModule : getSampleModules()) {
             sampleAb.addModule(sampleModule);
         }

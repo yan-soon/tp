@@ -12,7 +12,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.tag.Tag;
 
 /**
- * Contains utility methods for populating {@code AddressBook} with sample data.
+ * Contains utility methods for populating {@code GradPad} with sample data.
  */
 public class SampleDataUtil {
     public static Module[] getSampleModules() {

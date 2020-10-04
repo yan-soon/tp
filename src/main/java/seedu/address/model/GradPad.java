@@ -48,7 +48,7 @@ public class GradPad implements ReadOnlyGradPad {
     }
 
     /**
-     * Resets the existing data of this {@code AddressBook} with {@code newData}.
+     * Resets the existing data of this {@code GradPad} with {@code newData}.
      */
     public void resetData(ReadOnlyGradPad newData) {
         requireNonNull(newData);

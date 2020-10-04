@@ -14,7 +14,7 @@ import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGradPad;
-import seedu.address.model.person.Person;
+import seedu.address.model.module.Module;
 import seedu.address.storage.Storage;
 
 /**
@@ -55,12 +55,12 @@ public class LogicManager implements Logic {
     }
 
     @Override
-    public ReadOnlyGradPad getAddressBook() {
+    public ReadOnlyGradPad getGradPad() {
         return model.getGradPad();
     }
 
     @Override
-    public ObservableList<Person> getFilteredPersonList() {
+    public ObservableList<Module> getFilteredModuleList() {
         return model.getFilteredModuleList();
     }
 

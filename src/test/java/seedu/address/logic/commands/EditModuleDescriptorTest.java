@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
-public class EditPersonDescriptorTest {
+public class EditModuleDescriptorTest {
 
     @Test
     public void equals() {

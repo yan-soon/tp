@@ -24,9 +24,9 @@ public class StorageManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage = new JsonAddressBookStorage(getTempFilePath("ab"));
+        JsonGradPadStorage gradPadStorage = new JsonGradPadStorage(getTempFilePath("ab"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(getTempFilePath("prefs"));
-        storageManager = new StorageManager(addressBookStorage, userPrefsStorage);
+        storageManager = new StorageManager(gradPadStorage, userPrefsStorage);
     }
 
     private Path getTempFilePath(String fileName) {
@@ -48,21 +48,21 @@ public class StorageManagerTest {
     }
 
     @Test
-    public void addressBookReadSave() throws Exception {
+    public void gradPadReadSave() throws Exception {
         /*
          * Note: This is an integration test that verifies the StorageManager is properly wired to the
-         * {@link JsonAddressBookStorage} class.
+         * {@link JsonGradPadStorage} class.
          * More extensive testing of UserPref saving/reading is done in {@link JsonGradPadStorageTest} class.
          */
         GradPad original = getTypicalGradPad();
-        storageManager.saveAddressBook(original);
-        ReadOnlyGradPad retrieved = storageManager.readAddressBook().get();
+        storageManager.saveGradPad(original);
+        ReadOnlyGradPad retrieved = storageManager.readGradPad().get();
         assertEquals(original, new GradPad(retrieved));
     }
 
     @Test
-    public void getAddressBookFilePath() {
-        assertNotNull(storageManager.getAddressBookFilePath());
+    public void getGradPadFilePath() {
+        assertNotNull(storageManager.getGradPadFilePath());
     }
 
 }

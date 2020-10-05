@@ -84,16 +84,16 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCredits_validValueWithoutWhitespace_returnsPhone() throws Exception {
+    public void parseCredits_validValueWithoutWhitespace_returnCredits() throws Exception {
         ModularCredits expectedCredits = new ModularCredits(VALID_CREDITS);
         assertEquals(expectedCredits, ParserUtil.parseModularCredits(VALID_CREDITS));
     }
 
     @Test
-    public void parseCredits_validValueWithWhitespace_returnsTrimmedPhone() throws Exception {
-        String phoneWithWhitespace = WHITESPACE + VALID_CREDITS + WHITESPACE;
+    public void parseCredits_validValueWithWhitespace_returnsTrimmedCredits() throws Exception {
+        String creditsWithWhitespace = WHITESPACE + VALID_CREDITS + WHITESPACE;
         ModularCredits expectedCredits = new ModularCredits(VALID_CREDITS);
-        assertEquals(expectedCredits, ParserUtil.parseModularCredits(phoneWithWhitespace));
+        assertEquals(expectedCredits, ParserUtil.parseModularCredits(creditsWithWhitespace));
     }
     
     @Test

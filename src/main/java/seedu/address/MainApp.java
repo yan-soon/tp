@@ -19,8 +19,8 @@ import seedu.address.model.*;
 import seedu.address.model.GradPad;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.util.SampleDataUtil;
-import seedu.address.storage.AddressBookStorage;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.GradPadStorage;
+import seedu.address.storage.JsonGradPadStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.Storage;
 import seedu.address.storage.StorageManager;
@@ -53,8 +53,8 @@ public class MainApp extends Application {
 
         UserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(config.getUserPrefsFilePath());
         UserPrefs userPrefs = initPrefs(userPrefsStorage);
-        AddressBookStorage addressBookStorage = new JsonAddressBookStorage(userPrefs.getGradPadFilePath());
-        storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        GradPadStorage gradPadStorage = new JsonGradPadStorage(userPrefs.getGradPadFilePath());
+        storage = new StorageManager(gradPadStorage, userPrefsStorage);
 
         initLogging(config);
 
@@ -71,14 +71,14 @@ public class MainApp extends Application {
      * or an empty address book will be used instead if errors occur when reading {@code storage}'s address book.
      */
     private Model initModelManager(Storage storage, ReadOnlyUserPrefs userPrefs) {
-        Optional<ReadOnlyGradPad> addressBookOptional;
+        Optional<ReadOnlyGradPad> gradPadOptional;
         ReadOnlyGradPad initialData;
         try {
-            addressBookOptional = storage.readAddressBook();
-            if (!addressBookOptional.isPresent()) {
+            gradPadOptional = storage.readGradPad();
+            if (!gradPadOptional.isPresent()) {
                 logger.info("Data file not found. Will be starting with a sample GradPad");
             }
-            initialData = addressBookOptional.orElseGet(SampleDataUtil::getSampleAddressBook);
+            initialData = gradPadOptional.orElseGet(SampleDataUtil::getSampleGradPad);
         } catch (DataConversionException e) {
             logger.warning("Data file not in the correct format. Will be starting with an empty GradPad");
             initialData = new GradPad();

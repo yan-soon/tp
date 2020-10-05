@@ -49,14 +49,14 @@ public class ParserUtil {
     }
 
     /**
-     * Parses a {@code String phone} into a {@code Phone}.
+     * Parses a {@code String credits} into a {@code ModularCredits}.
      * Leading and trailing whitespaces will be trimmed.
      *
-     * @throws ParseException if the given {@code phone} is invalid.
+     * @throws ParseException if the given {@code credits} is invalid.
      */
-    public static ModularCredits parseModularCredits(String phone) throws ParseException {
-        requireNonNull(phone);
-        String trimmedCredits = phone.trim();
+    public static ModularCredits parseModularCredits(String credits) throws ParseException {
+        requireNonNull(credits);
+        String trimmedCredits = credits.trim();
         if (!ModularCredits.isValidMC(trimmedCredits)) {
             throw new ParseException(ModularCredits.MESSAGE_CONSTRAINTS);
         }

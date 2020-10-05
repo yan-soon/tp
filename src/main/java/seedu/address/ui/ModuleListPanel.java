@@ -11,22 +11,22 @@ import seedu.address.commons.core.LogsCenter;
 import seedu.address.model.module.Module;
 
 /**
- * Panel containing the list of persons.
+ * Panel containing the list of modules.
  */
 public class ModuleListPanel extends UiPart<Region> {
-    private static final String FXML = "PersonListPanel.fxml";
+    private static final String FXML = "ModuleListPanel.fxml";
     private final Logger logger = LogsCenter.getLogger(ModuleListPanel.class);
 
     @FXML
-    private ListView<Module> personListView;
+    private ListView<Module> moduleListView;
 
     /**
-     * Creates a {@code PersonListPanel} with the given {@code ObservableList}.
+     * Creates a {@code ModuleListPanel} with the given {@code ObservableList}.
      */
     public ModuleListPanel(ObservableList<Module> moduleList) {
         super(FXML);
-        personListView.setItems(moduleList);
-        personListView.setCellFactory(listView -> new ModuleListViewCell());
+        moduleListView.setItems(moduleList);
+        moduleListView.setCellFactory(listView -> new ModuleListViewCell());
     }
 
     /**

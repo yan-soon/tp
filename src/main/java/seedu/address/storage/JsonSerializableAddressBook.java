@@ -16,27 +16,27 @@ import seedu.address.model.module.Module;
 /**
  * An Immutable GradPad that is serializable to JSON format.
  */
-@JsonRootName(value = "addressbook")
-class JsonSerializableAddressBook {
+@JsonRootName(value = "gradpad")
+class JsonSerializableGradPad {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Modules list contains duplicate module(s).";
 
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializableAddressBook} with the given persons.
+     * Constructs a {@code JsonSerializablegradPad} with the given persons.
      */
     @JsonCreator
-    public JsonSerializableAddressBook(@JsonProperty("modules") List<JsonAdaptedModule> modules) {
+    public JsonSerializableGradPad(@JsonProperty("modules") List<JsonAdaptedModule> modules) {
         this.modules.addAll(modules);
     }
 
     /**
      * Converts a given {@code ReadOnlyGradPad} into this class for Jackson use.
      *
-     * @param source future changes to this will not affect the created {@code JsonSerializableAddressBook}.
+     * @param source future changes to this will not affect the created {@code JsonSerializableGradPad}.
      */
-    public JsonSerializableAddressBook(ReadOnlyGradPad source) {
+    public JsonSerializableGradPad(ReadOnlyGradPad source) {
         modules.addAll(source.getModuleList().stream().map(JsonAdaptedModule::new).collect(Collectors.toList()));
     }
 

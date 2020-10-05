@@ -25,7 +25,7 @@ import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
-import seedu.address.storage.JsonAddressBookStorage;
+import seedu.address.storage.JsonGradPadStorage;
 import seedu.address.storage.JsonUserPrefsStorage;
 import seedu.address.storage.StorageManager;
 import seedu.address.testutil.ModuleBuilder;
@@ -41,10 +41,10 @@ public class LogicManagerTest {
 
     @BeforeEach
     public void setUp() {
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookStorage(temporaryFolder.resolve("addressBook.json"));
+        JsonGradPadStorage gradPadStorage =
+                new JsonGradPadStorage(temporaryFolder.resolve("gradPad.json"));
         JsonUserPrefsStorage userPrefsStorage = new JsonUserPrefsStorage(temporaryFolder.resolve("userPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(gradPadStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
     }
 
@@ -68,12 +68,12 @@ public class LogicManagerTest {
 
     @Test
     public void execute_storageThrowsIoException_throwsCommandException() {
-        // Setup LogicManager with JsonAddressBookIoExceptionThrowingStub
-        JsonAddressBookStorage addressBookStorage =
-                new JsonAddressBookIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionAddressBook.json"));
+        // Setup LogicManager with JsonGradPadIoExceptionThrowingStub
+        JsonGradPadStorage gradPadStorage =
+                new JsonGradPadIoExceptionThrowingStub(temporaryFolder.resolve("ioExceptionGradPad.json"));
         JsonUserPrefsStorage userPrefsStorage =
                 new JsonUserPrefsStorage(temporaryFolder.resolve("ioExceptionUserPrefs.json"));
-        StorageManager storage = new StorageManager(addressBookStorage, userPrefsStorage);
+        StorageManager storage = new StorageManager(gradPadStorage, userPrefsStorage);
         logic = new LogicManager(model, storage);
 
         // Execute add command
@@ -146,13 +146,13 @@ public class LogicManagerTest {
     /**
      * A stub class to throw an {@code IOException} when the save method is called.
      */
-    private static class JsonAddressBookIoExceptionThrowingStub extends JsonAddressBookStorage {
-        private JsonAddressBookIoExceptionThrowingStub(Path filePath) {
+    private static class JsonGradPadIoExceptionThrowingStub extends JsonGradPadStorage {
+        private JsonGradPadIoExceptionThrowingStub(Path filePath) {
             super(filePath);
         }
 
         @Override
-        public void saveAddressBook(ReadOnlyGradPad addressBook, Path filePath) throws IOException {
+        public void saveGradPad(ReadOnlyGradPad gradPad, Path filePath) throws IOException {
             throw DUMMY_IO_EXCEPTION;
         }
     }

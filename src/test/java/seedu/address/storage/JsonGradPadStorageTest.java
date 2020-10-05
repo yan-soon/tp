@@ -3,9 +3,9 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalModules.ALICE;
-import static seedu.address.testutil.TypicalModules.HOON;
-import static seedu.address.testutil.TypicalModules.IDA;
+import static seedu.address.testutil.TypicalModules.CS1231;
+import static seedu.address.testutil.TypicalModules.CS2103T;
+import static seedu.address.testutil.TypicalModules.CS3216;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.io.IOException;
@@ -72,14 +72,14 @@ public class JsonGradPadStorageTest {
         assertEquals(original, new GradPad(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addModule(HOON);
-        original.removeModule(ALICE);
+        original.addModule(CS1231);
+        original.removeModule(CS2103T);
         jsonAddressBookStorage.saveAddressBook(original, filePath);
         readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
         assertEquals(original, new GradPad(readBack));
 
         // Save and read without specifying file path
-        original.addModule(IDA);
+        original.addModule(CS2103T);
         jsonAddressBookStorage.saveAddressBook(original); // file path not specified
         readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
         assertEquals(original, new GradPad(readBack));

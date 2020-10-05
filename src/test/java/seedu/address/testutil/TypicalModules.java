@@ -20,33 +20,14 @@ public class TypicalModules {
             .withModularCredits("4")
             .withTags("core").build();
 
-    public static final Module ALICE = new ModuleBuilder().withCode("Alice Pauline")
-                                               .withModularCredits("94351253")
-                                               .withTags("friends").build();
-    public static final Module BENSON = new ModuleBuilder().withCode("Benson Meier")
-                                                .withModularCredits("98765432")
-                                                .withTags("owesMoney", "friends").build();
-    public static final Module CARL = new ModuleBuilder().withCode("Carl Kurz").withModularCredits("95352563")
-            .build();
-    public static final Module DANIEL = new ModuleBuilder().withCode("Daniel Meier").withModularCredits("87652533")
-                                                .withTags("friends").build();
-    public static final Module ELLE = new ModuleBuilder().withCode("Elle Meyer").withModularCredits("9482224")
-                                              .build();
-    public static final Module FIONA = new ModuleBuilder().withCode("Fiona Kunz").withModularCredits("9482427")
-                                               .build();
-    public static final Module GEORGE = new ModuleBuilder().withCode("George Best").withModularCredits("9482442")
-                                                .build();
-
-    // Manually added
-    public static final Module HOON = new ModuleBuilder().withCode("Hoon Meier").withModularCredits("8482424")
-                                              .build();
-    public static final Module IDA = new ModuleBuilder().withCode("Ida Mueller").withModularCredits("8482131")
-                                             .build();
+    public static final Module CS1231 = new ModuleBuilder().withCode("CS1231")
+            .withModularCredits("4")
+            .withTags("core").build();
 
     // Manually added - Module's details found in {@code CommandTestUtil}
     public static final Module CS3216 =
             new ModuleBuilder().withCode(VALID_CODE_CS3216).withModularCredits(VALID_CREDITS_CS3216)
-                                             .withTags(VALID_TAG_NON_CORE).build();
+                    .withTags(VALID_TAG_NON_CORE).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

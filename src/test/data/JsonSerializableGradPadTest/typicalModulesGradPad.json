@@ -1,0 +1,12 @@
+{
+  "_comment": "AddressBook save file which contains the same Module values as in TypicalModules#getTypicalGradPad()",
+  "modules" : [ {
+    "code" : "CS2103T",
+    "credits" : "4",
+    "tagged" : [ "core" ]
+  }, {
+    "code" : "CS3216",
+    "credits" : "5",
+    "tagged" : [ "nonCore" ]
+  } ]
+}

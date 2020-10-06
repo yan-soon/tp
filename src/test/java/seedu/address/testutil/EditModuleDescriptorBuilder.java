@@ -11,7 +11,7 @@ import seedu.address.model.module.Module;
 import seedu.address.model.tag.Tag;
 
 /**
- * A utility class to help with building EditPersonDescriptor objects.
+ * A utility class to help with building EditModuleDescriptor objects.
  */
 public class EditModuleDescriptorBuilder {
 
@@ -52,7 +52,7 @@ public class EditModuleDescriptorBuilder {
     }
     
     /**
-     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditPersonDescriptor}
+     * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditModuleDescriptor}
      * that we are building.
      */
     public EditModuleDescriptorBuilder withTags(String... tags) {

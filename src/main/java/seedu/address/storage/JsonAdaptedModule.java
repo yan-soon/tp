@@ -29,7 +29,7 @@ class JsonAdaptedModule {
      * Constructs a {@code JsonAdaptedModule} with the given module details.
      */
     @JsonCreator
-    public JsonAdaptedModule(@JsonProperty("module code") String code, @JsonProperty("modular credits") String credits,
+    public JsonAdaptedModule(@JsonProperty("moduleCode") String code, @JsonProperty("modularCredits") String credits,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.code = code;
         this.credits = credits;

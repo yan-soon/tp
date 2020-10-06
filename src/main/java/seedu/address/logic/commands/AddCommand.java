@@ -24,11 +24,10 @@ public class AddCommand extends Command {
             + "Example: " + COMMAND_WORD + " "
             + PREFIX_CODE + "CS1231 "
             + PREFIX_CREDITS + "4 "
-            + PREFIX_TAG + "friends "
-            + PREFIX_TAG + "owesMoney";
+            + PREFIX_TAG + "core ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the address book";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the grad pad";
 
     private final Module toAdd;
 

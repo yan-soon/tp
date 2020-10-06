@@ -17,7 +17,7 @@ import seedu.address.model.tag.Tag;
 public class ModuleUtil {
 
     /**
-     * Returns an add command string for adding the {@code person}.
+     * Returns an add command string for adding the {@code module}.
      */
     public static String getAddCommand(Module module) {
         return AddCommand.COMMAND_WORD + " " + getModuleDetails(module);

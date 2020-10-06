@@ -40,20 +40,20 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
         }
 
-        EditModuleDescriptor editPersonDescriptor = new EditModuleDescriptor();
+        EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
-            editPersonDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get()));
+            editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get()));
         }
         if (argMultimap.getValue(PREFIX_CREDITS).isPresent()) {
-            editPersonDescriptor.setModularCredits(ParserUtil.parseModularCredits(argMultimap.getValue(PREFIX_CREDITS).get()));
+            editModuleDescriptor.setModularCredits(ParserUtil.parseModularCredits(argMultimap.getValue(PREFIX_CREDITS).get()));
         }
-        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editPersonDescriptor::setTags);
+        parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editModuleDescriptor::setTags);
 
-        if (!editPersonDescriptor.isAnyFieldEdited()) {
+        if (!editModuleDescriptor.isAnyFieldEdited()) {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editPersonDescriptor);
+        return new EditCommand(index, editModuleDescriptor);
     }
 
     /**

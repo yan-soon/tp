@@ -17,7 +17,7 @@ import seedu.address.model.module.ModularCredits;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_CODE = "CS1#212";
-    private static final String INVALID_CREDIS = "4#";
+    private static final String INVALID_CREDITS = "4#";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_CODE = CS2103T.getModuleCode().toString();
@@ -50,7 +50,7 @@ public class JsonAdaptedModuleTest {
     @Test
     public void toModelType_invalidCredits_throwsIllegalValueException() {
         JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, INVALID_CREDIS, VALID_TAGS);
+                new JsonAdaptedModule(VALID_CODE, INVALID_CREDITS, VALID_TAGS);
         String expectedMessage = ModularCredits.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }

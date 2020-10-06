@@ -30,15 +30,15 @@ public class EditModuleDescriptorTest {
         assertFalse(DESC_CS2103T.equals(DESC_CS3216));
 
         // different code -> returns false
-        EditModuleDescriptor editedAmy = new EditModuleDescriptorBuilder(DESC_CS2103T).withModuleCode(VALID_CODE_CS3216).build();
-        assertFalse(DESC_CS2103T.equals(editedAmy));
+        EditModuleDescriptor editedCS2103T = new EditModuleDescriptorBuilder(DESC_CS2103T).withModuleCode(VALID_CODE_CS3216).build();
+        assertFalse(DESC_CS2103T.equals(editedCS2103T));
 
         // different credits -> returns false
-        editedAmy = new EditModuleDescriptorBuilder(DESC_CS2103T).withModularCredits(VALID_CREDITS_CS3216).build();
-        assertFalse(DESC_CS2103T.equals(editedAmy));
+        editedCS2103T = new EditModuleDescriptorBuilder(DESC_CS2103T).withModularCredits(VALID_CREDITS_CS3216).build();
+        assertFalse(DESC_CS2103T.equals(editedCS2103T));
 
         // different tags -> returns false
-        editedAmy = new EditModuleDescriptorBuilder(DESC_CS2103T).withTags(VALID_TAG_NON_CORE).build();
-        assertFalse(DESC_CS2103T.equals(editedAmy));
+        editedCS2103T = new EditModuleDescriptorBuilder(DESC_CS2103T).withTags(VALID_TAG_NON_CORE).build();
+        assertFalse(DESC_CS2103T.equals(editedCS2103T));
     }
 }

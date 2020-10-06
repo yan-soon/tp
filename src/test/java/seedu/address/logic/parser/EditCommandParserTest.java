@@ -161,8 +161,9 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
-        descriptor = new EditModuleDescriptorBuilder().withModularCredits(VALID_CREDITS_CS3216).build();
+        userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T +  INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
+        descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
+                .withModularCredits(VALID_CREDITS_CS3216).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

@@ -30,13 +30,13 @@ public interface Logic {
      */
     ReadOnlyGradPad getGradPad();
 
-    /** Returns an unmodifiable view of the filtered list of persons */
+    /** Returns an unmodifiable view of the filtered list of modules */
     ObservableList<Module> getFilteredModuleList();
 
     /**
-     * Returns the user prefs' address book file path.
+     * Returns the user prefs' grad pad file path.
      */
-    Path getAddressBookFilePath();
+    Path getGradPadFilePath();
 
     /**
      * Returns the user prefs' GUI settings.

@@ -1,17 +1,16 @@
 package seedu.address.storage;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonRootName;
-
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.GradPad;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * An Immutable GradPad that is serializable to JSON format.
@@ -24,7 +23,7 @@ class JsonSerializableGradPad {
     private final List<JsonAdaptedModule> modules = new ArrayList<>();
 
     /**
-     * Constructs a {@code JsonSerializablegradPad} with the given persons.
+     * Constructs a {@code JsonSerializableGradPad} with the given modules.
      */
     @JsonCreator
     public JsonSerializableGradPad(@JsonProperty("modules") List<JsonAdaptedModule> modules) {

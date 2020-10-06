@@ -11,7 +11,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 /**
- * Deletes a Module identified using it's displayed index from the address book.
+ * Deletes a Module identified using it's displayed index from the grad pad.
  */
 public class DeleteCommand extends Command {
 

@@ -67,7 +67,7 @@ public class DeleteCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Index outOfBoundIndex = INDEX_SECOND_MODULE;
-        // ensures that outOfBoundIndex is still in bounds of address book list
+        // ensures that outOfBoundIndex is still in bounds of grad pad list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getGradPad().getModuleList().size());
 
         DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);

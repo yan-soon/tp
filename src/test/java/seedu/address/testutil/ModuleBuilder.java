@@ -14,7 +14,7 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class ModuleBuilder {
 
-    public static final String DEFAULT_CODE = "CS2103T";
+    public static final String DEFAULT_CODE = "CS1101S";
     public static final String DEFAULT_MC = "4";
 
     private ModuleCode code;

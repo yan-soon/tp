@@ -3,10 +3,10 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalPersons.ALICE;
-import static seedu.address.testutil.TypicalPersons.HOON;
-import static seedu.address.testutil.TypicalPersons.IDA;
-import static seedu.address.testutil.TypicalPersons.getTypicalAddressBook;
+import static seedu.address.testutil.TypicalModules.CS1231;
+import static seedu.address.testutil.TypicalModules.CS2103T;
+import static seedu.address.testutil.TypicalModules.CS3216;
+import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -26,12 +26,12 @@ public class JsonGradPadStorageTest {
     public Path testFolder;
 
     @Test
-    public void readAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> readAddressBook(null));
+    public void readGradPad_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> readGradPad(null));
     }
 
-    private java.util.Optional<ReadOnlyGradPad> readAddressBook(String filePath) throws Exception {
-        return new JsonAddressBookStorage(Paths.get(filePath)).readAddressBook(addToTestDataPathIfNotNull(filePath));
+    private java.util.Optional<ReadOnlyGradPad> readGradPad(String filePath) throws Exception {
+        return new JsonGradPadStorage(Paths.get(filePath)).readGradPad(addToTestDataPathIfNotNull(filePath));
     }
 
     private Path addToTestDataPathIfNotNull(String prefsFileInTestDataFolder) {
@@ -42,69 +42,69 @@ public class JsonGradPadStorageTest {
 
     @Test
     public void read_missingFile_emptyResult() throws Exception {
-        assertFalse(readAddressBook("NonExistentFile.json").isPresent());
+        assertFalse(readGradPad("NonExistentFile.json").isPresent());
     }
 
     @Test
     public void read_notJsonFormat_exceptionThrown() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("notJsonFormatAddressBook.json"));
+        assertThrows(DataConversionException.class, () -> readGradPad("notJsonFormatGradPad.json"));
     }
 
     @Test
-    public void readAddressBook_invalidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidPersonAddressBook.json"));
+    public void readGradPad_invalidModuleGradPad_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readGradPad("invalidModuleGradPad.json"));
     }
 
     @Test
-    public void readAddressBook_invalidAndValidPersonAddressBook_throwDataConversionException() {
-        assertThrows(DataConversionException.class, () -> readAddressBook("invalidAndValidPersonAddressBook.json"));
+    public void readGradPad_invalidAndValidModuleGradPad_throwDataConversionException() {
+        assertThrows(DataConversionException.class, () -> readGradPad("invalidAndValidModuleGradPad.json"));
     }
 
     @Test
-    public void readAndSaveAddressBook_allInOrder_success() throws Exception {
-        Path filePath = testFolder.resolve("TempAddressBook.json");
-        GradPad original = getTypicalAddressBook();
-        JsonAddressBookStorage jsonAddressBookStorage = new JsonAddressBookStorage(filePath);
+    public void readAndSaveGradPad_allInOrder_success() throws Exception {
+        Path filePath = testFolder.resolve("TempGradPad.json");
+        GradPad original = getTypicalGradPad();
+        JsonGradPadStorage jsonGradPadStorage = new JsonGradPadStorage(filePath);
 
         // Save in new file and read back
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        ReadOnlyGradPad readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        jsonGradPadStorage.saveGradPad(original, filePath);
+        ReadOnlyGradPad readBack = jsonGradPadStorage.readGradPad(filePath).get();
         assertEquals(original, new GradPad(readBack));
 
         // Modify data, overwrite exiting file, and read back
-        original.addPerson(HOON);
-        original.removePerson(ALICE);
-        jsonAddressBookStorage.saveAddressBook(original, filePath);
-        readBack = jsonAddressBookStorage.readAddressBook(filePath).get();
+        original.addModule(CS1231);
+        original.removeModule(CS2103T);
+        jsonGradPadStorage.saveGradPad(original, filePath);
+        readBack = jsonGradPadStorage.readGradPad(filePath).get();
         assertEquals(original, new GradPad(readBack));
 
         // Save and read without specifying file path
-        original.addPerson(IDA);
-        jsonAddressBookStorage.saveAddressBook(original); // file path not specified
-        readBack = jsonAddressBookStorage.readAddressBook().get(); // file path not specified
+        original.addModule(CS2103T);
+        jsonGradPadStorage.saveGradPad(original); // file path not specified
+        readBack = jsonGradPadStorage.readGradPad().get(); // file path not specified
         assertEquals(original, new GradPad(readBack));
 
     }
 
     @Test
-    public void saveAddressBook_nullAddressBook_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(null, "SomeFile.json"));
+    public void saveGradPad_nullGradPad_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveGradPad(null, "SomeFile.json"));
     }
 
     /**
-     * Saves {@code addressBook} at the specified {@code filePath}.
+     * Saves {@code gradPad} at the specified {@code filePath}.
      */
-    private void saveAddressBook(ReadOnlyGradPad addressBook, String filePath) {
+    private void saveGradPad(ReadOnlyGradPad gradPad, String filePath) {
         try {
-            new JsonAddressBookStorage(Paths.get(filePath))
-                    .saveAddressBook(addressBook, addToTestDataPathIfNotNull(filePath));
+            new JsonGradPadStorage(Paths.get(filePath))
+                    .saveGradPad(gradPad, addToTestDataPathIfNotNull(filePath));
         } catch (IOException ioe) {
             throw new AssertionError("There should not be an error writing to the file.", ioe);
         }
     }
 
     @Test
-    public void saveAddressBook_nullFilePath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> saveAddressBook(new GradPad(), null));
+    public void saveGradPad_nullFilePath_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> saveGradPad(new GradPad(), null));
     }
 }

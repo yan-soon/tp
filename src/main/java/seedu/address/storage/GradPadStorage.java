@@ -11,12 +11,12 @@ import seedu.address.model.ReadOnlyGradPad;
 /**
  * Represents a storage for {@link GradPad}.
  */
-public interface AddressBookStorage {
+public interface GradPadStorage {
 
     /**
      * Returns the file path of the data file.
      */
-    Path getAddressBookFilePath();
+    Path getGradPadFilePath();
 
     /**
      * Returns GradPad data as a {@link ReadOnlyGradPad}.
@@ -24,23 +24,23 @@ public interface AddressBookStorage {
      * @throws DataConversionException if the data in storage is not in the expected format.
      * @throws IOException if there was any problem when reading from the storage.
      */
-    Optional<ReadOnlyGradPad> readAddressBook() throws DataConversionException, IOException;
+    Optional<ReadOnlyGradPad> readGradPad() throws DataConversionException, IOException;
 
     /**
-     * @see #getAddressBookFilePath()
+     * @see #getGradPadFilePath()
      */
-    Optional<ReadOnlyGradPad> readAddressBook(Path filePath) throws DataConversionException, IOException;
+    Optional<ReadOnlyGradPad> readGradPad(Path filePath) throws DataConversionException, IOException;
 
     /**
      * Saves the given {@link ReadOnlyGradPad} to the storage.
-     * @param addressBook cannot be null.
+     * @param gradPad cannot be null.
      * @throws IOException if there was any problem writing to the file.
      */
-    void saveAddressBook(ReadOnlyGradPad addressBook) throws IOException;
+    void saveGradPad(ReadOnlyGradPad gradPad) throws IOException;
 
     /**
-     * @see #saveAddressBook(ReadOnlyGradPad)
+     * @see #saveGradPad(ReadOnlyGradPad)
      */
-    void saveAddressBook(ReadOnlyGradPad addressBook, Path filePath) throws IOException;
+    void saveGradPad(ReadOnlyGradPad gradPad, Path filePath) throws IOException;
 
 }

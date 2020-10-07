@@ -32,7 +32,7 @@ public class SampleDataUtil {
         };
     }
 
-    public static ReadOnlyGradPad getSampleAddressBook() {
+    public static ReadOnlyGradPad getSampleGradPad() {
         GradPad sampleAb = new GradPad();
         for (Module sampleModule : getSampleModules()) {
             sampleAb.addModule(sampleModule);

@@ -17,42 +17,42 @@ import seedu.address.model.ReadOnlyGradPad;
 /**
  * A class to access GradPad data stored as a json file on the hard disk.
  */
-public class JsonAddressBookStorage implements AddressBookStorage {
+public class JsonGradPadStorage implements GradPadStorage {
 
-    private static final Logger logger = LogsCenter.getLogger(JsonAddressBookStorage.class);
+    private static final Logger logger = LogsCenter.getLogger(JsonGradPadStorage.class);
 
     private Path filePath;
 
-    public JsonAddressBookStorage(Path filePath) {
+    public JsonGradPadStorage(Path filePath) {
         this.filePath = filePath;
     }
 
-    public Path getAddressBookFilePath() {
+    public Path getGradPadFilePath() {
         return filePath;
     }
 
     @Override
-    public Optional<ReadOnlyGradPad> readAddressBook() throws DataConversionException {
-        return readAddressBook(filePath);
+    public Optional<ReadOnlyGradPad> readGradPad() throws DataConversionException, IOException {
+        return readGradPad(filePath);
     }
 
     /**
-     * Similar to {@link #readAddressBook()}.
+     * Similar to {@link #readGradPad()}.
      *
      * @param filePath location of the data. Cannot be null.
      * @throws DataConversionException if the file is not in the correct format.
      */
-    public Optional<ReadOnlyGradPad> readAddressBook(Path filePath) throws DataConversionException {
+    public Optional<ReadOnlyGradPad> readGradPad(Path filePath) throws DataConversionException {
         requireNonNull(filePath);
 
-        Optional<JsonSerializableAddressBook> jsonAddressBook = JsonUtil.readJsonFile(
-                filePath, JsonSerializableAddressBook.class);
-        if (!jsonAddressBook.isPresent()) {
+        Optional<JsonSerializableGradPad> jsonGradPad = JsonUtil.readJsonFile(
+                filePath, JsonSerializableGradPad.class);
+        if (!jsonGradPad.isPresent()) {
             return Optional.empty();
         }
 
         try {
-            return Optional.of(jsonAddressBook.get().toModelType());
+            return Optional.of(jsonGradPad.get().toModelType());
         } catch (IllegalValueException ive) {
             logger.info("Illegal values found in " + filePath + ": " + ive.getMessage());
             throw new DataConversionException(ive);
@@ -60,21 +60,21 @@ public class JsonAddressBookStorage implements AddressBookStorage {
     }
 
     @Override
-    public void saveAddressBook(ReadOnlyGradPad addressBook) throws IOException {
-        saveAddressBook(addressBook, filePath);
+    public void saveGradPad(ReadOnlyGradPad gradPad) throws IOException {
+        saveGradPad(gradPad, filePath);
     }
 
     /**
-     * Similar to {@link #saveAddressBook(ReadOnlyGradPad)}.
+     * Similar to {@link #saveGradPad(ReadOnlyGradPad)}.
      *
      * @param filePath location of the data. Cannot be null.
      */
-    public void saveAddressBook(ReadOnlyGradPad addressBook, Path filePath) throws IOException {
-        requireNonNull(addressBook);
+    public void saveGradPad(ReadOnlyGradPad gradPad, Path filePath) throws IOException {
+        requireNonNull(gradPad);
         requireNonNull(filePath);
 
         FileUtil.createIfMissing(filePath);
-        JsonUtil.saveJsonFile(new JsonSerializableAddressBook(addressBook), filePath);
+        JsonUtil.saveJsonFile(new JsonSerializableGradPad(gradPad), filePath);
     }
 
 }

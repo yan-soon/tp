@@ -1,0 +1,10 @@
+{
+  "modules": [ {
+    "code": "CS1231",
+    "credits": "4",
+    "tagged": [ "core" ]
+  }, {
+    "code": "CS1231",
+    "credits": "4"
+  } ]
+}

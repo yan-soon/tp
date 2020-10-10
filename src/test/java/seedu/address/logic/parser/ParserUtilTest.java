@@ -67,10 +67,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCode_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_CODE + WHITESPACE;
+    public void parseCode_validValueWithWhitespace_returnsTrimmedModuleCode() throws Exception {
+        String moduleCodeWithWhitespace = WHITESPACE + VALID_CODE + WHITESPACE;
         ModuleCode expectedCode = new ModuleCode(VALID_CODE);
-        assertEquals(expectedCode, ParserUtil.parseModuleCode(nameWithWhitespace));
+        assertEquals(expectedCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
     }
 
     @Test

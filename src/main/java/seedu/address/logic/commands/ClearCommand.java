@@ -6,7 +6,7 @@ import seedu.address.model.GradPad;
 import seedu.address.model.Model;
 
 /**
- * Clears the address book.
+ * Clears the GradPad.
  */
 public class ClearCommand extends Command {
 

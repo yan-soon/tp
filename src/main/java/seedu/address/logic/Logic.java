@@ -34,7 +34,7 @@ public interface Logic {
     ObservableList<Module> getFilteredModuleList();
 
     /**
-     * Returns the user prefs' grad pad file path.
+     * Returns the user prefs' GradPad file path.
      */
     Path getGradPadFilePath();
 

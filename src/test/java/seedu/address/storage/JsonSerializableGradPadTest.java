@@ -21,7 +21,7 @@ public class JsonSerializableGradPadTest {
     private static final Path DUPLICATE_MODULE_FILE = TEST_DATA_FOLDER.resolve("duplicateModuleGradPad.json");
 
     @Test
-    public void toModelType_typicalPersonsFile_success() throws Exception {
+    public void toModelType_typicalModulesFile_success() throws Exception {
         JsonSerializableGradPad dataFromFile = JsonUtil.readJsonFile(TYPICAL_MODULES_FILE,
                 JsonSerializableGradPad.class).get();
         GradPad gradPadFromFile = dataFromFile.toModelType();

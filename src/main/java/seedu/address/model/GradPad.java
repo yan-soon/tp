@@ -59,7 +59,7 @@ public class GradPad implements ReadOnlyGradPad {
     //// module-level operations
 
     /**
-     * Returns true if a module with the same identity as {@code module} exists in the Grad pad.
+     * Returns true if a module with the same identity as {@code module} exists in the GradPad.
      */
     public boolean hasModule(Module module) {
         requireNonNull(module);
@@ -67,7 +67,7 @@ public class GradPad implements ReadOnlyGradPad {
     }
 
     /**
-     * Adds a module to the grad pad.
+     * Adds a module to the GradPad.
      * The module must not already exist in the GradPad.
      */
     public void addModule(Module m) {

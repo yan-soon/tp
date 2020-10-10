@@ -17,13 +17,13 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.module.Module;
 import seedu.address.model.module.ModularCredits;
+import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 /**
- * Edits the details of an existing module in the address book.
+ * Edits the details of an existing module in the GradPad.
  */
 public class EditCommand extends Command {
 
@@ -41,7 +41,7 @@ public class EditCommand extends Command {
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the grad pad.";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the GradPad.";
 
     private final Index index;
     private final EditModuleDescriptor editModuleDescriptor;
@@ -87,7 +87,8 @@ public class EditCommand extends Command {
         assert moduleToEdit != null;
 
         ModuleCode updatedCode = editModuleDescriptor.getModuleCode().orElse(moduleToEdit.getModuleCode());
-        ModularCredits updatedCredits = editModuleDescriptor.getModularCredits().orElse(moduleToEdit.getModularCredits());
+        ModularCredits updatedCredits = editModuleDescriptor.getModularCredits()
+                .orElse(moduleToEdit.getModularCredits());
         Set<Tag> updatedTags = editModuleDescriptor.getTags().orElse(moduleToEdit.getTags());
 
         return new Module(updatedCode, updatedCredits, updatedTags);

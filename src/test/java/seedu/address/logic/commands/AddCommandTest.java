@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addCS1231Command.equals(null));
 
-        // different person -> returns false
+        // different module -> returns false
         assertFalse(addCS1231Command.equals(addCS1101SCommand));
     }
 
@@ -150,7 +150,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single module.
      */
     private class ModelStubWithModule extends ModelStub {
         private final Module module;
@@ -168,7 +168,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the module being added.
      */
     private class ModelStubAcceptingModuleAdded extends ModelStub {
         final ArrayList<Module> modulesAdded = new ArrayList<>();

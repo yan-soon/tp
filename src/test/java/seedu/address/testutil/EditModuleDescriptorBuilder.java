@@ -5,9 +5,9 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -50,7 +50,7 @@ public class EditModuleDescriptorBuilder {
         descriptor.setModularCredits(new ModularCredits(credits));
         return this;
     }
-    
+
     /**
      * Parses the {@code tags} into a {@code Set<Tag>} and set it to the {@code EditModuleDescriptor}
      * that we are building.

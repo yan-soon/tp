@@ -1,12 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CREDITS_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS3216;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CREDITS_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NON_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2103T;
@@ -27,7 +27,6 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModularCredits;
-import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
@@ -76,7 +75,8 @@ public class EditCommandParserTest {
 
         // valid credit followed by invalid credit. The test case for invalid credit followed by valid credit
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
-        assertParseFailure(parser, "1" + CREDITS_DESC_CS3216 + INVALID_CREDITS_DESC, ModularCredits.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "1" + CREDITS_DESC_CS3216 + INVALID_CREDITS_DESC,
+                ModularCredits.MESSAGE_CONSTRAINTS);
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Module} being edited,
         // parsing it together with a valid tag results in error
@@ -156,12 +156,13 @@ public class EditCommandParserTest {
         // no other valid values specified
         Index targetIndex = INDEX_FIRST_MODULE;
         String userInput = targetIndex.getOneBased() + INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
-        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withModularCredits(VALID_CREDITS_CS3216).build();
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder()
+                .withModularCredits(VALID_CREDITS_CS3216).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T +  INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
+        userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T + INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
         descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
                 .withModularCredits(VALID_CREDITS_CS3216).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

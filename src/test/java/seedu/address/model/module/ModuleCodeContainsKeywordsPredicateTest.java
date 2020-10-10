@@ -18,14 +18,17 @@ public class ModuleCodeContainsKeywordsPredicateTest {
         List<String> firstPredicateKeywordList = Collections.singletonList("2100");
         List<String> secondPredicateKeywordList = Arrays.asList("2100", "3216");
 
-        ModuleCodeContainsKeywordsPredicate firstPredicate = new ModuleCodeContainsKeywordsPredicate(firstPredicateKeywordList);
-        ModuleCodeContainsKeywordsPredicate secondPredicate = new ModuleCodeContainsKeywordsPredicate(secondPredicateKeywordList);
+        ModuleCodeContainsKeywordsPredicate firstPredicate = new ModuleCodeContainsKeywordsPredicate(
+                firstPredicateKeywordList);
+        ModuleCodeContainsKeywordsPredicate secondPredicate = new ModuleCodeContainsKeywordsPredicate(
+                secondPredicateKeywordList);
 
         // same object -> returns true
         assertTrue(firstPredicate.equals(firstPredicate));
 
         // same values -> returns true
-        ModuleCodeContainsKeywordsPredicate firstPredicateCopy = new ModuleCodeContainsKeywordsPredicate(firstPredicateKeywordList);
+        ModuleCodeContainsKeywordsPredicate firstPredicateCopy = new ModuleCodeContainsKeywordsPredicate(
+                firstPredicateKeywordList);
         assertTrue(firstPredicate.equals(firstPredicateCopy));
 
         // different types -> returns false
@@ -57,7 +60,8 @@ public class ModuleCodeContainsKeywordsPredicateTest {
     @Test
     public void test_moduleCodeDoesNotContainKeywords_returnsFalse() {
         // Zero keywords
-        ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate(Collections.emptyList());
+        ModuleCodeContainsKeywordsPredicate predicate = new ModuleCodeContainsKeywordsPredicate(
+                Collections.emptyList());
         assertFalse(predicate.test(new ModuleBuilder().withCode("CS2100").build()));
 
         // Non-matching keyword

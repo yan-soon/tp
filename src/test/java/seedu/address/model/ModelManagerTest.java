@@ -4,7 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
-import static seedu.address.testutil.TypicalModules.*;
+import static seedu.address.testutil.TypicalModules.CS2103T;
+import static seedu.address.testutil.TypicalModules.CS3216;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -89,7 +90,8 @@ public class ModelManagerTest {
 
     @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> modelManager.getFilteredModuleList().remove(0));
+        Assertions.assertThrows(UnsupportedOperationException.class, () ->
+                modelManager.getFilteredModuleList().remove(0));
     }
 
     @Test

@@ -12,8 +12,8 @@ import java.util.stream.Collectors;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModularCredits;
+import seedu.address.model.module.ModuleCode;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_CODE = "CS1#212";
@@ -61,7 +61,7 @@ public class JsonAdaptedModuleTest {
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModularCredits.class.getSimpleName());
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
-    
+
     @Test
     public void toModelType_invalidTags_throwsIllegalValueException() {
         List<JsonAdaptedTag> invalidTags = new ArrayList<>(VALID_TAGS);
@@ -70,5 +70,4 @@ public class JsonAdaptedModuleTest {
                 new JsonAdaptedModule(VALID_CODE, VALID_CREDITS, invalidTags);
         assertThrows(IllegalValueException.class, module::toModelType);
     }
-
 }

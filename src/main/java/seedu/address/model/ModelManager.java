@@ -25,7 +25,7 @@ public class ModelManager implements Model {
 
 
     /**
-     * Initializes a ModelManager with the given gradPad and userPrefs.
+     * Initializes a ModelManager with the given GradPad and userPrefs.
      */
     public ModelManager(ReadOnlyGradPad gradPad, ReadOnlyUserPrefs userPrefs) {
         super();
@@ -90,9 +90,9 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public boolean hasModule(Module person) {
-        requireNonNull(person);
-        return gradPad.hasModule(person);
+    public boolean hasModule(Module module) {
+        requireNonNull(module);
+        return gradPad.hasModule(module);
     }
 
     @Override
@@ -101,8 +101,8 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public void addModule(Module person) {
-        gradPad.addModule(person);
+    public void addModule(Module module) {
+        gradPad.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }
 

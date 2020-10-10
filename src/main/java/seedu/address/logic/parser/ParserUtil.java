@@ -9,8 +9,8 @@ import java.util.Set;
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModularCredits;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -62,7 +62,7 @@ public class ParserUtil {
         }
         return new ModularCredits(trimmedCredits);
     }
-    
+
     /**
      * Parses a {@code String tag} into a {@code Tag}.
      * Leading and trailing whitespaces will be trimmed.

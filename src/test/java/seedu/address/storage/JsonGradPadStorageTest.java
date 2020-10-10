@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS1231;
 import static seedu.address.testutil.TypicalModules.CS2103T;
-import static seedu.address.testutil.TypicalModules.CS3216;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.io.IOException;

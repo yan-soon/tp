@@ -10,13 +10,13 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 /**
- * Adds a Module to the address book.
+ * Adds a Module to the GradPad.
  */
 public class AddCommand extends Command {
 
     public static final String COMMAND_WORD = "add";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the address book. "
+    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the GradPad. "
             + "Parameters: "
             + PREFIX_CODE + "MODULE CODE "
             + PREFIX_CREDITS + "MODULAR CREDITS "
@@ -27,7 +27,7 @@ public class AddCommand extends Command {
             + PREFIX_TAG + "core ";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
-    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the grad pad";
+    public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the GradPad";
 
     private final Module toAdd;
 

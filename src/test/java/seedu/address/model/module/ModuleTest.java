@@ -50,8 +50,8 @@ public class ModuleTest {
     @Test
     public void equals() {
         // same values -> returns true
-        Module CS2103TCopy = new ModuleBuilder(CS2103T).build();
-        assertTrue(CS2103T.equals(CS2103TCopy));
+        Module cs2103tCopy = new ModuleBuilder(CS2103T).build();
+        assertTrue(CS2103T.equals(cs2103tCopy));
 
         // same object -> returns true
         assertTrue(CS2103T.equals(CS2103T));

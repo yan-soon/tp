@@ -52,16 +52,16 @@ public class AddCommandTest {
 
     @Test
     public void equals() {
-        Module CS1231 = new ModuleBuilder().withCode("CS1231").build();
-        Module CS1101S = new ModuleBuilder().withCode("CS1101S").build();
-        AddCommand addCS1231Command = new AddCommand(CS1231);
-        AddCommand addCS1101SCommand = new AddCommand(CS1101S);
+        Module cs1231 = new ModuleBuilder().withCode("CS1231").build();
+        Module cs1101s = new ModuleBuilder().withCode("CS1101S").build();
+        AddCommand addCS1231Command = new AddCommand(cs1231);
+        AddCommand addCS1101SCommand = new AddCommand(cs1101s);
 
         // same object -> returns true
         assertTrue(addCS1231Command.equals(addCS1231Command));
 
         // same values -> returns true
-        AddCommand addCS1231CommandCopy = new AddCommand(CS1231);
+        AddCommand addCS1231CommandCopy = new AddCommand(cs1231);
         assertTrue(addCS1231Command.equals(addCS1231CommandCopy));
 
         // different types -> returns false
@@ -70,7 +70,7 @@ public class AddCommandTest {
         // null -> returns false
         assertFalse(addCS1231Command.equals(null));
 
-        // different person -> returns false
+        // different module -> returns false
         assertFalse(addCS1231Command.equals(addCS1101SCommand));
     }
 
@@ -150,7 +150,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that contains a single person.
+     * A Model stub that contains a single module.
      */
     private class ModelStubWithModule extends ModelStub {
         private final Module module;
@@ -168,7 +168,7 @@ public class AddCommandTest {
     }
 
     /**
-     * A Model stub that always accept the person being added.
+     * A Model stub that always accept the module being added.
      */
     private class ModelStubAcceptingModuleAdded extends ModelStub {
         final ArrayList<Module> modulesAdded = new ArrayList<>();

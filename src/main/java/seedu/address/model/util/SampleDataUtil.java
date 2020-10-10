@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 import seedu.address.model.GradPad;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.ModularCredits;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -17,18 +17,18 @@ import seedu.address.model.tag.Tag;
 public class SampleDataUtil {
     public static Module[] getSampleModules() {
         return new Module[] {
-            new Module(new ModuleCode("Alex Yeoh"), new ModularCredits("87438807"),
-                       getTagSet("friends")),
-            new Module(new ModuleCode("Bernice Yu"), new ModularCredits("99272758"),
-                       getTagSet("colleagues", "friends")),
-            new Module(new ModuleCode("Charlotte Oliveiro"), new ModularCredits("93210283"),
-                       getTagSet("neighbours")),
-            new Module(new ModuleCode("David Li"), new ModularCredits("91031282"),
-                       getTagSet("family")),
-            new Module(new ModuleCode("Irfan Ibrahim"), new ModularCredits("92492021"),
-                       getTagSet("classmates")),
-            new Module(new ModuleCode("Roy Balakrishnan"), new ModularCredits("92624417"),
-                       getTagSet("colleagues"))
+            new Module(new ModuleCode("CS2103T"), new ModularCredits("4"),
+                       getTagSet("Foundation")),
+            new Module(new ModuleCode("CS1010"), new ModularCredits("4"),
+                       getTagSet("Foundation")),
+            new Module(new ModuleCode("CS2101"), new ModularCredits("4"),
+                       getTagSet("ITProf")),
+            new Module(new ModuleCode("CS2105"), new ModularCredits("4"),
+                       getTagSet("Foundation")),
+            new Module(new ModuleCode("ST2334"), new ModularCredits("4"),
+                       getTagSet("MathAndSciences")),
+            new Module(new ModuleCode("CS2107"), new ModularCredits("4"),
+                       getTagSet("BreadthAndDepth"))
         };
     }
 

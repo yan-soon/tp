@@ -14,8 +14,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.parser.exceptions.ParseException;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModularCredits;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 public class ParserUtilTest {
@@ -67,10 +67,10 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCode_validValueWithWhitespace_returnsTrimmedName() throws Exception {
-        String nameWithWhitespace = WHITESPACE + VALID_CODE + WHITESPACE;
+    public void parseCode_validValueWithWhitespace_returnsTrimmedModuleCode() throws Exception {
+        String moduleCodeWithWhitespace = WHITESPACE + VALID_CODE + WHITESPACE;
         ModuleCode expectedCode = new ModuleCode(VALID_CODE);
-        assertEquals(expectedCode, ParserUtil.parseModuleCode(nameWithWhitespace));
+        assertEquals(expectedCode, ParserUtil.parseModuleCode(moduleCodeWithWhitespace));
     }
 
     @Test
@@ -95,7 +95,7 @@ public class ParserUtilTest {
         ModularCredits expectedCredits = new ModularCredits(VALID_CREDITS);
         assertEquals(expectedCredits, ParserUtil.parseModularCredits(creditsWithWhitespace));
     }
-    
+
     @Test
     public void parseTag_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> ParserUtil.parseTag(null));

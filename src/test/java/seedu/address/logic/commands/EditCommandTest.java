@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -110,7 +109,7 @@ public class EditCommandTest {
     public void execute_duplicateModuleFilteredList_failure() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
-        // edit module in filtered list into a duplicate in grad pad
+        // edit module in filtered list into a duplicate in GradPad
         Module moduleInList = model.getGradPad().getModuleList().get(INDEX_SECOND_MODULE.getZeroBased());
         EditCommand editCommand = new EditCommand(INDEX_FIRST_MODULE,
                 new EditModuleDescriptorBuilder(moduleInList).build());
@@ -129,13 +128,13 @@ public class EditCommandTest {
 
     /**
      * Edit filtered list where index is larger than size of filtered list,
-     * but smaller than size of grad pad
+     * but smaller than size of GradPad
      */
     @Test
     public void execute_invalidModuleIndexFilteredList_failure() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
         Index outOfBoundIndex = INDEX_SECOND_MODULE;
-        // ensures that outOfBoundIndex is still in bounds of grad pad list
+        // ensures that outOfBoundIndex is still in bounds of GradPad list
         assertTrue(outOfBoundIndex.getZeroBased() < model.getGradPad().getModuleList().size());
 
         EditCommand editCommand = new EditCommand(outOfBoundIndex,

@@ -45,7 +45,7 @@ public class ModuleCard extends UiPart<Region> {
         this.module = module;
         id.setText(displayedIndex + ". ");
         code.setText(module.getModuleCode().toString());
-        credits.setText(module.getModularCredits().value);
+        credits.setText("Modular Credits: " + module.getModularCredits().value);
         module.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

@@ -139,7 +139,10 @@ Expected outcome:
 
 ### Deleting a Module : `delete`
 
-Removes a module from the current list of modules.
+Removes a Module of choice from the Current Modules in GradPad.
+
+Module code must be specified and module must exist in 
+the Current Modules of Gradpad for successful deletion.
 
 Format: `delete {module code}`
 

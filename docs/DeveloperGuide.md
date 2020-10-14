@@ -133,10 +133,6 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 1d27b2b9dff13e8c24482903cbee09d1bd271039
 ### Add feature
 GradPad allows users to add modules to their list.
 

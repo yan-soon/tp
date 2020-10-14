@@ -121,7 +121,7 @@ The `Model`,
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
-* can save the address book data in json format and read it back.
+* can save the GradPad data in json format and read it back.
 
 ### Common classes
 
@@ -133,6 +133,7 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+<<<<<<< HEAD
 ### Add feature
 GradPad allows users to add modules to their list.
 
@@ -170,6 +171,54 @@ Step 9. Finally, the `Model` is then updated by adding the new `Module` object.
 The following sequence diagram shows how the add command is executed.
 
 ![AddSequenceDiagram](images/AddSequenceDiagram.png)
+=======
+### Edit feature
+GradPad allows users to edit modules that have already been added. 
+
+The following fields of a module can be edited:
+* Module Code
+* Modular Credits
+* Tags
+
+As with all operations in GradPad, the `EditCommand` class handles the execution of edit operations.
+The `EditCommandParser` class helps to parse a user's input before creating the correct edit command.
+
+GradPad uses the `EditModuleDescriptor` class to facilitate edit operations. An `EditModuleDescriptor` is
+a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode`,
+`ModularCredit`, and `Tags` of an `EditModuleDescriptor`. It is also fine to omit any of them, which is important
+as we don't want to be overly-concerned with which fields are to be edited and which are not.
+
+Given below is how an edit operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to an edit operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an edit command, and so uses the `EditCommandParser`
+class to create a corresponding `EditCommand`.
+
+Step 5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+
+Step 6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
+the new values that we want to update the target module with.
+
+Step 7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
+`LogicManager` in step 2.
+
+Step 8. `LogicManager` executes the newly created `EditCommand`.
+
+Step 9. The target module to be edited is retrieved. A copy of it is made and using the populated
+ `EditModuleDescriptor`, the fields that are to be updated are replaced with their new values.
+ 
+Step 10. The `Model` is then updated by replacing the target module with its new updated copy.
+
+The following sequence diagram shows how the edit command is executed.
+
+![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+>>>>>>> 720cfc7528d06a58f3f9dfeecd5ea091ec01a49d
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

@@ -1,0 +1,96 @@
+@startuml
+!include style.puml
+
+box Logic LOGIC_COLOR_T1
+participant ":LogicManager" as LogicManager LOGIC_COLOR
+participant ":GradPadParser" as GradPadParser LOGIC_COLOR
+participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
+participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":Module" as Module LOGIC_COLOR
+participant "e:AddCommand" as AddCommand LOGIC_COLOR
+participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Model MODEL_COLOR_T1
+participant ":Model" as Model MODEL_COLOR
+end box
+
+[-> LogicManager : execute("add c/CS1231 cr/4")
+activate LogicManager
+
+LogicManager -> GradPadParser : parseCommand("add c/CS1231 cr/4")
+activate GradPadParser
+
+create AddCommandParser
+GradPadParser -> AddCommandParser
+activate AddCommandParser
+
+AddCommandParser --> GradPadParser
+deactivate AddCommandParser
+
+GradPadParser -> AddCommandParser : parse("c/CS1231 cr/4")
+activate AddCommandParser
+
+AddCommandParser -> ParserUtil : parseModuleCode("CS1231")
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : code
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseModularCredits("4")
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : credits
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseTags("")
+activate ParserUtil
+
+ParserUtil --> AddCommandParser : tagList
+deactivate ParserUtil
+
+create Module
+AddCommandParser -> Module : Module(code, credits, tagList)
+activate Module
+
+Module --> AddCommandParser
+deactivate Module
+
+create AddCommand
+AddCommandParser -> AddCommand : AddCommand(Module)
+activate AddCommand
+
+AddCommand --> AddCommandParser : e
+deactivate AddCommand
+
+AddCommandParser --> GradPadParser : e
+deactivate AddCommandParser
+'Hidden arrow to position the destroy marker below the end of the activation bar.
+AddCommandParser -[hidden]-> GradPadParser
+destroy AddCommandParser
+
+GradPadParser --> LogicManager : e
+deactivate GradPadParser
+
+LogicManager -> AddCommand : execute()
+activate AddCommand
+
+AddCommand -> Model : addModule(Module)
+activate Model
+
+Model --> AddCommand
+deactivate Model
+
+create CommandResult
+AddCommand -> CommandResult
+activate CommandResult
+
+CommandResult --> AddCommand
+deactivate CommandResult
+
+AddCommand --> LogicManager : result
+deactivate AddCommand
+
+[<--LogicManager
+deactivate LogicManager
+@enduml

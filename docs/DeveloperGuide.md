@@ -80,9 +80,9 @@ The `UI` component,
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `GradPadParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding a module).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -133,6 +133,43 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Add feature
+GradPad allows users to add modules to their list.
+
+The following fields of a module are required (* for optional):
+* Module Code
+* Modular Credits
+* Tag*
+
+As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
+The `AddCommandParser` class helps to parse user's input before creating the correct add command.
+
+Given below is how an add operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to an add operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
+class to create a corresponding `EditCommand`.
+
+Step 5. In `AddCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+
+Step 6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
+the values that we want to add into our list.
+
+Step 7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the
+`LogicManager` in step 2.
+
+Step 8. `Logic Manager` executes the newly created `AddCommand`.
+
+Step 9. Finally, the `Model` is then updated by adding the new `Module` object.
+
+The following sequence diagram shows how the add command is executed.
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

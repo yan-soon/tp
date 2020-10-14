@@ -43,9 +43,11 @@ title: User Guide
     
 1. Adding a module
 
-    * Allows user to specify module description
+    * Allows user to add any Module of choice into GradPad for tracking purposes.
     
-    * Allows user to specify no. of modular credits
+    * User can add any module by specifying their desired Module Code (eg. CS1231),
+    Modular Credits (eg. 4), and Tags (eg. Core) along with the `add` command, in their
+    input (more instructions below).
     
 1. View added modules
 
@@ -105,9 +107,9 @@ Expected outcome:
 
 Adds a new module.
 
-Format: `add {module code} {modular credits}`
+Format: `add /c {module code} /cr {modular credits}`
 
-Example of usage: `add CS2103T 4`
+Example of usage: `add /c CS2103T /cr 4`
 
 Expected outcome:
 

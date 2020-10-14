@@ -81,7 +81,7 @@ public class EditCommand extends Command {
 
     /**
      * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
-     * edited with {@code editModuleDescriptor}.
+     * edited with {@code editModuleFDescriptor}.
      */
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;

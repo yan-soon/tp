@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":GradPadParser" as GradPadParser LOGIC_COLOR
 participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
-participant ":EditCommandDescriptor" as EditCommandDescriptor LOGIC_COLOR
+participant ":EditModuleDescriptor" as EditModuleDescriptor LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -37,18 +37,18 @@ activate ParserUtil
 ParserUtil --> EditCommandParser : code
 deactivate ParserUtil
 
-create EditCommandDescriptor
-EditCommandParser -> EditCommandDescriptor
-activate EditCommandDescriptor
+create EditModuleDescriptor
+EditCommandParser -> EditModuleDescriptor
+activate EditModuleDescriptor
 
-EditCommandDescriptor --> EditCommandParser
-deactivate EditCommandDescriptor
+EditModuleDescriptor --> EditCommandParser
+deactivate EditModuleDescriptor
 
-EditCommandParser -> EditCommandDescriptor : setModuleCode(code)
-activate EditCommandDescriptor
+EditCommandParser -> EditModuleDescriptor : setModuleCode(code)
+activate EditModuleDescriptor
 
-EditCommandDescriptor --> EditCommandParser : desc
-deactivate EditCommandDescriptor
+EditModuleDescriptor --> EditCommandParser : desc
+deactivate EditModuleDescriptor
 
 create EditCommand
 EditCommandParser -> EditCommand : EditCommand(1, desc)

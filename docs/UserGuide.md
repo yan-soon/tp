@@ -43,7 +43,7 @@ title: User Guide
     
 1. Adding a module
 
-    * Allows user to add any Module of choice into GradPad for tracking purposes.
+    * Allows user to add any Module of choice into the `Current Modules` section for tracking purposes.
     
     * User can add any module by specifying their desired Module Code (eg. CS1231),
     Modular Credits (eg. 4), and Tags (eg. Core) along with the `add` command, in their

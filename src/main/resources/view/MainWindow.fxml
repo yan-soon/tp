@@ -21,18 +21,17 @@
       </stylesheets>
 
       <VBox fx:id="moduleListResultDisplay">
-            <HBox alignment="CENTER" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
-               <children>
-      
-                                <VBox fx:id="moduleList" minWidth="200.0" HBox.hgrow="ALWAYS">
-                <StackPane fx:id="moduleListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
-              </VBox>
-      
-                    <StackPane fx:id="resultDisplayPlaceholder" minWidth="250.0" HBox.hgrow="ALWAYS" />
-               </children>
-            </HBox>
+          <HBox alignment="CENTER" styleClass="pane-with-border" VBox.vgrow="ALWAYS">
+              <children>
+                  <VBox fx:id="moduleList" minWidth="200.0" HBox.hgrow="ALWAYS">
+                      <StackPane fx:id="moduleListPanelPlaceholder" styleClass="pane-with-border" VBox.vgrow="ALWAYS" />
+                  </VBox>
 
-                    <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
+                  <StackPane fx:id="resultDisplayPlaceholder" minWidth="250.0" HBox.hgrow="ALWAYS" />
+              </children>
+          </HBox>
+
+          <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
           <padding>
             <Insets bottom="5" left="10" right="10" top="5" />
           </padding>

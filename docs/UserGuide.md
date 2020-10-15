@@ -18,7 +18,7 @@ be messy at times. So our team has come up with the idea of an easy-to-use, all-
 can ease the process of module management for Computer Science Undergraduates.
 
 GradPad is able to consolidate the modules you have taken and display the remaining required modules to 
-ease your modules planning process. A module searching platform is also included in GradPad, providing easy 
+ease your module planning process. A module searching platform is also included in GradPad, providing easy 
 navigation of modules.
 
 ## Quick start

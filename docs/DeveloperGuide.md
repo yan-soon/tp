@@ -179,6 +179,39 @@ The following sequence diagram shows how the edit command is executed.
 
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
 
+### Delete feature
+GradPad allows users to delete modules that have already been added. 
+
+As with all operations in GradPad, the `DeleteCommand` class handles the execution of delete operations.
+The `DeleteCommandParser` class helps to parse a user's input before creating the correct delete command.
+
+Given below is how a delete operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to a delete operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
+class to create a corresponding `DeleteCommand`.
+
+Step 5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
+
+Step 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
+`LogicManager` in step 2.
+
+Step 7. `LogicManager` executes the newly created `DeleteCommand`.
+
+Step 8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+ 
+Step 9. The `Model` is then updated by removing the target module.
+
+The following sequence diagram shows how the delete command is executed.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

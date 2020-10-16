@@ -16,6 +16,23 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  * Encapsulates operations to retrieve NUSMods module information.
  */
 public class NusmodsDataManager implements NusmodsData {
+    private final String filePath;
+    private final DataFetcher dataFetcher;
+
+    NusmodsDataManager() {
+        dataFetcher = new DataFetcherManager();
+        filePath = DataFetcher.DATA_FILE_PATH;
+    }
+
+    /**
+     * Constructor to change the DataFetcher class used. Mainly used for testing to provide stubs.
+     * @param dataFetcher The class used to invoke static methods in this class.
+     */
+    NusmodsDataManager(DataFetcher dataFetcher, String filePath) {
+        this.dataFetcher = dataFetcher;
+        this.filePath = filePath;
+    }
+
 
     /**
      * Returns the module title of a module given its module code.
@@ -39,7 +56,7 @@ public class NusmodsDataManager implements NusmodsData {
      */
     public Optional<ModuleInfo> getModuleInfo(String moduleCode) throws NusmodsException {
         try {
-            return DataFetcher.fetchModuleInfo(moduleCode);
+            return dataFetcher.fetchModuleInfo(moduleCode);
         } catch (NusmodsException ex) {
             return getModuleInfoFromFile(moduleCode);
         }
@@ -55,13 +72,17 @@ public class NusmodsDataManager implements NusmodsData {
     private Optional<ModuleInfo> getModuleInfoFromFile(String moduleCode) throws NusmodsException {
         ObjectMapper mapper = new ObjectMapper();
         try {
-            String jsonString = FileUtil.readFromFile(Paths.get(DataFetcher.DATA_FILE_PATH));
+            String jsonString = FileUtil.readFromFile(Paths.get(getFilePath()));
             TypeReference<HashMap<String, ModuleInfo>> targetType = new TypeReference<>(){};
             Map<String, ModuleInfo> moduleInfoMap = mapper.readValue(jsonString, targetType);
 
             return Optional.ofNullable(moduleInfoMap.get(moduleCode));
         } catch (IOException ex) {
-            throw new NusmodsException(ex);
+            throw new NusmodsException(new IOException("Error reading module info from local file."));
         }
+    }
+
+    public String getFilePath() {
+        return filePath;
     }
 }

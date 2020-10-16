@@ -1,0 +1,8 @@
+{
+  "moduleCode" : "CS2103T",
+  "title" : "Software Engineering",
+  "moduleCredit" : "4",
+  "description" : "The best module there is.",
+  "preclusion" : "CS2103, CS2113, CS2113T, IS2101 or its equivalent.",
+  "prerequisite" : "For SoC students only. (CS1020 or its equivalent) or CS2020 or ((CS2030 or its equivalent) and (CS2040 or its equivalent))"
+}

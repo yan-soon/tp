@@ -21,8 +21,9 @@ public class HttpUtil {
      * @return The HTTP response as a string.
      * @throws NusmodsException an error occurs while making the request.
      */
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
+    //CHECKSTYLE.OFF: AbbreviationAsWordInName
     public static String makeGETRequest(String urlString) throws NusmodsException {
+        //CHECKSTYLE.ON: AbbreviationAsWordInName
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                                       .timeout(Duration.ofSeconds(3))

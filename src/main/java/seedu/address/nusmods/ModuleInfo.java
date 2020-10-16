@@ -1,5 +1,7 @@
 package seedu.address.nusmods;
 
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
@@ -37,6 +39,30 @@ public class ModuleInfo {
 
     public String getPrerequisite() {
         return prerequisite;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ModuleInfo)) {
+            return false;
+        }
+
+        ModuleInfo otherModuleInfo = (ModuleInfo) other;
+        return otherModuleInfo.getModuleCode().equals(getModuleCode())
+                       && otherModuleInfo.getTitle().equals(getTitle())
+                       && otherModuleInfo.getModuleCredit().equals(getModuleCredit())
+                       && otherModuleInfo.getDescription().equals(getDescription())
+                       && otherModuleInfo.getPreclusion().equals(getPreclusion())
+                       && otherModuleInfo.getPrerequisite().equals(getPrerequisite());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(moduleCode, title, moduleCredit, description, preclusion, prerequisite);
     }
 
     @Override

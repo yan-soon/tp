@@ -232,7 +232,7 @@ Step 2. This calls the `execute` method of the `LogicManager` class. The user in
 Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
 
 Step 4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
-class to create a corresponding `DeleteCommand`.
+class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.parse()` method.
 
 Step 5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
 

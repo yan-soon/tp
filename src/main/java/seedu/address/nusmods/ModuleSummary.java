@@ -2,6 +2,7 @@ package seedu.address.nusmods;
 
 
 import java.util.List;
+import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -24,6 +25,27 @@ public class ModuleSummary {
 
     public List<Integer> getSemesters() {
         return semesters;
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == this) {
+            return true;
+        }
+
+        if (!(other instanceof ModuleSummary)) {
+            return false;
+        }
+
+        ModuleSummary otherModuleSummary = (ModuleSummary) other;
+        return otherModuleSummary.getModuleCode().equals(getModuleCode())
+                       && otherModuleSummary.getTitle().equals(getTitle())
+                       && otherModuleSummary.getSemesters().equals(getSemesters());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(moduleCode, title, semesters);
     }
 
     @Override

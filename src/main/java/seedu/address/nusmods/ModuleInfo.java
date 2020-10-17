@@ -16,7 +16,6 @@ public class ModuleInfo {
     private String preclusion;
     private String prerequisite;
 
-
     public String getModuleCode() {
         return moduleCode;
     }
@@ -56,8 +55,12 @@ public class ModuleInfo {
                        && otherModuleInfo.getTitle().equals(getTitle())
                        && otherModuleInfo.getModuleCredit().equals(getModuleCredit())
                        && otherModuleInfo.getDescription().equals(getDescription())
-                       && otherModuleInfo.getPreclusion().equals(getPreclusion())
-                       && otherModuleInfo.getPrerequisite().equals(getPrerequisite());
+                       && equalsIfNotNull(otherModuleInfo.getPreclusion(), getPreclusion())
+                       && equalsIfNotNull(otherModuleInfo.getPrerequisite(), getPrerequisite());
+    }
+
+    private boolean equalsIfNotNull(Object o1, Object o2) {
+        return o1 == null || o2 == null || o1.equals(o2);
     }
 
     @Override

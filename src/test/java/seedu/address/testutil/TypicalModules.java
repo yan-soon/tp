@@ -47,4 +47,12 @@ public class TypicalModules {
     public static List<Module> getTypicalModules() {
         return new ArrayList<>(Arrays.asList(CS2103T, CS3216));
     }
+
+    public static int getTypicalTotalMc() {
+        int totalMc = 0;
+        for (Module module: getTypicalModules()) {
+            totalMc += Integer.parseInt(module.getModularCredits().toString());
+        }
+        return totalMc;
+    }
 }

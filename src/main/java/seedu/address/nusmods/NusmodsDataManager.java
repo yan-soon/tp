@@ -26,6 +26,7 @@ public class NusmodsDataManager implements NusmodsData {
 
     /**
      * Constructor to change the DataFetcher class used. Mainly used for testing to provide stubs.
+     *
      * @param dataFetcher The class used to invoke static methods in this class.
      */
     NusmodsDataManager(DataFetcher dataFetcher, String filePath) {

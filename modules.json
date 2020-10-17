@@ -543,6 +543,14 @@
     "preclusion" : "CS4342",
     "prerequisite" : "CS3241 and (PC1221 or PC1221X) and \n(MA1101R or MA1311 or MA1508E or MA1513) and \n(MA1102R or MA1505 or MA1507 or (MA1511 and MA1512) or MA1521)"
   },
+  "CS3240" : {
+    "moduleCode" : "CS3240",
+    "title" : "Interaction Design",
+    "moduleCredit" : "4",
+    "description" : "This course is intended for students in computing and related disciplines whose work focuses on human-computer interaction issues in the design of computer systems. The course stresses the importance of user-centred design and usability in the development of computer applications and systems. Students will be taken through the analysis, design, development, and evaluation of human-computer interaction methods for computer systems. They will acquire hands-on design skills through laboratory exercises and assignments. The course also covers HCI design principles and emphasizes the importance of contextual, organisational, and social factors in system design.",
+    "preclusion" : null,
+    "prerequisite" : "(CS1020 or its equivalent) or CS2020 or (CS2030 or its equivalent) or CS2113/T or NM3209 or NM2207/Y"
+  },
   "CS6231" : {
     "moduleCode" : "CS6231",
     "title" : "Advanced Topics in Security and Privacy",

@@ -153,9 +153,9 @@ Step 2. This calls the `execute` method of the `LogicManager` class. The user in
 Step 3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
 
 Step 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
-class to create a corresponding `EditCommand`.
+class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
-Step 5. In `AddCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+Step 5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
 Step 6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
 the values that we want to add into our list.

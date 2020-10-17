@@ -107,9 +107,9 @@ Expected outcome:
 
 Adds a new module.
 
-Format: `add /c {module code} /cr {modular credits}`
+Format: `add c/ {module code} cr/ {modular credits}`
 
-Example of usage: `add /c CS2103T /cr 4`
+Example of usage: `add c/ CS2103T cr/ 4`
 
 Expected outcome:
 

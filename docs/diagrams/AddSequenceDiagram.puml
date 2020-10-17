@@ -60,16 +60,16 @@ create AddCommand
 AddCommandParser -> AddCommand : AddCommand(Module)
 activate AddCommand
 
-AddCommand --> AddCommandParser : e
+AddCommand --> AddCommandParser : a
 deactivate AddCommand
 
-AddCommandParser --> GradPadParser : e
+AddCommandParser --> GradPadParser : a
 deactivate AddCommandParser
 'Hidden arrow to position the destroy marker below the end of the activation bar.
 AddCommandParser -[hidden]-> GradPadParser
 destroy AddCommandParser
 
-GradPadParser --> LogicManager : e
+GradPadParser --> LogicManager : a
 deactivate GradPadParser
 
 LogicManager -> AddCommand : execute()

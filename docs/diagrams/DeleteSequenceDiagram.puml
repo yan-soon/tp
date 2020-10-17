@@ -43,12 +43,12 @@ DeleteCommandParser -[hidden]-> GradPadParser
 destroy DeleteCommandParser
 
 GradPadParser --> LogicManager : d
-deactivate AddressBookParser
+deactivate GradPadParser
 
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
-DeleteCommand -> Model : deletePerson(1)
+DeleteCommand -> Model : deleteModule(1)
 activate Model
 
 Model --> DeleteCommand

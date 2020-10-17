@@ -22,6 +22,23 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  */
 public class DataFetcherManager extends DataFetcher {
     private static final Logger logger = LogsCenter.getLogger(DataFetcher.class);
+    private final HttpUtil httpUtil;
+    private final String dataFilePath;
+
+    DataFetcherManager() {
+        httpUtil = HttpUtil.SINGLETON;
+        dataFilePath = DataFetcher.DATA_FILE_PATH;
+    }
+
+    DataFetcherManager(HttpUtil httpUtil) {
+        this.httpUtil = httpUtil;
+        dataFilePath = DataFetcher.DATA_FILE_PATH;
+    }
+
+    DataFetcherManager(HttpUtil httpUtil, String filePath) {
+        this.httpUtil = httpUtil;
+        this.dataFilePath = filePath;
+    }
 
     /**
      * Fetches a list of all NUS module summaries, then fetches module info for all CS modules (only) and
@@ -35,7 +52,7 @@ public class DataFetcherManager extends DataFetcher {
         Map<String, ModuleInfo> moduleInfoMap = generateModuleInfoMap(csModules);
 
         try {
-            JsonUtil.saveJsonFile(moduleInfoMap, Paths.get(DATA_FILE_PATH));
+            JsonUtil.saveJsonFile(moduleInfoMap, Paths.get(getDataFilePath()));
         } catch (IOException ex) {
             throw new NusmodsException(ex);
         }
@@ -52,7 +69,7 @@ public class DataFetcherManager extends DataFetcher {
     public Optional<ModuleInfo> fetchModuleInfo(String moduleCode) throws NusmodsException {
         logger.info("Fetching module info for: " + moduleCode);
 
-        String jsonResponse = HttpUtil.makeGETRequest(String.format(MODULE_INFO_URL, moduleCode));
+        String jsonResponse = httpUtil.makeGETRequest(String.format(MODULE_INFO_URL, moduleCode));
         try {
             return Optional.of(JsonUtil.fromJsonString(jsonResponse, ModuleInfo.class));
         } catch (IOException ex) {
@@ -70,7 +87,7 @@ public class DataFetcherManager extends DataFetcher {
     private List<ModuleSummary> fetchModuleSummaryList() throws NusmodsException {
         logger.info("Fetching list of module summaries from NUSMods API...");
 
-        String jsonResponse = HttpUtil.makeGETRequest(MODULE_SUMMARY_LIST_URL);
+        String jsonResponse = httpUtil.makeGETRequest(MODULE_SUMMARY_LIST_URL);
         ObjectMapper mapper = new ObjectMapper();
         try {
             return mapper.readValue(jsonResponse, new TypeReference<List<ModuleSummary>>(){});
@@ -87,7 +104,7 @@ public class DataFetcherManager extends DataFetcher {
      * @return The filtered list of ModuleSummary objects where every one of their module codes contains the
      * keyword specified.
      */
-    private List<ModuleSummary> filterModuleSummaries(List<ModuleSummary> modules, String keyword) {
+    List<ModuleSummary> filterModuleSummaries(List<ModuleSummary> modules, String keyword) {
         return modules.stream().filter(module -> module.getModuleCode().contains(keyword)).collect(Collectors.toList());
     }
 
@@ -98,7 +115,7 @@ public class DataFetcherManager extends DataFetcher {
      * @param moduleSummaries The list of {@code ModuleSummary} objects to fetch info for.
      * @return A mapping of module codes to their respective {@code ModuleInfo}.
      */
-    private Map<String, ModuleInfo> generateModuleInfoMap(List<ModuleSummary> moduleSummaries) {
+    Map<String, ModuleInfo> generateModuleInfoMap(List<ModuleSummary> moduleSummaries) {
         logger.info("Fetching module info for all modules...");
 
         Map<String, ModuleInfo> moduleInfoMap = new HashMap<>();
@@ -116,5 +133,9 @@ public class DataFetcherManager extends DataFetcher {
         }
 
         return moduleInfoMap;
+    }
+
+    public String getDataFilePath() {
+        return dataFilePath;
     }
 }

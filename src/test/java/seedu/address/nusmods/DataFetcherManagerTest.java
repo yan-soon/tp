@@ -6,6 +6,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.List;
@@ -104,6 +105,9 @@ public class DataFetcherManagerTest {
         manager.fetchAndSaveModules();
         Map<String, ModuleInfo> actualMap = readModuleInfoMapFromFile(TEST_SAVE_FILE_PATH);
         Optional<ModuleInfo> expectedModule = JsonUtil.readJsonFile(Paths.get(CS1010X_MODULE_INFO), ModuleInfo.class);
+
+        // clean up test data file after we're done
+        Files.deleteIfExists(Paths.get(TEST_SAVE_FILE_PATH));
 
         if (expectedModule.isPresent()) {
             Map<String, ModuleInfo> expectedMap = new HashMap<>();

@@ -8,6 +8,18 @@ title: User Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## GradPad
+
+GradPad is a one-stop solution to module management for Computer Science Undergraduates.
+Planning for modules has always been a tedious process but it does not have to be. 
+
+The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources which can
+be messy at times. So our team has come up with the idea of an easy-to-use, all-in-one application that 
+can ease the process of module management for Computer Science Undergraduates.
+
+GradPad is able to consolidate the modules you have taken and display the remaining required modules to 
+ease your module planning process. A module searching platform is also included in GradPad, providing easy 
+navigation of modules.
 
 ## Quick start
 
@@ -127,7 +139,10 @@ Expected outcome:
 
 ### Deleting a Module : `delete`
 
-Removes a module from the current list of modules.
+Removes a Module of choice from the Current Modules in GradPad.
+
+Module code must be specified and module must exist in 
+the Current Modules of Gradpad for successful deletion.
 
 Format: `delete {module code}`
 

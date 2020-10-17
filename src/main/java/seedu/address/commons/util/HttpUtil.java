@@ -13,7 +13,7 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  * Utilities for HTTP requests.
  */
 public class HttpUtil {
-
+    public static final HttpUtil SINGLETON = new HttpUtil();
     /**
      * Makes a HTTP GET request to a URL and returns the response as a string.
      *
@@ -22,7 +22,7 @@ public class HttpUtil {
      * @throws NusmodsException an error occurs while making the request.
      */
     //CHECKSTYLE.OFF: AbbreviationAsWordInName
-    public static String makeGETRequest(String urlString) throws NusmodsException {
+    public String makeGETRequest(String urlString) throws NusmodsException {
         //CHECKSTYLE.ON: AbbreviationAsWordInName
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()

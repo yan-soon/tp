@@ -1,6 +1,7 @@
 package seedu.address.nusmods;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -73,6 +74,26 @@ public class DataFetcherManagerTest {
         List<ModuleSummary> expectedFilteredList = summaryList.subList(1, 2);
 
         assertEquals(expectedFilteredList, actualFilteredList);
+    }
+
+    @Test
+    public void filterModuleSummaries_filterByCsAndIs_noModulesRemoved() throws IOException {
+        manager = new DataFetcherManager(new ValidModuleFileHttpUtilStub());
+
+        List<ModuleSummary> summaryList = readModuleSummaryFromFile(VALID_MODULE_SUMMARIES_TEST_FILE_PATH);
+        List<ModuleSummary> actualFilteredList = manager.filterModuleSummaries(summaryList, "CS", "IS1103");
+
+        assertEquals(summaryList, actualFilteredList);
+    }
+
+    @Test
+    public void filterModuleSummaries_noKeywordsGiven_returnEmptyList() throws IOException {
+        manager = new DataFetcherManager(new ValidModuleFileHttpUtilStub());
+
+        List<ModuleSummary> summaryList = readModuleSummaryFromFile(VALID_MODULE_SUMMARIES_TEST_FILE_PATH);
+        List<ModuleSummary> actualFilteredList = manager.filterModuleSummaries(summaryList);
+
+        assertTrue(actualFilteredList.isEmpty());
     }
 
     @Test

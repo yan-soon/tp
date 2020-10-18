@@ -146,7 +146,7 @@ Expected outcome:
 Shows the specified module, if it exists in the Current Modules in GradPad.
 
 Module code must be specified and the module must exist in
-the Current Modules in GradPad for successful find.
+the Current Modules in GradPad for the module to be successfully displayed.
 
 Format: `find {module code}`
 

@@ -839,6 +839,14 @@
     "preclusion" : "CS3213 Software Systems Design",
     "prerequisite" : "CS2103 or its equivalent"
   },
+  "MA1101R" : {
+    "moduleCode" : "MA1101R",
+    "title" : "Linear Algebra I",
+    "moduleCredit" : "4",
+    "description" : "This module is a first course in linear algebra.  Fundamental concepts of linear algebra will be introduced and investigated in the context of the Euclidean spaces R^n.  Proofs of results will be presented in the concrete setting.  Students are expected to acquire computational facilities and geometric intuition with regard to vectors and matrices.  Some applications will be presented. Major topics: Systems of linear equations, matrices, determinants, Euclidean spaces, linear combinations and linear span, subspaces, linear independence, bases and dimension, rank of a matrix, inner products, eigenvalues and eigenvectors, diagonalization, linear transformations between Euclidean spaces, applications.",
+    "preclusion" : "EG1401, EG1402, MA1101, MA1311, MA1506, MA1508, FOE students, YSC2232",
+    "prerequisite" : "GCE ‘A’ Level or H2 Mathematics or H2 Further Mathematics  or MA1301 or MA1301FC or MA1301X"
+  },
   "CS3216" : {
     "moduleCode" : "CS3216",
     "title" : "Software Product Engineering for Digital Markets",
@@ -1014,6 +1022,14 @@
     "description" : "This module will examine the various areas of research in Cultural Studies conducted by Asian scholars or scholars locating their research in Asia. It will examine the histories, concepts and analytic strategies that these scholars deploy in the analysis of the changing cultural landscapes and practices in contemporary Asia. Abiding themes of the module will be the conceptual constitution of the idea of 'Asia', the emergence of 'trans-Asian' practices and the possibility of 'pan-Asian' identities that these trans-location practices might engender.",
     "preclusion" : null,
     "prerequisite" : null
+  },
+  "MA1521" : {
+    "moduleCode" : "MA1521",
+    "title" : "Calculus for Computing",
+    "moduleCredit" : "4",
+    "description" : "This module provides a basic foundation for calculus and its related subjects required by computing students. The objective is to train the students to be able to handle calculus techniques arising in their courses of specialization. In addition to the standard calculus material, the course also covers simple mathematical modeling techniques and numerical methods in connection with ordinary differential equations. \n\n\n\nMajor topics: \n\nPreliminaries on sets and number systems. \n\nCalculus of functions of one variable and applications. \n\nSequences, series and power series.   \n\nFunctions of several variables. Extrema.\n\nFirst and second order differential equations. \n\nBasic numerical methods for ordinary differential equations.",
+    "preclusion" : "Students reading a primary major in Mathematics/Applied Mathematics/Quantitative Finance/Data Science and Analytics, MA1102R, MA1312, MA1505, MA1507, MA2501, FoE students, YSC1216",
+    "prerequisite" : "GCE ‘A’ Level Mathematics or H2 Mathematics or H2 Further Mathematics or MA1301 or MA1301X"
   },
   "CS3236R" : {
     "moduleCode" : "CS3236R",

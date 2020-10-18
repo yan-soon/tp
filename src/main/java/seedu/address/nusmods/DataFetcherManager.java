@@ -2,10 +2,12 @@ package seedu.address.nusmods;
 
 import java.io.IOException;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.function.Predicate;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
@@ -21,6 +23,7 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  * Handles API requests made by GradPad to the NUSMods public API to retrieve module data.
  */
 public class DataFetcherManager extends DataFetcher {
+    public static final String[] MODULE_FILTER_KEYWORDS = {"CS", "MA1521", "MA1101R"};
     private static final Logger logger = LogsCenter.getLogger(DataFetcher.class);
     private final HttpUtil httpUtil;
     private final String dataFilePath;
@@ -48,8 +51,8 @@ public class DataFetcherManager extends DataFetcher {
      */
     public void fetchAndSaveModules() throws NusmodsException {
         List<ModuleSummary> moduleSummaries = fetchModuleSummaryList();
-        List<ModuleSummary> csModules = filterModuleSummaries(moduleSummaries, "CS");
-        Map<String, ModuleInfo> moduleInfoMap = generateModuleInfoMap(csModules);
+        List<ModuleSummary> filteredModules = filterModuleSummaries(moduleSummaries, MODULE_FILTER_KEYWORDS);
+        Map<String, ModuleInfo> moduleInfoMap = generateModuleInfoMap(filteredModules);
 
         try {
             JsonUtil.saveJsonFile(moduleInfoMap, Paths.get(getDataFilePath()));
@@ -97,15 +100,19 @@ public class DataFetcherManager extends DataFetcher {
     }
 
     /**
-     * Filters a list of {@code ModuleSummary} objects' module codes by a given keyword.
+     * Filters a list of {@code ModuleSummary} objects' module codes by a list of keywords.
      *
      * @param modules The list of ModuleSummary objects to filter.
-     * @param keyword The keyword to match in each ModuleSummary object's module code.
-     * @return The filtered list of ModuleSummary objects where every one of their module codes contains the
-     * keyword specified.
+     * @param keywords The keywords to match in each ModuleSummary object's module code.
+     * @return The filtered list of ModuleSummary objects where every one of their module codes contains any
+     * one (or more) of the keywords specified.
      */
-    List<ModuleSummary> filterModuleSummaries(List<ModuleSummary> modules, String keyword) {
-        return modules.stream().filter(module -> module.getModuleCode().contains(keyword)).collect(Collectors.toList());
+    List<ModuleSummary> filterModuleSummaries(List<ModuleSummary> modules, String... keywords) {
+        // checks if a module summary's module code contains ANY of the filter keywords
+        Predicate<ModuleSummary> moduleCodePredicate = module -> Arrays.stream(keywords)
+                 .anyMatch(keyword -> module.getModuleCode().contains(keyword));
+
+        return modules.stream().filter(moduleCodePredicate).collect(Collectors.toList());
     }
 
     /**

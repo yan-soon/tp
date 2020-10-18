@@ -32,10 +32,9 @@
           </HBox>
 
           <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+              <padding>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+              </padding></StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

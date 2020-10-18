@@ -69,6 +69,9 @@ navigation of modules.
 
     * Allows a user to delete unwanted modules
     
+1. Editing a module
+    * Allows a user to edit the details of a module they have already added
+    
 1. Check modular credits (MCs)
 
     * Allows user to check their accumulated modular credit score
@@ -139,6 +142,24 @@ Expected outcome:
 
 <img src="images/list.png" width="550px" height="350px">
 
+### Editing a Module: `edit`
+
+Edits the module details of a module that has already been added to GradPad.
+
+To choose the module that you want to edit, specify the index of that module in the Current Modules list.
+You may also choose to edit more than one module detail in the same `edit` command.
+
+**Note:** Editing the tag of a module does not add on to its existing tags. Rather, it replaces all 
+existing tags with the new tags you're specifying.
+
+Format: `edit {index} [c/module code] [cr/modular credits] [t/tag]...`
+
+Example of usage: `edit 1 c/CS2103T cr/4 t/core-module t/required`
+
+Expected outcome:
+
+<img src="images/" width="550px" height="350px">
+
 ### Deleting a Module : `delete`
 
 Removes a Module of choice from the Current Modules in GradPad.
@@ -204,6 +225,7 @@ Expected outcome:
 Action | Format, Examples
 --------|------------------
 **Add** | `add {module description} {modular credits}` <br> e.g. `add CS2100 4`
+**Edit** | `edit {index} [c/module description] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
 **Delete** | `delete {module}`<br> e.g. `delete CS2103T`
 **List** | `list`
 **Check MCs** | `checkmc`

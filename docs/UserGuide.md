@@ -227,11 +227,13 @@ Expected outcome:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add {module code} {modular credits}` <br> e.g. `add CS2100 4`
-**Edit** | `edit {index} [c/module description] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
-**Delete** | `delete {module}`<br> e.g. `delete CS2103T`
-**List** | `list`
+**Help** | `help`
+**Add** | `add [c/module code] [cr/modular credits]` <br> e.g. `add c/CS2100 cr/4`
+**Edit** | `edit {index} [c/module code] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
+**Delete** | `delete {module code}`<br> e.g. `delete c/CS2103T`
+**Current Modules** | `list`
 **Find** | `find {module code}` <br> e.g. `find CS2103T`
 **Check MCs** | `checkmc`
-**Help** | `help`
+**Required Modules** | `required` 
+**Search module details** | `search {module code}` <br> e.g. `search CS2103T`
 **Exit** | `exit`

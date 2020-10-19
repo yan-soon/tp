@@ -11,7 +11,7 @@
 
 <fx:root minHeight="600" minWidth="450" onCloseRequest="#handleExit" title="GradPad App" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
-    <Image url="@/images/address_book_32.png" />
+    <Image url="@/images/gradpad.png" />
   </icons>
   <scene>
     <Scene>
@@ -32,10 +32,9 @@
           </HBox>
 
           <StackPane fx:id="commandBoxPlaceholder" styleClass="pane-with-border" VBox.vgrow="NEVER">
-          <padding>
-            <Insets bottom="5" left="10" right="10" top="5" />
-          </padding>
-        </StackPane>
+              <padding>
+                  <Insets left="5.0" right="5.0" top="5.0" />
+              </padding></StackPane>
 
         <StackPane fx:id="statusbarPlaceholder" VBox.vgrow="NEVER" />
       </VBox>

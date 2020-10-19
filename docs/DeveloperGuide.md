@@ -511,10 +511,10 @@ testers are expected to do more *exploratory* testing.
    1. Prerequisites: Multiple modules in the 'Current Modules'. e.g. CS2103T in 'Current Modules'.
 
    1. Test case: `delete CS2103T`<br>
-      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message. Timestamp in the status bar is updated.
+      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message.
 
    1. Test case: `delete AA1000`<br>
-      Expected: No module is deleted. Error details shown in the status message. Status bar remains the same.
+      Expected: No module is deleted. Error details shown in the status message.
 
    1. Other incorrect delete commands to try: `delete`, `delete x`, `...` <br>
       Expected: Similar to previous.

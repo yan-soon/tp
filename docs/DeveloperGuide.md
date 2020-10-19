@@ -62,11 +62,11 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModuleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -97,17 +97,17 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the GradPad data.
+* exposes an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `GradPad`, which `Module` references. This allows `GradPad` to only require one `Tag` object per unique `Tag`, instead of each `Module` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -216,6 +216,69 @@ Step 10. The `Model` is then updated by replacing the target module with its new
 The following sequence diagram shows how the edit command is executed.
 
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+### Delete feature
+GradPad allows users to delete modules that have already been added. 
+
+As with all operations in GradPad, the `DeleteCommand` class handles the execution of delete operations.
+The `DeleteCommandParser` class helps to parse a user's input before creating the correct delete command.
+
+Given below is how a delete operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to a delete operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
+class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.parse()` method.
+
+Step 5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
+
+Step 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
+`LogicManager` in step 2.
+
+Step 7. `LogicManager` executes the newly created `DeleteCommand`.
+
+Step 8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+ 
+Step 9. The `Model` is then updated by removing the target module.
+
+The following sequence diagram shows how the delete command is executed.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+### Find feature
+GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
+if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
+entire list to find the module they are looking for.  
+
+As with all operations in GradPad, the `FindCommand` class handles the execution of find operations.
+The `FindCommandParser` class helps to parse a user's input before creating the correct find command.
+
+Given below is a series of steps to show how a find operation behaves during its execution.
+
+Step 1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+Step 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
+class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
+
+Step 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
+
+Step 6. `LogicManager` executes the newly created `FindCommand`.
+
+Step 7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+
+Step 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
+
+The following sequence diagram illustrates how the find command is executed.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 
@@ -471,19 +534,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a module
 
-1. Deleting a person while all persons are being shown
+1. Deleting a module.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: Multiple modules in the 'Current Modules'. e.g. CS2103T in 'Current Modules'.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete CS2103T`<br>
+      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete AA1000`<br>
+      Expected: No module is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` <br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

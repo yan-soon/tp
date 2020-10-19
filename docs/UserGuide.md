@@ -11,14 +11,14 @@ title: User Guide
 ## GradPad
 
 GradPad is a one-stop solution to module management for Computer Science Undergraduates.
-Planning for modules has always been a tedious process but it does not have to be. 
+Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources which can
-be messy at times. So our team has come up with the idea of an easy-to-use, all-in-one application that 
+be messy at times. So our team has come up with the idea of an easy-to-use, all-in-one application that
 can ease the process of module management for Computer Science Undergraduates.
 
-GradPad is able to consolidate the modules you have taken and display the remaining required modules to 
-ease your module planning process. A module searching platform is also included in GradPad, providing easy 
+GradPad is able to consolidate the modules you have taken and display the remaining required modules to
+ease your module planning process. A module searching platform is also included in GradPad, providing easy
 navigation of modules.
 
 ## Quick start
@@ -52,38 +52,42 @@ navigation of modules.
 1. Viewing Help
 
     * Allows user to view a list of all possible commands
-    
+
 1. Adding a module
 
     * Allows user to add any Module of choice into the `Current Modules` section for tracking purposes.
-    
+
     * User can add any module by specifying their desired Module Code (eg. CS1231),
     Modular Credits (eg. 4), and Tags (eg. Core) along with the `add` command, in their
     input (more instructions below).
-    
+
 1. View added modules
 
     * Allows user to check all their added modules
-    
+
+1. Find a specific module
+
+    * Allows user to check if a specific module has been added
+
 1. Deleting a module
 
     * Allows a user to delete unwanted modules
-    
+
 1. Editing a module
     * Allows a user to edit the details of a module they have already added
-    
+
 1. Check modular credits (MCs)
 
     * Allows user to check their accumulated modular credit score
-    
+
 1. Exiting the program
 
     * Allows user to terminate the program
-    
+
 1. Saving the data
 
     * Allows users to save their current list of modules on their hard disk
-    
+
     Refer to [features](#features) below for details on all commands.
 
 ## Features
@@ -149,7 +153,7 @@ Edits the module details of a module that has already been added to GradPad.
 To choose the module that you want to edit, specify the index of that module in the Current Modules list.
 You may also choose to edit more than one module detail in the same `edit` command.
 
-**Note:** Editing the tag of a module does not add on to its existing tags. Rather, it replaces all 
+**Note:** Editing the tag of a module does not add on to its existing tags. Rather, it replaces all
 existing tags with the new tags you're specifying.
 
 Format: `edit {index} [c/module code] [cr/modular credits] [t/tag]...`
@@ -160,11 +164,26 @@ Expected outcome:
 
 <img src="images/" width="550px" height="350px">
 
+### Find a Specific Module : 'find'
+
+Shows the specified module, if it exists in the Current Modules in GradPad.
+
+Module code must be specified and the module must exist in
+the Current Modules in GradPad for the module to be successfully displayed.
+
+Format: `find {module code}`
+
+Example of usage: `find CS2103T`
+
+Expected outcome:
+
+<img src="images/" width="550px" height="350px">
+
 ### Deleting a Module : `delete`
 
 Removes a Module of choice from the Current Modules in GradPad.
 
-Module code must be specified and module must exist in 
+Module code must be specified and module must exist in
 the Current Modules of Gradpad for successful deletion.
 
 Format: `delete {module code}`
@@ -186,18 +205,6 @@ Example of usage: `checkmc`
 Expected outcome:
 
 <img src="images/checkmc.png" width="550px" height="350px">
-
-### Save : `save`
-
-Saves all changes made.
-
-Format: `save`
-
-Example of usage: `save`
-
-Expected outcome:
-
-<img src="images/save.png" width="550px" height="350px">
 
 ### Exit : `exit`
 
@@ -224,11 +231,11 @@ Expected outcome:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add {module description} {modular credits}` <br> e.g. `add CS2100 4`
+**Add** | `add {module code} {modular credits}` <br> e.g. `add CS2100 4`
 **Edit** | `edit {index} [c/module description] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
 **Delete** | `delete {module}`<br> e.g. `delete CS2103T`
 **List** | `list`
+**Find** | `find {module code}` <br> e.g. `find CS2103T`
 **Check MCs** | `checkmc`
 **Help** | `help`
 **Exit** | `exit`
-**Save** | `save`

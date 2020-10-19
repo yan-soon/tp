@@ -62,11 +62,11 @@ The sections below give more details of each component.
 ![Structure of the UI Component](images/UiClassDiagram.png)
 
 **API** :
-[`Ui.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/Ui.java)
+[`Ui.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/Ui.java)
 
-The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `PersonListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
+The UI consists of a `MainWindow` that is made up of parts e.g.`CommandBox`, `ResultDisplay`, `ModuleListPanel`, `StatusBarFooter` etc. All these, including the `MainWindow`, inherit from the abstract `UiPart` class.
 
-The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/resources/view/MainWindow.fxml)
+The `UI` component uses JavaFx UI framework. The layout of these UI parts are defined in matching `.fxml` files that are in the `src/main/resources/view` folder. For example, the layout of the [`MainWindow`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/ui/MainWindow.java) is specified in [`MainWindow.fxml`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/resources/view/MainWindow.fxml)
 
 The `UI` component,
 
@@ -249,6 +249,36 @@ The following sequence diagram shows how the delete command is executed.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
+### Find feature
+GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
+if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
+entire list to find the module they are looking for.  
+
+As with all operations in GradPad, the `FindCommand` class handles the execution of find operations.
+The `FindCommandParser` class helps to parse a user's input before creating the correct find command.
+
+Given below is a series of steps to show how a find operation behaves during its execution.
+
+Step 1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+Step 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
+class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
+
+Step 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
+
+Step 6. `LogicManager` executes the newly created `FindCommand`.
+
+Step 7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+
+Step 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
+
+The following sequence diagram illustrates how the find command is executed.
+
+![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

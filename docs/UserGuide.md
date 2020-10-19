@@ -65,6 +65,10 @@ navigation of modules.
 
     * Allows user to check all their added modules
     
+1. Find a specific module
+
+    * Allows user to check if a specific module has been added 
+
 1. Deleting a module
 
     * Allows a user to delete unwanted modules
@@ -139,6 +143,21 @@ Expected outcome:
 
 <img src="images/list.png" width="550px" height="350px">
 
+### Find a Specific Module : 'find'
+
+Shows the specified module, if it exists in the Current Modules in GradPad.
+
+Module code must be specified and the module must exist in
+the Current Modules in GradPad for the module to be successfully displayed.
+
+Format: `find {module code}`
+
+Example of usage: `find CS2103T`
+
+Expected outcome:
+
+<img src="images/" width="550px" height="350px">
+
 ### Deleting a Module : `delete`
 
 Removes a Module of choice from the Current Modules in GradPad.
@@ -166,18 +185,6 @@ Expected outcome:
 
 <img src="images/checkmc.png" width="550px" height="350px">
 
-### Save : `save`
-
-Saves all changes made.
-
-Format: `save`
-
-Example of usage: `save`
-
-Expected outcome:
-
-<img src="images/save.png" width="550px" height="350px">
-
 ### Exit : `exit`
 
 Exits the program. There is no auto-save upon exit.
@@ -203,10 +210,10 @@ Expected outcome:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add {module description} {modular credits}` <br> e.g. `add CS2100 4`
+**Add** | `add {module code} {modular credits}` <br> e.g. `add CS2100 4`
 **Delete** | `delete {module}`<br> e.g. `delete CS2103T`
 **List** | `list`
+**Find** | `find {module code}` <br> e.g. `find CS2103T`
 **Check MCs** | `checkmc`
 **Help** | `help`
 **Exit** | `exit`
-**Save** | `save`

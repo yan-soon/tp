@@ -49,46 +49,21 @@ navigation of modules.
 
 ## Feature Summary List
 
-1. Viewing Help
+ Features                         |    Description 
+ ----------------------------------------|------------
+ View Help                               | Allows user to view a list of all possible commands
+ Add a Module                            | Allows user to add any Module of choice into the `Current Modules` section for tracking purposes. 
+ View Added Modules                      | Allows user to check all their added modules in `Current Modules`
+ Find Modules from Current Modules       | Allows user to look for modules in `Current Modules` using keywords
+ Delete a Module                         | Allows user to delete unwanted modules in `Current Modules`
+ Edit a Module                           | Allows user to edit the details of a module they have already added in the `Current Modules`
+ Check Modular Credits                   | Allows user to display their total accumulated modular credit score
+ View All Required Modules               | Allows user to display all required modules in the Computer Science syllabus onto the `Command Line Display`
+ Search for a Required Module            | Allows user to search for a required module and display the module details in the `Command Line Display`
+ Exit the Program                        | Allows user to terminate the GradPad program
 
-    * Allows user to view a list of all possible commands
 
-1. Adding a module
-
-    * Allows user to add any Module of choice into the `Current Modules` section for tracking purposes.
-
-    * User can add any module by specifying their desired Module Code (eg. CS1231),
-    Modular Credits (eg. 4), and Tags (eg. Core) along with the `add` command, in their
-    input (more instructions below).
-
-1. View added modules
-
-    * Allows user to check all their added modules
-
-1. Find a specific module
-
-    * Allows user to check if a specific module has been added
-
-1. Deleting a module
-
-    * Allows a user to delete unwanted modules
-
-1. Editing a module
-    * Allows a user to edit the details of a module they have already added
-
-1. Check modular credits (MCs)
-
-    * Allows user to check their accumulated modular credit score
-
-1. Exiting the program
-
-    * Allows user to terminate the program
-
-1. Saving the data
-
-    * Allows users to save their current list of modules on their hard disk
-
-    Refer to [features](#features) below for details on all commands.
+ Refer to [features](#features) below for details on all commands.
 
 ## Features
 
@@ -110,7 +85,7 @@ navigation of modules.
 
 </div>
 
-### Viewing Help : `help`
+### View Help : `help`
 
 Lists all possible commands and their functions.
 
@@ -122,7 +97,7 @@ Expected outcome:
 
 <img src="images/help.png" width="550px" height="350px">
 
-### Adding a Module : `add`
+### Add a Module : `add`
 
 Adds a new module.
 
@@ -146,7 +121,7 @@ Expected outcome:
 
 <img src="images/list.png" width="550px" height="350px">
 
-### Editing a Module: `edit`
+### Edit a Module: `edit`
 
 Edits the module details of a module that has already been added to GradPad.
 
@@ -179,7 +154,7 @@ Expected outcome:
 
 <img src="images/" width="550px" height="350px">
 
-### Deleting a Module : `delete`
+### Delete a Module : `delete`
 
 Removes a Module of choice from the Current Modules in GradPad.
 
@@ -206,9 +181,30 @@ Expected outcome:
 
 <img src="images/checkmc.png" width="550px" height="350px">
 
+### View All Required Modules : `required`
+
+Display all required modules in the Computer Science syllabus onto the `Command Line Display` for easy referencing.
+
+Format: `required`
+
+Example of usage: `required`
+
+Expected outcome:
+
+### Search for a Required Module : `search`
+
+Search for a required module in the Computer Science syllabus using the module code and display the module details 
+(module code, title, modular credit, description, preclusion, prerequisite) in the `Command Line Display`.
+
+Format: `search {module code}`
+
+Example of usage: `search CS2103T`
+
+Expected outcome:
+
 ### Exit : `exit`
 
-Exits the program. There is no auto-save upon exit.
+Exits the GradPad program. There is no auto-save upon exit.
 
 Format: `exit`
 

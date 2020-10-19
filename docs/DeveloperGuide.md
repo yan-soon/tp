@@ -80,9 +80,9 @@ The `UI` component,
 **API** :
 [`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
 
-1. `Logic` uses the `AddressBookParser` class to parse the user command.
+1. `Logic` uses the `GradPadParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
-1. The command execution can affect the `Model` (e.g. adding a person).
+1. The command execution can affect the `Model` (e.g. adding a module).
 1. The result of the command execution is encapsulated as a `CommandResult` object which is passed back to the `Ui`.
 1. In addition, the `CommandResult` object can also instruct the `Ui` to perform certain actions, such as displaying help to the user.
 
@@ -97,17 +97,17 @@ Given below is the Sequence Diagram for interactions within the `Logic` componen
 
 ![Structure of the Model Component](images/ModelClassDiagram.png)
 
-**API** : [`Model.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/model/Model.java)
+**API** : [`Model.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/model/Model.java)
 
 The `Model`,
 
 * stores a `UserPref` object that represents the user’s preferences.
-* stores the address book data.
-* exposes an unmodifiable `ObservableList<Person>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
+* stores the GradPad data.
+* exposes an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `AddressBook`, which `Person` references. This allows `AddressBook` to only require one `Tag` object per unique `Tag`, instead of each `Person` needing their own `Tag` object.<br>
+<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `GradPad`, which `Module` references. This allows `GradPad` to only require one `Tag` object per unique `Tag`, instead of each `Module` needing their own `Tag` object.<br>
 ![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
 
 </div>
@@ -132,6 +132,44 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 ## **Implementation**
 
 This section describes some noteworthy details on how certain features are implemented.
+
+### Add feature
+GradPad allows users to add modules to their list.
+
+The following fields of a module are required (* for optional):
+* Module Code
+* Modular Credits
+* Tag*
+
+As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
+The `AddCommandParser` class helps to parse user's input before creating the correct add command.
+
+Given below is how an add operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to an add operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
+class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
+
+Step 5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+
+Step 6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
+the values that we want to add into our list.
+
+Step 7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the
+`LogicManager` in step 2.
+
+Step 8. `Logic Manager` executes the newly created `AddCommand`.
+
+Step 9. Finally, the `Model` is then updated by adding the new `Module` object.
+
+The following sequence diagram shows how the add command is executed.
+
+![AddSequenceDiagram](images/AddSequenceDiagram.png)
 
 ### Edit feature
 GradPad allows users to edit modules that have already been added. 
@@ -178,6 +216,38 @@ Step 10. The `Model` is then updated by replacing the target module with its new
 The following sequence diagram shows how the edit command is executed.
 
 ![EditSequenceDiagram](images/EditSequenceDiagram.png)
+
+### Delete feature
+GradPad allows users to delete modules that have already been added. 
+
+As with all operations in GradPad, the `DeleteCommand` class handles the execution of delete operations.
+The `DeleteCommandParser` class helps to parse a user's input before creating the correct delete command.
+
+Given below is how a delete operation behaves at each step of its execution.
+
+Step 1. The user types in a command string corresponding to a delete operation.
+
+Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+
+Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+
+Step 4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
+class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.parse()` method.
+
+Step 5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
+
+Step 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
+`LogicManager` in step 2.
+
+Step 7. `LogicManager` executes the newly created `DeleteCommand`.
+
+Step 8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+ 
+Step 9. The `Model` is then updated by removing the target module.
+
+The following sequence diagram shows how the delete command is executed.
+
+![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 ### Find feature
 GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
@@ -464,19 +534,19 @@ testers are expected to do more *exploratory* testing.
 
 1. _{ more test cases …​ }_
 
-### Deleting a person
+### Deleting a module
 
-1. Deleting a person while all persons are being shown
+1. Deleting a module.
 
-   1. Prerequisites: List all persons using the `list` command. Multiple persons in the list.
+   1. Prerequisites: Multiple modules in the 'Current Modules'. e.g. CS2103T in 'Current Modules'.
 
-   1. Test case: `delete 1`<br>
-      Expected: First contact is deleted from the list. Details of the deleted contact shown in the status message. Timestamp in the status bar is updated.
+   1. Test case: `delete CS2103T`<br>
+      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message.
 
-   1. Test case: `delete 0`<br>
-      Expected: No person is deleted. Error details shown in the status message. Status bar remains the same.
+   1. Test case: `delete AA1000`<br>
+      Expected: No module is deleted. Error details shown in the status message.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` (where x is larger than the list size)<br>
+   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` <br>
       Expected: Similar to previous.
 
 1. _{ more test cases …​ }_

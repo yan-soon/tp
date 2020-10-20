@@ -40,8 +40,8 @@ public class ScienceCommand extends Command {
         }
         
         for (Module module : modules) {
-            String moduleName = module.getModuleCode().toString();
-            moduleNames += "\n" + moduleName;
+            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+            moduleNames += "\n" + moduleToAdd;
         }
         
         return new CommandResult(MESSAGE_SUCCESS + moduleNames);

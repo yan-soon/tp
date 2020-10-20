@@ -54,13 +54,22 @@ public class RequiredCommand extends Command {
     private ObservableList<Module> requiredITProf;
     private Optional<ReadOnlyGradPad> mathAndScienceStorage;
     private ObservableList<Module> requiredMathAndScience;
-    
+
+    /**
+     * Loads the foundationStorage attribute with Foundation Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setFoundationStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "foundationmodules.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.foundationStorage = storage.readGradPad();
     }
-    
+
+    /**
+     * Cross references the user's current list of Modules and marks out
+     * any undone Foundation Modules.
+     */
     public void compareFoundation() {
         boolean foundationClear = true;
         String modulesToAdd = "";
@@ -84,12 +93,21 @@ public class RequiredCommand extends Command {
         leftOverModules += "\n";
     }
 
+    /**
+     * Loads the ITProfStorage attribute with IT Professionalism Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setITProfStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "ITProfessionalism.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.ITProfStorage = storage.readGradPad();
     }
-    
+
+    /**
+     * Cross references the user's current list of Modules and marks out
+     * any undone IT Professionalism Modules.
+     */
     public void compareITProf() {
         boolean ITProfClear = true;
         String modulesToAdd = "";
@@ -113,12 +131,21 @@ public class RequiredCommand extends Command {
         leftOverModules += "\n";
     }
 
+    /**
+     * Loads the mathAndScienceStorage attribute with Math and Science Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setMathAndScienceStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "mathandsciencemodules.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.mathAndScienceStorage = storage.readGradPad();
     }
 
+    /**
+     * Cross references the user's current list of Modules and marks out
+     * any undone Math and Science Modules.
+     */
     public void compareMathAndScience() {
         boolean mathAndScienceClear = true;
         String modulesToAdd = "";
@@ -142,12 +169,21 @@ public class RequiredCommand extends Command {
         leftOverModules += "\n";
     }
 
+    /**
+     * Loads the scienceStorage attribute with Science Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setScienceStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "sciencemodules.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         scienceStorage = storage.readGradPad();
     }
-    
+
+    /**
+     * Cross references the user's current list of Modules and marks out
+     * any undone Science Modules.
+     */
     public void compareScience() {
         boolean add = true;
         for (Module module : requiredScience) {
@@ -167,12 +203,22 @@ public class RequiredCommand extends Command {
         leftOverModules += "\n";
     }
 
+    /**
+     * Loads the internshipStorage attribute with Internship Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setInternshipStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "industrialexperience.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         internshipStorage = storage.readGradPad();
     }
-    
+
+    /**
+     * Cross references the user's current list of Modules and marks out
+     * any undone Internship Modules. Also calculates current MC score
+     * achieved from Internship Modules.
+     */
     public void compareInternship() {
         int modularScore = 0;
         String leftOverInternship = "";

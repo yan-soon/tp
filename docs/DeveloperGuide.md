@@ -389,8 +389,8 @@ The following sequence diagram illustrates how the `checkmc` command is executed
 
 ### [Implementation in progress] Check required modules feature
 
-The `required` command allows users to view the remaining modules under that are required in the NUS Computer
-Science curriculum that they have yet to take.
+The `required` command allows users to view the required modules in the NUS Computer Science curriculum 
+that they have yet to take.
 
 When the command is executed, it checks through the current modules in the `Completed Modules` list and ensures
 that modules that have already been taken are not displayed in the list of remaining required modules.
@@ -420,6 +420,36 @@ in the syllabus.
 
 9. Finally, a `CommandResult` is created to show the filtered list of remaining required modules.
 
+### [Implementation in progress] Search all modules feature
+
+The `search` command allows users to search for any module within the NUS Computer Science curriculum and view
+its module details.
+
+To retrieve a module's information, the execution of this command interacts with the `Nusmods` component, which
+contains all logic related to the access of module data from the NUSMODS public API. We will not go into detail
+about the component here as we are mainly focused on the implementation of the search functionality.
+
+As with all operations in GradPad, the `SearchCommand` class handles the execution of `search` operations.
+
+Given below is a series of steps to show how a `search` operation behaves during its execution.
+
+1. The user enters a search command string containing a module code, e.g. "search CS2103T".
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a search command and thus creates a `SearchCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `SearchCommand`.
+
+7. `SearchCommand.execute()` retrieves the corresponding module information by calling 
+`NusmodsData.getModuleInfo()` in the `Nusmods` package.
+
+9. Finally, a `CommandResult` is created to display the module information that has been retrieved.
 
 ### \[Proposed\] Undo/redo feature
 

@@ -241,7 +241,7 @@ Step 6. A `DeleteCommand` is then created with the ModuleCode, and is passed bac
 
 Step 7. `LogicManager` executes the newly created `DeleteCommand`.
 
-Step 8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+Step 8. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
  
 Step 9. The `Model` is then updated by removing the target module.
 
@@ -298,7 +298,7 @@ Step 1. The user launches the application for the first time. The `VersionedGrad
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete c/CS2103T` command to delete the `CS2103T` Module from the Current Modules. The `delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete c/CS2103T` command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted GradPad state.
+Step 2. The user executes `delete c/CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The `delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete c/CS2103T` command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted GradPad state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
@@ -412,19 +412,19 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 Delete a Module from `Current Modules`**
+**Use case: UC01 - Delete a Module from `Completed Modules`**
 
 **MSS**
 
-1.  User requests to delete a specific Module in the `Current Modules`
+1.  User requests to delete a specific Module in the `Completed Modules`
 2.  GradPad deletes the module
-3.  GradPad displayed the deleted module onto the `Command Line Display`
+3.  GradPad displays the deleted module onto the `Command Line Display`
 
     Use case ends.
 
 **Extensions**
 
-* 1a. The module does not exist in `Current Modules`.
+* 1a. The module does not exist in `Completed Modules`.
 
   Use case ends.
 
@@ -434,12 +434,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
       
-**Use case : UC02 Add a Module into `Current Modules`**
+**Use case : UC02 - Add a Module into `Completed Modules`**
 
 **MSS**
 
-1. User requests to add a module into the `Current Modules`
-2. GradPad adds the module into `Current Modules`
+1. User requests to add a module into the `Completed Modules`
+2. GradPad adds the module into `Completed Modules`
 3. GradPad displays the module added onto the `Command Line Display`
 
     Use case ends.
@@ -452,7 +452,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
-**Use case : UC03 View help**
+**Use case : UC03 - View help**
 
 **MSS**
 
@@ -461,27 +461,27 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case : UC04 View all current modules**
+**Use case : UC04 - View all current modules**
 
 **MSS**
 
-1. User requests to view list of modules in `Current Modules`
-2. GradPad shows all modules added into `Current Modules`
+1. User requests to view list of modules in `Completed Modules`
+2. GradPad shows all modules added into `Completed Modules`
 
     Use case ends.
     
-**User case: UC05 Edit a Module in `Current Modules`**
+**Use case: UC05 - Edit a Module in `Completed Modules`**
 
-1. User requests to list all modules in `Current Modules`
-2. GradPad shows the list of modules in `Current Modules`
-3. User requests to edit a module in `Current Modules`
+1. User requests to list all modules in `Completed Modules`
+2. GradPad shows the list of modules in `Completed Modules`
+3. User requests to edit a module in `Completed Modules`
 4. Module is replaced with updated fields
     
     Use case ends.
 
 **Extensions**
 
-* 2a. The list of modules in `Current Modules` is empty.
+* 2a. The list of modules in `Completed Modules` is empty.
 
     Use case ends.
     
@@ -490,8 +490,14 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     * 3a1. GradPad shows an error message.
     
         Use case resumes at step 2.
+        
+* 3b. The input fields format is invalid.
+    
+    * 3b1. GradPad shows an error message.
+        
+        Use case resumes at step 2.
 
-**Use case : UC06 View required modules in syllabus**
+**Use case : UC06 - View required modules in syllabus**
 
 **MSS**
 
@@ -500,11 +506,11 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
   
-**Use case : UC07 Search for module details**
+**Use case : UC07 - Search for module details**
 
 **MSS**
 
-1. User requests to search a module in the required module list.
+1. User requests to search for a module in the CS curriculum.
 2. GradPad displays the module details in the `Command Line Display`
 
     Use case ends.
@@ -523,7 +529,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case ends.
         
-**Use case : UC08 exit GradPad**
+**Use case : UC08 - exit GradPad**
 
 **MSS**
 
@@ -589,10 +595,10 @@ testers are expected to do more *exploratory* testing.
 
 1. Deleting a module.
 
-   1. Prerequisites: Multiple modules in the 'Current Modules'. e.g. CS2103T in 'Current Modules'.
+   1. Prerequisites: Multiple modules in the 'Completed Modules'. e.g. CS2103T in 'Completed Modules'.
 
    1. Test case: `delete CS2103T`<br>
-      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message.
+      Expected: CS2103T module is deleted from 'Completed Modules'. Details of the deleted module shown in the status message.
 
    1. Test case: `delete AA1000`<br>
       Expected: No module is deleted. Error details shown in the status message.

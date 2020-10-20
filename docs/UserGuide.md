@@ -52,11 +52,11 @@ navigation of modules.
  Features                         |    Description 
  ----------------------------------------|------------
  View Help                               | Allows user to view a list of all possible commands
- Add a Module                            | Allows user to add any Module of choice into the `Current Modules` section for tracking purposes. 
- View Added Modules                      | Allows user to check all their added modules in `Current Modules`
- Find Modules from Current Modules       | Allows user to look for modules in `Current Modules` using keywords
- Delete a Module                         | Allows user to delete unwanted modules in `Current Modules`
- Edit a Module                           | Allows user to edit the details of a module they have already added in the `Current Modules`
+ Add a Module                            | Allows user to add any Module of choice into the `Completed Modules` section for tracking purposes. 
+ View Added Modules                      | Allows user to check all their added modules in `Completed Modules`
+ Find Modules from Completed Modules     | Allows user to look for modules in `Completed Modules` using keywords
+ Delete a Module                         | Allows user to delete unwanted modules in `Completed Modules`
+ Edit a Module                           | Allows user to edit the details of a module they have already added in the `Completed Modules`
  Check Modular Credits                   | Allows user to display their total accumulated modular credit score
  View All Required Modules               | Allows user to display all required modules in the Computer Science syllabus onto the `Command Line Display`
  Search for a Required Module            | Allows user to search for a required module and display the module details in the `Command Line Display`
@@ -125,7 +125,7 @@ Expected outcome:
 
 Edits the module details of a module that has already been added to GradPad.
 
-To choose the module that you want to edit, specify the index of that module in the Current Modules list.
+To choose the module that you want to edit, specify the index of that module in the Completed Modules list.
 You may also choose to edit more than one module detail in the same `edit` command.
 
 **Note:** Editing the tag of a module does not add on to its existing tags. Rather, it replaces all
@@ -141,10 +141,10 @@ Expected outcome:
 
 ### Find a Specific Module : 'find'
 
-Shows the specified module, if it exists in the Current Modules in GradPad.
+Shows the specified module, if it exists in the Completed Modules in GradPad.
 
 Module code must be specified and the module must exist in
-the Current Modules in GradPad for the module to be successfully displayed.
+the Completed Modules in GradPad for the module to be successfully displayed.
 
 Format: `find {module code}`
 
@@ -156,10 +156,10 @@ Expected outcome:
 
 ### Delete a Module : `delete`
 
-Removes a Module of choice from the Current Modules in GradPad.
+Removes a Module of choice from the Completed Modules in GradPad.
 
 Module code must be specified and module must exist in
-the Current Modules of Gradpad for successful deletion.
+the Completed Modules of Gradpad for successful deletion.
 
 Format: `delete {module code}`
 
@@ -193,8 +193,15 @@ Expected outcome:
 
 ### Search for a Required Module : `search`
 
-Search for a required module in the Computer Science syllabus using the module code and display the module details 
-(module code, title, modular credit, description, preclusion, prerequisite) in the `Command Line Display`.
+Search for a required module in the Computer Science syllabus using the module code and display the module details in the `Command Line Display`.
+
+The following module details will be displayed:
+- module code
+- title
+- modular credits
+- description
+- preclusion
+- prerequisite
 
 Format: `search {module code}`
 
@@ -228,10 +235,10 @@ Expected outcome:
 Action | Format, Examples
 --------|------------------
 **Help** | `help`
-**Add** | `add [c/module code] [cr/modular credits]` <br> e.g. `add c/CS2100 cr/4`
+**Add** | `add c/ {module code} cr/ {modular credits}` <br> e.g. `add c/CS2100 cr/4`
 **Edit** | `edit {index} [c/module code] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
 **Delete** | `delete {module code}`<br> e.g. `delete c/CS2103T`
-**Current Modules** | `list`
+**Completed Modules** | `list`
 **Find** | `find {module code}` <br> e.g. `find CS2103T`
 **Check MCs** | `checkmc`
 **Required Modules** | `required` 

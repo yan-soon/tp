@@ -320,7 +320,7 @@
 }
 
 #resultDisplay .content {
-    -fx-background-color: transparent, #383838, transparent, #192841;
+    -fx-background-color: transparent, #192841, #ffffff, #192841;
     -fx-background-radius: 0;
 }
 

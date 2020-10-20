@@ -58,7 +58,7 @@ navigation of modules.
  Delete a Module                         | Allows user to delete unwanted modules in `Completed Modules`
  Edit a Module                           | Allows user to edit the details of a module they have already added in the `Completed Modules`
  Check Modular Credits                   | Allows user to display their total accumulated modular credit score
- View All Required Modules               | Allows user to display all required modules in the Computer Science syllabus onto the `Command Line Display`
+ View All Required Modules               | Allows user to display all required modules in the Computer Science curriculum onto the `Command Line Display`
  Search for a Required Module            | Allows user to search for a required module and display the module details in the `Command Line Display`
  Exit the Program                        | Allows user to terminate the GradPad program
 
@@ -183,7 +183,7 @@ Expected outcome:
 
 ### View All Required Modules : `required`
 
-Display all required modules in the Computer Science syllabus onto the `Command Line Display` for easy referencing.
+Display all required modules in the Computer Science curriculum onto the `Command Line Display` for easy referencing.
 
 Format: `required`
 
@@ -193,7 +193,7 @@ Expected outcome:
 
 ### Search for a Required Module : `search`
 
-Search for a required module in the Computer Science syllabus using the module code and display the module details in the `Command Line Display`.
+Search for a required module in the Computer Science curriculum using the module code and display the module details in the `Command Line Display`.
 
 The following module details will be displayed:
 - module code

@@ -497,12 +497,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case resumes at step 2.
 
-**Use case : UC06 - View required modules in syllabus**
+**Use case : UC06 - View required modules in CS curriculum**
 
 **MSS**
 
-1. User requests to view all required modules in syllabus
-2. GradPad displays the required modules in syllabus onto the `Command Line Display`
+1. User requests to view all required modules in CS curriculum
+2. GradPad displays the required modules in CS curriculum onto the `Command Line Display`
 
     Use case ends.
   

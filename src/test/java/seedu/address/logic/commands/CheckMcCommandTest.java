@@ -16,7 +16,7 @@ public class CheckMcCommandTest {
 
     @Test
     public void execute_checkmc_success() {
-        assertCommandSuccess(new CheckMcCommand(), model, CheckMcCommand.MESSAGE_SUCCESS
-                        + getTypicalTotalMc(), expectedModel);
+        assertCommandSuccess(new CheckMcCommand(), model, String.format(CheckMcCommand.MESSAGE_SUCCESS,
+                getTypicalTotalMc()), expectedModel);
     }
 }

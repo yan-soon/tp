@@ -22,6 +22,11 @@ public class ScienceCommand extends Command {
     private Optional<ReadOnlyGradPad> storage;
     private String moduleNames = "";
 
+    /**
+     * Loads the storage attribute with Science Modules.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     public void setStorage() throws IOException, DataConversionException {
         Path path = Paths.get("data", "sciencemodules.json");
         JsonGradPadStorage storage = new JsonGradPadStorage(path);

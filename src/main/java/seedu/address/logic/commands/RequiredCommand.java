@@ -1,22 +1,17 @@
 package seedu.address.logic.commands;
 
-import javafx.beans.binding.ObjectExpression;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.GradPad;
 import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.UniqueModuleList;
 import seedu.address.storage.JsonGradPadStorage;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
-import static java.util.Objects.compare;
 import static java.util.Objects.requireNonNull;
 
 public class RequiredCommand extends Command {

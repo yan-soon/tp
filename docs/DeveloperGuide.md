@@ -27,7 +27,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -78,7 +78,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `GradPadParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -117,7 +117,7 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.

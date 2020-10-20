@@ -312,6 +312,47 @@ The following sequence diagram illustrates how the find command is executed.
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+### List feature
+
+The `list` command shows all modules that have been added by the user in the `Completed Modules` list.
+This is needed as certain commands can change the modules that are being displayed. One such command is the
+`find` command, which shows only matching modules in the list.
+
+Before diving into how the `list` operation is executed, we must first gain a brief understanding of how the 
+`Completed Modules` list displays its modules, and how this display can be changed by other commands.
+
+The `Completed Modules` list is implemented by the `ModuleListPanel` UI class.
+This class contains a list of modules that it displays to the user which comes
+from GradPad's `Model` component. 
+To change the contents of the list, commands can apply filters to this list through `Model`.
+For example, a module may ask `Model` to only show modules that have 4 modular credits.
+When this happens, `Completed Modules` naturally changes the modules it displays too.
+
+The following diagram illustrates this relationship:
+
+![ModelFilteredListDiagram](images/ModelFilteredListClassDiagram.png)
+
+With this in mind, the aim of the `list` command is therefore to remove any existing filter on this module list,
+effectively getting `Completed Modules` to display all modules once again.
+
+Given below is a series of steps to show how a list operation behaves during its execution to achieve just this.
+
+1. The user input is parsed and constructs a `ListCommand` object. (Implementation details of the parser are omitted
+ here as they are not central in developing an understanding of the `list` operation)
+
+1. When this command is executed, it calls the `updateFilteredModuleList` in the `Model` class and passes in
+a predicate that lets all modules through the filter.
+
+1. The `Model` class updates its `filteredModules` list to include all modules as if it were unfiltered.
+
+1. The `ModuleListPanel` UI component listens to changes in `filteredModules` and updates whenever the list is updated.
+It thus updates to display all modules too.
+
+The following sequence diagram illustrates how the list command is executed.
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

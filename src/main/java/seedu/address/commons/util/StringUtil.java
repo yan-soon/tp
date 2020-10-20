@@ -5,7 +5,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
-import java.util.Arrays;
 
 /**
  * Helper functions for handling strings.
@@ -20,22 +19,20 @@ public class StringUtil {
      *       containsWordIgnoreCase("ABc def", "DEF") == true
      *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
      *       </pre>
-     * @param sentence cannot be null
-     * @param word cannot be null, cannot be empty, must be a single word
+     * @param moduleCode cannot be null
+     * @param charSequence cannot be null, cannot be empty, must be a single word
      */
-    public static boolean containsWordIgnoreCase(String sentence, String word) {
-        requireNonNull(sentence);
-        requireNonNull(word);
+    public static boolean containsCharSequenceIgnoreCase(String moduleCode, String charSequence) {
+        requireNonNull(moduleCode);
+        requireNonNull(charSequence);
 
-        String preppedWord = word.trim();
-        checkArgument(!preppedWord.isEmpty(), "Word parameter cannot be empty");
-        checkArgument(preppedWord.split("\\s+").length == 1, "Word parameter should be a single word");
+        String preppedModuleCode = moduleCode.trim().toUpperCase();
+        String preppedCharSequence = charSequence.trim().toUpperCase();
+        checkArgument(!preppedCharSequence.isEmpty(), "CharSequence parameter cannot be empty");
+        checkArgument(preppedCharSequence.split("\\s+").length == 1, "CharSequence parameter should be a "
+                + "single word");
 
-        String preppedSentence = sentence;
-        String[] wordsInPreppedSentence = preppedSentence.split("\\s+");
-
-        return Arrays.stream(wordsInPreppedSentence)
-                .anyMatch(preppedWord::equalsIgnoreCase);
+        return preppedModuleCode.contains(preppedCharSequence);
     }
 
     /**

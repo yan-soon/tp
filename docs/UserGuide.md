@@ -129,7 +129,8 @@ Description:
  input.
  
  * Module Code and Modular Credit fields are compulsory inputs but Tag fields are optional.
- Multiple Tags are allowed per module.
+ Multiple Tags are allowed per module. Duplicate Modules (Modules with all the same fields)
+ are not allowed.
 
 Format: `add c/ {module code} cr/ {modular credits}`
 
@@ -161,7 +162,7 @@ Expected outcome:
 
 Description:
 
- * Edits the module details of a module that has already been added to GradPad.
+ * Edits the details of a module that has already been added to GradPad.
  
  * To choose the module that you want to edit, specify the index of that module in the Current Modules list.
    You may also choose to edit more than one module detail in the same `edit` command.

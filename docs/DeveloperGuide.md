@@ -352,6 +352,40 @@ The following sequence diagram illustrates how the list command is executed.
 
 ![ListSequenceDiagram](images/ListSequenceDiagram.png)
 
+### CheckMc feature
+
+The `checkmc` command allows users to view a tally of the total no. of modular credits from the modules present 
+in the `Completed Modules` list.
+
+As with all operations in GradPad, the `CheckMcCommand` class handles the execution of `checkmc` operations.
+In brief, it works by going through all modules in the `Completed Modules` list and summing up each module's
+modular credits.
+
+Given below is a series of steps to show how a `checkmc` operation behaves during its execution.
+
+1. The user enters the `checkmc` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a checkmc command and thus creates a `CheckMcCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `CheckMcCommand`.
+
+7. `CheckMcCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules` field
+within the `GradPad`.
+
+8. It then loops through `modules`, which is a list of `Module` objects, and sums up all their modular credits.
+
+8. Finally, a `CommandResult` is created to show the total no. of modular credits calculated.
+
+The following sequence diagram illustrates how the `checkmc` command is executed.
+
+![CheckMcDiagram](images/CheckMcSequenceDiagram.png)
 
 ### \[Proposed\] Undo/redo feature
 

@@ -178,26 +178,26 @@ The `AddCommandParser` class helps to parse user's input before creating the cor
 
 Given below is how an add operation behaves at each step of its execution.
 
-Step 1. The user types in a command string corresponding to an add operation.
+1. The user types in a command string corresponding to an add operation.
 
-Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
-Step 3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
+3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
 
-Step 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
+4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
 class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
-Step 5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-Step 6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
+6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
 the values that we want to add into our list.
 
-Step 7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the
+7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the
 `LogicManager` in step 2.
 
-Step 8. `Logic Manager` executes the newly created `AddCommand`.
+8. `Logic Manager` executes the newly created `AddCommand`.
 
-Step 9. Finally, the `Model` is then updated by adding the new `Module` object.
+9. Finally, the `Model` is then updated by adding the new `Module` object.
 
 The following sequence diagram shows how the add command is executed.
 
@@ -221,29 +221,29 @@ as we don't want to be overly-concerned with which fields are to be edited and w
 
 Given below is how an edit operation behaves at each step of its execution.
 
-Step 1. The user types in a command string corresponding to an edit operation.
+1. The user types in a command string corresponding to an edit operation.
 
-Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
-Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
 
-Step 4. `gradPadParser.parseCommand()` sees that this is an edit command, and so uses the `EditCommandParser`
+4. `gradPadParser.parseCommand()` sees that this is an edit command, and so uses the `EditCommandParser`
 class to create a corresponding `EditCommand`.
 
-Step 5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-Step 6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
+6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
 the new values that we want to update the target module with.
 
-Step 7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
+7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
 `LogicManager` in step 2.
 
-Step 8. `LogicManager` executes the newly created `EditCommand`.
+8. `LogicManager` executes the newly created `EditCommand`.
 
-Step 9. The target module to be edited is retrieved. A copy of it is made and using the populated
+9. The target module to be edited is retrieved. A copy of it is made and using the populated
  `EditModuleDescriptor`, the fields that are to be updated are replaced with their new values.
  
-Step 10. The `Model` is then updated by replacing the target module with its new updated copy.
+10. The `Model` is then updated by replacing the target module with its new updated copy.
 
 The following sequence diagram shows how the edit command is executed.
 
@@ -257,25 +257,25 @@ The `DeleteCommandParser` class helps to parse a user's input before creating th
 
 Given below is how a delete operation behaves at each step of its execution.
 
-Step 1. The user types in a command string corresponding to a delete operation.
+1. The user types in a command string corresponding to a delete operation.
 
-Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
-Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
+3. `Logic.execute()` then calls the `parseCommand`  method of the `gradPadParser` class to parse the string input.
 
-Step 4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
+4. `gradPadParser.parseCommand()` sees that this is an delete command, and so uses the `DeleteCommandParser`
 class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.parse()` method.
 
-Step 5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
+5. In `DeleteCommandParser`, the ModuleCode is first extracted from the string input. 
 
-Step 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
+6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
 `LogicManager` in step 2.
 
-Step 7. `LogicManager` executes the newly created `DeleteCommand`.
+7. `LogicManager` executes the newly created `DeleteCommand`.
 
-Step 8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
  
-Step 9. The `Model` is then updated by removing the target module.
+9. The `Model` is then updated by removing the target module.
 
 The following sequence diagram shows how the delete command is executed.
 
@@ -291,22 +291,22 @@ The `FindCommandParser` class helps to parse a user's input before creating the 
 
 Given below is a series of steps to show how a find operation behaves during its execution.
 
-Step 1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
 
-Step 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
+2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
-Step 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
-Step 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
+4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
 class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
 
-Step 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
+5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
 
-Step 6. `LogicManager` executes the newly created `FindCommand`.
+6. `LogicManager` executes the newly created `FindCommand`.
 
-Step 7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
 
-Step 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
+8. Finally, a `CommandResult` is created and returned to show the result of the execution.
 
 The following sequence diagram illustrates how the find command is executed.
 
@@ -322,9 +322,8 @@ Before diving into how the `list` operation is executed, we must first gain a br
 `Completed Modules` list displays its modules, and how this display can be changed by other commands.
 
 The `Completed Modules` list is implemented by the `ModuleListPanel` UI class.
-This class contains a list of modules that it displays to the user which comes
-from GradPad's `Model` component. 
-To change the contents of the list, commands can apply filters to this list through `Model`.
+This class contains a list of modules, which comes from GradPad's `Model` component, that it uses to 
+display to the user. To change the contents of the list, commands can apply filters to this list through `Model`.
 For example, a module may ask `Model` to only show modules that have 4 modular credits.
 When this happens, `Completed Modules` naturally changes the modules it displays too.
 
@@ -340,12 +339,12 @@ Given below is a series of steps to show how a list operation behaves during its
 1. The user input is parsed and constructs a `ListCommand` object. (Implementation details of the parser are omitted
  here as they are not central in developing an understanding of the `list` operation)
 
-1. When this command is executed, it calls the `updateFilteredModuleList` in the `Model` class and passes in
+2. When this command is executed, it calls the `updateFilteredModuleList` method in the `Model` class and passes in
 a predicate that lets all modules through the filter.
 
-1. The `Model` class updates its `filteredModules` list to include all modules as if it were unfiltered.
+3. The `Model` class updates its `filteredModules` list to include all modules as if it were unfiltered.
 
-1. The `ModuleListPanel` UI component listens to changes in `filteredModules` and updates whenever the list is updated.
+4. The `ModuleListPanel` UI component listens to changes in `filteredModules` and updates whenever the list is updated.
 It thus updates to display all modules too.
 
 The following sequence diagram illustrates how the list command is executed.

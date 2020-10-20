@@ -39,6 +39,7 @@ The rest of the App consists of four components.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Nusmods`**](#nusmods-component): Reads data from the NUSMODS public API.
 
 Each of the four components,
 
@@ -122,6 +123,37 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the GradPad data in json format and read it back.
+
+### Nusmods component
+
+![Structure of the Nusmods Component](images/NusmodsClassDiagram.png)
+
+**API** : [`NusmodsData.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/nusmods/NusmodsData.java)
+
+The `Nusmods` component,
+* can fetch module data from the NUSMODS public API.
+* can save fetched module data in the form of `ModuleInfo` objects to a local JSON file.
+* can provide module information based on a module code, in the form of `ModuleInfo` objects.
+
+Critically, the component is able to fall back on reading pre-fetched module information from a local file when 
+there's no internet connection.
+
+#### Design considerations
+
+We chose to split the `Nusmods` component into two main parts that have the following responsibilities respectively:
+* Fetch module data - handled by `DataFetcher`
+* Allow other GradPad components to access module data - handled by `NusmodsData`
+
+##### Rationale
+
+We chose to do this instead of clumping all the logic together to achieve better encapsulation and abstraction.
+With this, the `NusmodsData` class only needs to be concerned with reading available module data, processing it,
+and serving it up to the code who requested it. It doesn't need to care about how the data got there. 
+That's the job of the `DataFetcher` class. As such, it is easy for us to swap out `DataFetcher`, or change its 
+implementation without the need to touch the public interface provided by `NusmodsData`. This will prove to be 
+useful when, for example, the NUSMODS API becomes obsolete, and we need to use another API, or if the NUSMODS 
+API changes, and we need to redesign how we fetch data from it.
+
 
 ### Common classes
 

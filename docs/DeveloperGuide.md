@@ -412,49 +412,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a Module**
+**Use case: UC01 Delete a Module from `Current Modules`**
 
 **MSS**
 
-1.  User requests to list Modules
-2.  GradPad shows a list of Modules
-3.  User requests to delete a specific Module in the list
-4.  GradPad deletes the Module
+1.  User requests to delete a specific Module in the `Current Modules`
+2.  GradPad deletes the module
+3.  GradPad displayed the deleted module onto the `Command Line Display`
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The module does not exist in `Current Modules`.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given module code is invalid.
 
-    * 3a1. GradPad shows an error message.
+    * 2a1. GradPad shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
       
-**Use case : Add a Module**
+**Use case : UC02 Add a Module into `Current Modules`**
 
 **MSS**
 
-1. User requests to list Modules
-2. GradPad shows a list of Modules
-3. User requests to add a specific Module into the list
-4. GradPad adds the module
+1. User requests to add a module into the `Current Modules`
+2. GradPad adds the module into `Current Modules`
+3. GradPad displays the module added onto the `Command Line Display`
 
     Use case ends.
     
 **Extensions**
   
-* 3a. The given module is invalid.
+* 1a. The input command format is invalid.
 
-    * 3a1. GradPad shows an error message.
+    * 1a1. GradPad shows an error message.
     
-      Use case resumes at step 2.
+      Use case ends.
       
-**Use case : View help**
+**Use case : UC03 View help**
 
 **MSS**
 
@@ -463,16 +461,69 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case : view modules**
+**Use case : UC04 View all current modules**
 
 **MSS**
 
-1. User requests to view current list of Modules
-2. GradPad shows current list of Modules
+1. User requests to view list of modules in `Current Modules`
+2. GradPad shows all modules added into `Current Modules`
 
     Use case ends.
     
-**Use case : exit GradPad**
+**User case: UC05 Edit a Module in `Current Modules`**
+
+1. User requests to list all modules in `Current Modules`
+2. GradPad shows the list of modules in `Current Modules`
+3. User requests to edit a module in `Current Modules`
+4. Module is replaced with updated fields
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list of modules in `Current Modules` is empty.
+
+    Use case ends.
+    
+* 3a. The given index is invalid.
+    
+    * 3a1. GradPad shows an error message.
+    
+        Use case resumes at step 2.
+
+**Use case : UC06 View required modules in syllabus**
+
+**MSS**
+
+1. User requests to view all required modules in syllabus
+2. GradPad displays the required modules in syllabus onto the `Command Line Display`
+
+    Use case ends.
+  
+**Use case : UC07 Search for module details**
+
+**MSS**
+
+1. User requests to search a module in the required module list.
+2. GradPad displays the module details in the `Command Line Display`
+
+    Use case ends.
+    
+**Extensions**
+  
+* 1a. The input command format is invalid.
+
+    * 1a1. GradPad shows an error message.
+    
+      Use case ends.  
+
+* 2a. The module searched does not exist in the required module list.
+
+    * 2a1. GradPad shows an error message.
+        
+        Use case ends.
+        
+**Use case : UC08 exit GradPad**
 
 **MSS**
 

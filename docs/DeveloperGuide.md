@@ -387,6 +387,40 @@ The following sequence diagram illustrates how the `checkmc` command is executed
 
 ![CheckMcDiagram](images/CheckMcSequenceDiagram.png)
 
+### [Implementation in progress] Check required modules feature
+
+The `required` command allows users to view the remaining modules under that are required in the NUS Computer
+Science curriculum that they have yet to take.
+
+When the command is executed, it checks through the current modules in the `Completed Modules` list and ensures
+that modules that have already been taken are not displayed in the list of remaining required modules.
+
+As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.
+
+Given below is a series of steps to show how a `required` operation behaves during its execution.
+
+1. The user enters the `required` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a required command and thus creates a `RequiredCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `RequiredCommand`, which contains a hard-coded list of required modules
+in the syllabus.
+
+7. Then, `RequiredCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules
+` field within the `GradPad`.
+
+8. It filters the list of required modules by removing those that are present in `modules`.
+
+9. Finally, a `CommandResult` is created to show the filtered list of remaining required modules.
+
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation

@@ -131,6 +131,10 @@ Description:
  * Module Code and Modular Credit fields are compulsory inputs but Tag fields are optional.
  Multiple Tags are allowed per module. Duplicate Modules (Modules with all the same fields)
  are not allowed.
+ 
+ * When you add a module, GradPad automatically gives it its correct module title based on the module code you've
+ entered. For example, Gradpad automatically gives the CS2103T module its title, "Software Engineering".
+ As such, there is no need to enter module titles yourself.
 
 Format: `add c/ {module code} cr/ {modular credits}`
 

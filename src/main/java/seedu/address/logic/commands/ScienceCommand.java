@@ -1,5 +1,12 @@
 package seedu.address.logic.commands;
 
+import static java.util.Objects.requireNonNull;
+
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Optional;
+
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.Model;
@@ -7,24 +14,16 @@ import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 import seedu.address.storage.JsonGradPadStorage;
 
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
-
-import static java.util.Objects.requireNonNull;
-
 public class ScienceCommand extends Command {
     public static final String COMMAND_WORD = "science";
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
     public static final String MESSAGE_FAILURE = "There was an error loading the required modules :(";
-    
     private Optional<ReadOnlyGradPad> storage;
     private String moduleNames = "";
 
     /**
      * Returns the storage attribute of a given ScienceCommand object.
-     * @return storage attribute of type Optional<ReadOnlyGradPad>.
+     * @return storage attribute of type Optional<ReadOnlyGradPad/>.
      */
     public Optional<ReadOnlyGradPad> getStorage() {
         return storage;
@@ -59,12 +58,10 @@ public class ScienceCommand extends Command {
         } else {
             return new CommandResult(MESSAGE_FAILURE);
         }
-        
         for (Module module : modules) {
             String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
             moduleNames += "\n" + moduleToAdd;
         }
-        
         return new CommandResult(MESSAGE_SUCCESS + moduleNames);
     }
 }

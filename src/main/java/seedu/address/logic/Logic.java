@@ -23,7 +23,8 @@ public interface Logic {
      * @throws CommandException If an error occurs during command execution.
      * @throws ParseException If an error occurs during parsing.
      */
-    CommandResult execute(String commandText) throws CommandException, ParseException, IOException, DataConversionException;
+    CommandResult execute(String commandText) throws CommandException, ParseException,
+            IOException, DataConversionException;
 
     /**
      * Returns the GradPad.

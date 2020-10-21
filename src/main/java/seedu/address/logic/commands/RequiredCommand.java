@@ -1,18 +1,18 @@
 package seedu.address.logic.commands;
 
-import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyGradPad;
-import seedu.address.model.module.Module;
-import seedu.address.storage.JsonGradPadStorage;
+import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Optional;
 
-import static java.util.Objects.requireNonNull;
+import javafx.collections.ObservableList;
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.Model;
+import seedu.address.model.ReadOnlyGradPad;
+import seedu.address.model.module.Module;
+import seedu.address.storage.JsonGradPadStorage;
 
 public class RequiredCommand extends Command {
     public static final String COMMAND_WORD = "required";
@@ -36,7 +36,6 @@ public class RequiredCommand extends Command {
     public static final String MESSAGE_FAILURE_ITPROF = "There was an error loading the IT Professionalism Modules :(";
     public static final String MESSAGE_FAILURE_MATHANDSCI = "There was an error loading"
             + " the Math and Science Modules :(";
-    
     public static final Path FOUNDATION_PATH = Paths.get("data", "foundationmodules.json");
     public static final Path INTERNSHIP_PATH = Paths.get("data", "industrialexperience.json");
     public static final Path ITPROF_PATH = Paths.get("data", "ITProfessionalism.json");
@@ -44,26 +43,25 @@ public class RequiredCommand extends Command {
     public static final Path SCIENCE_PATH = Paths.get("data", "sciencemodules.json");
 
     private ObservableList<Module> modules;
-    public String leftOverModules = "";
+    private String leftOverModules = "";
     private Optional<ReadOnlyGradPad> foundationStorage;
     private ObservableList<Module> requiredFoundation;
     private Optional<ReadOnlyGradPad> scienceStorage;
     private ObservableList<Module> requiredScience;
     private Optional<ReadOnlyGradPad> internshipStorage;
     private ObservableList<Module> requiredInternship;
-    private Optional<ReadOnlyGradPad> ITProfStorage;
-    private ObservableList<Module> requiredITProf;
+    private Optional<ReadOnlyGradPad> itProfStorage;
+    private ObservableList<Module> requiredITprof;
     private Optional<ReadOnlyGradPad> mathAndScienceStorage;
     private ObservableList<Module> requiredMathAndScience;
 
     /**
      * Returns foundationStorage attribute of RequiredCommand object.
-     * @return foundationStorage attribute of type Optional<ReadOnlyGradPad>.
+     * @return foundationStorage attribute of type Optional<ReadOnlyGradPad/>.
      */
     public Optional<ReadOnlyGradPad> getFoundationStorage() {
         return foundationStorage;
     }
-    
     /**
      * Loads the foundationStorage attribute with Foundation Modules.
      * @throws IOException
@@ -103,30 +101,29 @@ public class RequiredCommand extends Command {
 
     /**
      * Returns ITProfStorage attribute of RequiredCommand object.
-     * @return ITProfStorage attribute of type Optional<ReadOnlyGradPad>.
+     * @return ITProfStorage attribute of type Optional<ReadOnlyGradPad/>.
      */
-    public Optional<ReadOnlyGradPad> getITProfStorage() {
-        return ITProfStorage;
+    public Optional<ReadOnlyGradPad> getITprofStorage() {
+        return itProfStorage;
     }
-    
     /**
-     * Loads the ITProfStorage attribute with IT Professionalism Modules.
+     * Loads the ITprofStorage attribute with IT Professionalism Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setITProfStorage(Path path) throws IOException, DataConversionException {
+    public void setITprofStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        this.ITProfStorage = storage.readGradPad();
+        itProfStorage = storage.readGradPad();
     }
 
     /**
      * Cross references the user's current list of Modules and marks out
      * any undone IT Professionalism Modules.
      */
-    public void compareITProf() {
-        boolean ITProfClear = true;
+    public void compareITprof() {
+        boolean itProfClear = true;
         String modulesToAdd = "";
-        for (Module module : requiredITProf) {
+        for (Module module : requiredITprof) {
             boolean add = true;
             for (Module mod : modules) {
                 if (module.isSameModule(mod)) {
@@ -136,9 +133,9 @@ public class RequiredCommand extends Command {
             } if (add) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd += "\n" + moduleToAdd;
-                ITProfClear = false;
+                itProfClear = false;
             }
-        } if (ITProfClear) {
+        } if (itProfClear) {
             leftOverModules += MESSAGE_SUCCESS_ITPROF + "\n";
         } else {
             leftOverModules += MESSAGE_ITPROF + modulesToAdd + "\n";
@@ -148,7 +145,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Returns mathAndScienceStorage attribute of RequiredCommand object.
-     * @return mathAndScienceStorage attribute of type Optional<ReadOnlyGradPad>.
+     * @return mathAndScienceStorage attribute of type Optional<ReadOnlyGradPad/>.
      */
     public Optional<ReadOnlyGradPad> getMathAndScienceStorage() {
         return mathAndScienceStorage;
@@ -193,7 +190,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Returns scienceStorage attribute of RequiredCommand object.
-     * @return scienceStorage attribute of type Optional<ReadOnlyGradPad>.
+     * @return scienceStorage attribute of type Optional<ReadOnlyGradPad/>.
      */
     public Optional<ReadOnlyGradPad> getScienceStorage() {
         return scienceStorage;
@@ -234,7 +231,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Returns internshipStorage attribute of RequiredCommand object.
-     * @return internshipStorage attribute of type Optional<ReadOnlyGradPad>.
+     * @return internshipStorage attribute of type Optional<ReadOnlyGradPad/>.
      */
     public Optional<ReadOnlyGradPad> getInternshipStorage() {
         return internshipStorage;
@@ -278,13 +275,12 @@ public class RequiredCommand extends Command {
             leftOverModules += MESSAGE_SUCCESS_INTERN;
         }
     }
-    
     @Override
     public CommandResult execute(Model model) throws IOException, DataConversionException {
         requireNonNull(model);
         modules = model.getGradPad().getModuleList();
         setFoundationStorage(FOUNDATION_PATH);
-        setITProfStorage(ITPROF_PATH);
+        setITprofStorage(ITPROF_PATH);
         setMathAndScienceStorage(MATHANDSCI_PATH);
         setScienceStorage(SCIENCE_PATH);
         setInternshipStorage(INTERNSHIP_PATH);
@@ -294,12 +290,12 @@ public class RequiredCommand extends Command {
             return new CommandResult(MESSAGE_FAILURE_FOUNDATION);
         }
         compareFoundation();
-        if (ITProfStorage.isPresent()) {
-            requiredITProf = ITProfStorage.get().getModuleList();
+        if (itProfStorage.isPresent()) {
+            requiredITprof = itProfStorage.get().getModuleList();
         } else {
             return new CommandResult(MESSAGE_FAILURE_ITPROF);
         }
-        compareITProf();
+        compareITprof();
         if (mathAndScienceStorage.isPresent()) {
             requiredMathAndScience = mathAndScienceStorage.get().getModuleList();
         } else {

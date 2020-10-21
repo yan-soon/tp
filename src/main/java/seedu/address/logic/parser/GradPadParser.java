@@ -76,10 +76,10 @@ public class GradPadParser {
 
         case RequiredCommand.COMMAND_WORD:
             return new RequiredCommand();
-            
+
         case ScienceCommand.COMMAND_WORD:
             return new ScienceCommand();
-            
+
         default:
             throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
         }

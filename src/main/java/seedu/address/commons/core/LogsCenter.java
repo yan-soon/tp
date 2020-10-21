@@ -31,6 +31,7 @@ public class LogsCenter {
      * is requested again from the LogsCenter.
      */
     public static void init(Config config) {
+        assert(config != null);
         currentLogLevel = config.getLogLevel();
         logger.info("currentLogLevel: " + currentLogLevel);
     }

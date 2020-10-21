@@ -23,6 +23,8 @@ public class DeleteCommand extends Command {
             + "Example: " + COMMAND_WORD + " 1";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
+    public static final String MESSAGE_CONFIRMATION = "Are you sure you wish to delete the following"
+            + " module?\n\n";
 
     private final Index targetIndex;
 
@@ -30,16 +32,20 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
-    @Override
-    public CommandResult execute(Model model) throws CommandException {
-        requireNonNull(model);
+    public Module getModuleToDelete(Model model) throws CommandException {
         List<Module> lastShownList = model.getFilteredModuleList();
 
         if (targetIndex.getZeroBased() >= lastShownList.size()) {
             throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
         }
 
-        Module moduleToDelete = lastShownList.get(targetIndex.getZeroBased());
+        return lastShownList.get(targetIndex.getZeroBased());
+    }
+
+    @Override
+    public CommandResult execute(Model model) throws CommandException {
+        requireNonNull(model);
+        Module moduleToDelete = getModuleToDelete(model);
         model.deleteModule(moduleToDelete);
         return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
     }

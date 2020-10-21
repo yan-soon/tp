@@ -36,11 +36,11 @@ public class RequiredCommand extends Command {
     public static final String MESSAGE_FAILURE_ITPROF = "There was an error loading the IT Professionalism Modules :(";
     public static final String MESSAGE_FAILURE_MATHANDSCI = "There was an error loading"
             + " the Math and Science Modules :(";
-    public static final Path FOUNDATION_PATH = Paths.get("data", "foundationmodules.json");
-    public static final Path INTERNSHIP_PATH = Paths.get("data", "industrialexperience.json");
-    public static final Path ITPROF_PATH = Paths.get("data", "ITProfessionalism.json");
-    public static final Path MATHANDSCI_PATH = Paths.get("data", "mathandsciencemodules.json");
-    public static final Path SCIENCE_PATH = Paths.get("data", "sciencemodules.json");
+    public static final Path FOUNDATION_PATH = Paths.get("src/main/data/foundationmodules.json");
+    public static final Path INTERNSHIP_PATH = Paths.get("src/main/data/industrialexperience.json");
+    public static final Path ITPROF_PATH = Paths.get("src/main/data/ITProfessionalism.json");
+    public static final Path MATHANDSCI_PATH = Paths.get("src/main/data/mathandsciencemodules.json");
+    public static final Path SCIENCE_PATH = Paths.get("src/main/data/sciencemodules.json");
 
     private ObservableList<Module> modules;
     private String leftOverModules = "";

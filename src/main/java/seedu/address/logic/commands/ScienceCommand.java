@@ -50,7 +50,7 @@ public class ScienceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws IOException, DataConversionException {
         requireNonNull(model);
-        Path sciencePath = Paths.get("data", "sciencemodules.json");
+        Path sciencePath = Paths.get("src/main/data/sciencemodules.json");
         setStorage(sciencePath);
         ObservableList<Module> modules;
         if (storage.isPresent()) {

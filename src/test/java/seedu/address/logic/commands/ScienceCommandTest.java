@@ -21,14 +21,13 @@ import seedu.address.storage.JsonGradPadStorage;
 class ScienceCommandTest {
     public static final Path INVALID_PATH = Paths.get("data", "science.json");
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
-    public static final Path VALID_PATH = Paths.get("data", "sciencemodules.json");
+    public static final Path VALID_PATH = Paths.get("src/main/data/sciencemodules.json");
     private Model model;
     private ScienceCommand scienceCommand = new ScienceCommand();
     private ObservableList<Module> modules;
     private String moduleNames = "";
     public void setUp() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "sciencemodules.json");
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        JsonGradPadStorage storage = new JsonGradPadStorage(VALID_PATH);
         modules = storage.readGradPad().get().getModuleList();
         for (Module module : modules) {
             String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";

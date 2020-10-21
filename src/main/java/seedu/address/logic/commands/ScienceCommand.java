@@ -40,6 +40,14 @@ public class ScienceCommand extends Command {
         this.storage = storage.readGradPad();
     }
 
+    /**
+     * Goes through the storage attribute and parses all Science Modules, to be read by the user.
+     * @param model {@code Model} which the command should operate on.
+     * @return CommandResult Object with the relevant Science Modules or Failure Message if modules
+     * are absent.
+     * @throws IOException
+     * @throws DataConversionException
+     */
     @Override
     public CommandResult execute(Model model) throws IOException, DataConversionException {
         requireNonNull(model);

@@ -36,6 +36,12 @@ public class RequiredCommand extends Command {
     public static final String MESSAGE_FAILURE_ITPROF = "There was an error loading the IT Professionalism Modules :(";
     public static final String MESSAGE_FAILURE_MATHANDSCI = "There was an error loading"
             + " the Math and Science Modules :(";
+    
+    public static final Path FOUNDATION_PATH = Paths.get("data", "foundationmodules.json");
+    public static final Path INTERNSHIP_PATH = Paths.get("data", "industrialexperience.json");
+    public static final Path ITPROF_PATH = Paths.get("data", "ITProfessionalism.json");
+    public static final Path MATHANDSCI_PATH = Paths.get("data", "mathandsciencemodules.json");
+    public static final Path SCIENCE_PATH = Paths.get("data", "sciencemodules.json");
 
     private ObservableList<Module> modules;
     private String leftOverModules = "";
@@ -51,12 +57,19 @@ public class RequiredCommand extends Command {
     private ObservableList<Module> requiredMathAndScience;
 
     /**
+     * Returns foundationStorage attribute of RequiredCommand object.
+     * @return foundationStorage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getFoundationStorage() {
+        return foundationStorage;
+    }
+    
+    /**
      * Loads the foundationStorage attribute with Foundation Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setFoundationStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "foundationmodules.json");
+    public void setFoundationStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.foundationStorage = storage.readGradPad();
     }
@@ -89,12 +102,19 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Returns ITProfStorage attribute of RequiredCommand object.
+     * @return ITProfStorage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getITProfStorage() {
+        return ITProfStorage;
+    }
+    
+    /**
      * Loads the ITProfStorage attribute with IT Professionalism Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setITProfStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "ITProfessionalism.json");
+    public void setITProfStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.ITProfStorage = storage.readGradPad();
     }
@@ -127,12 +147,19 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Returns mathAndScienceStorage attribute of RequiredCommand object.
+     * @return mathAndScienceStorage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getMathAndScienceStorage() {
+        return mathAndScienceStorage;
+    }
+
+    /**
      * Loads the mathAndScienceStorage attribute with Math and Science Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setMathAndScienceStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "mathandsciencemodules.json");
+    public void setMathAndScienceStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.mathAndScienceStorage = storage.readGradPad();
     }
@@ -165,12 +192,19 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Returns scienceStorage attribute of RequiredCommand object.
+     * @return scienceStorage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getScienceStorage() {
+        return scienceStorage;
+    }
+
+    /**
      * Loads the scienceStorage attribute with Science Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setScienceStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "sciencemodules.json");
+    public void setScienceStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         scienceStorage = storage.readGradPad();
     }
@@ -199,12 +233,19 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Returns internshipStorage attribute of RequiredCommand object.
+     * @return internshipStorage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getInternshipStorage() {
+        return internshipStorage;
+    }
+
+    /**
      * Loads the internshipStorage attribute with Internship Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setInternshipStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "industrialexperience.json");
+    public void setInternshipStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         internshipStorage = storage.readGradPad();
     }
@@ -242,11 +283,11 @@ public class RequiredCommand extends Command {
     public CommandResult execute(Model model) throws IOException, DataConversionException {
         requireNonNull(model);
         modules = model.getGradPad().getModuleList();
-        setFoundationStorage();
-        setITProfStorage();
-        setMathAndScienceStorage();
-        setScienceStorage();
-        setInternshipStorage();
+        setFoundationStorage(FOUNDATION_PATH);
+        setITProfStorage(ITPROF_PATH);
+        setMathAndScienceStorage(MATHANDSCI_PATH);
+        setScienceStorage(SCIENCE_PATH);
+        setInternshipStorage(INTERNSHIP_PATH);
         if (foundationStorage.isPresent()) {
             requiredFoundation = foundationStorage.get().getModuleList();
         } else {

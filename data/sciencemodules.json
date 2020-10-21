@@ -1,0 +1,63 @@
+{
+  "modules" : [ {
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1121",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1131",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1417",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1102",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1105",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1106",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1301",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1306",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1141",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1142",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1143",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1144",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1221",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1222",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1432",
+    "credits" : "4"
+  }]
+}

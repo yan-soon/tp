@@ -1,0 +1,35 @@
+{
+  "modules" : [ {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3880",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3200",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3202",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3107",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3110",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "IS4010",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "TR3202",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP4101",
+    "credits" : "12"
+  }]
+}

@@ -324,7 +324,7 @@ Before diving into how the `list` operation is executed, we must first gain a br
 The `Completed Modules` list is implemented by the `ModuleListPanel` UI class.
 This class contains a list of modules, which comes from GradPad's `Model` component, that it uses to 
 display to the user. To change the contents of the list, commands can apply filters to this list through `Model`.
-For example, a module may ask `Model` to only show modules that have 4 modular credits.
+For example, a command may ask `Model` to only show modules that have 4 modular credits.
 When this happens, `Completed Modules` naturally changes the modules it displays too.
 
 The following diagram illustrates this relationship:

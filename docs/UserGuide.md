@@ -178,7 +178,7 @@ Expected outcome:
 
 <img src="images/edit.png" width="550px" height="350px">
 
-### Find a Specific Module : 'find'
+### Find a Specific Module : `find`
 
 Description:
 

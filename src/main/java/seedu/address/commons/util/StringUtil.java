@@ -12,12 +12,12 @@ import java.io.StringWriter;
 public class StringUtil {
 
     /**
-     * Returns true if the {@code sentence} contains the {@code word}.
-     *   Ignores case, but a full word match is required.
+     * Returns true if the {@code moduleCode} contains the {@code charSequence}.
+     *   Ignores case, a partial match is required.
      *   <br>examples:<pre>
-     *       containsWordIgnoreCase("ABc def", "abc") == true
-     *       containsWordIgnoreCase("ABc def", "DEF") == true
-     *       containsWordIgnoreCase("ABc def", "AB") == false //not a full word match
+     *       containsCharSequenceIgnoreCase("ABc", "abc") == true
+     *       containsCharSequenceIgnoreCase("def", "DEF") == true
+     *       containsCharSequenceIgnoreCase("ABc", "AB") == true // partial match
      *       </pre>
      * @param moduleCode cannot be null
      * @param charSequence cannot be null, cannot be empty, must be a single word

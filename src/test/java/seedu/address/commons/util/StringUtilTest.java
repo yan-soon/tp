@@ -46,7 +46,7 @@ public class StringUtilTest {
     }
 
 
-    //---------------- Tests for containsWordIgnoreCase --------------------------------------
+    //---------------- Tests for containsCharSequenceIgnoreCase --------------------------------------
 
     /*
      * Invalid equivalence partitions for word: null, empty, multiple words
@@ -55,48 +55,43 @@ public class StringUtilTest {
      */
 
     @Test
-    public void containsWordIgnoreCase_nullWord_throwsNullPointerException() {
+    public void containsCharSequenceIgnoreCase_nullWord_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsCharSequenceIgnoreCase(
                 "typical ModuleCode", null));
     }
 
     @Test
-    public void containsWordIgnoreCase_emptyWord_throwsIllegalArgumentException() {
+    public void containsCharSequenceIgnoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "CharSequence parameter cannot be empty", () ->
                 StringUtil.containsCharSequenceIgnoreCase("typical ModuleCode", "  "));
     }
 
     @Test
-    public void containsWordIgnoreCase_multipleWords_throwsIllegalArgumentException() {
+    public void containsCharSequenceIgnoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "CharSequence parameter should be a single word", () ->
                 StringUtil.containsCharSequenceIgnoreCase("typical ModuleCode", "aaa BBB"));
     }
 
     @Test
-    public void containsWordIgnoreCase_nullModuleCode_throwsNullPointerException() {
+    public void containsCharSequenceIgnoreCase_nullModuleCode_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> StringUtil.containsCharSequenceIgnoreCase(null, "abc"));
     }
 
     /*
      * Valid equivalence partitions for CharSequence:
-     *   - any word
-     *   - word containing symbols/numbers
-     *   - word with leading/trailing spaces
+     *   - any charSequence
+     *   - charSequence containing symbols/numbers
+     *   - charSequence with leading/trailing spaces
      *
      * Valid equivalence partitions for ModuleCode:
-     *   - empty string
-     *   - one word
-     *   - multiple words
+     *   - one moduleCode
      *   - ModuleCode with extra spaces
      *
      * Possible scenarios returning true:
-     *   - matches first word in ModuleCode
-     *   - last word in ModuleCode
-     *   - middle word in ModuleCode
-     *   - matches multiple words
+     *   - charSequence matches any part of moduleCode
      *
      * Possible scenarios returning false:
-     *   - ModuleCode word matches part of the CharSequence
+     *   - ModuleCode does not contain charSequence
      *
      * The test method below tries to verify all above with a reasonably low number of test cases.
      */

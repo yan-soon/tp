@@ -30,6 +30,8 @@ public class NusmodsDataManager implements NusmodsData {
      * @param dataFetcher The class used to invoke static methods in this class.
      */
     NusmodsDataManager(DataFetcher dataFetcher, String filePath) {
+        assert(dataFetcher != null && !filePath.trim().isEmpty());
+
         this.dataFetcher = dataFetcher;
         this.filePath = filePath;
     }
@@ -43,6 +45,7 @@ public class NusmodsDataManager implements NusmodsData {
      * @throws NusmodsException if an error occurs while retrieving module info.
      */
     public Optional<String> getModuleTitle(String moduleCode) throws NusmodsException {
+        assert(!moduleCode.trim().isEmpty());
         return getModuleInfo(moduleCode).map(ModuleInfo::getTitle);
     }
 
@@ -56,6 +59,8 @@ public class NusmodsDataManager implements NusmodsData {
      * @throws NusmodsException if an error occurs while retrieving module info.
      */
     public Optional<ModuleInfo> getModuleInfo(String moduleCode) throws NusmodsException {
+        assert(!moduleCode.trim().isEmpty());
+
         try {
             return dataFetcher.fetchModuleInfo(moduleCode);
         } catch (NusmodsException ex) {
@@ -71,6 +76,8 @@ public class NusmodsDataManager implements NusmodsData {
      * @throws NusmodsException if an error occurs while retrieving module info.
      */
     private Optional<ModuleInfo> getModuleInfoFromFile(String moduleCode) throws NusmodsException {
+        assert(!moduleCode.trim().isEmpty());
+
         ObjectMapper mapper = new ObjectMapper();
         try {
             String jsonString = FileUtil.readFromFile(Paths.get(getFilePath()));

@@ -736,7 +736,7 @@ testers are expected to do more *exploratory* testing.
    Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
       
 1. Test case: `add c/cs2100 cr/4 tag/hardestmoduleever`<br>
-   Expected: Similar to previous.
+   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
    
 1. Test case: `add c/cs2100 Computer Organisation cr/4`<br>
    Expected: No module added. _Invalid module code format_ message is shown in the result display.
@@ -751,7 +751,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No module added. _Invalid command format_ message is shown in the result display.
       
 1. Other invalid add commands to try: `add`, `add cs1000 4`, `add cr/4`<br>
-   Expected: Similar to previous.
+   Expected: No module added. _Invalid command format_ message is shown in the result display.
 
 ### Delete a Module
 
@@ -773,7 +773,7 @@ testers are expected to do more *exploratory* testing.
    Expected: No module deleted. _Invalid command format_ message is shown in the result display.
 
 1. Other invalid delete commands to try: `delete cs2103t 4`, `delete c/cs2103t`, `delete 1`<br>
-   Expected: Similar to previous.
+   Expected: No module deleted. _Invalid command format_ message is shown in the result display.
       
 ### Edit a Module
 
@@ -788,7 +788,7 @@ testers are expected to do more *exploratory* testing.
    Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
       
 1. Test case: `edit cs2103t cr/5`<br>
-   Expected: Similar to previous.
+   Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
       
 1. Test case: `edit cs2100 Computer Organisation c/cs1000s`<br>
    Expected: No module edited. _Invalid module code format_ message is shown in the result display.
@@ -806,37 +806,36 @@ testers are expected to do more *exploratory* testing.
    Expected: No module edited. _Invalid command format_ message is shown in the result display.
       
 1. Other invalid edit commands to try: `edit`, `edit cs2103t 2103 5`, `edit 1`<br>
-   Expected: Similar to previous.
+   Expected: No module edited. _Invalid command format_ message is shown in the result display.
       
 ### List All Modules
 
 1. Prerequisite: 
-   1. List of 'Completed Modules' being displayed in GradPad must be filtered, e.g. using `find`.
    1. Command must not be accompanied by any arguments.
 
 1. Test case: `list`<br>
-   Expected: The full list of 'Completed Modules' is displayed.
+   Expected: The full list of 'Completed Modules' is displayed. "Listed all modules" message shown in the result display.
    
 1. Test case: `list modules`<br>
-   Expected: Full list of 'Completed Modules' is not displayed, current list is unchanged. _Invalid command format_ message is shown in the result display.
+   Expected: Current list remains unchanged. _Invalid command format_ message is shown in the result display.
 
 ### Find a Specific Module or a Group of Modules
 
 1. Prerequisites: 
    1. Arguments must be specified.
-   1. Module to be included must exist in the list being displayed in GradPad, e.g. CS2100, CS2101, CS3230 and ST2334 are in the list and CS2106 is not.
+   1. Module to be included must exist in the 'Completed Modules' in GradPad, e.g. CS2100, CS2101, CS3230 and ST2334 are in the list and CS2106 is not.
       
 1. Test case: `find cs2`<br>
-   Expected: CS2100 and CS2101 are displayed.
+   Expected: CS2100 and CS2101 are displayed. "2 modules listed!" message shown in the result display.
    
 1. Test case: `find cs2 st`<br>
-   Expected: CS2100, CS2101 and ST2334 are displayed.
+   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules listed!" message shown in the result display.
    
 1. Test case: `find cs3230`<br>
-   Expected: CS3230 is displayed.
+   Expected: CS3230 is displayed. "1 modules listed!" message shown in the result display.
 
-1. Test case: `delete cs2106`<br>
-   Expected: No modules displayed.
+1. Test case: `find cs2106`<br>
+   Expected: No modules displayed. "0 modules listed!" message shown in the result display.
       
 1. Test case: `find`<br>
    Expected: Current list is unchanged. _Invalid command format_ message is shown in the result display.
@@ -858,7 +857,7 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `help`
    Expected: Help page is displayed.
    
-1. Test case: `checkmc modules`
+1. Test case: `help modules`
    Expected: Help page is not displayed. _Invalid command format_ message is shown in the result display.
    
 ### Show Required Modules
@@ -890,8 +889,8 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `search`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
-1. Other invalid delete commands to try: `search c/cs2103t`, `delete 1`<br>
-   Expected: Similar to previous.
+1. Other invalid delete commands to try: `search c/cs2103t`, `search 1`<br>
+   Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
 ### Saving data
 

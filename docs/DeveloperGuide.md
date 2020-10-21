@@ -205,16 +205,13 @@ Given below is how an add operation behaves at each step of its execution.
 
 3. `Logic.execute()` then calls the `parseCommand` method of the `gradPadParser` class to parse the string input.
 
-4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser`
-class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
+4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser` class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
 5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores
-the values that we want to add into our list.
+6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores the values that we want to add into our list.
 
-7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the
-`LogicManager` in step 2.
+7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
 
 8. `Logic Manager` executes the newly created `AddCommand`.
 
@@ -694,7 +691,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for manual testing**
+## **Appendix: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -703,39 +700,197 @@ testers are expected to do more *exploratory* testing.
 
 </div>
 
-### Launch and shutdown
+### Launch and Shutdown
 
-1. Initial launch
+1. Initial Launch
 
-   1. Download the jar file and copy into an empty folder
+   1. Download the jar file and copy into an empty folder.
 
-   1. Double-click the jar file Expected: Shows the GUI with a set of sample contacts. The window size may not be optimum.
+   1. Double-click the jar file.<br>
+      Expected: GUI runs with a set of sample modules. The window size may not be optimum.
 
-1. Saving window preferences
+1. Saving Window Preferences
 
    1. Resize the window to an optimum size. Move the window to a different location. Close the window.
 
    1. Re-launch the app by double-clicking the jar file.<br>
        Expected: The most recent window size and location is retained.
 
-1. _{ more test cases …​ }_
+1. Shutdown
 
-### Deleting a module
+   1. Test case: Click the "close" button (red button) at the top of the window.<br>
+      Expected: The window closes immediately.
+      
+   1. Test case: `exit`<br>
+      Expected: GUI shows a farewell message,"Exiting GradPad as requested ..." and delays for 1.5 seconds, after which the window closes.
+      
+### Add a Module
 
-1. Deleting a module.
+1. Prerequisites: 
+   1. Both module code and modular credits must be specified.
+   1. Module code format must be valid, e.g. 'CS2100' is a valid module code.
+   1. Modular credits format must be valid. e.g. '4' is a valid module code.
+   1. Module to be added must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 with 4 modular credits is a valid module, whereas module code CS1000 with 4 modular credits is an invalid module.
 
-   1. Prerequisites: Multiple modules in the 'Current Modules'. e.g. CS2103T in 'Current Modules'.
+1. Test case: `add c/cs2100 cr/4`<br>
+   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+      
+1. Test case: `add c/cs2100 cr/4 tag/hardestmoduleever`<br>
+   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+   
+1. Test case: `add c/cs2100 Computer Organisation cr/4`<br>
+   Expected: No module added. _Invalid module code format_ message is shown in the result display.
+      
+1. Test case: `add c/cs2100 cr/4a`<br>
+   Expected: No module added. _Invalid modular credit format_ message is shown in the result display.
+      
+1. Test case: `add c/cs1000 cr/4`<br>
+   Expected: No module added. _Invalid module_ message is shown in the result display.
+      
+1. Test case: `add c/cs2100`<br>
+   Expected: No module added. _Invalid command format_ message is shown in the result display.
+      
+1. Other invalid add commands to try: `add`, `add cs1000 4`, `add cr/4`<br>
+   Expected: No module added. _Invalid command format_ message is shown in the result display.
 
-   1. Test case: `delete CS2103T`<br>
-      Expected: CS2103T module is deleted from 'Current Modules'. Details of the deleted module shown in the status message.
+### Delete a Module
 
-   1. Test case: `delete AA1000`<br>
-      Expected: No module is deleted. Error details shown in the status message.
+1. Prerequisites: 
+   1. Module code must be specified.
+   1. Module code format must be valid.
+   1. Module to be deleted must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
+      
+1. Test case: `delete cs2100`<br>
+   Expected: CS2100 module is deleted from 'Completed Modules' in GradPad. Details of the deleted module are shown in the result display.
+   
+1. Test case: `delete cs2100 Computer Ogranisation`<br>
+   Expected: No module deleted. _Invalid module code format_ message is shown in the result display.
 
-   1. Other incorrect delete commands to try: `delete`, `delete x`, `...` <br>
-      Expected: Similar to previous.
+1. Test case: `delete cs2106`<br>
+   Expected: No module deleted. _Module not found_ message is shown in the result display.
+      
+1. Test case: `delete`<br>
+   Expected: No module deleted. _Invalid command format_ message is shown in the result display.
 
-1. _{ more test cases …​ }_
+1. Other invalid delete commands to try: `delete cs2103t 4`, `delete c/cs2103t`, `delete 1`<br>
+   Expected: No module deleted. _Invalid command format_ message is shown in the result display.
+      
+### Edit a Module
+
+1. Prerequisites:
+   1. Module code of module to be edited must be specified.
+   1. Module code format of module to be edited must be valid.
+   1. Module to be edited must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
+   1. At least 1 field to edit must be specified (module code/modular credits/tags)
+   1. Format of field to edit must be valid.
+   
+1. Test case: `edit cs2100 c/cs2100s`<br>
+   Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
+      
+1. Test case: `edit cs2103t cr/5`<br>
+   Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
+      
+1. Test case: `edit cs2100 Computer Organisation c/cs1000s`<br>
+   Expected: No module edited. _Invalid module code format_ message is shown in the result display.
+      
+1. Test case: `edit cs2106 c/cs2106s`<br>
+   Expected: No module edited. _Module not found_ message is shown in the result display.
+   
+1. Test case: `edit cs2100 c/cs2100s Computer Organisation II`<br>
+   Expected: No module edited. _Invalid module code format_ message is shown in the result display.
+   
+1. Test case: `edit cs2100 cr/4a`<br>
+   Expected: No module edited. _Invalid modular credits format_ message is shown in the result display.
+   
+1. Test case: `edit c/cs2100s cr/5`<br>
+   Expected: No module edited. _Invalid command format_ message is shown in the result display.
+      
+1. Other invalid edit commands to try: `edit`, `edit cs2103t 2103 5`, `edit 1`<br>
+   Expected: No module edited. _Invalid command format_ message is shown in the result display.
+      
+### List All Modules
+
+1. Prerequisite: 
+   1. Command must not be accompanied by any arguments.
+
+1. Test case: `list`<br>
+   Expected: The full list of 'Completed Modules' is displayed. "Listed all modules" message shown in the result display.
+   
+1. Test case: `list modules`<br>
+   Expected: Current list remains unchanged. _Invalid command format_ message is shown in the result display.
+
+### Find a Specific Module or a Group of Modules
+
+1. Prerequisites: 
+   1. Arguments must be specified.
+   1. Module to be included must exist in the 'Completed Modules' in GradPad, e.g. CS2100, CS2101, CS3230 and ST2334 are in the list and CS2106 is not.
+      
+1. Test case: `find cs2`<br>
+   Expected: CS2100 and CS2101 are displayed. "2 modules listed!" message shown in the result display.
+   
+1. Test case: `find cs2 st`<br>
+   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules listed!" message shown in the result display.
+   
+1. Test case: `find cs3230`<br>
+   Expected: CS3230 is displayed. "1 modules listed!" message shown in the result display.
+
+1. Test case: `find cs2106`<br>
+   Expected: No modules displayed. "0 modules listed!" message shown in the result display.
+      
+1. Test case: `find`<br>
+   Expected: Current list is unchanged. _Invalid command format_ message is shown in the result display.
+   
+### Check Total Modular Credits
+
+1. Prerequisite: Command must not be accompanied by any arguments.
+
+1. Test case: `checkmc`
+   Expected: Total modular credits are calculated and displayed. If there are no modules in 'Completed Modules', total modular credits will be 0.
+   
+1. Test case: `checkmc modules`
+   Expected: Total modular credits are not calculated. _Invalid command format_ message is shown in the result display.
+   
+### Open Help Page
+
+1. Prerequisite: Command must not be accompanied by any arguments.
+
+1. Test case: `help`
+   Expected: Help page is displayed.
+   
+1. Test case: `help modules`
+   Expected: Help page is not displayed. _Invalid command format_ message is shown in the result display.
+   
+### Show Required Modules
+
+1. Prerequisite: Command must not be accompanied by any arguments.
+
+1. Test case: `required`
+   Expected: All required modules are displayed in the result display. Modules already in the 'Completed Modules' list in GradPad would not be displayed in the 'Required Modules' list.
+   
+1. Test case: `required modules`
+   Expected: Required modules are not displayed. _Invalid command format_ message is shown in the result display.
+   
+### Check Module Information
+
+1. Prerequisites: 
+   1. Module code must be specified.
+   1. Module code format must be valid.
+   1. Module to be searched must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 is a valid module, whereas module code CS1000 is an invalid module.
+ 
+1. Test case: `search cs2100`<br>
+   Expected: CS2100 module information is displayed in the result display.
+   
+1. Test case: `search cs2100 Computer Ogranisation`<br>
+   Expected: No module information is displayed. _Invalid module code format_ message is shown in the result display.
+
+1. Test case: `search cs1000`<br>
+   Expected: No module information is displayed. _Invalid module_ message is shown in the result display.
+      
+1. Test case: `search`<br>
+   Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
+
+1. Other invalid delete commands to try: `search c/cs2103t`, `search 1`<br>
+   Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
 ### Saving data
 

@@ -60,6 +60,7 @@ The rest of the App consists of four components.
 * [**`Logic`**](#logic-component): The command executor.
 * [**`Model`**](#model-component): Holds the data of the App in memory.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
+* [**`Nusmods`**](#nusmods-component): Reads data from the NUSMODS public API.
 
 Each of the four components,
 
@@ -143,6 +144,37 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the GradPad data in json format and read it back.
+
+### Nusmods component
+
+![Structure of the Nusmods Component](images/NusmodsClassDiagram.png)
+
+**API** : [`NusmodsData.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/nusmods/NusmodsData.java)
+
+The `Nusmods` component,
+* can fetch module data from the NUSMODS public API.
+* can save fetched module data in the form of `ModuleInfo` objects to a local JSON file.
+* can provide module information based on a module code, in the form of `ModuleInfo` objects.
+
+Critically, the component is able to fall back on reading pre-fetched module information from a local file when 
+there's no internet connection.
+
+#### Design considerations
+
+We chose to split the `Nusmods` component into two main parts that have the following responsibilities respectively:
+* Fetch module data - handled by `DataFetcher`
+* Allow other GradPad components to access module data - handled by `NusmodsData`
+
+##### Rationale
+
+We chose to do this instead of clumping all the logic together to achieve better encapsulation and abstraction.
+With this, the `NusmodsData` class only needs to be concerned with reading available module data, processing it,
+and serving it up to the code who requested it. It doesn't need to care about how the data got there. 
+That's the job of the `DataFetcher` class. As such, it is easy for us to swap out `DataFetcher`, or change its 
+implementation without the need to touch the public interface provided by `NusmodsData`. This will prove to be 
+useful when, for example, the NUSMODS API becomes obsolete, and we need to use another API, or if the NUSMODS 
+API changes, and we need to redesign how we fetch data from it.
+
 
 ### Common classes
 
@@ -298,6 +330,144 @@ The following sequence diagram illustrates how the find command is executed.
 
 ![FindSequenceDiagram](images/FindSequenceDiagram.png)
 
+### List feature
+
+The `list` command shows all modules that have been added by the user in the `Completed Modules` list.
+This is needed as certain commands can change the modules that are being displayed. One such command is the
+`find` command, which shows only matching modules in the list.
+
+Before diving into how the `list` operation is executed, we must first gain a brief understanding of how the 
+`Completed Modules` list displays its modules, and how this display can be changed by other commands.
+
+The `Completed Modules` list is implemented by the `ModuleListPanel` UI class.
+This class contains a list of modules, which comes from GradPad's `Model` component, that it uses to 
+display to the user. To change the contents of the list, commands can apply filters to this list through `Model`.
+For example, a command may ask `Model` to only show modules that have 4 modular credits.
+When this happens, `Completed Modules` naturally changes the modules it displays too.
+
+The following diagram illustrates this relationship:
+
+![ModelFilteredListDiagram](images/ModelFilteredListClassDiagram.png)
+
+With this in mind, the aim of the `list` command is therefore to remove any existing filter on this module list,
+effectively getting `Completed Modules` to display all modules once again.
+
+Given below is a series of steps to show how a list operation behaves during its execution to achieve just this.
+
+1. The user input is parsed and constructs a `ListCommand` object. (Implementation details of the parser are omitted
+ here as they are not central in developing an understanding of the `list` operation)
+
+2. When this command is executed, it calls the `updateFilteredModuleList` method in the `Model` class and passes in
+a predicate that lets all modules through the filter.
+
+3. The `Model` class updates its `filteredModules` list to include all modules as if it were unfiltered.
+
+4. The `ModuleListPanel` UI component listens to changes in `filteredModules` and updates whenever the list is updated.
+It thus updates to display all modules too.
+
+The following sequence diagram illustrates how the list command is executed.
+
+![ListSequenceDiagram](images/ListSequenceDiagram.png)
+
+### CheckMc feature
+
+The `checkmc` command allows users to view a tally of the total no. of modular credits from the modules present 
+in the `Completed Modules` list.
+
+As with all operations in GradPad, the `CheckMcCommand` class handles the execution of `checkmc` operations.
+In brief, it works by going through all modules in the `Completed Modules` list and summing up each module's
+modular credits.
+
+Given below is a series of steps to show how a `checkmc` operation behaves during its execution.
+
+1. The user enters the `checkmc` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a checkmc command and thus creates a `CheckMcCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `CheckMcCommand`.
+
+7. `CheckMcCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules` field
+within the `GradPad`.
+
+8. It then loops through `modules`, which is a list of `Module` objects, and sums up all their modular credits.
+
+8. Finally, a `CommandResult` is created to show the total no. of modular credits calculated.
+
+The following sequence diagram illustrates how the `checkmc` command is executed.
+
+![CheckMcDiagram](images/CheckMcSequenceDiagram.png)
+
+### [Implementation in progress] Check required modules feature
+
+The `required` command allows users to view the required modules in the NUS Computer Science curriculum 
+that they have yet to take.
+
+When the command is executed, it checks through the current modules in the `Completed Modules` list and ensures
+that modules that have already been taken are not displayed in the list of remaining required modules.
+
+As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.
+
+Given below is a series of steps to show how a `required` operation behaves during its execution.
+
+1. The user enters the `required` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a required command and thus creates a `RequiredCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `RequiredCommand`, which contains a hard-coded list of required modules
+in the syllabus.
+
+7. Then, `RequiredCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules
+` field within the `GradPad`.
+
+8. It filters the list of required modules by removing those that are present in `modules`.
+
+9. Finally, a `CommandResult` is created to show the filtered list of remaining required modules.
+
+### [Implementation in progress] Search all modules feature
+
+The `search` command allows users to search for any module within the NUS Computer Science curriculum and view
+its module details.
+
+To retrieve a module's information, the execution of this command interacts with the `Nusmods` component, which
+contains all logic related to the access of module data from the NUSMODS public API. We will not go into detail
+about the component here as we are mainly focused on the implementation of the search functionality.
+
+As with all operations in GradPad, the `SearchCommand` class handles the execution of `search` operations.
+
+Given below is a series of steps to show how a `search` operation behaves during its execution.
+
+1. The user enters a search command string containing a module code, e.g. "search CS2103T".
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a search command and thus creates a `SearchCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `SearchCommand`.
+
+7. `SearchCommand.execute()` retrieves the corresponding module information by calling 
+`NusmodsData.getModuleInfo()` in the `Nusmods` package.
+
+9. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+
 ### \[Proposed\] Undo/redo feature
 
 #### Proposed Implementation
@@ -312,15 +482,15 @@ These operations are exposed in the `Model` interface as `Model#commitAddressBoo
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
@@ -328,7 +498,7 @@ Given below is an example usage scenario and how the undo/redo mechanism behaves
 
 </div>
 
-4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
@@ -351,11 +521,11 @@ The `redo` command does the opposite — it calls `Model#redoAddressBook()`,
 
 </div>
 
-5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 

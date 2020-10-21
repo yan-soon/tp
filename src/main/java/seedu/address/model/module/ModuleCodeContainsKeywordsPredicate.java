@@ -12,6 +12,7 @@ public class ModuleCodeContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
 
     public ModuleCodeContainsKeywordsPredicate(List<String> keywords) {
+        assert(keywords != null);
         this.keywords = keywords;
     }
 

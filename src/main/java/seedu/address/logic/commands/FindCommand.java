@@ -21,7 +21,13 @@ public class FindCommand extends Command {
 
     private final ModuleCodeContainsKeywordsPredicate predicate;
 
+    /**
+     * Creates a FindCommand to filter module(s) based on the specified predicate.
+     *
+     * @param predicate the predicate used to filter relevant module(s).
+     */
     public FindCommand(ModuleCodeContainsKeywordsPredicate predicate) {
+        assert(predicate != null);
         this.predicate = predicate;
     }
 

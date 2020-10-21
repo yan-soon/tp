@@ -49,7 +49,7 @@ class ScienceCommandTest {
         assertThrows(NullPointerException.class, () -> scienceCommand.setStorage(null));
     }
     @Test
-    public void validPathExecuteRequiredCommand_success() throws IOException, DataConversionException {
+    public void validPathExecuteScienceCommand_success() throws IOException, DataConversionException {
         model = new ModelManager();
         setUp();
         CommandResult expected = new CommandResult(MESSAGE_SUCCESS + moduleNames);

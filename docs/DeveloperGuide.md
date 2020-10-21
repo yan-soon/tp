@@ -6,6 +6,27 @@ title: Developer Guide
 {:toc}
 
 --------------------------------------------------------------------------------------------------------------------
+## Introduction
+
+GradPad is an offline computer application meant to help Computer Science students from the
+National University of Singapore (NUS) plan their modules with more ease. All module information is
+displayed through our simple and organised Graphical User Interface (GUI). GradPad is also optimised 
+for users who prefer working on a Command Line Interface (CLI).
+
+The objectives of the application include:
+
+1. Allowing NUS CS students to track their degree progress.
+2. Allowing NUS CS students to plan their modules for upcoming semesters.
+3. Providing a fast and convenient way to view NUS CS module details.
+
+--------------------------------------------------------------------------------------------------------------------
+## About this Guide
+
+This is a Developer Guide written for developers who wish to contribute to or extend
+our GradPad Project. The guide will explain the different components that make up GradPad
+and how these components come together to implement GradPad.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## **Setting up, getting started**
 
@@ -171,7 +192,7 @@ GradPad allows users to add modules to their list.
 The following fields of a module are required (* for optional):
 * Module Code
 * Modular Credits
-* Tag*
+* Tags*
 
 As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
 The `AddCommandParser` class helps to parse user's input before creating the correct add command.
@@ -529,11 +550,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
-
-### \[Proposed\] Data archiving
-
-_{Explain here how the data archiving feature will be implemented}_
-
 
 --------------------------------------------------------------------------------------------------------------------
 

@@ -1,0 +1,151 @@
+{
+  "modules" : [ {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS1101S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS1231S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2030S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2040S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2100",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2103T",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2106",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS3230",
+    "credits" : "4"
+  },{
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "IS1103",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "CS2101",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "ES2660",
+    "credits" : "4"
+  },{
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "MA1521",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "MA1101R",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "ST2334",
+    "credits" : "4"
+  },{
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1121",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1131",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Chemistry" ],
+    "code" : "CM1417",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1102",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1105",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1106",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1301",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Biology" ],
+    "code" : "LSM1306",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1141",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1142",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1143",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1144",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1221",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1222",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Physics" ],
+    "code" : "PC1432",
+    "credits" : "4"
+  },{
+    "tagged" : [ "Internship" ],
+    "code" : "CP3880",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3200",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3202",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3107",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP3110",
+    "credits" : "6"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "IS4010",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "TR3202",
+    "credits" : "12"
+  }, {
+    "tagged" : [ "Internship" ],
+    "code" : "CP4101",
+    "credits" : "12"
+  }]
+}

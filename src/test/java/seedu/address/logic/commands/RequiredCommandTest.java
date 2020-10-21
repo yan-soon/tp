@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import org.junit.jupiter.api.Test;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.storage.JsonGradPadStorage;
 
@@ -18,11 +19,25 @@ import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
 import static seedu.address.logic.commands.RequiredCommand.ITPROF_PATH;
 import static seedu.address.logic.commands.RequiredCommand.MATHANDSCI_PATH;
 import static seedu.address.logic.commands.RequiredCommand.SCIENCE_PATH;
+import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_INTERN;
+import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_ITPROF;
+import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_MATHANDSCI;
+import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_SCIENCE;
 
 class RequiredCommandTest {
     
     Model model;
     RequiredCommand requiredCommand= new RequiredCommand();
+    
+    public void setUp() throws IOException, DataConversionException {
+        String string = "src/test/data/RequiredCommandTest/compiledmodules.json";
+        Path path = Paths.get(string);
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        model = new ModelManager();
+        model.setGradPad(gradPad);
+    }
 
     @Test
     public void nullModel_ThrowsNullPointerException() {
@@ -138,6 +153,15 @@ class RequiredCommandTest {
         Optional<ReadOnlyGradPad> actual = requiredCommand.getInternshipStorage();
         assertEquals(actual, Optional.empty());
     }
-    
 
+    @Test
+    public void validPathExecuteRequiredCommand_Success() throws IOException, DataConversionException {
+        setUp();
+        String expectedMessage = "" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
+                + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI
+                + "\n" + "\n" + MESSAGE_SUCCESS_SCIENCE + "\n" + "\n" + MESSAGE_SUCCESS_INTERN;
+        CommandResult expected = new CommandResult(expectedMessage);
+        CommandResult actual = requiredCommand.execute(model);
+        assertEquals(expected, actual);
+    }
 }

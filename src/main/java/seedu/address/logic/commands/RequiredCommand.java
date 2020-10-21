@@ -44,7 +44,7 @@ public class RequiredCommand extends Command {
     public static final Path SCIENCE_PATH = Paths.get("data", "sciencemodules.json");
 
     private ObservableList<Module> modules;
-    private String leftOverModules = "";
+    public String leftOverModules = "";
     private Optional<ReadOnlyGradPad> foundationStorage;
     private ObservableList<Module> requiredFoundation;
     private Optional<ReadOnlyGradPad> scienceStorage;

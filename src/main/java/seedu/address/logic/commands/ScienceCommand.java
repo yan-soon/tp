@@ -23,12 +23,19 @@ public class ScienceCommand extends Command {
     private String moduleNames = "";
 
     /**
+     * Returns the storage attribute of a given ScienceCommand object.
+     * @return storage attribute of type Optional<ReadOnlyGradPad>.
+     */
+    public Optional<ReadOnlyGradPad> getStorage() {
+        return storage;
+    }
+
+    /**
      * Loads the storage attribute with Science Modules.
      * @throws IOException
      * @throws DataConversionException
      */
-    public void setStorage() throws IOException, DataConversionException {
-        Path path = Paths.get("data", "sciencemodules.json");
+    public void setStorage(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         this.storage = storage.readGradPad();
     }
@@ -36,7 +43,8 @@ public class ScienceCommand extends Command {
     @Override
     public CommandResult execute(Model model) throws IOException, DataConversionException {
         requireNonNull(model);
-        setStorage();
+        Path sciencePath = Paths.get("data", "sciencemodules.json");
+        setStorage(sciencePath);
         ObservableList<Module> modules;
         if (storage.isPresent()) {
             modules = storage.get().getModuleList();

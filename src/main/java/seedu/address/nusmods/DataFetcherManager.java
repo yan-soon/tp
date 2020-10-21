@@ -34,11 +34,13 @@ public class DataFetcherManager extends DataFetcher {
     }
 
     DataFetcherManager(HttpUtil httpUtil) {
+        assert(httpUtil != null);
         this.httpUtil = httpUtil;
         dataFilePath = DataFetcher.DATA_FILE_PATH;
     }
 
     DataFetcherManager(HttpUtil httpUtil, String filePath) {
+        assert(httpUtil != null && !filePath.trim().isEmpty());
         this.httpUtil = httpUtil;
         this.dataFilePath = filePath;
     }
@@ -70,6 +72,7 @@ public class DataFetcherManager extends DataFetcher {
      * {@code ModuleInfo}.
      */
     public Optional<ModuleInfo> fetchModuleInfo(String moduleCode) throws NusmodsException {
+        assert(!moduleCode.trim().isEmpty());
         logger.info("Fetching module info for: " + moduleCode);
 
         String jsonResponse = httpUtil.makeGETRequest(String.format(MODULE_INFO_URL, moduleCode));

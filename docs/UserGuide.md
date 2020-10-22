@@ -49,44 +49,19 @@ navigation of modules.
 
 ## Feature Summary List
 
-1. Viewing Help
+ Features                         |    Description 
+ ----------------------------------------|------------
+ View Help                               | Allows user to view a list of all possible commands
+ Add a Module                            | Allows user to add any Module of choice into the `Completed Modules` section for tracking purposes
+ View Added Modules                      | Allows user to check all their added modules in `Completed Modules`
+ Find Modules from Completed Modules     | Allows user to look for modules in `Completed Modules` using keywords
+ Delete a Module                         | Allows user to delete unwanted modules in `Completed Modules`
+ Edit a Module                           | Allows user to edit the details of a module they have already added in the `Completed Modules`
+ Check Modular Credits                   | Allows user to display their total accumulated modular credit score
+ View All Required Modules               | Allows user to display all required modules in the Computer Science curriculum onto the `Command Line Display`
+ Search for a Required Module            | Allows user to search for a required module and display the module details in the `Command Line Display`
+ Exit the Program                        | Allows user to terminate the GradPad program
 
-    * Allows user to view a list of all possible commands
-
-1. Adding a module
-
-    * Allows user to add any Module of choice into the `Current Modules` section for tracking purposes.
-
-    * User can add any module by specifying their desired Module Code (eg. CS1231),
-    Modular Credits (eg. 4), and Tags (eg. Core) along with the `add` command, in their
-    input (more instructions below).
-
-1. View added modules
-
-    * Allows user to check all their added modules
-
-1. Find a specific module
-
-    * Allows user to check if a specific module has been added
-
-1. Deleting a module
-
-    * Allows a user to delete unwanted modules
-
-1. Editing a module
-    * Allows a user to edit the details of a module they have already added
-
-1. Check modular credits (MCs)
-
-    * Allows user to check their accumulated modular credit score
-
-1. Exiting the program
-
-    * Allows user to terminate the program
-
-1. Saving the data
-
-    * Allows users to save their current list of modules on their hard disk
 
     Refer to [Commands](#commands) below for details on all commands.
 
@@ -245,11 +220,13 @@ To exit:
 
 Action | Format, Examples
 --------|------------------
-**Add** | `add {module code} {modular credits}` <br> e.g. `add CS2100 4`
-**Edit** | `edit {index} [c/module description] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
-**Delete** | `delete {module}`<br> e.g. `delete CS2103T`
-**List** | `list`
+**Help** | `help`
+**Add** | `add c/ {module code} cr/ {modular credits}` <br> e.g. `add c/CS2100 cr/4`
+**Edit** | `edit {index} [c/module code] [cr/modular credits] [t/tags]` <br> e.g. `edit 1 c/CS2103T t/core`
+**Delete** | `delete {module code}`<br> e.g. `delete c/CS2103T`
+**Completed Modules** | `list`
 **Find** | `find {module code}` <br> e.g. `find CS2103T`
 **Check MCs** | `checkmc`
-**Help** | `help`
+**Required Modules** | `required` 
+**Search module details** | `search {module code}` <br> e.g. `search CS2103T`
 **Exit** | `exit`

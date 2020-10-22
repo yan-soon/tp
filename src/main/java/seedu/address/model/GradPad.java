@@ -44,6 +44,7 @@ public class GradPad implements ReadOnlyGradPad {
      * {@code modules} must not contain duplicate modules.
      */
     public void setModules(List<Module> modules) {
+        assert modules != null;
         this.modules.setModules(modules);
     }
 
@@ -71,6 +72,7 @@ public class GradPad implements ReadOnlyGradPad {
      * The module must not already exist in the GradPad.
      */
     public void addModule(Module m) {
+        assert m != null;
         modules.add(m);
     }
 
@@ -90,6 +92,7 @@ public class GradPad implements ReadOnlyGradPad {
      * {@code key} must exist in the GradPad.
      */
     public void removeModule(Module key) {
+        assert key != null;
         modules.remove(key);
     }
 

@@ -1,11 +1,13 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
@@ -18,26 +20,27 @@ import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 import seedu.address.storage.JsonGradPadStorage;
 
-class ScienceCommandTest {
+public class ScienceCommandTest {
     public static final Path INVALID_PATH = Paths.get("data", "science.json");
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
     public static final Path VALID_PATH = Paths.get("src/main/data/sciencemodules.json");
     private Model model;
     private ScienceCommand scienceCommand = new ScienceCommand();
-    private ObservableList<Module> modules;
     private String moduleNames = "";
     public void setUp() throws IOException, DataConversionException {
+        StringBuilder modulesToAdd = new StringBuilder();
         JsonGradPadStorage storage = new JsonGradPadStorage(VALID_PATH);
-        modules = storage.readGradPad().get().getModuleList();
+        ObservableList<Module> modules = storage.readGradPad().get().getModuleList();
         for (Module module : modules) {
             String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-            moduleNames += "\n" + moduleToAdd;
+            modulesToAdd.append("\n").append(moduleToAdd);
         }
+        moduleNames += modulesToAdd;
     }
     @Test
-    public void validGetStorageTest() {
-        Optional<ReadOnlyGradPad> empty = scienceCommand.getStorage();
-        assertEquals(null, empty);
+    public void validGetScienceModulesTest() {
+        ObservableList<Module> empty = scienceCommand.getScienceModules();
+        assertNull(empty);
     }
     @Test
     public void nullModel_throwsNullPointerException() {
@@ -45,7 +48,7 @@ class ScienceCommandTest {
     }
     @Test
     public void nullPath_throwsNullPointerException() {
-        assertThrows(NullPointerException.class, () -> scienceCommand.setStorage(null));
+        assertThrows(NullPointerException.class, () -> scienceCommand.setScienceModules(null));
     }
     @Test
     public void validPathExecuteScienceCommand_success() throws IOException, DataConversionException {
@@ -56,17 +59,16 @@ class ScienceCommandTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        scienceCommand.setStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = scienceCommand.getStorage();
-        assertEquals(actual, Optional.empty());
+    public void setScienceModulesInvalidPath_throwsNoSuchElementException() {
+        assertThrows(NoSuchElementException.class, () -> scienceCommand.setScienceModules(INVALID_PATH));
     }
     @Test
-    public void setStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
+    public void setScienceModulesValidPath_returnsFilledOptional() throws IOException, DataConversionException {
         JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(VALID_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        scienceCommand.setStorage(VALID_PATH);
-        Optional<ReadOnlyGradPad> actual = scienceCommand.getStorage();
+        Optional<ReadOnlyGradPad> expectedGradPad = expectedJsonStorage.readGradPad();
+        ObservableList<Module> expected = expectedGradPad.get().getModuleList();
+        scienceCommand.setScienceModules(VALID_PATH);
+        ObservableList<Module> actual = scienceCommand.getScienceModules();
         assertEquals(actual, expected);
     }
 }

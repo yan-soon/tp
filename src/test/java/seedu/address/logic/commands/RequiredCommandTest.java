@@ -1,35 +1,41 @@
 package seedu.address.logic.commands;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.RequiredCommand.FOUNDATION_PATH;
-import static seedu.address.logic.commands.RequiredCommand.INTERNSHIP_PATH;
-import static seedu.address.logic.commands.RequiredCommand.ITPROF_PATH;
-import static seedu.address.logic.commands.RequiredCommand.MATHANDSCI_PATH;
-import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_FOUNDATION;
-import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_INTERN;
-import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_ITPROF;
-import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_MATHANDSCI;
-import static seedu.address.logic.commands.RequiredCommand.MESSAGE_SUCCESS_SCIENCE;
-import static seedu.address.logic.commands.RequiredCommand.SCIENCE_PATH;
-import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
+import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
+import seedu.address.model.module.Module;
 import seedu.address.storage.JsonGradPadStorage;
+import seedu.address.storage.RequiredCommandStorage;
 
 class RequiredCommandTest {
     private Model model;
     private RequiredCommand requiredCommand = new RequiredCommand();
+    private ObservableList<Module> requiredFoundation;
+    public void setUpRequiredFoundation() throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(FOUNDATION_PATH);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        requiredFoundation = gradPad.getModuleList();
+    }
     public void setUp() throws IOException, DataConversionException {
         String string = "src/test/data/RequiredCommandTest/compiledmodules.json";
         Path path = Paths.get(string);
@@ -38,119 +44,67 @@ class RequiredCommandTest {
         model = new ModelManager();
         model.setGradPad(gradPad);
     }
-
+    @Test
+    public void getLeftOverModules_validTest() {
+        String actual = requiredCommand.getLeftOverModules();
+        assertEquals("", actual);
+    }
+    @Test
+    public void getStorage_validTest() {
+        RequiredCommandStorage actual = requiredCommand.getStorage();
+        assertNull(actual);
+    }
+    @Test
+    public void setStorage_validTest() throws IOException, DataConversionException {
+        setUpRequiredFoundation();
+        requiredCommand.setStorage();
+        RequiredCommandStorage storage = requiredCommand.getStorage();
+        ObservableList<Module> actual = storage.getRequiredFoundation();
+        assertEquals(requiredFoundation, actual);
+    }
+    @Test
+    public void getCurrentModules_validTest() {
+        ObservableList<Module> actual = requiredCommand.getCurrentModules();
+        assertNull(actual);
+    }
+    @Test
+    public void setCurrentModules_validTest() {
+        requiredCommand.setCurrentModules(null);
+        assertNull(requiredCommand.getCurrentModules());
+    }
+    @Test
+    public void compareModules_validTest() throws IOException, DataConversionException {
+        setUpRequiredFoundation();
+        requiredCommand.setCurrentModules(requiredFoundation);
+        requiredCommand.compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+        String expected = MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n";
+        String actual = requiredCommand.getLeftOverModules();
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void compareScience_validTest() throws IOException, DataConversionException {
+        setUpRequiredFoundation();
+        requiredCommand.setCurrentModules(requiredFoundation);
+        requiredCommand.compareScience(requiredFoundation);
+        String actual = requiredCommand.getLeftOverModules();
+        String expected = MESSAGE_SUCCESS_SCIENCE + "\n" + "\n";
+        assertEquals(expected, actual);
+    }
+    @Test
+    public void compareInternship_validTest() throws IOException, DataConversionException {
+        setUpRequiredFoundation();
+        requiredCommand.setCurrentModules(requiredFoundation);
+        requiredCommand.compareInternship(requiredFoundation);
+        String actual = requiredCommand.getLeftOverModules();
+        String expected = MESSAGE_SUCCESS_INTERN;
+        assertEquals(expected, actual);
+    }
     @Test
     public void nullModel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> requiredCommand.execute(model));
     }
-
     @Test
-    public void validGetFoundationStorageTest() {
-        Optional<ReadOnlyGradPad> empty = requiredCommand.getFoundationStorage();
-        assertEquals(null, empty);
-    }
-
-    @Test
-    public void validGetITprofStorageTest() {
-        Optional<ReadOnlyGradPad> empty = requiredCommand.getITprofStorage();
-        assertEquals(null, empty);
-    }
-    @Test
-    public void validGetMathAndScienceStorageTest() {
-        Optional<ReadOnlyGradPad> empty = requiredCommand.getMathAndScienceStorage();
-        assertEquals(null, empty);
-    }
-
-    @Test
-    public void validGetScienceStorageTest() {
-        Optional<ReadOnlyGradPad> empty = requiredCommand.getScienceStorage();
-        assertEquals(null, empty);
-    }
-
-    @Test
-    public void validGetInternshipStorageTest() {
-        Optional<ReadOnlyGradPad> empty = requiredCommand.getInternshipStorage();
-        assertEquals(null, empty);
-    }
-
-    @Test
-    public void setFoundationStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(FOUNDATION_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        requiredCommand.setFoundationStorage(FOUNDATION_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getFoundationStorage();
-        assertEquals(actual, expected);
-    }
-    @Test
-    public void setITprofStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(ITPROF_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        requiredCommand.setITprofStorage(ITPROF_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getITprofStorage();
-        assertEquals(actual, expected);
-    }
-    @Test
-    public void setMathAndScienceStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(MATHANDSCI_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        requiredCommand.setMathAndScienceStorage(MATHANDSCI_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getMathAndScienceStorage();
-        assertEquals(actual, expected);
-    }
-    @Test
-    public void setScienceStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(SCIENCE_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        requiredCommand.setScienceStorage(SCIENCE_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getScienceStorage();
-        assertEquals(actual, expected);
-    }
-    @Test
-    public void setInternshipStorageValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(INTERNSHIP_PATH);
-        Optional<ReadOnlyGradPad> expected = expectedJsonStorage.readGradPad();
-        requiredCommand.setInternshipStorage(INTERNSHIP_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getInternshipStorage();
-        assertEquals(actual, expected);
-    }
-
-    @Test
-    public void setFoundationStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        requiredCommand.setFoundationStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getFoundationStorage();
-        assertEquals(actual, Optional.empty());
-    }
-
-    @Test
-    public void setITprofStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        requiredCommand.setITprofStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getITprofStorage();
-        assertEquals(actual, Optional.empty());
-    }
-
-    @Test
-    public void setMathAndScienceStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        requiredCommand.setMathAndScienceStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getMathAndScienceStorage();
-        assertEquals(actual, Optional.empty());
-    }
-
-    @Test
-    public void setScienceStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        requiredCommand.setScienceStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getScienceStorage();
-        assertEquals(actual, Optional.empty());
-    }
-
-    @Test
-    public void setInternshipStorageInvalidPath_returnsEmptyOptional() throws IOException, DataConversionException {
-        requiredCommand.setInternshipStorage(INVALID_PATH);
-        Optional<ReadOnlyGradPad> actual = requiredCommand.getInternshipStorage();
-        assertEquals(actual, Optional.empty());
-    }
-
-    @Test
-    public void validPathExecuteRequiredCommand_success() throws IOException, DataConversionException {
+    public void execute_validTest() throws IOException, DataConversionException {
         setUp();
         String expectedMessage = "" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
                 + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI

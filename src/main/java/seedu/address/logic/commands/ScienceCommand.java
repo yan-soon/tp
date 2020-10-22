@@ -1,10 +1,10 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.Optional;
 
 import javafx.collections.ObservableList;
@@ -18,25 +18,25 @@ public class ScienceCommand extends Command {
     public static final String COMMAND_WORD = "science";
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
     public static final String MESSAGE_FAILURE = "There was an error loading the required modules :(";
-    private Optional<ReadOnlyGradPad> storage;
-    private String moduleNames = "";
+    private ObservableList<Module> scienceModules;
 
     /**
      * Returns the storage attribute of a given ScienceCommand object.
      * @return storage attribute of type Optional<ReadOnlyGradPad/>.
      */
-    public Optional<ReadOnlyGradPad> getStorage() {
-        return storage;
+    public ObservableList<Module> getScienceModules() {
+        return scienceModules;
     }
 
     /**
      * Loads the storage attribute with Science Modules.
-     * @throws IOException
-     * @throws DataConversionException
+     * @throws IOException When the path in invalid.
+     * @throws DataConversionException When there is an error converting from the JSON file.
      */
-    public void setStorage(Path path) throws IOException, DataConversionException {
+    public void setScienceModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        this.storage = storage.readGradPad();
+        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
+        scienceModules = gradPad.orElseThrow().getModuleList();
     }
 
     /**
@@ -44,24 +44,20 @@ public class ScienceCommand extends Command {
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult Object with the relevant Science Modules or Failure Message if modules
      * are absent.
-     * @throws IOException
-     * @throws DataConversionException
      */
     @Override
-    public CommandResult execute(Model model) throws IOException, DataConversionException {
-        requireNonNull(model);
-        Path sciencePath = Paths.get("src/main/data/sciencemodules.json");
-        setStorage(sciencePath);
-        ObservableList<Module> modules;
-        if (storage.isPresent()) {
-            modules = storage.get().getModuleList();
-        } else {
+    public CommandResult execute(Model model) {
+        try {
+            requireNonNull(model);
+            setScienceModules(SCIENCE_PATH);
+            StringBuilder modulesToAdd = new StringBuilder();
+            for (Module module : scienceModules) {
+                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+                modulesToAdd.append("\n").append(moduleToAdd);
+            }
+            return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
+        } catch (DataConversionException | IOException e) {
             return new CommandResult(MESSAGE_FAILURE);
         }
-        for (Module module : modules) {
-            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-            moduleNames += "\n" + moduleToAdd;
-        }
-        return new CommandResult(MESSAGE_SUCCESS + moduleNames);
     }
 }

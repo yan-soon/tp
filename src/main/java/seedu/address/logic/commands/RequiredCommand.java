@@ -1,219 +1,124 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
+import static seedu.address.storage.RequiredCommandMessages.INTERNSHIP_PATH;
+import static seedu.address.storage.RequiredCommandMessages.ITPROF_PATH;
+import static seedu.address.storage.RequiredCommandMessages.MATHANDSCI_PATH;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_ITPROF;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
+import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
-import seedu.address.storage.JsonGradPadStorage;
+import seedu.address.storage.RequiredCommandStorage;
 
 public class RequiredCommand extends Command {
     public static final String COMMAND_WORD = "required";
-    public static final String MESSAGE_FOUNDATION = "These are the Foundation Modules you have yet to take: ";
-    public static final String MESSAGE_FAILURE_FOUNDATION = "There was an error loading the Foundation Modules :(";
-    public static final String MESSAGE_FAILURE_SCI = "There was an error loading the Science Modules :(";
-    public static final String MESSAGE_SCIENCE = "You have not completed your Science Module requirement,"
-            + " use the 'science' command to view the available modules.";
-    public static final String MESSAGE_FAILURE_INTERN = "There was an error loading the Internship Modules :(";
-    public static final String MESSAGE_INTERN_1 = "You have yet to complete your 12MCs worth of Internship Modules.";
-    public static final String MESSAGE_INTERN_2 = "These are the Internship Modules you can take:";
-    public static final String MESSAGE_SUCCESS_FOUNDATION = "You have completed all your Foundation Modules!";
-    public static final String MESSAGE_SUCCESS_SCIENCE = "You have completed your Science Module Requirement!";
-    public static final String MESSAGE_SUCCESS_INTERN = "You have completed your Internship Module Requirement!";
-    public static final String MESSAGE_ITPROF = "These are the IT Professionalism Modules you have yet to take:";
-    public static final String MESSAGE_SUCCESS_ITPROF = "You have completed your "
-            + "IT Professionalism Module Requirement!";
-    public static final String MESSAGE_MATHANDSCI = "These are the Math and Science Modules you have yet to take:";
-    public static final String MESSAGE_SUCCESS_MATHANDSCI = "You have completed your "
-            + "Math and Science Module Requirement!";
-    public static final String MESSAGE_FAILURE_ITPROF = "There was an error loading the IT Professionalism Modules :(";
-    public static final String MESSAGE_FAILURE_MATHANDSCI = "There was an error loading"
-            + " the Math and Science Modules :(";
-    public static final Path FOUNDATION_PATH = Paths.get("src/main/data/foundationmodules.json");
-    public static final Path INTERNSHIP_PATH = Paths.get("src/main/data/industrialexperience.json");
-    public static final Path ITPROF_PATH = Paths.get("src/main/data/ITProfessionalism.json");
-    public static final Path MATHANDSCI_PATH = Paths.get("src/main/data/mathandsciencemodules.json");
-    public static final Path SCIENCE_PATH = Paths.get("src/main/data/sciencemodules.json");
 
-    private ObservableList<Module> modules;
+    private ObservableList<Module> currentModules;
     private String leftOverModules = "";
-    private Optional<ReadOnlyGradPad> foundationStorage;
-    private ObservableList<Module> requiredFoundation;
-    private Optional<ReadOnlyGradPad> scienceStorage;
-    private ObservableList<Module> requiredScience;
-    private Optional<ReadOnlyGradPad> internshipStorage;
-    private ObservableList<Module> requiredInternship;
-    private Optional<ReadOnlyGradPad> itProfStorage;
-    private ObservableList<Module> requiredITprof;
-    private Optional<ReadOnlyGradPad> mathAndScienceStorage;
-    private ObservableList<Module> requiredMathAndScience;
+    private RequiredCommandStorage storage;
 
     /**
-     * Returns foundationStorage attribute of RequiredCommand object.
-     * @return foundationStorage attribute of type Optional<ReadOnlyGradPad/>.
+     * Retrieves the leftOverModules attribute of a RequiredCommand object.
+     * @return leftOverModules of type String.
      */
-    public Optional<ReadOnlyGradPad> getFoundationStorage() {
-        return foundationStorage;
-    }
-    /**
-     * Loads the foundationStorage attribute with Foundation Modules.
-     * @throws IOException
-     * @throws DataConversionException
-     */
-    public void setFoundationStorage(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        this.foundationStorage = storage.readGradPad();
+    public String getLeftOverModules() {
+        return leftOverModules;
     }
 
     /**
-     * Cross references the user's current list of Modules and marks out
-     * any undone Foundation Modules.
+     * Retrieves the attribute storage of a RequiredCommand object.
+     * @return storage attribute of type RequiredCommandStorage.
      */
-    public void compareFoundation() {
-        boolean foundationClear = true;
-        String modulesToAdd = "";
-        for (Module module : requiredFoundation) {
+    public RequiredCommandStorage getStorage() {
+        return storage;
+    }
+
+    /**
+     * Sets up the storage attribute with all the relevant modules from various fields.
+     * @throws IOException When path is invalid.
+     * @throws DataConversionException When there is an error converting from the JSON file.
+     */
+    public void setStorage() throws IOException, DataConversionException {
+        storage = new RequiredCommandStorage();
+        storage.setRequiredFoundation(FOUNDATION_PATH);
+        storage.setRequiredITprof(ITPROF_PATH);
+        storage.setRequiredMathAndScience(MATHANDSCI_PATH);
+        storage.setRequiredScience(SCIENCE_PATH);
+        storage.setRequiredInternship(INTERNSHIP_PATH);
+    }
+
+    /**
+     * Retrieves the currentModules attribute of an Required Command object.
+     * @return currentModules attribute of type ObservableList<Module/>.
+     */
+    public ObservableList<Module> getCurrentModules() {
+        return currentModules;
+    }
+
+    /**
+     * Sets the argument modules as the attribute currentModules.
+     * @param modules target argument of type ObservableList<Module/>.
+     */
+    public void setCurrentModules(ObservableList<Module> modules) {
+        currentModules = modules;
+    }
+
+    /**
+     * Cross references the user's current list of Modules against the given
+     * modules argument and marks out any undone Modules. Displays a successMessage
+     * if all modules are done, and a failMessage if there are left over modules.
+     * @param modules List of Modules of a certain category (Eg. Foundation, IT Professsionalism)
+     * @param failMessage Fail message for particular category of Modules.
+     * @param successMessage Success message for particular category of Modules.
+     */
+    public void compareModules(ObservableList<Module> modules, String failMessage, String successMessage) {
+        boolean areModulesCleared = true;
+        StringBuilder modulesToAdd = new StringBuilder();
+        for (Module module : modules) {
             boolean add = true;
-            for (Module mod : modules) {
+            for (Module mod : currentModules) {
                 if (module.isSameModule(mod)) {
                     add = false;
                     break;
                 }
             } if (add) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-                modulesToAdd += "\n" + moduleToAdd;
-                foundationClear = false;
+                modulesToAdd.append("\n").append(moduleToAdd);
+                areModulesCleared = false;
             }
-        } if (foundationClear) {
-            leftOverModules += MESSAGE_SUCCESS_FOUNDATION + "\n";
+        } if (areModulesCleared) {
+            leftOverModules += successMessage + "\n";
         } else {
-            leftOverModules += MESSAGE_FOUNDATION + modulesToAdd + "\n";
+            leftOverModules += failMessage + modulesToAdd + "\n";
         }
         leftOverModules += "\n";
-    }
-
-    /**
-     * Returns ITProfStorage attribute of RequiredCommand object.
-     * @return ITProfStorage attribute of type Optional<ReadOnlyGradPad/>.
-     */
-    public Optional<ReadOnlyGradPad> getITprofStorage() {
-        return itProfStorage;
-    }
-    /**
-     * Loads the ITprofStorage attribute with IT Professionalism Modules.
-     * @throws IOException
-     * @throws DataConversionException
-     */
-    public void setITprofStorage(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        itProfStorage = storage.readGradPad();
-    }
-
-    /**
-     * Cross references the user's current list of Modules and marks out
-     * any undone IT Professionalism Modules.
-     */
-    public void compareITprof() {
-        boolean itProfClear = true;
-        String modulesToAdd = "";
-        for (Module module : requiredITprof) {
-            boolean add = true;
-            for (Module mod : modules) {
-                if (module.isSameModule(mod)) {
-                    add = false;
-                    break;
-                }
-            } if (add) {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-                modulesToAdd += "\n" + moduleToAdd;
-                itProfClear = false;
-            }
-        } if (itProfClear) {
-            leftOverModules += MESSAGE_SUCCESS_ITPROF + "\n";
-        } else {
-            leftOverModules += MESSAGE_ITPROF + modulesToAdd + "\n";
-        }
-        leftOverModules += "\n";
-    }
-
-    /**
-     * Returns mathAndScienceStorage attribute of RequiredCommand object.
-     * @return mathAndScienceStorage attribute of type Optional<ReadOnlyGradPad/>.
-     */
-    public Optional<ReadOnlyGradPad> getMathAndScienceStorage() {
-        return mathAndScienceStorage;
-    }
-
-    /**
-     * Loads the mathAndScienceStorage attribute with Math and Science Modules.
-     * @throws IOException
-     * @throws DataConversionException
-     */
-    public void setMathAndScienceStorage(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        this.mathAndScienceStorage = storage.readGradPad();
-    }
-
-    /**
-     * Cross references the user's current list of Modules and marks out
-     * any undone Math and Science Modules.
-     */
-    public void compareMathAndScience() {
-        boolean mathAndScienceClear = true;
-        String modulesToAdd = "";
-        for (Module module : requiredMathAndScience) {
-            boolean add = true;
-            for (Module mod : modules) {
-                if (module.isSameModule(mod)) {
-                    add = false;
-                    break;
-                }
-            } if (add) {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-                modulesToAdd += "\n" + moduleToAdd;
-                mathAndScienceClear = false;
-            }
-        } if (mathAndScienceClear) {
-            leftOverModules += MESSAGE_SUCCESS_MATHANDSCI + "\n";
-        } else {
-            leftOverModules += MESSAGE_MATHANDSCI + modulesToAdd + "\n";
-        }
-        leftOverModules += "\n";
-    }
-
-    /**
-     * Returns scienceStorage attribute of RequiredCommand object.
-     * @return scienceStorage attribute of type Optional<ReadOnlyGradPad/>.
-     */
-    public Optional<ReadOnlyGradPad> getScienceStorage() {
-        return scienceStorage;
-    }
-
-    /**
-     * Loads the scienceStorage attribute with Science Modules.
-     * @throws IOException
-     * @throws DataConversionException
-     */
-    public void setScienceStorage(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        scienceStorage = storage.readGradPad();
     }
 
     /**
      * Cross references the user's current list of Modules and marks out
      * any undone Science Modules.
      */
-    public void compareScience() {
+    public void compareScience(ObservableList<Module> requiredScience) {
         boolean add = true;
         for (Module module : requiredScience) {
-            for (Module mod : modules) {
+            for (Module mod : currentModules) {
                 if (module.isSameModule(mod)) {
                     add = false;
                     break;
@@ -230,34 +135,16 @@ public class RequiredCommand extends Command {
     }
 
     /**
-     * Returns internshipStorage attribute of RequiredCommand object.
-     * @return internshipStorage attribute of type Optional<ReadOnlyGradPad/>.
-     */
-    public Optional<ReadOnlyGradPad> getInternshipStorage() {
-        return internshipStorage;
-    }
-
-    /**
-     * Loads the internshipStorage attribute with Internship Modules.
-     * @throws IOException
-     * @throws DataConversionException
-     */
-    public void setInternshipStorage(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        internshipStorage = storage.readGradPad();
-    }
-
-    /**
      * Cross references the user's current list of Modules and marks out
      * any undone Internship Modules. Also calculates current MC score
      * achieved from Internship Modules.
      */
-    public void compareInternship() {
+    public void compareInternship(ObservableList<Module> requiredInternship) {
         int modularScore = 0;
-        String leftOverInternship = "";
+        StringBuilder leftOverInternship = new StringBuilder();
         for (Module module : requiredInternship) {
             boolean add = true;
-            for (Module mod : modules) {
+            for (Module mod : currentModules) {
                 if (module.isSameModule(mod)) {
                     int modularCredits = Integer.parseInt(mod.getModularCredits().toString());
                     modularScore += modularCredits;
@@ -266,7 +153,7 @@ public class RequiredCommand extends Command {
                 }
             } if (add) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-                leftOverInternship += "\n" + moduleToAdd;
+                leftOverInternship.append("\n").append(moduleToAdd);
             }
         } if (modularScore < 12) {
             String modScore = " You are currently at " + modularScore + " MCs. ";
@@ -275,45 +162,31 @@ public class RequiredCommand extends Command {
             leftOverModules += MESSAGE_SUCCESS_INTERN;
         }
     }
+
+    /**
+     * Sets up the reference modules and the current modules in gradPad and compares all the modules.
+     * @param model {@code Model} which the command should operate on.
+     * @return a CommandResult displaying all the undone modules.
+     */
     @Override
-    public CommandResult execute(Model model) throws IOException, DataConversionException {
-        requireNonNull(model);
-        modules = model.getGradPad().getModuleList();
-        setFoundationStorage(FOUNDATION_PATH);
-        setITprofStorage(ITPROF_PATH);
-        setMathAndScienceStorage(MATHANDSCI_PATH);
-        setScienceStorage(SCIENCE_PATH);
-        setInternshipStorage(INTERNSHIP_PATH);
-        if (foundationStorage.isPresent()) {
-            requiredFoundation = foundationStorage.get().getModuleList();
-        } else {
-            return new CommandResult(MESSAGE_FAILURE_FOUNDATION);
+    public CommandResult execute(Model model) {
+        try {
+            requireNonNull(model);
+            currentModules = model.getGradPad().getModuleList();
+            setStorage();
+            ObservableList<Module> requiredFoundation = storage.getRequiredFoundation();
+            ObservableList<Module> requiredITprof = storage.getRequiredITprof();
+            ObservableList<Module> requiredMathAndScience = storage.getRequiredMathAndScience();
+            ObservableList<Module> requiredScience = storage.getRequiredScience();
+            ObservableList<Module> requiredInternship = storage.getRequiredInternship();
+            compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+            compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
+            compareModules(requiredMathAndScience, MESSAGE_MATHANDSCI, MESSAGE_SUCCESS_MATHANDSCI);
+            compareScience(requiredScience);
+            compareInternship(requiredInternship);
+            return new CommandResult(leftOverModules);
+        } catch (DataConversionException | IOException e) {
+            return new CommandResult(MESSAGE_FAILURE);
         }
-        compareFoundation();
-        if (itProfStorage.isPresent()) {
-            requiredITprof = itProfStorage.get().getModuleList();
-        } else {
-            return new CommandResult(MESSAGE_FAILURE_ITPROF);
-        }
-        compareITprof();
-        if (mathAndScienceStorage.isPresent()) {
-            requiredMathAndScience = mathAndScienceStorage.get().getModuleList();
-        } else {
-            return new CommandResult(MESSAGE_FAILURE_MATHANDSCI);
-        }
-        compareMathAndScience();
-        if (scienceStorage.isPresent()) {
-            requiredScience = scienceStorage.get().getModuleList();
-        } else {
-            return new CommandResult(MESSAGE_FAILURE_SCI);
-        }
-        compareScience();
-        if (internshipStorage.isPresent()) {
-            requiredInternship = internshipStorage.get().getModuleList();
-        } else {
-            return new CommandResult(MESSAGE_FAILURE_INTERN);
-        }
-        compareInternship();
-        return new CommandResult(leftOverModules);
     }
 }

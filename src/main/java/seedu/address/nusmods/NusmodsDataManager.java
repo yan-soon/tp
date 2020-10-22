@@ -19,7 +19,10 @@ public class NusmodsDataManager implements NusmodsData {
     private final String filePath;
     private final DataFetcher dataFetcher;
 
-    NusmodsDataManager() {
+    /**
+     * Default public constructor to create an NusmodsDataManager object.
+     */
+    public NusmodsDataManager() {
         dataFetcher = new DataFetcherManager();
         filePath = DataFetcher.DATA_FILE_PATH;
     }

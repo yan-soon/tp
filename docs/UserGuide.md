@@ -52,7 +52,7 @@ navigation of modules.
  Features                         |    Description 
  ----------------------------------------|------------
  View Help                               | Allows user to view a list of all possible commands
- Add a Module                            | Allows user to add any Module of choice into the `Completed Modules` section for tracking purposes. 
+ Add a Module                            | Allows user to add any Module of choice into the `Completed Modules` section for tracking purposes
  View Added Modules                      | Allows user to check all their added modules in `Completed Modules`
  Find Modules from Completed Modules     | Allows user to look for modules in `Completed Modules` using keywords
  Delete a Module                         | Allows user to delete unwanted modules in `Completed Modules`

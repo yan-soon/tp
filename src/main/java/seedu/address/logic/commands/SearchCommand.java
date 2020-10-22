@@ -21,7 +21,7 @@ public class SearchCommand extends Command {
             + "Parameters: MODULE CODE\n"
             + "Example: " + COMMAND_WORD + " CS2103T";
 
-    public static final String MESSAGE_SUCCESS = "Search result for: %1$s \n"
+    public static final String MESSAGE_SUCCESS = "Module Info for: %1$s \n"
             + "Module Title: %2$s \n\n" + "Module Description: \n%3$s \n\n"
             + "Preclusion: %4$s\n\n" + "Prerequisite: %5$s\n";
 

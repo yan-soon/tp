@@ -134,13 +134,13 @@ public class StringUtilTest {
     @Test
     public void ignoreCase_emptyWord_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "CharSequence parameter cannot be empty", ()
-                -> StringUtil.ignoreCase("  "));
+            -> StringUtil.ignoreCase("  "));
     }
 
     @Test
     public void ignoreCase_multipleWords_throwsIllegalArgumentException() {
         assertThrows(IllegalArgumentException.class, "CharSequence parameter should be a single word", ()
-                -> StringUtil.ignoreCase("aaa BBB"));
+            -> StringUtil.ignoreCase("aaa BBB"));
     }
 
     @Test

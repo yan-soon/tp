@@ -39,6 +39,19 @@ public class StringUtil {
     }
 
     /**
+     * Ensures that the charSequence is in the correct String format as the module code.
+     * @param charSequence cannot be null, cannot be empty, must be a single word.
+     * @return the upper case of the module code.
+     */
+    public static String ignoreCase(String charSequence) {
+        String preppedCharSequence = charSequence.trim().toUpperCase();
+        checkArgument(!preppedCharSequence.isEmpty(), "CharSequence parameter cannot be empty");
+        checkArgument(preppedCharSequence.split("\\s+").length == 1, "CharSequence parameter should be a "
+                + "single word");
+        return preppedCharSequence;
+    }
+
+    /**
      * Returns a detailed message of the t, including the stack trace.
      */
     public static String getDetails(Throwable t) {

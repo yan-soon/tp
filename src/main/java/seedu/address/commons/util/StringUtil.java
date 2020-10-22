@@ -44,6 +44,7 @@ public class StringUtil {
      * @return the upper case of the module code.
      */
     public static String ignoreCase(String charSequence) {
+        requireNonNull(charSequence);
         String preppedCharSequence = charSequence.trim().toUpperCase();
         checkArgument(!preppedCharSequence.isEmpty(), "CharSequence parameter cannot be empty");
         checkArgument(preppedCharSequence.split("\\s+").length == 1, "CharSequence parameter should be a "

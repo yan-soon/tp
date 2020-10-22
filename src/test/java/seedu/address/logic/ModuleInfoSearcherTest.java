@@ -8,6 +8,4 @@ class ModuleInfoSearcherTest {
 
     private NusmodsDataManager nusmodsDataManager = new NusmodsDataManager();
 
-
-
 }

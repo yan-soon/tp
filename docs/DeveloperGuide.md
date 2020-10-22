@@ -44,11 +44,11 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 <div markdown="span" class="alert alert-primary">
 
-:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/se-edu/addressbook-level3/tree/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
+:bulb: **Tip:** The `.puml` files used to create diagrams in this document can be found in the [diagrams](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/docs/diagrams/) folder. Refer to the [_PlantUML Tutorial_ at se-edu/guides](https://se-education.org/guides/tutorials/plantUml.html) to learn how to create and edit diagrams.
 
 </div>
 
-**`Main`** has two classes called [`Main`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
+**`Main`** has two classes called [`Main`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/Main.java) and [`MainApp`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/MainApp.java). It is responsible for,
 * At app launch: Initializes the components in the correct sequence, and connects them up with each other.
 * At shut down: Shuts down the components and invokes cleanup methods where necessary.
 
@@ -100,7 +100,7 @@ The `UI` component,
 ![Structure of the Logic Component](images/LogicClassDiagram.png)
 
 **API** :
-[`Logic.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/logic/Logic.java)
+[`Logic.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/logic/Logic.java)
 
 1. `Logic` uses the `GradPadParser` class to parse the user command.
 1. This results in a `Command` object which is executed by the `LogicManager`.
@@ -139,7 +139,7 @@ The `Model`,
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
 
-**API** : [`Storage.java`](https://github.com/se-edu/addressbook-level3/tree/master/src/main/java/seedu/address/storage/Storage.java)
+**API** : [`Storage.java`](https://github.com/AY2021S1-CS2103T-T09-1/tp/blob/master/src/main/java/seedu/address/storage/Storage.java)
 
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
@@ -291,7 +291,7 @@ class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.
 
 7. `LogicManager` executes the newly created `DeleteCommand`.
 
-8. The target module to be deleted is retrieved, if it exists in the Current Modules of GradPad. 
+8. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
  
 9. The `Model` is then updated by removing the target module.
 
@@ -472,37 +472,37 @@ object.
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedAddressBook`. It extends `AddressBook` with an undo/redo history, stored internally as an `addressBookStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history, stored internally as an `gradPadStateList` and `currentStatePointer`. Additionally, it implements the following operations:
 
-* `VersionedAddressBook#commit()` — Saves the current address book state in its history.
-* `VersionedAddressBook#undo()` — Restores the previous address book state from its history.
-* `VersionedAddressBook#redo()` — Restores a previously undone address book state from its history.
+* `VersionedGradPad#commit()` — Saves the current GradPad state in its history.
+* `VersionedGradPad#undo()` — Restores the previous GradPad state from its history.
+* `VersionedGradPad#redo()` — Restores a previously undone GradPad state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitAddressBook()`, `Model#undoAddressBook()` and `Model#redoAddressBook()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitGradPad()`, `Model#undoGradPad()` and `Model#redoGradPad()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedAddressBook` will be initialized with the initial address book state, and the `currentStatePointer` pointing to that single address book state.
+Step 1. The user launches the application for the first time. The `VersionedGradPad` will be initialized with the initial GradPad state, and the `currentStatePointer` pointing to that single GradPad state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete 5` command to delete the 5th person in the address book. The `delete` command calls `Model#commitAddressBook()`, causing the modified state of the address book after the `delete 5` command executes to be saved in the `addressBookStateList`, and the `currentStatePointer` is shifted to the newly inserted address book state.
+Step 2. The user executes `delete c/CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The `delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete c/CS2103T` command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted GradPad state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add n/David …​` to add a new person. The `add` command also calls `Model#commitAddressBook()`, causing another modified address book state to be saved into the `addressBookStateList`.
+Step 3. The user executes `add c/CS2100 …​` to add a new module. The `add` command also calls `Model#commitGradPad()`, causing another modified GradPad state to be saved into the `gradPadStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitAddressBook()`, so the address book state will not be saved into the `addressBookStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitGradPad()`, so the GradPad state will not be saved into the `gradPadStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the person was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoAddressBook()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous address book state, and restores the address book to that state.
+Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGradPad()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous GradPad state, and restores the GradPad to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial AddressBook state, then there are no previous AddressBook states to restore. The `undo` command uses `Model#canUndoAddressBook()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial GradPad state, then there are no previous GradPad states to restore. The `undo` command uses `Model#canUndoGradPad()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -515,17 +515,17 @@ The following sequence diagram shows how the undo operation works:
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoAddressBook()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the address book to that state.
+The `redo` command does the opposite — it calls `Model#redoGradPad()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the GradPad to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `addressBookStateList.size() - 1`, pointing to the latest address book state, then there are no undone AddressBook states to restore. The `redo` command uses `Model#canRedoAddressBook()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `gradPadStateList.size() - 1`, pointing to the latest GradPad state, then there are no undone GradPad states to restore. The `redo` command uses `Model#canRedoGradPad()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the address book, such as `list`, will usually not call `Model#commitAddressBook()`, `Model#undoAddressBook()` or `Model#redoAddressBook()`. Thus, the `addressBookStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the GradPad, such as `list`, will usually not call `Model#commitGradPad()`, `Model#undoGradPad()` or `Model#redoGradPad()`. Thus, the `gradPadStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitAddressBook()`. Since the `currentStatePointer` is not pointing at the end of the `addressBookStateList`, all address book states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add n/David …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitGradPad()`. Since the `currentStatePointer` is not pointing at the end of the `gradPadStateList`, all GradPad states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add c/CS2100 …​` command. This is the behavior that most modern desktop applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -537,13 +537,13 @@ The following activity diagram summarizes what happens when a user executes a ne
 
 ##### Aspect: How undo & redo executes
 
-* **Alternative 1 (current choice):** Saves the entire address book.
+* **Alternative 1 (current choice):** Saves the entire GradPad.
   * Pros: Easy to implement.
   * Cons: May have performance issues in terms of memory usage.
 
 * **Alternative 2:** Individual command knows how to undo/redo by
   itself.
-  * Pros: Will use less memory (e.g. for `delete`, just save the person being deleted).
+  * Pros: Will use less memory (e.g. for `delete`, just save the module being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
 _{more aspects and alternatives to be added}_
@@ -595,49 +595,47 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: Delete a Module**
+**Use case: UC01 - Delete a Module from `Completed Modules`**
 
 **MSS**
 
-1.  User requests to list Modules
-2.  GradPad shows a list of Modules
-3.  User requests to delete a specific Module in the list
-4.  GradPad deletes the Module
+1.  User requests to delete a specific Module in the `Completed Modules`
+2.  GradPad deletes the module
+3.  GradPad displays the deleted module onto the `Command Line Display`
 
     Use case ends.
 
 **Extensions**
 
-* 2a. The list is empty.
+* 1a. The module does not exist in `Completed Modules`.
 
   Use case ends.
 
-* 3a. The given index is invalid.
+* 2a. The given module code is invalid.
 
-    * 3a1. GradPad shows an error message.
+    * 2a1. GradPad shows an error message.
 
-      Use case resumes at step 2.
+      Use case resumes at step 1.
       
-**Use case : Add a Module**
+**Use case : UC02 - Add a Module into `Completed Modules`**
 
 **MSS**
 
-1. User requests to list Modules
-2. GradPad shows a list of Modules
-3. User requests to add a specific Module into the list
-4. GradPad adds the module
+1. User requests to add a module into the `Completed Modules`
+2. GradPad adds the module into `Completed Modules`
+3. GradPad displays the module added onto the `Command Line Display`
 
     Use case ends.
     
 **Extensions**
   
-* 3a. The given module is invalid.
+* 1a. The input command format is invalid.
 
-    * 3a1. GradPad shows an error message.
+    * 1a1. GradPad shows an error message.
     
-      Use case resumes at step 2.
+      Use case ends.
       
-**Use case : View help**
+**Use case : UC03 - View help**
 
 **MSS**
 
@@ -646,16 +644,75 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case : view modules**
+**Use case : UC04 - View all current modules**
 
 **MSS**
 
-1. User requests to view current list of Modules
-2. GradPad shows current list of Modules
+1. User requests to view list of modules in `Completed Modules`
+2. GradPad shows all modules added into `Completed Modules`
 
     Use case ends.
     
-**Use case : exit GradPad**
+**Use case: UC05 - Edit a Module in `Completed Modules`**
+
+1. User requests to list all modules in `Completed Modules`
+2. GradPad shows the list of modules in `Completed Modules`
+3. User requests to edit a module in `Completed Modules`
+4. Module is replaced with updated fields
+    
+    Use case ends.
+
+**Extensions**
+
+* 2a. The list of modules in `Completed Modules` is empty.
+
+    Use case ends.
+    
+* 3a. The given index is invalid.
+    
+    * 3a1. GradPad shows an error message.
+    
+        Use case resumes at step 2.
+        
+* 3b. The input fields format is invalid.
+    
+    * 3b1. GradPad shows an error message.
+        
+        Use case resumes at step 2.
+
+**Use case : UC06 - View required modules in CS curriculum**
+
+**MSS**
+
+1. User requests to view all required modules in CS curriculum
+2. GradPad displays the required modules in CS curriculum onto the `Command Line Display`
+
+    Use case ends.
+  
+**Use case : UC07 - Search for module details**
+
+**MSS**
+
+1. User requests to search for a module in the CS curriculum.
+2. GradPad displays the module details in the `Command Line Display`
+
+    Use case ends.
+    
+**Extensions**
+  
+* 1a. The input command format is invalid.
+
+    * 1a1. GradPad shows an error message.
+    
+      Use case ends.  
+
+* 2a. The module searched does not exist in the required module list.
+
+    * 2a1. GradPad shows an error message.
+        
+        Use case ends.
+        
+**Use case : UC08 - exit GradPad**
 
 **MSS**
 

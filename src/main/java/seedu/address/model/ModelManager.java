@@ -97,11 +97,13 @@ public class ModelManager implements Model {
 
     @Override
     public void deleteModule(Module target) {
+        assert target != null;
         gradPad.removeModule(target);
     }
 
     @Override
     public void addModule(Module module) {
+        assert module != null;
         gradPad.addModule(module);
         updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
     }

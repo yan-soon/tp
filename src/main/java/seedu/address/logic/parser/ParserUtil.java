@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,21 @@ public class ParserUtil {
             throw new ParseException(MESSAGE_INVALID_INDEX);
         }
         return Index.fromOneBased(Integer.parseInt(trimmedIndex));
+    }
+
+    /**
+     * Parses a {@code String ModuleTitle} into a {@code ModuleTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleTitle} is invalid.
+     */
+    public static ModuleTitle parseModuleTitle(String moduleTitle) throws ParseException {
+        requireNonNull(moduleTitle);
+        String trimmedModuleTitle = moduleTitle.trim();
+        if (!ModuleTitle.isValidModuleTitle(trimmedModuleTitle)) {
+            throw new ParseException(ModuleTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleTitle(trimmedModuleTitle);
     }
 
     /**

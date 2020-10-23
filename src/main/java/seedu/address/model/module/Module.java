@@ -17,6 +17,7 @@ public class Module {
 
     // Identity fields
     private final ModuleCode code;
+    private final ModuleTitle title;
     private final ModularCredits credits;
 
     // Data fields
@@ -25,15 +26,20 @@ public class Module {
     /**
      * Every field must be present and not null.
      */
-    public Module(ModuleCode code, ModularCredits credits, Set<Tag> tags) {
-        requireAllNonNull(code, credits, tags);
+    public Module(ModuleCode code, ModuleTitle title, ModularCredits credits, Set<Tag> tags) {
+        requireAllNonNull(code, title, credits, tags);
         this.code = code;
+        this.title = title;
         this.credits = credits;
         this.tags.addAll(tags);
     }
 
     public ModuleCode getModuleCode() {
         return code;
+    }
+
+    public ModuleTitle getModuleTitle() {
+        return title;
     }
 
     public ModularCredits getModularCredits() {
@@ -59,6 +65,7 @@ public class Module {
 
         return otherModule != null
                 && otherModule.getModuleCode().equals(getModuleCode())
+                && otherModule.getModuleTitle().equals(getModuleTitle())
                 && (otherModule.getModularCredits().equals(getModularCredits()));
     }
 
@@ -79,24 +86,27 @@ public class Module {
         Module otherModule = (Module) other;
         return otherModule.getModularCredits().equals(getModularCredits())
                 && otherModule.getModuleCode().equals(getModuleCode())
+                && otherModule.getModuleTitle().equals(getModuleTitle())
                 && otherModule.getTags().equals(getTags());
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(code, credits, tags);
+        return Objects.hash(code, title, credits, tags);
     }
 
     @Override
     public String toString() {
         final StringBuilder builder = new StringBuilder();
-        builder.append(getModuleCode())
-                .append(" ModularCredits: ")
+        builder.append("Module Code: ")
+                .append(getModuleCode())
+                .append("\nModule Title: ")
+                .append(getModuleTitle())
+                .append("\nModular Credits: ")
                 .append(getModularCredits())
-                .append(" Tags: ");
+                .append("\nTags: ");
         getTags().forEach(builder::append);
         return builder.toString();
     }
-
 }

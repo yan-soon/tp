@@ -1,54 +1,67 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CREDITS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
-import java.util.stream.Stream;
 
+import seedu.address.commons.util.StringUtil;
+import seedu.address.logic.ModuleInfoSearcher;
+import seedu.address.logic.ValidNusmodsModuleCodeChecker;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
+import seedu.address.nusmods.ModuleInfo;
 
 /**
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    public static final String MESSAGE_INVALID_MODULE = "There is no such module in the CS curriculum!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
      * and returns an AddCommand object for execution.
-     * @throws ParseException if the user input does not conform the expected format
+     *
+     * @throws ParseException if the user input does not conform the expected format or if the module does
+     * not exist
      */
     public AddCommand parse(String args) throws ParseException {
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_CREDITS, PREFIX_TAG);
+                ArgumentTokenizer.tokenize(args, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_CODE, PREFIX_CREDITS)
-                || !argMultimap.getPreamble().isEmpty()) {
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
 
-        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
-        ModularCredits credits = ParserUtil.parseModularCredits(argMultimap.getValue(PREFIX_CREDITS).get());
+        String moduleCodeText = StringUtil.ignoreCase(argMultimap.getPreamble());
+        ValidNusmodsModuleCodeChecker codeChecker = new ValidNusmodsModuleCodeChecker();
+        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
+        ModuleInfo moduleInfo;
+
+        try {
+            if (codeChecker.isValidNusmodsModuleCode(moduleCodeText)) {
+                moduleInfo = moduleInfoSearcher.searchModule(moduleCodeText);
+            } else {
+                throw new CommandException(MESSAGE_INVALID_MODULE);
+            }
+        } catch (CommandException e) {
+            throw new ParseException(e.getMessage());
+        }
+
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleInfo.getModuleCode());
+        ModuleTitle moduleTitle = ParserUtil.parseModuleTitle(moduleInfo.getTitle());
+        ModularCredits modularCredits = ParserUtil.parseModularCredits(moduleInfo.getModuleCredit());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
 
-        Module module = new Module(code, credits, tagList);
+        Module module = new Module(moduleCode, moduleTitle, modularCredits, tagList);
 
         return new AddCommand(module);
     }
-
-    /**
-     * Returns true if none of the prefixes contains empty {@code Optional} values in the given
-     * {@code ArgumentMultimap}.
-     */
-    private static boolean arePrefixesPresent(ArgumentMultimap argumentMultimap, Prefix... prefixes) {
-        return Stream.of(prefixes).allMatch(prefix -> argumentMultimap.getValue(prefix).isPresent());
-    }
-
 }

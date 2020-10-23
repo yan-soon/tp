@@ -128,7 +128,7 @@ To view all modules:
 
 This command allows you to edit the details of a module that you have added into GradPad.
 
-You can edit a module by specifying the index of the module in the Completed Modules list, followed by the details of the modules you wish to edit with their respective prefixes, 'c/' for Module Code, 'cr/' for Modular Credits, etc.
+You can edit a module by specifying the index of the module in the Completed Modules list, followed by the fields you wish to edit with their respective prefixes, 'c/' for Module Code, 'cr/' for Modular Credits, etc. You may edit multiple fields in a single `edit` command.
 
 **Note:** You can also edit tags, however, instead of changing the descriptions of the existing tags, editing tags replace them with new ones.
 

@@ -11,7 +11,14 @@ import seedu.address.commons.util.StringUtil;
 public class ModuleCodeContainsKeywordsPredicate implements Predicate<Module> {
     private final List<String> keywords;
 
+    /**
+     * Creates a new ModuleCodeContainsKeywordsPredicate to test whether a module code matches the contains
+     * the keywords in the specified list.
+     *
+     * @param keywords list of keywords.
+     */
     public ModuleCodeContainsKeywordsPredicate(List<String> keywords) {
+        assert(keywords != null);
         this.keywords = keywords;
     }
 

@@ -1,0 +1,12 @@
+{
+  "modules": [
+    { "tagged": [ "Foundation" ],
+      "code": "CS1101S",
+      "credits": "4"
+    }, {
+      "tagged" : [ "Foundation" ],
+      "code" : "CS1231S",
+      "credits" : "4"
+    }
+  ]
+}

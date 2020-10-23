@@ -16,9 +16,9 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
-import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.RequiredCommand;
 import seedu.address.logic.commands.ScienceCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 

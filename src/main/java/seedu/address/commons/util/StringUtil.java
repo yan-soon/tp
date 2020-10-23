@@ -40,6 +40,7 @@ public class StringUtil {
 
     /**
      * Ensures that the charSequence is in the correct String format as the module code.
+     *
      * @param charSequence cannot be null, cannot be empty, must be a single word.
      * @return the upper case of the module code.
      */

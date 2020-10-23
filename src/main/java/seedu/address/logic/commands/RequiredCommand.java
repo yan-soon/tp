@@ -81,6 +81,21 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Checks if a Module already exists in a given Module List.
+     * @param module Module that you wish to check.
+     * @param modules Module List that you wish to check against.
+     * @return True if the module already exists, false otherwise.
+     */
+    public boolean doesModuleAlreadyExist(Module module, ObservableList<Module> modules) {
+        for (Module mod : modules) {
+            if (module.isSameModule(mod)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Cross references the user's current list of Modules against the given
      * modules argument and marks out any undone Modules. Displays a successMessage
      * if all modules are done, and a failMessage if there are left over modules.
@@ -92,13 +107,7 @@ public class RequiredCommand extends Command {
         boolean areModulesCleared = true;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
-            boolean add = true;
-            for (Module mod : currentModules) {
-                if (module.isSameModule(mod)) {
-                    add = false;
-                    break;
-                }
-            } if (add) {
+            if (!doesModuleAlreadyExist(module, currentModules)) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;
@@ -116,20 +125,15 @@ public class RequiredCommand extends Command {
      * any undone Science Modules.
      */
     public void compareScience(ObservableList<Module> requiredScience) {
-        boolean add = true;
+        boolean areModulesCleared = true;
         for (Module module : requiredScience) {
-            for (Module mod : currentModules) {
-                if (module.isSameModule(mod)) {
-                    add = false;
-                    break;
-                }
-            } if (!add) {
+            if (doesModuleAlreadyExist(module, currentModules)) {
+                leftOverModules += MESSAGE_SUCCESS_SCIENCE + "\n";
+                areModulesCleared = false;
                 break;
             }
-        } if (add) {
+        } if (areModulesCleared) {
             leftOverModules += MESSAGE_SCIENCE + "\n";
-        } else {
-            leftOverModules += MESSAGE_SUCCESS_SCIENCE + "\n";
         }
         leftOverModules += "\n";
     }
@@ -143,21 +147,19 @@ public class RequiredCommand extends Command {
         int modularScore = 0;
         StringBuilder leftOverInternship = new StringBuilder();
         for (Module module : requiredInternship) {
-            boolean add = true;
-            for (Module mod : currentModules) {
-                if (module.isSameModule(mod)) {
-                    int modularCredits = Integer.parseInt(mod.getModularCredits().toString());
-                    modularScore += modularCredits;
-                    add = false;
-                    break;
-                }
-            } if (add) {
+            boolean areModulesCleared = true;
+            if (doesModuleAlreadyExist(module, currentModules)) {
+                int modularCredits = Integer.parseInt(module.getModularCredits().toString());
+                modularScore += modularCredits;
+                areModulesCleared = false;
+            }
+            if (areModulesCleared) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 leftOverInternship.append("\n").append(moduleToAdd);
             }
         } if (modularScore < 12) {
             String modScore = " You are currently at " + modularScore + " MCs. ";
-            leftOverModules += "\n" + MESSAGE_INTERN_1 + modScore + MESSAGE_INTERN_2 + leftOverInternship;
+            leftOverModules += MESSAGE_INTERN_1 + modScore + MESSAGE_INTERN_2 + leftOverInternship;
         } else {
             leftOverModules += MESSAGE_SUCCESS_INTERN;
         }

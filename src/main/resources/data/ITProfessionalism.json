@@ -1,0 +1,15 @@
+{
+  "modules" : [ {
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "IS1103",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "CS2101",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "ITProfessionalism" ],
+    "code" : "ES2660",
+    "credits" : "4"
+  }]
+}

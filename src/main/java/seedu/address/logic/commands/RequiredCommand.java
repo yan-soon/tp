@@ -125,14 +125,14 @@ public class RequiredCommand extends Command {
      * any undone Science Modules.
      */
     public void compareScience(ObservableList<Module> requiredScience) {
-        boolean areModulesCleared = true;
+        boolean isScienceCleared = false;
         for (Module module : requiredScience) {
             if (doesModuleAlreadyExist(module, currentModules)) {
                 leftOverModules += MESSAGE_SUCCESS_SCIENCE + "\n";
-                areModulesCleared = false;
+                isScienceCleared = true;
                 break;
             }
-        } if (areModulesCleared) {
+        } if (!isScienceCleared) {
             leftOverModules += MESSAGE_SCIENCE + "\n";
         }
         leftOverModules += "\n";
@@ -147,13 +147,10 @@ public class RequiredCommand extends Command {
         int modularScore = 0;
         StringBuilder leftOverInternship = new StringBuilder();
         for (Module module : requiredInternship) {
-            boolean areModulesCleared = true;
             if (doesModuleAlreadyExist(module, currentModules)) {
                 int modularCredits = Integer.parseInt(module.getModularCredits().toString());
                 modularScore += modularCredits;
-                areModulesCleared = false;
-            }
-            if (areModulesCleared) {
+            } else {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 leftOverInternship.append("\n").append(moduleToAdd);
             }

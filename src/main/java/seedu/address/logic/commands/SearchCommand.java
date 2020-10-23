@@ -40,12 +40,7 @@ public class SearchCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
-        ModuleInfo searchResult;
-        try {
-            searchResult = moduleInfoSearcher.searchModule(moduleCode);
-        } catch (CommandException e) {
-            throw new CommandException(e.getMessage());
-        }
+        ModuleInfo searchResult = moduleInfoSearcher.searchModule(moduleCode);
         String searchDisplay = String.format(MESSAGE_SUCCESS, searchResult.getModuleCode(),
                 searchResult.getTitle(), searchResult.getDescription(),
                 searchResult.getPreclusion(), searchResult.getPrerequisite());

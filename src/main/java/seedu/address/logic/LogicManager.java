@@ -47,15 +47,7 @@ public class LogicManager implements Logic {
         gradPadParser = new GradPadParser();
     }
 
-    /**
-     * Handles a stalled situation where a command requires confirmation from the user to execute.
-     *
-     * @param command The command to be stalled.
-     * @param commandText The user input text to be stalled.
-     * @return A CommandResult requesting confirmation from the user.
-     * @throws CommandException if a requested DeleteCommand is invalid.
-     */
-    public CommandResult handleStall(Command command, String commandText) throws CommandException {
+    private CommandResult handleStall(Command command, String commandText) throws CommandException {
         if (command instanceof ClearCommand) {
             assignStalledComponents(command, commandText);
             return new CommandResult(ClearCommand.MESSAGE_CONFIRMATION + MESSAGE_CONFIRMATION_SYNTAX);
@@ -67,13 +59,7 @@ public class LogicManager implements Logic {
         }
     }
 
-    /**
-     * Assigns the specified command and commandText to the relevant stalled components.
-     *
-     * @param command The command to be stalled.
-     * @param commandText The user input text to be stalled.
-     */
-    public void assignStalledComponents(Command command, String commandText) {
+    private void assignStalledComponents(Command command, String commandText) {
         stalledCommand = command;
         stalledCommandText = commandText;
     }

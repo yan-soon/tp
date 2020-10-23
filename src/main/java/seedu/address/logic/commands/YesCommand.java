@@ -12,6 +12,6 @@ public class YesCommand extends Command {
 
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult("");
+        return new CommandResult("There is nothing to confirm!");
     }
 }

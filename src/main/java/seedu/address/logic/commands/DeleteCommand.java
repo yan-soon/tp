@@ -32,6 +32,13 @@ public class DeleteCommand extends Command {
         this.targetIndex = targetIndex;
     }
 
+    /**
+     * Retrieves the module to be deleted.
+     *
+     * @param model The Model which the command operates on.
+     * @return The module to be deleted.
+     * @throws CommandException if the target index given is not within the bounds of the module list.
+     */
     public Module getModuleToDelete(Model model) throws CommandException {
         List<Module> lastShownList = model.getFilteredModuleList();
 
@@ -55,5 +62,10 @@ public class DeleteCommand extends Command {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
                 && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+    }
+
+    @Override
+    public boolean requiresStall() {
+        return true;
     }
 }

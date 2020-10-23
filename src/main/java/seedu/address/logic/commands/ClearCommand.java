@@ -21,4 +21,9 @@ public class ClearCommand extends Command {
         model.setGradPad(new GradPad());
         return new CommandResult(MESSAGE_SUCCESS);
     }
+
+    @Override
+    public boolean requiresStall() {
+        return true;
+    }
 }

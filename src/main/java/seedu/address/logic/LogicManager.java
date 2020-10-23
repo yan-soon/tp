@@ -47,43 +47,57 @@ public class LogicManager implements Logic {
         gradPadParser = new GradPadParser();
     }
 
-    private void assignStalledComponents(Command command, String commandText) {
+    /**
+     * Handles a stalled situation where a command requires confirmation from the user to execute.
+     *
+     * @param command The command to be stalled.
+     * @param commandText The user input text to be stalled.
+     * @return A CommandResult requesting confirmation from the user.
+     * @throws CommandException if a requested DeleteCommand is invalid.
+     */
+    public CommandResult handleStall(Command command, String commandText) throws CommandException {
+        if (command instanceof ClearCommand) {
+            assignStalledComponents(command, commandText);
+            return new CommandResult(ClearCommand.MESSAGE_CONFIRMATION + MESSAGE_CONFIRMATION_SYNTAX);
+        } else {
+            Module moduleToBeDeleted = ((DeleteCommand) command).getModuleToDelete(model);
+            assignStalledComponents(command, commandText);
+            return new CommandResult(DeleteCommand.MESSAGE_CONFIRMATION + moduleToBeDeleted
+                    + MESSAGE_CONFIRMATION_SYNTAX);
+        }
+    }
+
+    /**
+     * Assigns the specified command and commandText to the relevant stalled components.
+     *
+     * @param command The command to be stalled.
+     * @param commandText The user input text to be stalled.
+     */
+    public void assignStalledComponents(Command command, String commandText) {
         stalledCommand = command;
-        stalledCommandText = commandText.trim();
+        stalledCommandText = commandText;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
+        boolean isCancel = stalledCommand != null && !commandText.equalsIgnoreCase("yes");
 
-        if (stalledCommand instanceof Command) {
-            if (!commandText.equalsIgnoreCase("yes")) {
-                stalledCommand = null;
-                return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
-                        + String.format("\"%s\"", stalledCommandText));
-            }
+        if (isCancel) {
+            stalledCommand = null;
+            return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                    + String.format("\"%s\"", stalledCommandText));
         }
 
         CommandResult commandResult;
         Command command = gradPadParser.parseCommand(commandText);
+        boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
 
-        if (command instanceof ClearCommand) {
-            assignStalledComponents(command, commandText);
-            return new CommandResult(ClearCommand.MESSAGE_CONFIRMATION + MESSAGE_CONFIRMATION_SYNTAX);
-        } else if (command instanceof DeleteCommand) {
-            assignStalledComponents(command, commandText);
-            Module moduleToBeDeleted = ((DeleteCommand) command).getModuleToDelete(model);
-            return new CommandResult(DeleteCommand.MESSAGE_CONFIRMATION + moduleToBeDeleted
-                    + MESSAGE_CONFIRMATION_SYNTAX);
-        }
-
-        if (command instanceof YesCommand) {
-            if (stalledCommand == null) {
-                return new CommandResult(YesCommand.NO_CONFIRMATION_MESSAGE);
-            } else {
-                command = stalledCommand;
-                stalledCommand = null;
-            }
+        if (command.requiresStall()) {
+            return handleStall(command, commandText);
+        } else if (isConfirmation) {
+            command = stalledCommand;
+            stalledCommand = null;
         }
 
         commandResult = command.execute(model);

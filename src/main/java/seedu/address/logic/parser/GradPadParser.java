@@ -16,6 +16,8 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RequiredCommand;
+import seedu.address.logic.commands.ScienceCommand;
 import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 
@@ -72,6 +74,12 @@ public class GradPadParser {
 
         case CheckMcCommand.COMMAND_WORD:
             return new CheckMcCommand();
+
+        case RequiredCommand.COMMAND_WORD:
+            return new RequiredCommand();
+
+        case ScienceCommand.COMMAND_WORD:
+            return new ScienceCommand();
 
         case YesCommand.COMMAND_WORD:
             return new YesCommand();

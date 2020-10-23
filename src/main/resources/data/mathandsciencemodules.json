@@ -1,0 +1,15 @@
+{
+  "modules" : [ {
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "MA1521",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "MA1101R",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "MathAndSciences" ],
+    "code" : "ST2334",
+    "credits" : "4"
+  } ]
+}

@@ -17,9 +17,7 @@ import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
-import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -86,12 +84,10 @@ public class EditCommand extends Command {
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;
 
-        ModuleCode updatedCode = editModuleDescriptor.getModuleCode().orElse(moduleToEdit.getModuleCode());
-        ModularCredits updatedCredits = editModuleDescriptor.getModularCredits()
-                .orElse(moduleToEdit.getModularCredits());
         Set<Tag> updatedTags = editModuleDescriptor.getTags().orElse(moduleToEdit.getTags());
 
-        return new Module(updatedCode, updatedCredits, updatedTags);
+        return new Module(moduleToEdit.getModuleCode(), moduleToEdit.getModuleTitle(),
+                moduleToEdit.getModularCredits(), updatedTags);
     }
 
     @Override
@@ -117,8 +113,6 @@ public class EditCommand extends Command {
      * corresponding field value of the module.
      */
     public static class EditModuleDescriptor {
-        private ModuleCode code;
-        private ModularCredits credits;
         private Set<Tag> tags;
 
         public EditModuleDescriptor() {}
@@ -128,8 +122,6 @@ public class EditCommand extends Command {
          * A defensive copy of {@code tags} is used internally.
          */
         public EditModuleDescriptor(EditModuleDescriptor toCopy) {
-            setModuleCode(toCopy.code);
-            setModularCredits(toCopy.credits);
             setTags(toCopy.tags);
         }
 
@@ -137,23 +129,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(code, credits, tags);
-        }
-
-        public void setModuleCode(ModuleCode code) {
-            this.code = code;
-        }
-
-        public Optional<ModuleCode> getModuleCode() {
-            return Optional.ofNullable(code);
-        }
-
-        public void setModularCredits(ModularCredits credits) {
-            this.credits = credits;
-        }
-
-        public Optional<ModularCredits> getModularCredits() {
-            return Optional.ofNullable(credits);
+            return CollectionUtil.isAnyNonNull(tags);
         }
 
         /**
@@ -188,9 +164,7 @@ public class EditCommand extends Command {
             // state check
             EditModuleDescriptor e = (EditModuleDescriptor) other;
 
-            return getModuleCode().equals(e.getModuleCode())
-                    && getModularCredits().equals(e.getModularCredits())
-                    && getTags().equals(e.getTags());
+            return getTags().equals(e.getTags());
         }
     }
 }

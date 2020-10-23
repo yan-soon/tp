@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
 import java.nio.file.Path;
@@ -23,13 +24,12 @@ import seedu.address.storage.JsonGradPadStorage;
 public class ScienceCommandTest {
     public static final Path INVALID_PATH = Paths.get("data", "science.json");
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
-    public static final Path VALID_PATH = Paths.get("src/main/data/sciencemodules.json");
     private Model model;
     private ScienceCommand scienceCommand = new ScienceCommand();
     private String moduleNames = "";
     public void setUp() throws IOException, DataConversionException {
         StringBuilder modulesToAdd = new StringBuilder();
-        JsonGradPadStorage storage = new JsonGradPadStorage(VALID_PATH);
+        JsonGradPadStorage storage = new JsonGradPadStorage(SCIENCE_PATH);
         ObservableList<Module> modules = storage.readGradPad().get().getModuleList();
         for (Module module : modules) {
             String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
@@ -64,10 +64,10 @@ public class ScienceCommandTest {
     }
     @Test
     public void setScienceModulesValidPath_returnsFilledOptional() throws IOException, DataConversionException {
-        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(VALID_PATH);
+        JsonGradPadStorage expectedJsonStorage = new JsonGradPadStorage(SCIENCE_PATH);
         Optional<ReadOnlyGradPad> expectedGradPad = expectedJsonStorage.readGradPad();
         ObservableList<Module> expected = expectedGradPad.get().getModuleList();
-        scienceCommand.setScienceModules(VALID_PATH);
+        scienceCommand.setScienceModules(SCIENCE_PATH);
         ObservableList<Module> actual = scienceCommand.getScienceModules();
         assertEquals(actual, expected);
     }

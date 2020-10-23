@@ -12,7 +12,7 @@ import seedu.address.model.module.Module;
 public class CheckMcCommand extends Command {
 
     public static final String COMMAND_WORD = "checkmc";
-    public static final String MESSAGE_SUCCESS = "Total MC has been calculated: ";
+    public static final String MESSAGE_SUCCESS = "Total MC has been calculated: %1$d";
 
     private ObservableList<Module> modules;
     private int totalMc = 0;
@@ -25,6 +25,6 @@ public class CheckMcCommand extends Command {
         for (Module module : modules) {
             totalMc += Integer.parseInt(module.getModularCredits().toString());
         }
-        return new CommandResult(MESSAGE_SUCCESS + totalMc);
+        return new CommandResult(String.format(MESSAGE_SUCCESS, totalMc));
     }
 }

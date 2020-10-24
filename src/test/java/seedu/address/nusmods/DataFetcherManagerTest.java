@@ -26,22 +26,22 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.nusmods.exceptions.NusmodsException;
 
 public class DataFetcherManagerTest {
-    private static final String TEST_SAVE_FILE_PATH = "src/test/data/NusmodsDataManagerTest/saveModulesTest.json";
-    private static final String MODULE_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest/validModule.json";
-    private static final String INVALID_MODULE_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest"
+    private static final String TEST_SAVE_FILE_PATH = "src/test/resources/NusmodsDataManagerTest/saveModulesTest.json";
+    private static final String MODULE_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest/validModule.json";
+    private static final String INVALID_MODULE_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest"
                                                                         + "/invalidModule.json";
-    private static final String VALID_MODULE_SUMMARIES_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest"
+    private static final String VALID_MODULE_SUMMARIES_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/validSummaries.json";
-    private static final String CS1010X_MODULE_INFO = "src/test/data/NusmodsDataManagerTest"
+    private static final String CS1010X_MODULE_INFO = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/CS1010X.json";
-    private static final String IS1103_MODULE_INFO = "src/test/data/NusmodsDataManagerTest"
+    private static final String IS1103_MODULE_INFO = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/IS1103.json";
 
     private DataFetcherManager manager = new DataFetcherManager();
 
     @Test
     public void constructor_defaultWithNoArgs_defaultFilePathUsed() {
-        assertEquals(DataFetcher.DATA_FILE_PATH, manager.getDataFilePath());
+        assertEquals(DataFetcher.SAVE_DATA_FILE_PATH, manager.getDataFilePath());
     }
 
     @Test

@@ -24,7 +24,7 @@ import seedu.address.nusmods.ModuleInfo;
  */
 public class SearchCommandTest {
 
-    private static final String CS1010X = "src/test/data/NusmodsDataManagerTest/CS1010X.json";
+    private static final String CS1010X = "src/test/resources/NusmodsDataManagerTest/CS1010X.json";
     private Model model = new ModelManager(getTypicalGradPad(), new UserPrefs());
     private Model expectedModel = new ModelManager(getTypicalGradPad(), new UserPrefs());
 

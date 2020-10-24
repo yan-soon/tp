@@ -1,0 +1,31 @@
+{
+  "modules" : [ {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS1231S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2030S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2040S",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2100",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2103T",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS2106",
+    "credits" : "4"
+  }, {
+    "tagged" : [ "Foundation" ],
+    "code" : "CS3230",
+    "credits" : "4"
+  }]
+}

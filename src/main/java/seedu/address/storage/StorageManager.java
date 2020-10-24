@@ -25,6 +25,7 @@ public class StorageManager implements Storage {
      */
     public StorageManager(GradPadStorage gradPadStorage, UserPrefsStorage userPrefsStorage) {
         super();
+        assert(gradPadStorage != null && userPrefsStorage != null);
         this.gradPadStorage = gradPadStorage;
         this.userPrefsStorage = userPrefsStorage;
     }

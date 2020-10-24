@@ -1,5 +1,6 @@
 package seedu.address.commons.util;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -116,6 +117,36 @@ public class StringUtilTest {
         // spaces
         assertTrue(StringUtil.containsCharSequenceIgnoreCase("ccc", "  ccc  ")); // CharSequence has extra
         // spaces
+    }
+
+    //---------------- Tests for ignoreCase --------------------------------------
+
+    @Test
+    public void ignoreCase_nullWord_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> StringUtil.ignoreCase(null));
+    }
+
+    @Test
+    public void ignoreCase_emptyWord_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "CharSequence parameter cannot be empty", ()
+            -> StringUtil.ignoreCase("  "));
+    }
+
+    @Test
+    public void ignoreCase_multipleWords_throwsIllegalArgumentException() {
+        assertThrows(IllegalArgumentException.class, "CharSequence parameter should be a single word", ()
+            -> StringUtil.ignoreCase("aaa BBB"));
+    }
+
+    @Test
+    public void ignoreCase_validInputs_correctResult() {
+        // Return all uppercase letters with different upper/lower case letters
+        assertEquals(StringUtil.ignoreCase("abc"), "ABC");
+        assertEquals(StringUtil.ignoreCase("abc1"), "ABC1");
+        assertEquals(StringUtil.ignoreCase("ab1@c"), "AB1@C");
+        assertEquals(StringUtil.ignoreCase("   abc  "), "ABC");
+        assertEquals(StringUtil.ignoreCase("ABC"), "ABC");
+        assertEquals(StringUtil.ignoreCase("cS2100"), "CS2100");
     }
 
     //---------------- Tests for getDetails --------------------------------------

@@ -125,14 +125,17 @@ public class DataFetcherManagerTest {
 
         manager.fetchAndSaveModules();
         Map<String, ModuleInfo> actualMap = readModuleInfoMapFromFile(TEST_SAVE_FILE_PATH);
-        Optional<ModuleInfo> expectedModule = JsonUtil.readJsonFile(Paths.get(CS1010X_MODULE_INFO), ModuleInfo.class);
+
+        Optional<ModuleInfo> expectedCs1010x = JsonUtil.readJsonFile(Paths.get(CS1010X_MODULE_INFO), ModuleInfo.class);
+        Optional<ModuleInfo> expectedIs1103 = JsonUtil.readJsonFile(Paths.get(IS1103_MODULE_INFO), ModuleInfo.class);
 
         // clean up test data file after we're done
         Files.deleteIfExists(Paths.get(TEST_SAVE_FILE_PATH));
 
-        if (expectedModule.isPresent()) {
+        if (expectedCs1010x.isPresent() && expectedIs1103.isPresent()) {
             Map<String, ModuleInfo> expectedMap = new HashMap<>();
-            expectedMap.put("CS1010X", expectedModule.get());
+            expectedMap.put("CS1010X", expectedCs1010x.get());
+            expectedMap.put("IS1103", expectedIs1103.get());
             assertEquals(expectedMap, actualMap);
             return;
         }

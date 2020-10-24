@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.nio.file.Paths;
+import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
@@ -66,10 +67,14 @@ public class SearchCommandTest {
         String moduleCode = "CS1010X";
         ModuleInfo cs1010x = JsonUtil.readJsonFile(Paths.get(CS1010X), ModuleInfo.class).get();
         SearchCommand command = new SearchCommand(moduleCode);
+
+        String expectedPreclusion = Optional.ofNullable(cs1010x.getPreclusion()).orElse("None");
+        String expectedPrerequisite = Optional.ofNullable(cs1010x.getPrerequisite()).orElse("None");
+
         String expectedMessage = String.format(SearchCommand.MESSAGE_SUCCESS,
                 cs1010x.getModuleCode(),
                 cs1010x.getTitle(), cs1010x.getDescription(),
-                cs1010x.getPreclusion(), cs1010x.getPrerequisite());
+                expectedPreclusion, expectedPrerequisite);
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

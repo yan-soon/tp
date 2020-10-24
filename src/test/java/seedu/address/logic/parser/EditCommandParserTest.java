@@ -2,9 +2,11 @@ package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
+import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T_WITH_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC_WITH_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CREDITS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CORE;
@@ -69,7 +71,8 @@ public class EditCommandParserTest {
 
     @Test
     public void parse_invalidValue_failure() {
-        assertParseFailure(parser, "1" + INVALID_CODE_DESC, ModuleCode.MESSAGE_CONSTRAINTS); // invalid code
+        assertParseFailure(parser, "1" + INVALID_CODE_DESC_WITH_PREFIX, ModuleCode.MESSAGE_CONSTRAINTS); // invalid
+        // code
         assertParseFailure(parser, "1" + INVALID_CREDITS_DESC, ModularCredits.MESSAGE_CONSTRAINTS); // invalid credit
         assertParseFailure(parser, "1" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
 
@@ -85,7 +88,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, "1" + TAG_EMPTY + TAG_DESC_CORE + TAG_DESC_NON_CORE, Tag.MESSAGE_CONSTRAINTS);
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "1" + INVALID_CODE_DESC + VALID_CREDITS_CS2103T,
+        assertParseFailure(parser, "1" + INVALID_CODE_DESC_WITH_PREFIX + VALID_CREDITS_CS2103T,
                 ModuleCode.MESSAGE_CONSTRAINTS);
     }
 
@@ -93,7 +96,7 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         Index targetIndex = INDEX_SECOND_MODULE;
         String userInput = targetIndex.getOneBased() + CREDITS_DESC_CS3216 + TAG_DESC_NON_CORE
-                + CODE_DESC_CS2103T + TAG_DESC_CORE;
+                + CODE_DESC_CS2103T_WITH_PREFIX + TAG_DESC_CORE;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
                 .withModularCredits(VALID_CREDITS_CS3216).withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build();
@@ -105,7 +108,7 @@ public class EditCommandParserTest {
     @Test
     public void parse_someFieldsSpecified_success() {
         Index targetIndex = INDEX_FIRST_MODULE;
-        String userInput = targetIndex.getOneBased() + CREDITS_DESC_CS3216 + CODE_DESC_CS2103T;
+        String userInput = targetIndex.getOneBased() + CREDITS_DESC_CS3216 + CODE_DESC_CS2103T_WITH_PREFIX;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withModularCredits(VALID_CREDITS_CS3216)
                 .withModuleCode(VALID_CODE_CS2103T).build();
@@ -118,7 +121,7 @@ public class EditCommandParserTest {
     public void parse_oneFieldSpecified_success() {
         // code
         Index targetIndex = INDEX_THIRD_MODULE;
-        String userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T;
+        String userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T_WITH_PREFIX;
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T).build();
         EditCommand expectedCommand = new EditCommand(targetIndex, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
@@ -162,7 +165,8 @@ public class EditCommandParserTest {
         assertParseSuccess(parser, userInput, expectedCommand);
 
         // other valid values specified
-        userInput = targetIndex.getOneBased() + CODE_DESC_CS2103T + INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
+        userInput =
+            targetIndex.getOneBased() + CODE_DESC_CS2103T_WITH_PREFIX + INVALID_CREDITS_DESC + CREDITS_DESC_CS3216;
         descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
                 .withModularCredits(VALID_CREDITS_CS3216).build();
         expectedCommand = new EditCommand(targetIndex, descriptor);

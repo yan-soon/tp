@@ -41,6 +41,13 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
+        if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
+            editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get()));
+        }
+        if (argMultimap.getValue(PREFIX_CREDITS).isPresent()) {
+            editModuleDescriptor.setModularCredits(
+                ParserUtil.parseModularCredits(argMultimap.getValue(PREFIX_CREDITS).get()));
+        }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editModuleDescriptor::setTags);
 
         if (!editModuleDescriptor.isAnyFieldEdited()) {

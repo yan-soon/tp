@@ -31,6 +31,7 @@ public class EditModuleDescriptorBuilder {
     public EditModuleDescriptorBuilder(Module module) {
         descriptor = new EditModuleDescriptor();
         descriptor.setModuleCode(module.getModuleCode());
+        descriptor.setModuleTitle(module.getModuleTitle());
         descriptor.setModularCredits(module.getModularCredits());
         descriptor.setTags(module.getTags());
     }

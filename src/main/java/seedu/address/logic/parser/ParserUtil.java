@@ -57,11 +57,11 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCode(String code) throws ParseException {
         requireNonNull(code);
-        String trimmedCode = code.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedCode)) {
+        String modifiedCode = code.trim().toUpperCase();
+        if (!ModuleCode.isValidModuleCode(modifiedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(trimmedCode);
+        return new ModuleCode(modifiedCode);
     }
 
     /**

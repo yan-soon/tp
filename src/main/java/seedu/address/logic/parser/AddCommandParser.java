@@ -39,8 +39,8 @@ public class AddCommandParser implements Parser<AddCommand> {
         if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
         }
-
-        String moduleCodeText = StringUtil.ignoreCase(argMultimap.getPreamble());
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
+        String moduleCodeText = StringUtil.ignoreCase(moduleCode.toString());
         ValidNusmodsModuleCodeChecker codeChecker = new ValidNusmodsModuleCodeChecker();
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         ModuleInfo moduleInfo;
@@ -55,7 +55,6 @@ public class AddCommandParser implements Parser<AddCommand> {
             throw new ParseException(e.getMessage());
         }
 
-        ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleInfo.getModuleCode());
         ModuleTitle moduleTitle = ParserUtil.parseModuleTitle(moduleInfo.getTitle());
         ModularCredits modularCredits = ParserUtil.parseModularCredits(moduleInfo.getModuleCredit());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));

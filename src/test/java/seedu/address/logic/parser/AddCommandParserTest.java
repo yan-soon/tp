@@ -3,17 +3,11 @@ package seedu.address.logic.parser;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS3216;
-import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS2103T;
-import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CREDITS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
-import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_NON_EMPTY;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NON_CORE;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
-import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
@@ -24,7 +18,6 @@ import static seedu.address.testutil.TypicalModules.CS3216;
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
-import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
@@ -70,7 +63,8 @@ public class AddCommandParserTest {
     @Test
     public void parse_invalidValue_failure() {
         // invalid code
-        assertParseFailure(parser, INVALID_CODE_DESC + TAG_DESC_CORE + TAG_DESC_NON_CORE, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, INVALID_CODE_DESC + TAG_DESC_CORE + TAG_DESC_NON_CORE,
+            ModuleCode.MESSAGE_CONSTRAINTS);
 
         // invalid tag
         assertParseFailure(parser, CODE_DESC_CS3216 + INVALID_TAG_DESC + VALID_TAG_NON_CORE,

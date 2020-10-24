@@ -5,7 +5,6 @@ import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T_WITH_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CREDITS_DESC_CS3216;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC_WITH_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CREDITS_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;

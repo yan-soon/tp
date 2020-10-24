@@ -1,7 +1,12 @@
 package seedu.address.nusmods;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Paths;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -9,7 +14,6 @@ import java.util.Optional;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import seedu.address.commons.util.FileUtil;
 import seedu.address.nusmods.exceptions.NusmodsException;
 
 /**
@@ -83,7 +87,7 @@ public class NusmodsDataManager implements NusmodsData {
 
         ObjectMapper mapper = new ObjectMapper();
         try {
-            String jsonString = FileUtil.readFromFile(Paths.get(getFilePath()));
+            String jsonString = getFileFromResource(getFilePath());
             TypeReference<HashMap<String, ModuleInfo>> targetType = new TypeReference<>(){};
             Map<String, ModuleInfo> moduleInfoMap = mapper.readValue(jsonString, targetType);
 
@@ -95,5 +99,27 @@ public class NusmodsDataManager implements NusmodsData {
 
     public String getFilePath() {
         return filePath;
+    }
+
+    private String getFileFromResource(String fileName) throws IOException {
+
+        // The class loader that loaded the class
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+
+        if (inputStream == null) {
+            throw new IOException();
+        } else {
+            StringBuilder dataString = new StringBuilder();
+
+            Reader reader = new BufferedReader(new InputStreamReader(inputStream,
+                                                                     Charset.forName(StandardCharsets.UTF_8.name())));
+            int c = 0;
+            while ((c = reader.read()) != -1) {
+                dataString.append((char) c);
+            }
+
+            return dataString.toString();
+        }
     }
 }

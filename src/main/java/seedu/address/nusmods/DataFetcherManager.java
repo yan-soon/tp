@@ -31,13 +31,13 @@ public class DataFetcherManager extends DataFetcher {
 
     DataFetcherManager() {
         httpUtil = HttpUtil.SINGLETON;
-        dataFilePath = DataFetcher.DATA_FILE_PATH;
+        dataFilePath = DataFetcher.SAVE_DATA_FILE_PATH;
     }
 
     DataFetcherManager(HttpUtil httpUtil) {
         assert(httpUtil != null);
         this.httpUtil = httpUtil;
-        dataFilePath = DataFetcher.DATA_FILE_PATH;
+        dataFilePath = DataFetcher.SAVE_DATA_FILE_PATH;
     }
 
     DataFetcherManager(HttpUtil httpUtil, String filePath) {

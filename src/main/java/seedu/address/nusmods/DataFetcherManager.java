@@ -1,5 +1,7 @@
 package seedu.address.nusmods;
 
+import static seedu.address.nusmods.NusmodsKeywords.MODULE_FILTER_KEYWORDS;
+
 import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -23,7 +25,6 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  * Handles API requests made by GradPad to the NUSMods public API to retrieve module data.
  */
 public class DataFetcherManager extends DataFetcher {
-    public static final String[] MODULE_FILTER_KEYWORDS = {"CS", "MA1521", "MA1101R"};
     private static final Logger logger = LogsCenter.getLogger(DataFetcher.class);
     private final HttpUtil httpUtil;
     private final String dataFilePath;

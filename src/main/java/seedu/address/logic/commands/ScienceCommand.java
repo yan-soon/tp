@@ -15,7 +15,7 @@ import seedu.address.storage.RequiredCommandStorage;
 public class ScienceCommand extends Command {
     public static final String COMMAND_WORD = "science";
     public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
-    public static final String MESSAGE_FAILURE = "There was an error loading the required modules :(";
+    public static final String MESSAGE_FAILURE_SCIENCE = "There was an error loading the required Science Modules :(";
     private ObservableList<Module> scienceModules;
 
     /**
@@ -56,7 +56,7 @@ public class ScienceCommand extends Command {
             }
             return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
-            return new CommandResult(MESSAGE_FAILURE);
+            return new CommandResult(MESSAGE_FAILURE_SCIENCE);
         }
     }
 }

@@ -58,6 +58,7 @@ public class ScienceCommandTest {
         CommandResult actual = scienceCommand.execute(model);
         assertEquals(expected, actual);
     }
+
     @Test
     public void setScienceModulesInvalidPath_throwsIOexception() {
         assertThrows(IOException.class, () -> scienceCommand.setScienceModules(INVALID_PATH));

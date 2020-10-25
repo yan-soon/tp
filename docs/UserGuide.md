@@ -69,7 +69,7 @@ With this guide, you'll be ready to use GradPad in no time.
  Exit the Program                        | Allows you to terminate the GradPad program
 
 
-    Refer to [Commands](#commands) below for details on all commands.
+> Refer to [Commands](#commands) below for details on all commands.
 
 ## Commands
 

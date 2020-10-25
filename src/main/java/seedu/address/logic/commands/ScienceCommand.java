@@ -4,15 +4,13 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
-import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
-import seedu.address.storage.JsonGradPadStorage;
+import seedu.address.storage.RequiredCommandStorage;
 
 public class ScienceCommand extends Command {
     public static final String COMMAND_WORD = "science";
@@ -21,26 +19,27 @@ public class ScienceCommand extends Command {
     private ObservableList<Module> scienceModules;
 
     /**
-     * Returns the storage attribute of a given ScienceCommand object.
-     * @return storage attribute of type Optional<ReadOnlyGradPad/>.
+     * Returns the scienceModules attribute of a given ScienceCommand object.
+     * @return scienceModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getScienceModules() {
         return scienceModules;
     }
 
     /**
-     * Loads the storage attribute with Science Modules.
+     * Loads the scienceModules attribute with Science Modules by using
+     * the setRequiredScience() method from the RequiredCommandStorage class.
      * @throws IOException When the path in invalid.
      * @throws DataConversionException When there is an error converting from the JSON file.
      */
-    public void setScienceModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        scienceModules = gradPad.orElseThrow().getModuleList();
+    public void setScienceModules(String path) throws IOException, IllegalValueException {
+        RequiredCommandStorage storage = new RequiredCommandStorage();
+        storage.setRequiredScience(path);
+        scienceModules = storage.getRequiredScience();
     }
 
     /**
-     * Goes through the storage attribute and parses all Science Modules, to be read by the user.
+     * Goes through the scienceModules attribute and parses all Science Modules, to be read by the user.
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult Object with the relevant Science Modules or Failure Message if modules
      * are absent.
@@ -56,7 +55,7 @@ public class ScienceCommand extends Command {
                 modulesToAdd.append("\n").append(moduleToAdd);
             }
             return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
-        } catch (DataConversionException | IOException e) {
+        } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE);
         }
     }

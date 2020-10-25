@@ -22,7 +22,6 @@ import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 import java.io.IOException;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -54,18 +53,16 @@ public class RequiredCommand extends Command {
     /**
      * Sets up the storage attribute with all the relevant modules from various fields.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file violates some constraints.
      */
-    public void setStorage() throws IOException, DataConversionException, IllegalValueException {
+    public void setStorage() throws IOException, IllegalValueException {
         storage = new RequiredCommandStorage();
         storage.setRequiredFoundation(FOUNDATION_PATH);
-        //storage.setRequiredITprof(ITPROF_PATH);
-        //storage.setRequiredMathAndScience(MATHANDSCI_PATH);
-        //storage.setRequiredScience(SCIENCE_PATH);
-        //storage.setRequiredInternship(INTERNSHIP_PATH);
+        storage.setRequiredITprof(ITPROF_PATH);
+        storage.setRequiredMathAndScience(MATHANDSCI_PATH);
+        storage.setRequiredScience(SCIENCE_PATH);
+        storage.setRequiredInternship(INTERNSHIP_PATH);
     }
-    
-    
 
     /**
      * Retrieves the currentModules attribute of an Required Command object.
@@ -177,22 +174,18 @@ public class RequiredCommand extends Command {
             currentModules = model.getGradPad().getModuleList();
             setStorage();
             ObservableList<Module> requiredFoundation = storage.getRequiredFoundation();
-           // ObservableList<Module> requiredITprof = storage.getRequiredITprof();
-            //ObservableList<Module> requiredMathAndScience = storage.getRequiredMathAndScience();
-            //ObservableList<Module> requiredScience = storage.getRequiredScience();
-            //ObservableList<Module> requiredInternship = storage.getRequiredInternship();
+            ObservableList<Module> requiredITprof = storage.getRequiredITprof();
+            ObservableList<Module> requiredMathAndScience = storage.getRequiredMathAndScience();
+            ObservableList<Module> requiredScience = storage.getRequiredScience();
+            ObservableList<Module> requiredInternship = storage.getRequiredInternship();
             compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
-            //compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
-            //compareModules(requiredMathAndScience, MESSAGE_MATHANDSCI, MESSAGE_SUCCESS_MATHANDSCI);
-            //compareScience(requiredScience);
-            //compareInternship(requiredInternship);
+            compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
+            compareModules(requiredMathAndScience, MESSAGE_MATHANDSCI, MESSAGE_SUCCESS_MATHANDSCI);
+            compareScience(requiredScience);
+            compareInternship(requiredInternship);
             return new CommandResult(leftOverModules);
-        } catch (DataConversionException e) {
+        } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE);
-        } catch (IOException e) {
-            return new CommandResult("IO");
-        } catch (IllegalValueException e) {
-            return new CommandResult("ILLEGAL");
         }
     }
 }

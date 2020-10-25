@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
@@ -12,7 +11,8 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTE
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
-import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
+import static seedu.address.storage.RequiredCommandMessages.TEST_FOUNDATION_PATH;
+import static seedu.address.storage.RequiredCommandMessages.TEST_SCIENCE_PATH;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -23,6 +23,7 @@ import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
@@ -43,7 +44,7 @@ class RequiredCommandTest {
     private RequiredCommand requiredCommand = new RequiredCommand();
     private ObservableList<Module> testModules;
     public void setUpTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(FOUNDATION_PATH);
+        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_FOUNDATION_PATH));
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
@@ -53,7 +54,7 @@ class RequiredCommandTest {
         testModules = gradPad.getModuleList();
     }
     public void setUpWrongTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(SCIENCE_PATH);
+        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_SCIENCE_PATH));
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
@@ -84,7 +85,7 @@ class RequiredCommandTest {
         assertNull(actual);
     }
     @Test
-    public void setStorage_validTest() throws IOException, DataConversionException {
+    public void setStorage_validTest() throws IOException, DataConversionException, IllegalValueException {
         setUpTestModules();
         requiredCommand.setStorage();
         RequiredCommandStorage storage = requiredCommand.getStorage();

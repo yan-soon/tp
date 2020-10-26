@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
@@ -19,7 +20,9 @@ import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
+import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.GradPad;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
@@ -86,7 +89,7 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_sucess() {
+    public void execute_filteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().stream()
@@ -125,6 +128,32 @@ public class EditCommandTest {
                 new EditModuleDescriptorBuilder(moduleInList).build());
 
         assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+    }
+
+    @Test
+    public void execute_moduleNotYetAddedUnfilteredList_failure() {
+        ModuleCode moduleNotYetAdded = new ModuleCode("CS2108");
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder()
+            .withModuleCode(VALID_CODE_CS3216).build();
+        EditCommand editCommand = new EditCommand(moduleNotYetAdded, descriptor);
+
+        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_MODULE_NOT_YET_ADDED,
+            moduleNotYetAdded));
+    }
+
+    /**
+     * Edit filtered list where module code does exists in NUSMods but not yet added into GradPad.
+     */
+    @Test
+    public void execute_moduleNotYetAddedFilteredList_failure() {
+        showModuleAtIndex(model, INDEX_FIRST_MODULE);
+        ModuleCode moduleNotYetAdded = new ModuleCode("CS2108");
+
+        EditCommand editCommand = new EditCommand(moduleNotYetAdded,
+            new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS3216).build());
+
+        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_MODULE_NOT_YET_ADDED,
+            moduleNotYetAdded));
     }
 
     @Test

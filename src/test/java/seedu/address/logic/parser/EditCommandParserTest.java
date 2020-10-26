@@ -93,18 +93,18 @@ public class EditCommandParserTest {
     public void parse_allFieldsSpecified_success() {
         ModuleCode targetCode = CODE_SECOND_MODULE;
         String userInput = targetCode + TAG_DESC_NON_CORE
-                + CODE_DESC_CS2103T_WITH_PREFIX + TAG_DESC_CORE;
+                + CODE_DESC_CS2103T_WITH_PREFIX;
 
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
             .withModuleTitle(VALID_TITLE_CS2103T).withModularCredits(VALID_CREDITS_CS2103T)
-            .withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build();
+            .withTags(VALID_TAG_NON_CORE).build();
         EditCommand expectedCommand = new EditCommand(targetCode, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
     }
 
     @Test
-    public void parse_someFieldsSpecified_success() {
+    public void parse_onlyModuleCodeSpecified_success() {
         ModuleCode targetCode = CODE_FIRST_MODULE;
         String userInput = targetCode + CODE_DESC_CS2103T_WITH_PREFIX;
 
@@ -117,18 +117,17 @@ public class EditCommandParserTest {
     }
 
     @Test
-    public void parse_oneFieldSpecified_success() {
-        // code
+    public void parse_onlyTagsSpecified_success() {
+        // one tag
         ModuleCode targetCode = CODE_THIRD_MODULE;
         String userInput = targetCode + TAG_DESC_CORE;
-        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder()
-            .withTags(VALID_TAG_CORE).build();
+        EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE).build();
         EditCommand expectedCommand = new EditCommand(targetCode, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
 
-        // tags
-        userInput = targetCode + TAG_DESC_CORE;
-        descriptor = new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE).build();
+        // two tags
+        userInput = targetCode + TAG_DESC_CORE + TAG_DESC_NON_CORE;
+        descriptor = new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build();
         expectedCommand = new EditCommand(targetCode, descriptor);
         assertParseSuccess(parser, userInput, expectedCommand);
     }

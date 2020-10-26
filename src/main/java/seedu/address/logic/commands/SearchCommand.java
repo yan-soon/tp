@@ -2,6 +2,8 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
+import java.util.Optional;
+
 import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
@@ -41,9 +43,14 @@ public class SearchCommand extends Command {
         requireNonNull(model);
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         ModuleInfo searchResult = moduleInfoSearcher.searchModule(moduleCode);
+
+        // preclusions and prerequisites could be null
+        String preclusion = Optional.ofNullable(searchResult.getPreclusion()).orElse("None");
+        String prerequisite = Optional.ofNullable(searchResult.getPrerequisite()).orElse("None");
+
         String searchDisplay = String.format(MESSAGE_SUCCESS, searchResult.getModuleCode(),
                 searchResult.getTitle(), searchResult.getDescription(),
-                searchResult.getPreclusion(), searchResult.getPrerequisite());
+                preclusion, prerequisite);
         return new CommandResult(searchDisplay);
     }
 

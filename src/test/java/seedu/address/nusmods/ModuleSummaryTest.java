@@ -15,8 +15,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
 
 public class ModuleSummaryTest {
-    private static final String CS1010X_SUMMARY = "src/test/data/NusmodsDataManagerTest/CS1010XSummary.json";
-    private static final String IS1103_SUMMARY = "src/test/data/NusmodsDataManagerTest/IS1103Summary.json";
+    private static final String CS1010X_SUMMARY = "src/test/resources/NusmodsDataManagerTest/CS1010XSummary.json";
+    private static final String IS1103_SUMMARY = "src/test/resources/NusmodsDataManagerTest/IS1103Summary.json";
 
     @Test
     public void equals() throws DataConversionException {

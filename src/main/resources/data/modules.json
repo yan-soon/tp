@@ -1,4 +1,36 @@
 {
+  "CP3107" : {
+    "moduleCode" : "CP3107",
+    "title" : "Computing for Voluntary Welfare Organisations",
+    "moduleCredit" : "6",
+    "description" : "This is a project-based module that provides students with\ntraining in software engineering by working on an actual\nsoftware system that supports a local voluntary welfare\norganisation. This module is graded on a Completed\nSatisfactorily/Completed Unsatisfactorily (CS/CU) basis.",
+    "preclusion" : null,
+    "prerequisite" : "CS2010 or CS2020 or (((CS2030 or its equivalent) or CS2113/T) and CS2040/C). Student selection process will be enforced."
+  },
+  "LSM1306" : {
+    "moduleCode" : "LSM1306",
+    "title" : "Forensic Science",
+    "moduleCredit" : "4",
+    "description" : "Crime is one feature of human behaviour that fascinates our community. How crimes impact our society and how crimes are investigated and solved in the Singapore context is the focus of the module. The module is designed to enable students to appreciate why and how crimes are committed, to understand how crimes are solved in Singapore using investigative, and the latest scientific and forensic techniques, and to learn the role of the major stakeholders in the Criminal Justice System. Experts from law, pharmacy, statistics, the Health Sciences Authority and the Singapore Police Force will cover topics related to forensic science.",
+    "preclusion" : "GEK1542",
+    "prerequisite" : null
+  },
+  "CP3106" : {
+    "moduleCode" : "CP3106",
+    "title" : "Independent Project",
+    "moduleCredit" : "4",
+    "description" : "",
+    "preclusion" : null,
+    "prerequisite" : "[(CS2102 or CS2102S) and CS2105 and read (CS3214 or CS3215)] or IS3102 or IS4102 or CS3201 or CS3281 or CS4201 or CS4203"
+  },
+  "LSM1301" : {
+    "moduleCode" : "LSM1301",
+    "title" : "General Biology",
+    "moduleCredit" : "4",
+    "description" : "This is an introductory module that explores what a living thing is, the basics of life, and the science behind it. The course will introduce the chemistry of life and the unit of life. The question of how traits are inherited will be discussed and the field of biotechnology, including its applications and the ethical issues involved be will introduced. The diversity of life on earth will be explored, with discussions how life on earth possibly came about and how biologists try to classify and make sense of the diversity. The course will also introduce the concept of life functions from cells to tissues and from organs to systems. The concept of how organisms maintain their internal constancy and organisation of major organ systems will be discussed. The focus will be to introduce the unifying concepts in biology and how they play a role in everyday life.",
+    "preclusion" : "GCE `A’ Level or H2 Biology or equivalent, or LSM1301X",
+    "prerequisite" : null
+  },
   "CS2106" : {
     "moduleCode" : "CS2106",
     "title" : "Introduction to Operating Systems",
@@ -172,7 +204,7 @@
     "title" : "Computer Vision and Pattern Recognition",
     "moduleCredit" : "4",
     "description" : "This module is for undergraduates who are interested in computer vision and its applications.  It covers (a) the basic skills needed in handling images and videos, (b) the basic theories needed to understand geometrical computer vision, and (c) pattern recognition.  Topics covered in image handling include: contrast stretch, histogram equalization, noise removal, and color space.  Topics covered in geometrical vision include:  affine transform, vanishing points, camera projection models, homography, camera calibration, rotation representations including quaternions, epipolar geometry, binocular stereo, structure from motion.  Topics covered for pattern recognition include principal component analysis.",
-    "preclusion" : "EE4212 Computer Vision",
+    "preclusion" : "EE4212 Computer Vision\nEE4704 (Image Processing and Analysis)",
     "prerequisite" : "((CS1020 or its equivalent) or (((CS2030 or its equivalent) or CS2113/T) and (CS2040 or its equivalent))) and \n(MA1101R or MA1311 or MA1508E or MA1513) and \n(MA1102R or MA1505 or MA1507 or (MA1511 and MA1512) or MA1521) and \n(EE2012/A or MA2216 or ST1131/A or ST1232 or ST2131 or ST2334)"
   },
   "CS5331" : {
@@ -206,6 +238,14 @@
     "description" : "This module introduces the necessary conceptual and analytical tools for systematic and rigorous development of software systems. It covers four main areas of software development, namely object-oriented system analysis, object-oriented system modelling and design, implementation, and testing, with emphasis on system modelling and design and implementation of software modules that work cooperatively to fulfill the requirements of the system. Tools and techniques for software development, such as Unified Modelling Language (UML), program specification, and testing methods, will be taught. Major software engineering issues such as modularisation criteria, program correctness, and software quality will also be covered.",
     "preclusion" : "CS2103, CS2113, CS2113T, IS2101 or its equivalent.",
     "prerequisite" : "For SoC students only. (CS1020 or its equivalent) or CS2020 or ((CS2030 or its equivalent) and (CS2040 or its equivalent))"
+  },
+  "ST2334" : {
+    "moduleCode" : "ST2334",
+    "title" : "Probability and Statistics",
+    "moduleCredit" : "4",
+    "description" : "Basic concepts of probability, conditional probability, independence, random variables, joint and marginal distributions, mean and variance, some common probability distributions, sampling distributions, estimation and hypothesis testing based on a normal population.  This module is targeted at students who are interested in Statistics and are able to meet the pre-requisites. Preclude ME students taking or have taken ME4273.",
+    "preclusion" : "ST1131, ST1131A, ST1232, ST2131, MA2216, CE2407, EC2231, EC2303, PR2103, DSC2008. ME students taking or having taken ME4273. All ISE students.",
+    "prerequisite" : "MA1102R or MA1312 or MA1505 or MA1507 or MA1521"
   },
   "CS1231S" : {
     "moduleCode" : "CS1231S",
@@ -271,6 +311,14 @@
     "preclusion" : null,
     "prerequisite" : "CS3230 Design and Analysis of Algorithms or CS3210 Parallel Computing"
   },
+  "CP5010" : {
+    "moduleCode" : "CP5010",
+    "title" : "Graduate Research Paper",
+    "moduleCredit" : "0",
+    "description" : "The graduate research paper presentation is for evaluating the ability of the student to undertake a critical review of an existing research area.  The student is expected to have necessary background and show competence in embarking on the PhD research.  Students are expected to identify a promising research area.  The paper should be self-contained and provide a good overview of the research problems, initial exploration of the research area, and insight to the research problems, with preliminary study and proposals on the outstanding research issues.  It should contain more findings than a survery paper.",
+    "preclusion" : null,
+    "prerequisite" : null
+  },
   "CS4232" : {
     "moduleCode" : "CS4232",
     "title" : "Theory of Computation",
@@ -287,6 +335,30 @@
     "preclusion" : null,
     "prerequisite" : "CS3247 or NM3216"
   },
+  "CM1131" : {
+    "moduleCode" : "CM1131",
+    "title" : "Physical Chemistry 1",
+    "moduleCredit" : "4",
+    "description" : "Equations of state of ideal and real gases, intermolecular forces; kinetic theory of gases; first law of thermodynamics; enthalpy; thermochemistry; the second law; entropy; Helmholtz and Gibbs functions; the third law; rates of chemical reactions; accounting for the rate laws - reaction mechanisms; effect of temperature on reaction rate; theories of reaction rates.",
+    "preclusion" : null,
+    "prerequisite" : "'A' level or H2 pass in Chemistry or equivalent"
+  },
+  "CP3209" : {
+    "moduleCode" : "CP3209",
+    "title" : "Undergraduate Research Project in Computing",
+    "moduleCredit" : "8",
+    "description" : "This year-long module provides an opportunity for students to undertake a substantial research project under the supervision of faculty members of the School of Computing. Through this research collaboration, the student will experience first-hand the challenges and exhilaration of research, discovery and invention.",
+    "preclusion" : null,
+    "prerequisite" : "Completed 60MCs"
+  },
+  "CP3208" : {
+    "moduleCode" : "CP3208",
+    "title" : "Undergraduate Research in Computing I",
+    "moduleCredit" : "4",
+    "description" : "The module (together with CP3209) is part of the UROP (Computing) project. The objective of this module and the UROP (Computing) project in general, is to provide an opportunity for talented students to undertake a substantial research project under the supervision of faculty members of the School of Computing. Through this research collaboration, the student will get to experience at first hand the challenges and exhilaration of research, discovery and invention. This module should be followed by CS3209 to complete the UROP (Computing) project.",
+    "preclusion" : "CS3208",
+    "prerequisite" : "SoC students who have passed at least 60 MCs and with approval from respective department."
+  },
   "CS5439" : {
     "moduleCode" : "CS5439",
     "title" : "Software Security",
@@ -294,6 +366,22 @@
     "description" : "Software engineering processes need to include security considerations in the modern world. This module familiarizes students to security issues in different stages of the software life-cycle. At the end of the module, the students are expected to understand secure programming practices, be able to analyse and check for impact of malicious inputs in programs, and employ specific testing techniques which can help detect software vulnerabilities.",
     "preclusion" : "CS4239",
     "prerequisite" : "CS3235 and (CS2103 or its equivalent)"
+  },
+  "TR3202S" : {
+    "moduleCode" : "TR3202S",
+    "title" : "Start-up Internship Programme",
+    "moduleCredit" : "12",
+    "description" : "This module documents the learning experience from the internship in writing. Taken together with TR3201 Entrepreneurship Practicum, the student will prepare a weekly logbook as well as internship reports which will be used a part of the evaluation of their internship experience.",
+    "preclusion" : "TR3102",
+    "prerequisite" : null
+  },
+  "TR3202T" : {
+    "moduleCode" : "TR3202T",
+    "title" : "Start-up Internship Programme",
+    "moduleCredit" : "12",
+    "description" : "This module documents the learning experience from the internship in writing. Taken together with TR3201 Entrepreneurship Practicum, the student will prepare a weekly logbook as well as internship reports which will be used a part of the evaluation of their internship experience.",
+    "preclusion" : "TR3102",
+    "prerequisite" : null
   },
   "CS4226" : {
     "moduleCode" : "CS4226",
@@ -307,7 +395,7 @@
     "moduleCode" : "CS4347",
     "title" : "Sound and Music Computing",
     "moduleCredit" : "4",
-    "description" : "This module introduces the fundamental technologies employed in sound and music computing which are grouped into three major areas: Sound, Music, and Interaction. It begins with an introduction to sound production, propagation and perception, followed by digital sound recording, editing, post-processing and compression. Its core components consists of the analytic and synthetic approaches of sound and music. The analytic approach pertains to analysis and understanding, whereas the synthetic approach pertains to generation and processing. Interaction aspects include multimodal mobile music interface and sound interaction design. Finally, music information retrieval will be introduced as an application of analytic techniques.",
+    "description" : "This module introduces the fundamental technologies employed in Sound and Music Computing focusing on three major categories: speech, music, and environmental sound. This module introduces the concept of sound and its representations in the analog and digital domains, as well as in time and frequency domains. Moreover, this module provides hands-on instruction on relevant machine learning tools, and an in-depth review of related technologies in sound data analytics (Automatic Speech Recognition, Automatic Music Transcription and Sound Event Detection) leading to a group project. Topics in sound synthesis, automatic music generation and music information retrieval will be covered for breadth.",
     "preclusion" : null,
     "prerequisite" : "CS2108 and \n(MA1101R or MA1311 or MA1508E or MA1513) and \n(MA1102R or MA1505 or MA1507 or (MA1511 and MA1512) or MA1521)"
   },
@@ -351,6 +439,14 @@
     "preclusion" : null,
     "prerequisite" : "(CS2106 Operating Systems or CG2271 Realtime Operating Systems) and (CS3210 Parallel Computing or CS3220 Computer Architecture or CG3207 Computer Architecture)."
   },
+  "TR3202N" : {
+    "moduleCode" : "TR3202N",
+    "title" : "Start-up Internship Programme",
+    "moduleCredit" : "12",
+    "description" : "This module documents the learning experience from the internship in writing. Taken together with TR3201 Entrepreneurship Practicum, the student will prepare a weekly logbook as well as internship reports which will be used a part of the evaluation of their internship experience.",
+    "preclusion" : "TR3102",
+    "prerequisite" : null
+  },
   "CS1231" : {
     "moduleCode" : "CS1231",
     "title" : "Discrete Structures",
@@ -391,6 +487,14 @@
     "preclusion" : null,
     "prerequisite" : "CS3230 and \n(MA1101R or MA1311 or MA1506 or MA1508E) and\n(ST2131 or ST2334)"
   },
+  "TR3202I" : {
+    "moduleCode" : "TR3202I",
+    "title" : "Start-up Internship ProgrammeStart-up Internship Programme",
+    "moduleCredit" : "12",
+    "description" : "This module documents the learning experience from the internship in writing. Taken together with TR3201 Entrepreneurship Practicum, the student will prepare a weekly logbook as well as internship reports which will be used a part of the evaluation of their internship experience.",
+    "preclusion" : "TR3102",
+    "prerequisite" : null
+  },
   "CS2040" : {
     "moduleCode" : "CS2040",
     "title" : "Data Structures and Algorithms",
@@ -407,6 +511,94 @@
     "preclusion" : null,
     "prerequisite" : "CS4243 or CS5240"
   },
+  "CP5103" : {
+    "moduleCode" : "CP5103",
+    "title" : "Master of Computing Project",
+    "moduleCredit" : "8",
+    "description" : "The project option provides individual students the\nopportunity and experience to work on a significant\ncomputing project. It aims to prepare students with\nsufficient practical and/or research experiences in the\ncomputing field. The project will be carried out under the\nsupervision of an academic staff. The selection of the\ntopic will be done in consultation with the supervisor. All\nprojects will be vetted by the School. The project will be\nassessed through a written project report and will be\nletter-graded.",
+    "preclusion" : "CP5101 (MComp Dissertation), CP5102 (MComp\nInformation Security Project) or any project/ dissertation\nmodule.",
+    "prerequisite" : "Students must be in Master of Computing programme."
+  },
+  "PC1143" : {
+    "moduleCode" : "PC1143",
+    "title" : "Introduction to Electricity & Magnetism",
+    "moduleCredit" : "4",
+    "description" : "This module covers the fundamentals of electricity and magnetism: electric fields, electric flux and Gauss's law, electric potential; capacitance, dielectrics, current and resistance; DC circuits; magnetic fields, magnetic effect of currents, Ampere's law, electromagnetic induction; AC circuits; magnetism in matter; electromagnetic waves. The module also has a practical component consisting of five experiments designed to enhance students' understanding of some of the concepts discussed in lectures. This module is targeted at science students who wish to acquire a working knowledge in electricity and magnetism, and is an essential for physics majors.",
+    "preclusion" : "Students who have passed PC1432/PC1432X are not allowed to take this module.",
+    "prerequisite" : "‘A' level or H2 pass in Physics or PC1221/PC1221FC/PC1221X & PC1222/PC1222X"
+  },
+  "CP5104" : {
+    "moduleCode" : "CP5104",
+    "title" : "Graduate Project in Computing",
+    "moduleCredit" : "4",
+    "description" : "The objective of this project module is to allow graduate students an opportunity to undertake a substantial project work over a semester. Students may work individually on projects proposed by staff, possibly in collaboration with\nexternal companies. The students will have good opportunity to apply what they have learnt to some technical challenges or practical problems, be it researchoriented or software-development. The project will be assessed through a written project report and will be letter-graded.",
+    "preclusion" : "CP5101",
+    "prerequisite" : "Student must be enrolled in a postgraduate programme."
+  },
+  "PC1144" : {
+    "moduleCode" : "PC1144",
+    "title" : "Introduction to Modern Physics",
+    "moduleCredit" : "4",
+    "description" : "This module introduces the ideas of modern physics to students, with an emphasis on conceptual understanding. Topics covered are a) Einstein's theory of special relativity, including time dilation, length contraction, and his famous equation E=mc2, b) Quantum physics, where the observed phenomena of black body radiation, the photoelectric effect and Compton scattering, leading to the quantization of angular momentum and energy, atomic transitions and atomic spectra, c) Introduction to quantum mechanics, introducing the Heisenberg uncertainty principle, wave-mechanics and wave particle duality, and the use of wavefunctions in predicting the behaviour of particles trapped in potential wells, d) Nuclear physics, introducing radioactivity and decay processes, nuclear interaction and binding energy, fission and fusion, and e) Sub-atomic elementary particles and their classification. The module is targeted at science students who are interested in learning about the more recent developments in physics, and is an essential for physics majors.",
+    "preclusion" : "Students who have passed PC1432/PC1432X are not allowed to take this module.",
+    "prerequisite" : "‘A' level or H2 pass in Physics or PC1221/PC1221FC/PC1221X & PC1222/PC1222X"
+  },
+  "PC1141" : {
+    "moduleCode" : "PC1141",
+    "title" : "Introduction to Classical Mechanics",
+    "moduleCredit" : "4",
+    "description" : "This module presents the fundamental principles of classical mechanics. It covers such topics as kinematics, Galilean transformation, Newton's laws of motion, dynamics of a particle with generalization to many particle systems, conservation laws, collisions, angular momentum and torque, motion of a rigid body, gravitation and planetary motion, static equilibrium, oscillatory motion and vibrational modes, waves, Doppler's effect and fluid mechanics. The module also has a practical component consisting of five experiments designed to enhance students' understanding of some of the concepts discussed in lectures. This module is targeted at science students who wish to acquire a working knowledge of mechanics, and is an essential for physics majors.",
+    "preclusion" : "STUDENTS WHO HAVE PASSED PC1431 OR PC1431FC or PC1431X OR PC1433 ARE NOT ALLOWED TO TAKE THIS MODULE.",
+    "prerequisite" : "‘A' level or H2 pass in Physics or PC1221/PC1221FC/PC1221X & PC1222/PC1222X"
+  },
+  "CM1417" : {
+    "moduleCode" : "CM1417",
+    "title" : "Fundamentals of Chemistry",
+    "moduleCredit" : "4",
+    "description" : "The objective of this module is to provide an introduction to the fundamental topics and concepts of chemistry. This includes topics like structure of matter, periodicity and the periodic table, chemical Bonding, states of matter, stoichiometry and equilibrium, reaction types, kinetics, organic chemistry, including such topics as functional groups and isomerism.",
+    "preclusion" : "A level or H2 Chemistry or equivalent or CM1417X",
+    "prerequisite" : "'O' Level pass in Chemistry or equivalent"
+  },
+  "PC1142" : {
+    "moduleCode" : "PC1142",
+    "title" : "Introduction to Thermodynamics and Optics",
+    "moduleCredit" : "4",
+    "description" : "This module covers the fundamentals of two branches of physics: thermodynamics and optics. Its aim is to prepare students for a host of more advanced modules in these and related areas. Topics included in the part on thermodynamics are thermal processes and effects, the first and second laws, kinetic theory of gases, heat engines and entropy. The part on optics encompasses topics such as geometric optics, systems of lenses, optical instruments, interference, diffraction, grating and polarization. The module also has a practical component consisting of five experiments designed to enhance students' understanding of some of the concepts discussed in lectures. This module is targeted at science students who wish to acquire a working knowledge of thermodynamics and optics, and is an essential for physics majors.",
+    "preclusion" : "STUDENTS WHO HAVE PASSED PC1431 OR PC1431FC or PC1431X ARE NOT ALLOWED TO TAKE THIS MODULE.",
+    "prerequisite" : "‘A' level or H2 pass in Physics or PC1221/PC1221FC/PC1221X & PC1222/PC1222X"
+  },
+  "CP3201" : {
+    "moduleCode" : "CP3201",
+    "title" : "Industry Seminar",
+    "moduleCredit" : "2",
+    "description" : "The information technology (IT) industry is in an everchanging state of evolvement and innovation. This module aims to acquaint students with the latest Information\nTechnology (IT) innovation, practices, and developments. Prominent leaders and practitioners in the IT industry will be invited to impart their knowledge and insights into the latest IT trends and developments from various industry arenas such as the finance, healthcare, consulting, manufacturing, and entertainment industries. Students' performance will be graded as \"Completed Satisfactory/Completed Unsatisfactory (CS/CU)\" at the end of the module based on the coursework.",
+    "preclusion" : null,
+    "prerequisite" : "Students can only take this module after completing 70 MCs"
+  },
+  "CP5101" : {
+    "moduleCode" : "CP5101",
+    "title" : "MComp Dissertation",
+    "moduleCredit" : "16",
+    "description" : "The dissertation option gives individual students the opportunity for independent study and research in the area of their selected specialization. This will be carried out under the supervision of an academic staff, and the selection of the topic/area will be done in consultation with the supervisor in the area of expertise.",
+    "preclusion" : "- CP5102 (MComp Information Security Project - 8MC)\n- CP5103 (Master of Computing Project – 8MC)\n- CP5104 (Graduate Project in Computing – 4MC)",
+    "prerequisite" : null
+  },
+  "CP5102" : {
+    "moduleCode" : "CP5102",
+    "title" : "MComp Information Security Project",
+    "moduleCredit" : "8",
+    "description" : "The exploratory project option gives individual students the opportunity for independent study and research in the area of their selected specialization. This will be carried out under the supervision of an academic staff, in possible cosupervision with a mentor from the industry or government agency. The selection of the topic/area will be done in consultation with the supervisor and the external mentor. All projects will be vetted by School of Computing Postgraduate Office.",
+    "preclusion" : null,
+    "prerequisite" : "Students must be in Master of Computing programme, Infocomm Security specialisation"
+  },
+  "CM1121" : {
+    "moduleCode" : "CM1121",
+    "title" : "Organic Chemistry 1",
+    "moduleCredit" : "4",
+    "description" : "This module covers the characteristic properties, methods of preparation, and reactions of alkanes/cycloalkanes, alkenes, alkynes, benzene and other aromatic compounds, alkyl halides; alcohols; ethers; epoxides, phenols, aldehydes and ketones; carboxylic acids and their derivatives; amines.",
+    "preclusion" : "CM1501 or CM1503 or CM1401",
+    "prerequisite" : "'A' level or H2 pass in Chemistry or equivalent or CM1417/CM1417X"
+  },
   "CS2040C" : {
     "moduleCode" : "CS2040C",
     "title" : "Data Structures and Algorithms",
@@ -414,6 +606,22 @@
     "description" : "This module introduces students to the design and implementation of fundamental data structures and algorithms. The module covers basic data structures (linked lists, stacks, queues, hash tables, binary heaps, trees, and graphs), searching and sorting algorithms, basic analysis of algorithms, and basic object-oriented programming concepts.",
     "preclusion" : "CS1020, CS1020E, CS2020, CS2010, CS2040, CS2040S",
     "prerequisite" : "CS1010 or its equivalent"
+  },
+  "CP3108A" : {
+    "moduleCode" : "CP3108A",
+    "title" : "Independent Work",
+    "moduleCredit" : "2",
+    "description" : "",
+    "preclusion" : "CS3108A",
+    "prerequisite" : null
+  },
+  "CP3108B" : {
+    "moduleCode" : "CP3108B",
+    "title" : "Independent Work",
+    "moduleCredit" : "4",
+    "description" : "",
+    "preclusion" : "CS3108B",
+    "prerequisite" : null
   },
   "CS4218" : {
     "moduleCode" : "CS4218",
@@ -567,6 +775,14 @@
     "preclusion" : "CS2030S",
     "prerequisite" : "CS1010 or its equivalent"
   },
+  "IS1103" : {
+    "moduleCode" : "IS1103",
+    "title" : "Ethics in Computing",
+    "moduleCredit" : "4",
+    "description" : "This module gives an introduction to Ethics in the Computing domain. Students will learn about the importance of Ethics in Computing policy-making and be able to make judgements and decisions based on established ethical frameworks (such as Deontology, Consequentialism, Social Contract Theory and Virtue Ethics). The objective is to develop students to be ethical computing decision-makers who can analyse and explain their decisions in real-world policy-making situations. Issues in emerging areas such as Digital Intellectual Property Rights, Artificial Intelligence, Big Data, Social Media, Hacking, and interface design may also be discussed in relation to Ethics.",
+    "preclusion" : null,
+    "prerequisite" : null
+  },
   "CS5260" : {
     "moduleCode" : "CS5260",
     "title" : "Neural Networks and Deep Learning II",
@@ -574,6 +790,30 @@
     "description" : "This module is a follow-up to CS5242 and covers\nadvanced topics in neural networks and deep learning.\nThis module explores the underlying mechanism of a\nvariety of different types of learning models: unsupervised,\nsemi-supervised, and adversarial learning models, that\nare not covered in CS5242. Topics may include:\ngenerative adversarial networks, adversarial machine\nlearning, zero-shot learning, geometric deep learning,\nneural architecture search.",
     "preclusion" : null,
     "prerequisite" : "CS5242 Neural Networks and Deep Learning"
+  },
+  "PC1432" : {
+    "moduleCode" : "PC1432",
+    "title" : "Physics IIE",
+    "moduleCredit" : "4",
+    "description" : "This module introduces fundamental concepts of physics and is illustrated with many practical examples. Topics covered include a) Electricity and magnetism, where the basic concepts of electric and magnetic fields, forces on charged particles, electric potential, electromotive force, work and energy, are described. The properties of basic electrical circuits comprising resistors, inductors and capacitors are discussed, along with analysis of their transient and steady-state behaviour. Understanding the role of Maxwell's equations in electromagnetism is emphasized; b) Waves, introducing properties of waves, including geometric optics, propagation, interference and diffraction, and electromagnetic waves; and c) Quantum physics, where new physics concepts which led to the quantization of energy are introduced, leading to an explanation of atomic transitions, atomic spectra and the physical and the chemical properties of the atom. The uncertainty principle, wave-mechanics and wave particle duality concepts are covered, together with the use of wavefunctions in predicting the behaviour of trapped particles. The module is targeted essentially at Engineering students.",
+    "preclusion" : "Students majoring in Physics or students who have passed in PC1143 or PC1144 or PC1432X are not allowed to take this module.",
+    "prerequisite" : "Students from FOE ( i.e. Computer Eng, Common Engineering, Bioengineering, Industrial & Systems Eng and Material Science & Eng) with ‘A’ level or H2 pass in Physics; or 'A' level or H2 pass in Physics; or PC1221/PC1221FC/PC1221X & PC1222/PC1222X"
+  },
+  "LSM1106" : {
+    "moduleCode" : "LSM1106",
+    "title" : "Molecular Cell Biology",
+    "moduleCredit" : "4",
+    "description" : "The objective is to provide the student with a firm and rigorous foundation in current concepts of the structure and functions of biomolecules in molecular cellular biology. These fundamental concepts form the basis of almost all recent advances in biological and the biomedical sciences. The lectures will introduce various cellular organelles as models to gain insights into how structures and functions of classes of biomolecules participating in important cellular processes.",
+    "preclusion" : "LSM1101",
+    "prerequisite" : "GCE ‘A’ Level or H2 Biology or equivalent, or LSM1301 or LSM1301X"
+  },
+  "LSM1105" : {
+    "moduleCode" : "LSM1105",
+    "title" : "Evolutionary Biology",
+    "moduleCredit" : "4",
+    "description" : "Evolutionary biology covers the history of life on our planet and the processes that produced the multiple life forms of Earth. Topics include: the origins of life, the eukaryotic cell, and multicellularity; the generation of genetic variation and the sorting of that variation through random processes and through natural and sexual selection; the origin of new traits, new life histories, and new species; the origins of sex, sociality, and altruism; the evolution of humans; and applications of evolutionary biology to solving modern-day problems.",
+    "preclusion" : "YSC2216",
+    "prerequisite" : "GCE 'A' Level or H2 Biology or equivalent, or LSM1301 or LSM1301X"
   },
   "CS1010X" : {
     "moduleCode" : "CS1010X",
@@ -590,6 +830,14 @@
     "description" : "",
     "preclusion" : "CS2305S",
     "prerequisite" : "(CS2010 or its equivalent) or CS2020 or ((CS2030 or its equivalent) or CS2113/T) and (CS2040 or its equivalent))\nand \n(MA1100 or (CS1231 or its equivalent))"
+  },
+  "LSM1102" : {
+    "moduleCode" : "LSM1102",
+    "title" : "Molecular Genetics",
+    "moduleCredit" : "4",
+    "description" : "This module covers topics on (i) the patterns of inheritance, (ii) the molecular properties of genes and chromosomes, (iii) transcription and translation, (iv) genetic methods and technology, and (v) genetic analysis of individuals and populations. This will include an in-depth understanding of mendelian patterns of inheritance and variations that could occur due to multiple alleles, lethal genes, chromosomal variations, linkage, gene interaction and other genetic phenomena. Emphasis is placed on the understanding of the underlying molecular and biochemical basis of inheritance. Quantitative and population genetics will also be discussed with the emphasis of understanding the processes and forces in nature that promote genetic changes.",
+    "preclusion" : "YSC2233",
+    "prerequisite" : "GCE 'A' Level or H2 Biology or equivalent, or LSM1301 or LSM1301X"
   },
   "CS1010R" : {
     "moduleCode" : "CS1010R",
@@ -671,6 +919,14 @@
     "preclusion" : "EEE and CPE students can only take this module as a technical elective to satisfy the program requirements or UEM but not CFM/ULR-Breadth.",
     "prerequisite" : "((CS2010 or its equivalent) or CS2020 or (CS2040 or its equivalent)) and (MA1100 or (CS1231 or its equivalent))"
   },
+  "CP6010" : {
+    "moduleCode" : "CP6010",
+    "title" : "Doctoral Seminar",
+    "moduleCredit" : "0",
+    "description" : "A PhD candidate will be required to give a Doctoral Seminar within 12 months after passing his/her PhD Thesis Proposal.  The seminar, which should include any research findings or work from published papers.",
+    "preclusion" : null,
+    "prerequisite" : null
+  },
   "CS6101" : {
     "moduleCode" : "CS6101",
     "title" : "Exploration of Computer Science Research",
@@ -702,6 +958,14 @@
     "description" : "The module covers a broad range of issues in the design and implementation of modern advanced operating systems. The topics covered in this module includes OS design strategies (including microkernels, mobile, embedded and real-time operating systems and the component’s interfaces), priority and resource allocation strategies; scheduling algorithms (including for multi-core, multi-processors); naming, protection and security; UI and windowing systems; file system implementations (including network and distributed file systems); failure and recovery; and virtualization and the Internet-ready OS. They extend and provide in-depth coverage of material in earlier prerequisite OS modules.",
     "preclusion" : null,
     "prerequisite" : "CS2106 Introduction to Operating Systems or CG2271\nReal-Time Operating Systems"
+  },
+  "CP2106" : {
+    "moduleCode" : "CP2106",
+    "title" : "Independent Software Development Project (Orbital)",
+    "moduleCredit" : "4",
+    "description" : "Orbital provides a platform for students to gain hands-on industrial experience for computing technologies related to students’ own interests. Done in pairs of two, Orbital students propose, design, execute, implement and market their project to peers and faculty. Peer assessment and critique of others’ projects are key components of the modules’ deliverables.",
+    "preclusion" : "CS2103 Software Engineering or its equivalent",
+    "prerequisite" : "CS1010 Programming Methodology or its equivalent"
   },
   "CS6219" : {
     "moduleCode" : "CS6219",
@@ -799,6 +1063,14 @@
     "preclusion" : null,
     "prerequisite" : "(ST2334 or ST2131) and CS2105 and CS2106."
   },
+  "CM1417X" : {
+    "moduleCode" : "CM1417X",
+    "title" : "Fundamentals of Chemistry",
+    "moduleCredit" : "4",
+    "description" : "The objective of this module is to provide an introduction to the fundamental topics and concepts in chemistry. This includes topics such as structure of matter, periodic table and periodicity, chemical bonding, states of matter, stoichiometry, reaction types, kinetics, equilibrium and introduction to organic chemistry.",
+    "preclusion" : "Students with ‘A’ level or H2 Chemistry or equivalent.\nor CM1417",
+    "prerequisite" : "’O’ level pass in chemistry or equivalent"
+  },
   "CS5242" : {
     "moduleCode" : "CS5242",
     "title" : "Neural Networks and Deep Learning",
@@ -870,6 +1142,14 @@
     "description" : "This module covers advanced topics in artificial intelligence that are of current research or application interests. A wide range of topics may be covered including soft computing (fuzzy logic, genetic algorithms, etc.), data mining, machine learning, image and video processing, artificial life, robotics, etc. The exact topics to be taught will depend on the lecturers teaching the module.",
     "preclusion" : null,
     "prerequisite" : "CS3243"
+  },
+  "ES2660" : {
+    "moduleCode" : "ES2660",
+    "title" : "Communicating in the Information Age",
+    "moduleCredit" : "4",
+    "description" : "In a context of prolific production and convenient access to content and innovation in the Information Age, how should one critically process and clearly communicate ideas to various audiences? In this module, students will learn to question and articulate their analysis of assumptions and assertions on issues facing the Information Age through processes such as identifying bias and substantiating arguments. The Ennis’ (1986, 2001) taxonomy of critical thinking dispositions will be employed to develop students’ analytical thinking skills and their ability to articulate cogent responses to arguments or to defend their own positions in both written and oral form.",
+    "preclusion" : "GET1006 and GEK1901",
+    "prerequisite" : "1. Students who are required to take ES1000 Foundation Academic English and/or ES1103 English for Academic Purposes, must pass those modules before they are allowed to read this module.\n2. Only SoC students matriculated in AY2016/2017 and after, are allowed to take ES2660."
   },
   "CS5239" : {
     "moduleCode" : "CS5239",
@@ -1007,6 +1287,14 @@
     "preclusion" : "Variable, depend on the choice of topics or departmental approval.",
     "prerequisite" : "CS3244 Machine Learning"
   },
+  "PC1221" : {
+    "moduleCode" : "PC1221",
+    "title" : "Fundamentals of Physics I",
+    "moduleCredit" : "4",
+    "description" : "This module aims to bridge the gap between O level physics and 1st year university physics level. The module covers the fundamentals of two branches of physics: mechanics and thermodynamics. Topics included in the part on mechanics are linear motion, curvilinear motion, relative motion, circular motion, Newtons laws of motion, work and energy, conservation of energy, linear momentum and conservation, rotational kinematics, torque and moment of inertia, rotational dynamics, conservation of angular momentum, gravitation and planetary motion, static equilibrium, oscillatory motion and fluid mechanics. The part on thermodynamics encompasses topics such as temperature and zeroth law of thermodynamics, temperature scales, thermal expansion, heat and internal energy, thermal processes, first law of thermodynamics, ideal gas laws and kinetic theory of gasses.  .",
+    "preclusion" : "A' LEVEL OR H2 PASS IN PHYSICS OR PC1141, OR PC1142 OR PC1431 OR PC1431FC or PC1431X OR PC1221FC or PC1221X, YSC1213",
+    "prerequisite" : "'O' level pass in Physics or Combined Science (Physics & Chemistry OR Physics & Biology)."
+  },
   "CS6280" : {
     "moduleCode" : "CS6280",
     "title" : "Topics in Computer Science: Systems Design for Next Gen Hardware",
@@ -1015,6 +1303,14 @@
     "preclusion" : null,
     "prerequisite" : "CS2100 Computer Organization and CS2106 Introduction to Operating Systems"
   },
+  "CP3880" : {
+    "moduleCode" : "CP3880",
+    "title" : "Advanced Technology Attachment Programme",
+    "moduleCredit" : "12",
+    "description" : "",
+    "preclusion" : "EG3601",
+    "prerequisite" : "(IS2101 Business and Technical Communication or CS2101 Effective Communication for Computing Professionals or their equivalents)\nand\n(CS2103/CS2103T Software Engineering or IS2103 Enterprise Systems Development Concepts or IS2150 E-Business Design and Implementation or BT2101 IT and Decision Making)"
+  },
   "CSA6102" : {
     "moduleCode" : "CSA6102",
     "title" : "Cultural Studies in Asia",
@@ -1022,6 +1318,22 @@
     "description" : "This module will examine the various areas of research in Cultural Studies conducted by Asian scholars or scholars locating their research in Asia. It will examine the histories, concepts and analytic strategies that these scholars deploy in the analysis of the changing cultural landscapes and practices in contemporary Asia. Abiding themes of the module will be the conceptual constitution of the idea of 'Asia', the emergence of 'trans-Asian' practices and the possibility of 'pan-Asian' identities that these trans-location practices might engender.",
     "preclusion" : null,
     "prerequisite" : null
+  },
+  "PC1222" : {
+    "moduleCode" : "PC1222",
+    "title" : "Fundamentals of Physics II",
+    "moduleCredit" : "4",
+    "description" : "The module aims to bridge the gap between O level Physics and first year university physics level. The module covers the fundamentals of three branches of physics: electricity &amp; magnetism, optics and modern physics. Topics included in the part on electricity &amp; magnetism are Coulombs law, electric field and potential, capacitance, current and resistance, DC circuits, magnetic fields, magnetic effects on current, electromagnetic induction, AC circuits and electromagnetic waves. The part on optics encompasses topics such as reflection and refraction, systems of lenses, optical instruments, interference, diffraction, grating and polarization. Topics covered in the part on modern physics are blackbody radiation, photoelectric effect, atomic transitions and spectra, the uncertainty principle, wave-particle duality, radioactivity and decay processes, binding energy and fusion energy and fusion &amp; fission.",
+    "preclusion" : "'A' Level OR H2 Pass in Physics or PC1143, or PC1144 or PC1432/PC1432X, YSC1213",
+    "prerequisite" : "'O' level pass in Physics or Combined Science (Physics & Chemistry OR Physics & Biology)."
+  },
+  "CP4106" : {
+    "moduleCode" : "CP4106",
+    "title" : "Computing Project",
+    "moduleCredit" : "8",
+    "description" : "The objective of this project module enables students to undertake a substantial computing-related project work over a period of one year. Students work individually on self-proposed projects or projects proposed by staff. They will have good opportunity to apply what they have learnt on practical problems, be it research-oriented or software development-oriented. Students should periodically submit a report make a presentation to the respective supervisors.\nThe project will be letter-graded.",
+    "preclusion" : "CG4001, BT4101, CP4101, or any Integrated Honours Thesis/Project/Dissertation module",
+    "prerequisite" : "Completed at least 112 MCs for the respective degree."
   },
   "MA1521" : {
     "moduleCode" : "MA1521",
@@ -1134,5 +1446,29 @@
     "description" : "This module is the second part of a two-part series on the development of large-scaled computer systems to solve real-world problems under specific themes such as healthcare, security and surveillance, tourism, etc. Students with complementary technical expertise will form project teams to work on real-world projects under the supervision of CS professors and industrial partners. This\nsecond part focuses on the development of algorithms required for the systems, implementation and testing of the algorithms and the systems, and evaluation of the systems according to the users’ requirements.",
     "preclusion" : null,
     "prerequisite" : "CS3281 and have passed at least two primary modules in a CS focus area. Student selection process will be enforced."
+  },
+  "CP2201" : {
+    "moduleCode" : "CP2201",
+    "title" : "Journey of the Innovator",
+    "moduleCredit" : "2",
+    "description" : "Innovators practice the art of persuading people to accept changes in how they live—in work, leisure and social interaction. This module’s object is to introduce students to digital innovation, and to encourage them to embark on a personal journey of creativity and challenge. Inspirational innovators will be invited to present topics related to digital innovation, such as successful innovative projects of start-up teams and advanced development teams, innovative approaches such as Design Thinking, and opportunities for innovation, the vibrant intersection of energising technology trends and new markets. This module will be graded as “Completed Satisfactory” or “Completed Unsatisfactory”\n(CS/CU).",
+    "preclusion" : null,
+    "prerequisite" : null
+  },
+  "IS4010" : {
+    "moduleCode" : "IS4010",
+    "title" : "Industry Internship Programme",
+    "moduleCredit" : "12",
+    "description" : "This module enables students to apply the computing knowledge and skills that they have acquired in class to industry internships in companies/organizations. Students in industry internships will be jointly guided by supervisors from both the companies/organizations and the school Their progress on internship projects will be monitored during internship period, and their performance will be assessed through letter grades at the end of the internship. The internship duration will be 6 months, consisting of both a full-time and part-time component. Full-time internship attachment will last for 3 months during the NUS vacation period, and will continue on a part-time basis that will last for 3 months during the NUS study semester.",
+    "preclusion" : null,
+    "prerequisite" : "[IS2101 or CS2101] and [IS1105 or IS3101 or IS3103] and [IS2103 or CS2107 or  (BT2101 and BT2102)]"
+  },
+  "CP4101" : {
+    "moduleCode" : "CP4101",
+    "title" : "B.Comp. Dissertation",
+    "moduleCredit" : "12",
+    "description" : "",
+    "preclusion" : "CS4101",
+    "prerequisite" : "Attain at least 70% of the MC requirement for the respective degree"
   }
 }

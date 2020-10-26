@@ -26,22 +26,22 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.nusmods.exceptions.NusmodsException;
 
 public class DataFetcherManagerTest {
-    private static final String TEST_SAVE_FILE_PATH = "src/test/data/NusmodsDataManagerTest/saveModulesTest.json";
-    private static final String MODULE_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest/validModule.json";
-    private static final String INVALID_MODULE_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest"
+    private static final String TEST_SAVE_FILE_PATH = "src/test/resources/NusmodsDataManagerTest/saveModulesTest.json";
+    private static final String MODULE_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest/validModule.json";
+    private static final String INVALID_MODULE_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest"
                                                                         + "/invalidModule.json";
-    private static final String VALID_MODULE_SUMMARIES_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest"
+    private static final String VALID_MODULE_SUMMARIES_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/validSummaries.json";
-    private static final String CS1010X_MODULE_INFO = "src/test/data/NusmodsDataManagerTest"
+    private static final String CS1010X_MODULE_INFO = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/CS1010X.json";
-    private static final String IS1103_MODULE_INFO = "src/test/data/NusmodsDataManagerTest"
+    private static final String IS1103_MODULE_INFO = "src/test/resources/NusmodsDataManagerTest"
                                                                                 + "/IS1103.json";
 
     private DataFetcherManager manager = new DataFetcherManager();
 
     @Test
     public void constructor_defaultWithNoArgs_defaultFilePathUsed() {
-        assertEquals(DataFetcher.DATA_FILE_PATH, manager.getDataFilePath());
+        assertEquals(DataFetcher.SAVE_DATA_FILE_PATH, manager.getDataFilePath());
     }
 
     @Test
@@ -125,14 +125,17 @@ public class DataFetcherManagerTest {
 
         manager.fetchAndSaveModules();
         Map<String, ModuleInfo> actualMap = readModuleInfoMapFromFile(TEST_SAVE_FILE_PATH);
-        Optional<ModuleInfo> expectedModule = JsonUtil.readJsonFile(Paths.get(CS1010X_MODULE_INFO), ModuleInfo.class);
+
+        Optional<ModuleInfo> expectedCs1010x = JsonUtil.readJsonFile(Paths.get(CS1010X_MODULE_INFO), ModuleInfo.class);
+        Optional<ModuleInfo> expectedIs1103 = JsonUtil.readJsonFile(Paths.get(IS1103_MODULE_INFO), ModuleInfo.class);
 
         // clean up test data file after we're done
         Files.deleteIfExists(Paths.get(TEST_SAVE_FILE_PATH));
 
-        if (expectedModule.isPresent()) {
+        if (expectedCs1010x.isPresent() && expectedIs1103.isPresent()) {
             Map<String, ModuleInfo> expectedMap = new HashMap<>();
-            expectedMap.put("CS1010X", expectedModule.get());
+            expectedMap.put("CS1010X", expectedCs1010x.get());
+            expectedMap.put("IS1103", expectedIs1103.get());
             assertEquals(expectedMap, actualMap);
             return;
         }

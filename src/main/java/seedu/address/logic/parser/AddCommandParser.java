@@ -7,7 +7,6 @@ import java.util.Set;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.ModuleInfoSearcher;
-import seedu.address.logic.ValidNusmodsModuleCodeChecker;
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -41,16 +40,11 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         String moduleCodeText = StringUtil.ignoreCase(moduleCode.toString());
-        ValidNusmodsModuleCodeChecker codeChecker = new ValidNusmodsModuleCodeChecker();
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         ModuleInfo moduleInfo;
 
         try {
-            if (codeChecker.isValidNusmodsModuleCode(moduleCodeText)) {
-                moduleInfo = moduleInfoSearcher.searchModule(moduleCodeText);
-            } else {
-                throw new CommandException(MESSAGE_INVALID_MODULE);
-            }
+            moduleInfo = moduleInfoSearcher.searchModule(moduleCodeText);
         } catch (CommandException e) {
             throw new ParseException(e.getMessage());
         }

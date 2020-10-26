@@ -3,10 +3,13 @@ package seedu.address.model;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Set;
 
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.UniqueModuleList;
+import seedu.address.model.tag.Tag;
+import seedu.address.model.tag.UniqueTagMap;
 
 /**
  * Wraps all data at the GradPad level
@@ -15,6 +18,7 @@ import seedu.address.model.module.UniqueModuleList;
 public class GradPad implements ReadOnlyGradPad {
 
     private final UniqueModuleList modules;
+    private final UniqueTagMap tags;
 
     /*
      * The 'unusual' code block below is a non-static initialization block, sometimes used to avoid duplication
@@ -25,6 +29,7 @@ public class GradPad implements ReadOnlyGradPad {
      */
     {
         modules = new UniqueModuleList();
+        tags = new UniqueTagMap();
     }
 
     public GradPad() {}
@@ -49,12 +54,21 @@ public class GradPad implements ReadOnlyGradPad {
     }
 
     /**
+     * Replaces the current tags with {@code tags}.
+     */
+    public void setTags(UniqueTagMap tags) {
+        assert tags != null;
+        this.tags.setTags(tags);
+    }
+
+    /**
      * Resets the existing data of this {@code GradPad} with {@code newData}.
      */
     public void resetData(ReadOnlyGradPad newData) {
         requireNonNull(newData);
 
         setModules(newData.getModuleList());
+        setTags(newData.getTags());
     }
 
     //// module-level operations
@@ -73,7 +87,12 @@ public class GradPad implements ReadOnlyGradPad {
      */
     public void addModule(Module m) {
         assert m != null;
-        modules.add(m);
+
+        // Reuse existing tags if possible
+        Set<Tag> replacedTags = tags.checkAndReplaceTags(m.getTags());
+        Module toAdd = new Module(m.getModuleCode(), m.getModularCredits(), replacedTags);
+
+        modules.add(toAdd);
     }
 
     /**
@@ -84,7 +103,14 @@ public class GradPad implements ReadOnlyGradPad {
     public void setModule(Module target, Module editedModule) {
         requireNonNull(editedModule);
 
-        modules.setModule(target, editedModule);
+        // "untag" all tags in the module we're going to edit
+        tags.remove(target.getTags());
+        // Get new tags and reuse existing tags if possible
+        Set<Tag> replacedTags = tags.checkAndReplaceTags(editedModule.getTags());
+        Module editedModuleToAdd = new Module(editedModule.getModuleCode(), editedModule.getModularCredits(),
+                                           replacedTags);
+
+        modules.setModule(target, editedModuleToAdd);
     }
 
     /**
@@ -93,6 +119,7 @@ public class GradPad implements ReadOnlyGradPad {
      */
     public void removeModule(Module key) {
         assert key != null;
+        tags.remove(key.getTags());
         modules.remove(key);
     }
 
@@ -107,6 +134,11 @@ public class GradPad implements ReadOnlyGradPad {
     @Override
     public ObservableList<Module> getModuleList() {
         return modules.asUnmodifiableObservableList();
+    }
+
+    @Override
+    public UniqueTagMap getTags() {
+        return tags;
     }
 
     @Override

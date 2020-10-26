@@ -1,7 +1,9 @@
 package seedu.address.model;
 
+
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
+import seedu.address.model.tag.UniqueTagMap;
 
 /**
  * Unmodifiable view of a GradPad
@@ -14,4 +16,8 @@ public interface ReadOnlyGradPad {
      */
     ObservableList<Module> getModuleList();
 
+    /**
+     * Returns the unique tags in the GradPad.
+     */
+    UniqueTagMap getTags();
 }

@@ -204,7 +204,7 @@ To check total modular credits:
 
 ### Checking required modules: `required`
 
-The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your current GradPad module list.
+The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
 
 Example: <br>
 You have added several modules into your GradPad so far but you are unsure if they are part of the Computer Science curriculum. You can simply check by using the `required` command.
@@ -233,6 +233,8 @@ To check Science modules:
 The `search` command allows you to search for any module available in NUS.
 
 You can search for a module by specifying the module code of the module.
+
+**Note**: If your internet is down, you can only search for modules that are of the Computer Science curriculum.
 
 Example: <br>
 After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? Do they have any pre-requisites?). You can simply look up those details by using the `search` command.

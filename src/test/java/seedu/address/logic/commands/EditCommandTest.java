@@ -7,6 +7,7 @@ import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -85,16 +86,22 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_filteredList_failure() {
+    public void execute_filteredList_sucess() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         Module moduleInFilteredList = model.getFilteredModuleList().stream()
             .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
-        Module editedModule = new ModuleBuilder(moduleInFilteredList).withCode(VALID_CODE_CS3216).build();
+        Module editedModule = new ModuleBuilder(moduleInFilteredList)
+            .withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build();
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
-                new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS3216).build());
+                new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+
+        Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
+        expectedModel.setModule(moduleInFilteredList, editedModule);
+
+        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
     }
 
     @Test

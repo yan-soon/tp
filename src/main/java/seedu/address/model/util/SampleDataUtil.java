@@ -19,17 +19,17 @@ public class SampleDataUtil {
     public static Module[] getSampleModules() {
         return new Module[] {
             new Module(new ModuleCode("CS2103T"), new ModuleTitle("Software Engineering"),
-                new ModularCredits("4"), getTagSet("noice")),
+                new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("CS1010"), new ModuleTitle("Programming Methodology"),
-                new ModularCredits("4"), getTagSet("toit")),
+                new ModularCredits("4"), getTagSet("FOundation")),
             new Module(new ModuleCode("CS2101"), new ModuleTitle("Effective Communication for Computing "
-                + "Professionals"), new ModularCredits("4"), getTagSet("smort")),
+                + "Professionals"), new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("CS2105"), new ModuleTitle("Introduction to Computer Networks"),
-                new ModularCredits("4"), getTagSet("boringass")),
+                new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("MA1521"), new ModuleTitle("Calculus for Computing"),
-                new ModularCredits("4"), getTagSet("dumb")),
+                new ModularCredits("4"), getTagSet("MathSci")),
             new Module(new ModuleCode("CS2107"), new ModuleTitle("Introduction to Information Security"),
-                new ModularCredits("4"), getTagSet("hehe"))
+                new ModularCredits("4"), getTagSet("BreadthDepth"))
         };
     }
 

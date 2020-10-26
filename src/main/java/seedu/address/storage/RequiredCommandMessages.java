@@ -21,9 +21,4 @@ public class RequiredCommandMessages {
     public static final String ITPROF_PATH = "data/ITProfessionalism.json";
     public static final String MATHANDSCI_PATH = "data/mathandsciencemodules.json";
     public static final String SCIENCE_PATH = "data/sciencemodules.json";
-    public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
-    public static final String TEST_INTERNSHIP_PATH = "src/main/resources/data/industrialexperience.json";
-    public static final String TEST_ITPROF_PATH = "src/main/resources/data/ITProfessionalism.json";
-    public static final String TEST_MATHANDSCI_PATH = "src/main/resources/data/mathandsciencemodules.json";
-    public static final String TEST_SCIENCE_PATH = "src/main/resources/data/sciencemodules.json";
 }

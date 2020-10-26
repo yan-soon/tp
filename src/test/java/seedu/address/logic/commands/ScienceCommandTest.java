@@ -4,7 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
-import static seedu.address.storage.RequiredCommandMessages.TEST_SCIENCE_PATH;
+import static seedu.address.storage.RequiredCommandStorageTest.TEST_SCIENCE_PATH;
 
 import java.io.IOException;
 import java.nio.file.Paths;

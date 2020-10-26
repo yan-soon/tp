@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
-import static seedu.address.storage.RequiredCommandMessages.TEST_FOUNDATION_PATH;
 
 import java.io.IOException;
 import java.nio.file.Paths;
@@ -18,7 +17,9 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 
-class RequiredCommandStorageTest {
+public class RequiredCommandStorageTest {
+    public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
+    public static final String TEST_SCIENCE_PATH = "src/main/resources/data/sciencemodules.json";
     private RequiredCommandStorage storage = new RequiredCommandStorage();
     private ObservableList<Module> requiredFoundation;
     public void setUpRequiredFoundation() throws IOException, DataConversionException {

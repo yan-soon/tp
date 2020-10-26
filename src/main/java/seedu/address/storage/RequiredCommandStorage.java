@@ -22,15 +22,16 @@ public class RequiredCommandStorage {
 
     /**
      * Makes use of classLoaders to convert the original file path
-     * into one that can be readable during runtime.
-     * @param fileName Original file path.
-     * @return Converted runtime path.
+     * into one that can be readable during runtime, such that it
+     * can be used to retrieve the File's content.
+     * @param filePath Original file path.
+     * @return Converted file content of type String.
      * @throws IOException When the provided fileName is invalid.
      */
-    public String getFileNameFromResource(String fileName) throws IOException {
+    private String getFileFromResource(String filePath) throws IOException {
         // The class loader that loaded the class
         ClassLoader classLoader = getClass().getClassLoader();
-        InputStream inputStream = classLoader.getResourceAsStream(fileName);
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
 
         if (inputStream == null) {
             throw new IOException();
@@ -50,13 +51,14 @@ public class RequiredCommandStorage {
 
     /**
      * Converts a given JSON file via its runtime path, into a list of Modules.
-     * @param filePath Converted runtime path.
+     * @param file Converted file content of type String.
      * @return List of modules taken from the JSON file via the runtime path.
-     * @throws IOException When the filePath is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IOException When the file is invalid.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public ObservableList<Module> getModulesFromJsonFile(String filePath) throws IOException, IllegalValueException {
-        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(filePath, JsonSerializableGradPad.class);
+    public ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
+        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
         return jsonGradPad.toModelType().getModuleList();
     }
 
@@ -70,11 +72,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredFoundation attribute with Foundation Modules.
      * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setRequiredFoundation(String path) throws IOException, IllegalValueException {
-        String fileName = getFileNameFromResource(path);
-        requiredFoundation = getModulesFromJsonFile(fileName);
+        String file = getFileFromResource(path);
+        requiredFoundation = getModulesFromJsonFile(file);
     }
 
     /**
@@ -87,11 +90,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredITprof attribute with IT Professionalism Modules.
      * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setRequiredITprof(String path) throws IOException, IllegalValueException {
-        String fileName = getFileNameFromResource(path);
-        requiredITprof = getModulesFromJsonFile(fileName);
+        String file = getFileFromResource(path);
+        requiredITprof = getModulesFromJsonFile(file);
     }
 
     /**
@@ -104,11 +108,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredMathAndScience attribute with Math and Science Modules.
      * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setRequiredMathAndScience(String path) throws IOException, IllegalValueException {
-        String fileName = getFileNameFromResource(path);
-        requiredMathAndScience = getModulesFromJsonFile(fileName);
+        String file = getFileFromResource(path);
+        requiredMathAndScience = getModulesFromJsonFile(file);
     }
 
     /**
@@ -121,11 +126,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredScience attribute with Science Modules.
      * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setRequiredScience(String path) throws IOException, IllegalValueException {
-        String fileName = getFileNameFromResource(path);
-        requiredScience = getModulesFromJsonFile(fileName);
+        String file = getFileFromResource(path);
+        requiredScience = getModulesFromJsonFile(file);
     }
 
     /**
@@ -138,11 +144,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredInternship attribute with Internship Modules.
      * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setRequiredInternship(String path) throws IOException, IllegalValueException {
-        String fileName = getFileNameFromResource(path);
-        requiredInternship = getModulesFromJsonFile(fileName);
+        String file = getFileFromResource(path);
+        requiredInternship = getModulesFromJsonFile(file);
     }
 }
 

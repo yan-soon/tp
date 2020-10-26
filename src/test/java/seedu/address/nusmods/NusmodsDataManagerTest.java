@@ -16,10 +16,10 @@ import seedu.address.commons.util.JsonUtil;
 import seedu.address.nusmods.exceptions.NusmodsException;
 
 public class NusmodsDataManagerTest {
-    private static final String VALID_MAP_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest/validModuleMap.json";
-    private static final String INVALID_MAP_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest/invalidModuleMap"
+    private static final String VALID_MAP_TEST_FILE_PATH = "NusmodsDataManagerTest/validModuleMap.json";
+    private static final String INVALID_MAP_TEST_FILE_PATH = "NusmodsDataManagerTest/invalidModuleMap"
                                                                      + ".json";
-    private static final String MODULE_TEST_FILE_PATH = "src/test/data/NusmodsDataManagerTest/validModule.json";
+    private static final String MODULE_TEST_FILE_PATH = "src/test/resources/NusmodsDataManagerTest/validModule.json";
     private NusmodsDataManager manager = new NusmodsDataManager(new ReadFromFileDataFetcherStub(),
                                                                 VALID_MAP_TEST_FILE_PATH);
 

@@ -64,8 +64,9 @@ With this guide, you'll be ready to use GradPad in no time.
  Delete a Module                         | Allows you to delete unwanted modules in `Completed Modules`
  Edit a Module                           | Allows you to edit the details of a module you've already added to `Completed Modules`
  Check Modular Credits                   | Allows you to check your current modular credit tally
- View All Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the `Result Display`
- Search for a Required Module            | Allows you to search for a required module and display the module details in the `Result Display`
+ View all Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the `Result Display`
+ View all Science Modules                | Allows you to display all viable Science modules in the Computer Science curriculum onto the `Result Display`
+ Search for a Module                     | Allows you to search for any module available in NUS and display the module details in the `Result Display`
  Exit the Program                        | Allows you to terminate the GradPad program
 
 
@@ -98,7 +99,7 @@ To show the help display:
 
 ### Adding a module: `add`
 
-This command allows you to add a module you have completed into the Completed Modules list.
+The `add` command allows you to add a module you have completed into the Completed Modules list.
 
 You can add a module by specifying a valid module code as well as the modular credits the module carries using the prefixes 'c/' and 'cr/' respectively. You can also include multiple tags using the prefix 't/' but they are optional.
 
@@ -117,7 +118,7 @@ To add the module:
 
 ### Viewing all added modules: `list`
 
-You can view all the modules you have added into the Completed Modules list in GradPad using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`) and you wish to restore the list to its original state.
+The `list` command allows you to view all the modules you have added into the Completed Modules list in GradPad using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`) and you wish to restore the list to its original state.
 
 Example:<br>
 You have filtered the Completed Modules list to show modules whose module codes contain 'cs1', and you wish to restore the list to view all the modules you have added.
@@ -132,7 +133,7 @@ To view all modules:
 
 ### Editing module details: `edit`
 
-This command allows you to edit the details of a module that you have added into GradPad.
+The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the index of the module in the Completed Modules list, followed by the fields you wish to edit with their respective prefixes, 'c/' for module code, 'cr/' for modular credits, etc. You may edit multiple fields in a single `edit` command.
 
@@ -170,7 +171,7 @@ To find the module:
 
 ### Deleting a Module: `delete`
 
-This command allows you to remove a module you have added into GradPad.
+The `delete` command allows you to remove a module you have added into GradPad.
 
 You can delete a module by specifying the module code of the module.
 
@@ -191,7 +192,7 @@ To delete the module:
 
 ### Checking total modular credits: `checkmc`
 
-You can check the total amount of modular credits you have accumulated so far using this command.
+The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
 
 To check total modular credits:
 
@@ -200,6 +201,47 @@ To check total modular credits:
 
 2. The result display box will display the message "Total MC has been calculated" along with your total modular credits amount.
 ![CheckMc2](images/CheckMc2.png)
+
+### Checking required modules: `required`
+
+The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
+
+Example: <br>
+You have added several modules into your GradPad so far but you are unsure if they are part of the Computer Science curriculum. You can simply check by using the `required` command.
+
+To check required modules:
+
+1. Type `required` into the command box, press **Enter** to execute it.
+
+2. The result display box will then display all the modules you have yet to take for each particular field, as shown below.
+
+### Checking Science modules: `science`
+
+The `science` command allows you to check all the available Science modules of the Computer Science curriculum.
+
+Example: <br>
+You wish to take a Science module to clear your Science requirement, but you forgot what modules are available. You can simply check by using the `science` command.
+
+To check Science modules:
+
+1. Type `science` into the command box, press **Enter** to execute it.
+
+2. The result display box will then display all the available Science modules that you can take, as shown below.
+
+### Searching for a module: `search`
+
+The `search` command allows you to search for any module available in NUS.
+
+You can search for a module by specifying the module code of the module.
+
+**Note**: If your internet is down, you can only search for modules that are of the Computer Science curriculum.
+
+Example: <br>
+After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? Do they have any pre-requisites?). You can simply look up those details by using the `search` command.
+
+1. Type `search MA1521` into the command box, press **Enter** to execute it.
+
+2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
 
 ### Exiting GradPad: `exit`
 
@@ -234,5 +276,6 @@ Action | Format | Example
 **Find** | `find {module code}` | `find CS2103T`
 **Check MCs** | `checkmc`
 **Required Modules** | `required`
+**Science Modules** | `science`
 **Search module details** | `search {module code}` | `search CS2103T`
 **Exit** | `exit`

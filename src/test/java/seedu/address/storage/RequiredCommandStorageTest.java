@@ -7,20 +7,23 @@ import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 
 import java.io.IOException;
-import java.util.NoSuchElementException;
+import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 
-class RequiredCommandStorageTest {
+public class RequiredCommandStorageTest {
+    public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
+    public static final String TEST_SCIENCE_PATH = "src/main/resources/data/sciencemodules.json";
     private RequiredCommandStorage storage = new RequiredCommandStorage();
     private ObservableList<Module> requiredFoundation;
     public void setUpRequiredFoundation() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(FOUNDATION_PATH);
+        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_FOUNDATION_PATH));
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         requiredFoundation = gradPad.getModuleList();
     }
@@ -50,32 +53,28 @@ class RequiredCommandStorageTest {
         assertNull(actual);
     }
     @Test
-    public void setRequiredFoundationInvalidPath_throwsNoSuchElementException() throws IOException,
-            DataConversionException {
-        assertThrows(NoSuchElementException.class, () -> storage.setRequiredFoundation(INVALID_PATH));
+    public void setRequiredFoundationInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredFoundation(INVALID_PATH));
     }
     @Test
-    public void setRequiredITprofInvalidPath_throwsNoSuchElementException() throws IOException,
-            DataConversionException {
-        assertThrows(NoSuchElementException.class, () -> storage.setRequiredITprof(INVALID_PATH));
+    public void setRequiredITprofInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredITprof(INVALID_PATH));
     }
     @Test
-    public void setRequiredMathAndScienceInvalidPath_throwsNoSuchElementException() throws IOException,
-            DataConversionException {
-        assertThrows(NoSuchElementException.class, () -> storage.setRequiredMathAndScience(INVALID_PATH));
+    public void setRequiredMathAndScienceInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredMathAndScience(INVALID_PATH));
     }
     @Test
-    public void setRequiredScienceInvalidPath_throwsNoSuchElementException() throws IOException,
-            DataConversionException {
-        assertThrows(NoSuchElementException.class, () -> storage.setRequiredScience(INVALID_PATH));
+    public void setRequiredScienceInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredScience(INVALID_PATH));
     }
     @Test
-    public void setRequiredInternshipInvalidPath_throwsNoSuchElementException() throws IOException,
-            DataConversionException {
-        assertThrows(NoSuchElementException.class, () -> storage.setRequiredInternship(INVALID_PATH));
+    public void setRequiredInternshipInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredInternship(INVALID_PATH));
     }
     @Test
-    public void setRequiredFoundationValidPath_success() throws IOException, DataConversionException {
+    public void setRequiredFoundationValidPath_success() throws IOException,
+            DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
         storage.setRequiredFoundation(FOUNDATION_PATH);
@@ -83,7 +82,8 @@ class RequiredCommandStorageTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setRequiredITprofValidPath_success() throws IOException, DataConversionException {
+    public void setRequiredITprofValidPath_success() throws IOException,
+            DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
         storage.setRequiredITprof(FOUNDATION_PATH);
@@ -91,7 +91,8 @@ class RequiredCommandStorageTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setRequiredMathAndScienceValidPath_success() throws IOException, DataConversionException {
+    public void setRequiredMathAndScienceValidPath_success() throws IOException,
+            DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
         storage.setRequiredMathAndScience(FOUNDATION_PATH);
@@ -99,7 +100,8 @@ class RequiredCommandStorageTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setRequiredScienceValidPath_success() throws IOException, DataConversionException {
+    public void setRequiredScienceValidPath_success() throws IOException,
+            DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
         storage.setRequiredScience(FOUNDATION_PATH);
@@ -107,7 +109,8 @@ class RequiredCommandStorageTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setRequiredInternshipValidPath_success() throws IOException, DataConversionException {
+    public void setRequiredInternshipValidPath_success() throws IOException,
+            DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
         storage.setRequiredInternship(FOUNDATION_PATH);

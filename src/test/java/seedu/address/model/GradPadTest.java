@@ -22,6 +22,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
+import seedu.address.model.tag.UniqueTagMap;
 import seedu.address.testutil.ModuleBuilder;
 
 public class GradPadTest {
@@ -90,6 +91,7 @@ public class GradPadTest {
      */
     private static class GradPadStub implements ReadOnlyGradPad {
         private final ObservableList<Module> modules = FXCollections.observableArrayList();
+        private final UniqueTagMap tags = new UniqueTagMap();
 
         GradPadStub(Collection<Module> modules) {
             this.modules.setAll(modules);
@@ -98,6 +100,11 @@ public class GradPadTest {
         @Override
         public ObservableList<Module> getModuleList() {
             return modules;
+        }
+
+        @Override
+        public UniqueTagMap getTags() {
+            return tags;
         }
     }
 

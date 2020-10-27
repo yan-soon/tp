@@ -23,6 +23,6 @@ public class ModuleContainsTagsPredicate implements Predicate<Module> {
     public boolean test(Module module) {
         return tagNames.stream().anyMatch(name ->
               module.getTags().stream().anyMatch(tag ->
-                     tag.tagName.equals(name)));
+                     tag.tagName.equalsIgnoreCase(name)));
     }
 }

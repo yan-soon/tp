@@ -86,6 +86,16 @@ public class FindCommandTest {
     }
 
     @Test
+    public void execute_oneCapitalizedTagKeyword_oneModuleFound() {
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 1);
+        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE.toUpperCase());
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredModuleList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(CS2103T), model.getFilteredModuleList());
+    }
+
+    @Test
     public void execute_tagAndModuleCodeKeywords_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
         CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE + " CS3216");

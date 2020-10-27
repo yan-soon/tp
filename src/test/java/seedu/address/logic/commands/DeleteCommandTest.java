@@ -42,9 +42,7 @@ public class DeleteCommandTest {
     @Test
     public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
         ModuleCode invalidModuleCode = new ModuleCode("AA0000");
-        // is there a better way to test an invalid module code?
         DeleteCommand deleteCommand = new DeleteCommand(invalidModuleCode);
-
         assertCommandFailure(deleteCommand, model,
                 String.format(Messages.MESSAGE_INVALID_MODULE, invalidModuleCode.toString()));
     }

@@ -6,6 +6,7 @@ import java.util.Set;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
 
@@ -15,9 +16,11 @@ import seedu.address.model.util.SampleDataUtil;
 public class ModuleBuilder {
 
     public static final String DEFAULT_CODE = "CS1101S";
+    public static final String DEFAULT_TITLE = "Programming Methodology";
     public static final String DEFAULT_MC = "4";
 
     private ModuleCode code;
+    private ModuleTitle title;
     private ModularCredits credits;
     private Set<Tag> tags;
 
@@ -26,6 +29,7 @@ public class ModuleBuilder {
      */
     public ModuleBuilder() {
         code = new ModuleCode(DEFAULT_CODE);
+        title = new ModuleTitle(DEFAULT_TITLE);
         credits = new ModularCredits(DEFAULT_MC);
         tags = new HashSet<>();
     }
@@ -35,6 +39,7 @@ public class ModuleBuilder {
      */
     public ModuleBuilder(Module moduleToCopy) {
         code = moduleToCopy.getModuleCode();
+        title = moduleToCopy.getModuleTitle();
         credits = moduleToCopy.getModularCredits();
         tags = new HashSet<>(moduleToCopy.getTags());
     }
@@ -44,6 +49,14 @@ public class ModuleBuilder {
      */
     public ModuleBuilder withCode(String code) {
         this.code = new ModuleCode(code);
+        return this;
+    }
+
+    /**
+     * Sets the {@code ModuleTitle} of the {@code Module} that we are building.
+     */
+    public ModuleBuilder withTitle(String title) {
+        this.title = new ModuleTitle(title);
         return this;
     }
 
@@ -64,7 +77,7 @@ public class ModuleBuilder {
     }
 
     public Module build() {
-        return new Module(code, credits, tags);
+        return new Module(code, title, credits, tags);
     }
 
 }

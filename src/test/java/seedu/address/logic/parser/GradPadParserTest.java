@@ -6,6 +6,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 
 import java.util.Arrays;
 import java.util.List;
@@ -59,8 +60,8 @@ public class GradPadParserTest {
         Module module = new ModuleBuilder().build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(module).build();
         EditCommand command = (EditCommand) parser.parseCommand(EditCommand.COMMAND_WORD + " "
-                + INDEX_FIRST_MODULE.getOneBased() + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
-        assertEquals(new EditCommand(INDEX_FIRST_MODULE, descriptor), command);
+                + CODE_FIRST_MODULE + " " + ModuleUtil.getEditModuleDescriptorDetails(descriptor));
+        assertEquals(new EditCommand(CODE_FIRST_MODULE, descriptor), command);
     }
 
     @Test

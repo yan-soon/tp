@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULES_LISTED_OVERVIEW;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.CS3216;
@@ -17,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.CompoundFindPredicate;
 import seedu.address.model.module.ModuleCodeContainsKeywordsPredicate;
 
 /**
@@ -56,7 +58,7 @@ public class FindCommandTest {
     @Test
     public void execute_zeroKeywords_noModuleFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 0);
-        ModuleCodeContainsKeywordsPredicate predicate = preparePredicate(" ");
+        CompoundFindPredicate predicate = preparePredicate(" ");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -64,9 +66,29 @@ public class FindCommandTest {
     }
 
     @Test
-    public void execute_multipleKeywords_multipleModulesFound() {
+    public void execute_multipleModuleCodes_multipleModulesFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
-        ModuleCodeContainsKeywordsPredicate predicate = preparePredicate("CS2103T CS3216");
+        CompoundFindPredicate predicate = preparePredicate("CS2103T CS3216");
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredModuleList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Arrays.asList(CS2103T, CS3216), model.getFilteredModuleList());
+    }
+
+    @Test
+    public void execute_oneTagKeyword_oneModuleFound() {
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 1);
+        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE);
+        FindCommand command = new FindCommand(predicate);
+        expectedModel.updateFilteredModuleList(predicate);
+        assertCommandSuccess(command, model, expectedMessage, expectedModel);
+        assertEquals(Collections.singletonList(CS2103T), model.getFilteredModuleList());
+    }
+
+    @Test
+    public void execute_tagAndModuleCodeKeywords_multipleModulesFound() {
+        String expectedMessage = String.format(MESSAGE_MODULES_LISTED_OVERVIEW, 2);
+        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE + " CS3216");
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
@@ -76,7 +98,7 @@ public class FindCommandTest {
     /**
      * Parses {@code userInput} into a {@code ModuleCodeContainsKeywordsPredicate}.
      */
-    private ModuleCodeContainsKeywordsPredicate preparePredicate(String userInput) {
-        return new ModuleCodeContainsKeywordsPredicate(Arrays.asList(userInput.split("\\s+")));
+    private CompoundFindPredicate preparePredicate(String userInput) {
+        return new CompoundFindPredicate(Arrays.asList(userInput.split("\\s+")));
     }
 }

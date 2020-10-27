@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+
+<HBox fx:id="introDisplayPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="pane-without-border" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Region />
+      <AnchorPane>
+         <children>
+            <VBox layoutY="32.0" prefHeight="303.0" prefWidth="204.0">
+               <children>
+                  <ImageView fx:id="logo" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../images/logo.png" />
+                     </image>
+                  </ImageView>
+                  <Region maxHeight="20.0" minHeight="20.0" />
+                  <TextField fx:id="version" alignment="CENTER" styleClass="intro-display" text="version 1.3" />
+                  <TextField fx:id="firstTwoNames" alignment="CENTER" styleClass="intro-display" text="by Lau Siaw Sam, Lim Shao Kiat," />
+                  <TextField fx:id="nextTwoNames" alignment="CENTER" styleClass="intro-display" text="Muhd Syafiq &amp; Yan Soon Xiang" />
+                  <Region maxHeight="20.0" minHeight="20.0" VBox.vgrow="NEVER" />
+                  <TextField fx:id="helpInfo" styleClass="intro-display" text="type   help&lt;Enter&gt;   for information" />
+                  <TextField fx:id="exitInfo" styleClass="intro-display" text="type   exit&lt;Enter&gt;    to exit" />
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <Region />
+   </children>
+</HBox>

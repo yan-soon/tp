@@ -133,8 +133,19 @@
      -fx-border-top-width: 0.3px;
 }
 
+.pane-without-border {
+    -fx-background-color: transparent;
+}
+
 .status-bar {
     -fx-background-color: #192841;
+}
+
+.intro-display {
+    -fx-background-color: transparent;
+    -fx-font-family: "Tahoma";
+    -fx-font-size: 11px;
+    -fx-text-fill: derive(#ef7c00, 80%);
 }
 
 .result-display {

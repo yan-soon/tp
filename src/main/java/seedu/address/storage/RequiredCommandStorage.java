@@ -1,12 +1,16 @@
 package seedu.address.storage;
 
+import java.io.BufferedReader;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.util.Optional;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyGradPad;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.module.Module;
 
 public class RequiredCommandStorage {
@@ -15,6 +19,48 @@ public class RequiredCommandStorage {
     private ObservableList<Module> requiredMathAndScience;
     private ObservableList<Module> requiredScience;
     private ObservableList<Module> requiredInternship;
+
+    /**
+     * Makes use of classLoaders to convert the original file path
+     * into one that can be readable during runtime, such that it
+     * can be used to retrieve the File's content.
+     * @param filePath Original file path.
+     * @return Converted file content of type String.
+     * @throws IOException When the provided fileName is invalid.
+     */
+    private String getFileFromResource(String filePath) throws IOException {
+        // The class loader that loaded the class
+        ClassLoader classLoader = getClass().getClassLoader();
+        InputStream inputStream = classLoader.getResourceAsStream(filePath);
+
+        if (inputStream == null) {
+            throw new IOException();
+        } else {
+            StringBuilder dataString = new StringBuilder();
+
+            Reader reader = new BufferedReader(new InputStreamReader(inputStream,
+                    Charset.forName(StandardCharsets.UTF_8.name())));
+            int c = 0;
+            while ((c = reader.read()) != -1) {
+                dataString.append((char) c);
+            }
+
+            return dataString.toString();
+        }
+    }
+
+    /**
+     * Converts a given JSON file via its runtime path, into a list of Modules.
+     * @param file Converted file content of type String.
+     * @return List of modules taken from the JSON file via the runtime path.
+     * @throws IOException When the file is invalid.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
+     */
+    public ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
+        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
+        return jsonGradPad.toModelType().getModuleList();
+    }
 
     /**
      * Returns requiredFoundation attribute of RequiredCommandStorage object.
@@ -26,12 +72,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredFoundation attribute with Foundation Modules.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredFoundation(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        requiredFoundation = gradPad.orElseThrow().getModuleList();
+    public void setRequiredFoundation(String path) throws IOException, IllegalValueException {
+        String file = getFileFromResource(path);
+        requiredFoundation = getModulesFromJsonFile(file);
     }
 
     /**
@@ -44,12 +90,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredITprof attribute with IT Professionalism Modules.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredITprof(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        requiredITprof = gradPad.orElseThrow().getModuleList();
+    public void setRequiredITprof(String path) throws IOException, IllegalValueException {
+        String file = getFileFromResource(path);
+        requiredITprof = getModulesFromJsonFile(file);
     }
 
     /**
@@ -62,12 +108,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredMathAndScience attribute with Math and Science Modules.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredMathAndScience(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        requiredMathAndScience = gradPad.orElseThrow().getModuleList();
+    public void setRequiredMathAndScience(String path) throws IOException, IllegalValueException {
+        String file = getFileFromResource(path);
+        requiredMathAndScience = getModulesFromJsonFile(file);
     }
 
     /**
@@ -80,12 +126,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredScience attribute with Science Modules.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredScience(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        requiredScience = gradPad.orElseThrow().getModuleList();
+    public void setRequiredScience(String path) throws IOException, IllegalValueException {
+        String file = getFileFromResource(path);
+        requiredScience = getModulesFromJsonFile(file);
     }
 
     /**
@@ -98,12 +144,12 @@ public class RequiredCommandStorage {
     /**
      * Loads the requiredInternship attribute with Internship Modules.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredInternship(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        Optional<ReadOnlyGradPad> gradPad = storage.readGradPad();
-        requiredInternship = gradPad.orElseThrow().getModuleList();
+    public void setRequiredInternship(String path) throws IOException, IllegalValueException {
+        String file = getFileFromResource(path);
+        requiredInternship = getModulesFromJsonFile(file);
     }
 }
 

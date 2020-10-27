@@ -29,7 +29,7 @@ public class ModuleCode {
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
         checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
-        this.moduleCode = moduleCode.toUpperCase();
+        this.moduleCode = moduleCode;
     }
 
     /**
@@ -56,5 +56,4 @@ public class ModuleCode {
     public int hashCode() {
         return moduleCode.hashCode();
     }
-
 }

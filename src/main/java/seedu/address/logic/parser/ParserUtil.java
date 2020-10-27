@@ -11,6 +11,7 @@ import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -34,6 +35,21 @@ public class ParserUtil {
     }
 
     /**
+     * Parses a {@code String ModuleTitle} into a {@code ModuleTitle}.
+     * Leading and trailing whitespaces will be trimmed.
+     *
+     * @throws ParseException if the given {@code moduleTitle} is invalid.
+     */
+    public static ModuleTitle parseModuleTitle(String moduleTitle) throws ParseException {
+        requireNonNull(moduleTitle);
+        String trimmedModuleTitle = moduleTitle.trim();
+        if (!ModuleTitle.isValidModuleTitle(trimmedModuleTitle)) {
+            throw new ParseException(ModuleTitle.MESSAGE_CONSTRAINTS);
+        }
+        return new ModuleTitle(trimmedModuleTitle);
+    }
+
+    /**
      * Parses a {@code String code} into a {@code ModuleCode}.
      * Leading and trailing whitespaces will be trimmed.
      *
@@ -41,11 +57,11 @@ public class ParserUtil {
      */
     public static ModuleCode parseModuleCode(String code) throws ParseException {
         requireNonNull(code);
-        String trimmedCode = code.trim();
-        if (!ModuleCode.isValidModuleCode(trimmedCode)) {
+        String modifiedCode = code.trim().toUpperCase();
+        if (!ModuleCode.isValidModuleCode(modifiedCode)) {
             throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
         }
-        return new ModuleCode(trimmedCode);
+        return new ModuleCode(modifiedCode);
     }
 
     /**

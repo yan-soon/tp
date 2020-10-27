@@ -8,6 +8,7 @@ import java.util.function.Predicate;
 
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.CompoundFindPredicate;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.model.module.ModuleContainsTagsPredicate;
@@ -34,26 +35,4 @@ public class FindCommandParser implements Parser<FindCommand> {
         return new FindCommand(new CompoundFindPredicate(keywords));
     }
 
-    public static class CompoundFindPredicate implements Predicate<Module> {
-        private final List<String> keywords;
-
-        CompoundFindPredicate(List<String> keywords) {
-            this.keywords = keywords;
-        }
-
-        @Override
-        public boolean test(Module module) {
-            Predicate<Module> moduleCodePredicate = new ModuleCodeContainsKeywordsPredicate(keywords);
-            Predicate<Module> tagsPredicate = new ModuleContainsTagsPredicate(keywords);
-            // chain the predicates
-            return moduleCodePredicate.or(tagsPredicate).test(module);
-        }
-
-        @Override
-        public boolean equals(Object other) {
-            return other == this // short circuit if same object
-                           || (other instanceof CompoundFindPredicate // instanceof handles nulls
-                                       && keywords.equals(((CompoundFindPredicate) other).keywords)); // state check
-        }
-    }
 }

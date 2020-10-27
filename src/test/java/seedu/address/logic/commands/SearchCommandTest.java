@@ -72,7 +72,7 @@ public class SearchCommandTest {
         String expectedPrerequisite = Optional.ofNullable(cs1010x.getPrerequisite()).orElse("None");
 
         String expectedMessage = String.format(SearchCommand.MESSAGE_SUCCESS,
-                cs1010x.getModuleCode(),
+                cs1010x.getModuleCode(), cs1010x.getModuleCredit(),
                 cs1010x.getTitle(), cs1010x.getDescription(),
                 expectedPreclusion, expectedPrerequisite);
 

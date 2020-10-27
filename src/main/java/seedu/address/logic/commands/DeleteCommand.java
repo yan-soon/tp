@@ -3,12 +3,13 @@ package seedu.address.logic.commands;
 import static java.util.Objects.requireNonNull;
 
 import java.util.List;
+import java.util.Optional;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Deletes a Module identified using it's displayed index from the GradPad.
@@ -18,18 +19,18 @@ public class DeleteCommand extends Command {
     public static final String COMMAND_WORD = "delete";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the module identified by the index number used in the displayed module list.\n"
-            + "Parameters: INDEX (must be a positive integer)\n"
-            + "Example: " + COMMAND_WORD + " 1";
+            + ": Deletes the module identified by the module code used in the Completed Modules.\n"
+            + "Parameters: MODULE CODE\n"
+            + "Example: " + COMMAND_WORD + " cs2103t";
 
     public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
     public static final String MESSAGE_CONFIRMATION = "Are you sure you wish to delete the following"
             + " module?\n\n";
 
-    private final Index targetIndex;
+    private final ModuleCode code;
 
-    public DeleteCommand(Index targetIndex) {
-        this.targetIndex = targetIndex;
+    public DeleteCommand(ModuleCode code) {
+        this.code = code;
     }
 
     /**
@@ -37,16 +38,17 @@ public class DeleteCommand extends Command {
      *
      * @param model The Model which the command operates on.
      * @return The module to be deleted.
-     * @throws CommandException if the target index given is not within the bounds of the module list.
+     * @throws CommandException if the module cannot be found in Completed Modules.
      */
     public Module getModuleToDelete(Model model) throws CommandException {
-        List<Module> lastShownList = model.getFilteredModuleList();
+        List<Module> modules = model.getGradPad().getModuleList();
 
-        if (targetIndex.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+        Optional<Module> moduleToDelete = modules.stream()
+                .filter(module -> module.getModuleCode().equals(code)).findFirst();
+        if (moduleToDelete.isEmpty()) {
+            throw new CommandException(String.format(Messages.MESSAGE_INVALID_MODULE, code.toString()));
         }
-
-        return lastShownList.get(targetIndex.getZeroBased());
+        return moduleToDelete.get();
     }
 
     @Override
@@ -61,7 +63,7 @@ public class DeleteCommand extends Command {
     public boolean equals(Object other) {
         return other == this // short circuit if same object
                 || (other instanceof DeleteCommand // instanceof handles nulls
-                && targetIndex.equals(((DeleteCommand) other).targetIndex)); // state check
+                && code.equals(((DeleteCommand) other).code)); // state check
     }
 
     @Override

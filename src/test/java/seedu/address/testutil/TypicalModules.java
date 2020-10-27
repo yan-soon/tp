@@ -3,6 +3,7 @@ package seedu.address.testutil;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_CS3216;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,17 +18,19 @@ import seedu.address.model.module.Module;
 public class TypicalModules {
 
     public static final Module CS2103T = new ModuleBuilder().withCode("CS2103T")
+            .withTitle("Software Engineering")
             .withModularCredits("4")
             .withTags("core").build();
 
     public static final Module CS1231 = new ModuleBuilder().withCode("CS1231")
+            .withTitle("Discrete Structures")
             .withModularCredits("4")
             .withTags("core").build();
 
     // Manually added - Module's details found in {@code CommandTestUtil}
     public static final Module CS3216 =
             new ModuleBuilder().withCode(VALID_CODE_CS3216).withModularCredits(VALID_CREDITS_CS3216)
-                    .withTags(VALID_TAG_NON_CORE).build();
+                    .withTitle(VALID_TITLE_CS3216).withTags(VALID_TAG_NON_CORE).build();
 
     public static final String KEYWORD_MATCHING_MEIER = "Meier"; // A keyword that matches MEIER
 

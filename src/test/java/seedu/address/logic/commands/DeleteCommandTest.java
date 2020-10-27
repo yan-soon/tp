@@ -4,19 +4,19 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
-import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_MODULE;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
+
 /**
  * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
  * {@code DeleteCommand}.
@@ -26,9 +26,10 @@ public class DeleteCommandTest {
     private Model model = new ModelManager(getTypicalGradPad(), new UserPrefs());
 
     @Test
-    public void execute_validIndexUnfilteredList_success() {
-        Module moduleToDelete = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MODULE);
+    public void execute_validModuleCodeUnfilteredList_success() {
+        Module moduleToDelete = model.getFilteredModuleList().stream()
+                .filter(module -> module.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
+        DeleteCommand deleteCommand = new DeleteCommand(CODE_FIRST_MODULE);
 
         String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
 
@@ -39,52 +40,23 @@ public class DeleteCommandTest {
     }
 
     @Test
-    public void execute_invalidIndexUnfilteredList_throwsCommandException() {
-        Index outOfBoundIndex = Index.fromOneBased(model.getFilteredModuleList().size() + 1);
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
-    }
-
-    @Test
-    public void execute_validIndexFilteredList_success() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
-
-        Module moduleToDelete = model.getFilteredModuleList().get(INDEX_FIRST_MODULE.getZeroBased());
-        DeleteCommand deleteCommand = new DeleteCommand(INDEX_FIRST_MODULE);
-
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
-
-        Model expectedModel = new ModelManager(model.getGradPad(), new UserPrefs());
-        expectedModel.deleteModule(moduleToDelete);
-        showNoModule(expectedModel);
-
-        assertCommandSuccess(deleteCommand, model, expectedMessage, expectedModel);
-    }
-
-    @Test
-    public void execute_invalidIndexFilteredList_throwsCommandException() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
-
-        Index outOfBoundIndex = INDEX_SECOND_MODULE;
-        // ensures that outOfBoundIndex is still in bounds of GradPad list
-        assertTrue(outOfBoundIndex.getZeroBased() < model.getGradPad().getModuleList().size());
-
-        DeleteCommand deleteCommand = new DeleteCommand(outOfBoundIndex);
-
-        assertCommandFailure(deleteCommand, model, Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+    public void execute_invalidModuleCodeUnfilteredList_throwsCommandException() {
+        ModuleCode invalidModuleCode = new ModuleCode("AA0000");
+        DeleteCommand deleteCommand = new DeleteCommand(invalidModuleCode);
+        assertCommandFailure(deleteCommand, model,
+                String.format(Messages.MESSAGE_INVALID_MODULE, invalidModuleCode.toString()));
     }
 
     @Test
     public void equals() {
-        DeleteCommand deleteFirstCommand = new DeleteCommand(INDEX_FIRST_MODULE);
-        DeleteCommand deleteSecondCommand = new DeleteCommand(INDEX_SECOND_MODULE);
+        DeleteCommand deleteFirstCommand = new DeleteCommand(CODE_FIRST_MODULE);
+        DeleteCommand deleteSecondCommand = new DeleteCommand(CODE_SECOND_MODULE);
 
         // same object -> returns true
         assertTrue(deleteFirstCommand.equals(deleteFirstCommand));
 
         // same values -> returns true
-        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(INDEX_FIRST_MODULE);
+        DeleteCommand deleteFirstCommandCopy = new DeleteCommand(CODE_FIRST_MODULE);
         assertTrue(deleteFirstCommand.equals(deleteFirstCommandCopy));
 
         // different types -> returns false

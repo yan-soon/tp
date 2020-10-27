@@ -36,6 +36,8 @@ public class ModuleCard extends UiPart<Region> {
     private Label credits;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label title;
 
     /**
      * Creates a {@code ModuleCode} with the given {@code Module} and index to display.
@@ -45,7 +47,8 @@ public class ModuleCard extends UiPart<Region> {
         this.module = module;
         id.setText(displayedIndex + ". ");
         code.setText(module.getModuleCode().toString());
-        credits.setText("Modular Credits: " + module.getModularCredits().value);
+        title.setText(module.getModuleTitle().toString());
+        credits.setText(module.getModularCredits().value + " MCs");
         module.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

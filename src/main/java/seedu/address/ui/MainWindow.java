@@ -124,7 +124,7 @@ public class MainWindow extends UiPart<Stage> {
                 resultDisplay.show();
             }
 
-            CommandResult commandResult = logic.execute(commandText);
+            CommandResult commandResult = logic.execute(commandText.trim().replaceAll("\\s+", " "));
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());
 

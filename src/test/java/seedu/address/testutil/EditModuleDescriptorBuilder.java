@@ -8,6 +8,7 @@ import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -31,6 +32,7 @@ public class EditModuleDescriptorBuilder {
     public EditModuleDescriptorBuilder(Module module) {
         descriptor = new EditModuleDescriptor();
         descriptor.setModuleCode(module.getModuleCode());
+        descriptor.setModuleTitle(module.getModuleTitle());
         descriptor.setModularCredits(module.getModularCredits());
         descriptor.setTags(module.getTags());
     }
@@ -48,6 +50,14 @@ public class EditModuleDescriptorBuilder {
      */
     public EditModuleDescriptorBuilder withModularCredits(String credits) {
         descriptor.setModularCredits(new ModularCredits(credits));
+        return this;
+    }
+
+    /**
+     * Sets the {@code Module Title} of the {@code EditModuleDescriptor} that we are building.
+     */
+    public EditModuleDescriptorBuilder withModuleTitle(String title) {
+        descriptor.setModuleTitle(new ModuleTitle(title));
         return this;
     }
 

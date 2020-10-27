@@ -29,9 +29,9 @@ public class ModuleTest {
         // null -> returns false
         assertFalse(CS2103T.isSameModule(null));
 
-        // different MCs -> returns false
+        // different MCs -> returns true
         Module editedCS2103T = new ModuleBuilder(CS2103T).withModularCredits(VALID_CREDITS_CS3216).build();
-        assertFalse(CS2103T.isSameModule(editedCS2103T));
+        assertTrue(CS2103T.isSameModule(editedCS2103T));
 
         // different module code -> returns false
         editedCS2103T = new ModuleBuilder(CS2103T).withCode(VALID_CODE_CS3216).build();
@@ -41,10 +41,10 @@ public class ModuleTest {
         editedCS2103T = new ModuleBuilder(CS2103T).withTags(VALID_TAG_NON_CORE).build();
         assertTrue(CS2103T.isSameModule(editedCS2103T));
 
-        // same code, different MCs, different tags -> returns false
+        // same code, different MCs, different tags -> returns true
         editedCS2103T = new ModuleBuilder(CS2103T).withModularCredits(VALID_CREDITS_CS3216)
                               .withTags(VALID_TAG_NON_CORE).build();
-        assertFalse(CS2103T.isSameModule(editedCS2103T));
+        assertTrue(CS2103T.isSameModule(editedCS2103T));
     }
 
     @Test

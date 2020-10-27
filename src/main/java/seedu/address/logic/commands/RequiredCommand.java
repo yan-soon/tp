@@ -22,7 +22,7 @@ import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 import java.io.IOException;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.storage.RequiredCommandStorage;
@@ -53,9 +53,9 @@ public class RequiredCommand extends Command {
     /**
      * Sets up the storage attribute with all the relevant modules from various fields.
      * @throws IOException When path is invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file violates some constraints.
      */
-    public void setStorage() throws IOException, DataConversionException {
+    public void setStorage() throws IOException, IllegalValueException {
         storage = new RequiredCommandStorage();
         storage.setRequiredFoundation(FOUNDATION_PATH);
         storage.setRequiredITprof(ITPROF_PATH);
@@ -184,7 +184,7 @@ public class RequiredCommand extends Command {
             compareScience(requiredScience);
             compareInternship(requiredInternship);
             return new CommandResult(leftOverModules);
-        } catch (DataConversionException | IOException e) {
+        } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE);
         }
     }

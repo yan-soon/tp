@@ -2,7 +2,6 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CREDITS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.model.Model.PREDICATE_SHOW_ALL_MODULES;
 
@@ -12,14 +11,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.Messages;
-import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.CollectionUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -30,51 +28,51 @@ public class EditCommand extends Command {
     public static final String COMMAND_WORD = "edit";
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Edits the details of the module identified "
-            + "by the index number used in the displayed module list. "
-            + "Existing values will be overwritten by the input values.\n"
-            + "Parameters: INDEX (must be a positive integer) "
-            + "[" + PREFIX_CODE + "MODULE CODE] "
-            + "[" + PREFIX_CREDITS + "MODULAR CREDITS] "
-            + "[" + PREFIX_TAG + "TAG]...\n"
-            + "Example: " + COMMAND_WORD + " 1 "
-            + PREFIX_CREDITS + "4 ";
+        + "by its module code. "
+        + "Existing values will be overwritten by the input values.\n"
+        + "Parameters: MODULE CODE "
+        + "[" + PREFIX_CODE + "MODULE CODE] "
+        + "[" + PREFIX_TAG + "TAG]...\n"
+        + "Example: " + COMMAND_WORD + " cs2103t "
+        + PREFIX_CODE + "cs2108 ";
 
     public static final String MESSAGE_EDIT_MODULE_SUCCESS = "Edited Module: %1$s";
     public static final String MESSAGE_NOT_EDITED = "At least one field to edit must be provided.";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the GradPad.";
+    public static final String MESSAGE_MODULE_NOT_YET_ADDED = "Module %1$s has not been added yet!";
 
-    private final Index index;
+    private final ModuleCode code;
     private final EditModuleDescriptor editModuleDescriptor;
 
     /**
-     * @param index of the module in the filtered module list to edit
+     * @param code of the module in GradPad to edit
      * @param editModuleDescriptor details to edit the module with
      */
-    public EditCommand(Index index, EditModuleDescriptor editModuleDescriptor) {
-        requireNonNull(index);
+    public EditCommand(ModuleCode code, EditModuleDescriptor editModuleDescriptor) {
+        requireNonNull(code);
         requireNonNull(editModuleDescriptor);
 
-        this.index = index;
+        this.code = code;
         this.editModuleDescriptor = new EditModuleDescriptor(editModuleDescriptor);
     }
 
     @Override
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
-        List<Module> lastShownList = model.getFilteredModuleList();
+        List<Module> modules = model.getGradPad().getModuleList();
 
-        if (index.getZeroBased() >= lastShownList.size()) {
-            throw new CommandException(Messages.MESSAGE_INVALID_MODULE_DISPLAYED_INDEX);
+        Optional<Module> moduleToEdit = modules.stream()
+            .filter(x -> x.getModuleCode().equals(code)).findFirst();
+        if (moduleToEdit.isEmpty()) {
+            throw new CommandException(String.format(MESSAGE_MODULE_NOT_YET_ADDED, code.toString()));
         }
 
-        Module moduleToEdit = lastShownList.get(index.getZeroBased());
-        Module editedModule = createEditedModule(moduleToEdit, editModuleDescriptor);
-
-        if (!moduleToEdit.isSameModule(editedModule) && model.hasModule(editedModule)) {
+        Module editedModule = createEditedModule(moduleToEdit.get(), editModuleDescriptor);
+        if (!moduleToEdit.get().isSameModule(editedModule) && model.hasModule(editedModule)) {
             throw new CommandException(MESSAGE_DUPLICATE_MODULE);
         }
 
-        model.setModule(moduleToEdit, editedModule);
+        model.setModule(moduleToEdit.get(), editedModule);
         model.updateFilteredModuleList(PREDICATE_SHOW_ALL_MODULES);
         return new CommandResult(String.format(MESSAGE_EDIT_MODULE_SUCCESS, editedModule));
     }
@@ -87,11 +85,13 @@ public class EditCommand extends Command {
         assert moduleToEdit != null;
 
         ModuleCode updatedCode = editModuleDescriptor.getModuleCode().orElse(moduleToEdit.getModuleCode());
+        ModuleTitle updatedTitle = editModuleDescriptor.getModuleTitle()
+            .orElse(moduleToEdit.getModuleTitle());
         ModularCredits updatedCredits = editModuleDescriptor.getModularCredits()
-                .orElse(moduleToEdit.getModularCredits());
+            .orElse(moduleToEdit.getModularCredits());
         Set<Tag> updatedTags = editModuleDescriptor.getTags().orElse(moduleToEdit.getTags());
 
-        return new Module(updatedCode, updatedCredits, updatedTags);
+        return new Module(updatedCode, updatedTitle, updatedCredits, updatedTags);
     }
 
     @Override
@@ -108,8 +108,8 @@ public class EditCommand extends Command {
 
         // state check
         EditCommand e = (EditCommand) other;
-        return index.equals(e.index)
-                && editModuleDescriptor.equals(e.editModuleDescriptor);
+        return code.equals(e.code)
+            && editModuleDescriptor.equals(e.editModuleDescriptor);
     }
 
     /**
@@ -118,6 +118,7 @@ public class EditCommand extends Command {
      */
     public static class EditModuleDescriptor {
         private ModuleCode code;
+        private ModuleTitle title;
         private ModularCredits credits;
         private Set<Tag> tags;
 
@@ -129,6 +130,7 @@ public class EditCommand extends Command {
          */
         public EditModuleDescriptor(EditModuleDescriptor toCopy) {
             setModuleCode(toCopy.code);
+            setModuleTitle(toCopy.title);
             setModularCredits(toCopy.credits);
             setTags(toCopy.tags);
         }
@@ -137,7 +139,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(code, credits, tags);
+            return CollectionUtil.isAnyNonNull(code, title, credits, tags);
         }
 
         public void setModuleCode(ModuleCode code) {
@@ -146,6 +148,14 @@ public class EditCommand extends Command {
 
         public Optional<ModuleCode> getModuleCode() {
             return Optional.ofNullable(code);
+        }
+
+        public void setModuleTitle(ModuleTitle title) {
+            this.title = title;
+        }
+
+        public Optional<ModuleTitle> getModuleTitle() {
+            return Optional.ofNullable(title);
         }
 
         public void setModularCredits(ModularCredits credits) {
@@ -189,8 +199,9 @@ public class EditCommand extends Command {
             EditModuleDescriptor e = (EditModuleDescriptor) other;
 
             return getModuleCode().equals(e.getModuleCode())
-                    && getModularCredits().equals(e.getModularCredits())
-                    && getTags().equals(e.getTags());
+                && getModuleTitle().equals(e.getModuleTitle())
+                && getModularCredits().equals(e.getModularCredits())
+                && getTags().equals(e.getTags());
         }
     }
 }

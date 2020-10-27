@@ -13,6 +13,7 @@ import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.module.ModularCredits;
 import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
+import seedu.address.model.module.ModuleTitle;
 import seedu.address.model.tag.Tag;
 
 /**
@@ -23,6 +24,7 @@ class JsonAdaptedModule {
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Module's %s field is missing!";
 
     private final String code;
+    private final String title;
     private final String credits;
     private final List<JsonAdaptedTag> tagged = new ArrayList<>();
 
@@ -30,9 +32,12 @@ class JsonAdaptedModule {
      * Constructs a {@code JsonAdaptedModule} with the given module details.
      */
     @JsonCreator
-    public JsonAdaptedModule(@JsonProperty("moduleCode") String code, @JsonProperty("modularCredits") String credits,
+    public JsonAdaptedModule(@JsonProperty("moduleCode") String code,
+                             @JsonProperty("moduleTitle") String title,
+                             @JsonProperty("modularCredits") String credits,
                              @JsonProperty("tagged") List<JsonAdaptedTag> tagged) {
         this.code = code;
+        this.title = title;
         this.credits = credits;
         if (tagged != null) {
             this.tagged.addAll(tagged);
@@ -44,6 +49,7 @@ class JsonAdaptedModule {
      */
     public JsonAdaptedModule(Module source) {
         code = source.getModuleCode().toString();
+        title = source.getModuleTitle().toString();
         credits = source.getModularCredits().value;
         tagged.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
@@ -70,6 +76,15 @@ class JsonAdaptedModule {
         }
         final ModuleCode modelCode = new ModuleCode(code);
 
+        if (title == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    ModuleTitle.class.getSimpleName()));
+        }
+        if (!ModuleTitle.isValidModuleTitle(title)) {
+            throw new IllegalValueException(ModuleTitle.MESSAGE_CONSTRAINTS);
+        }
+        final ModuleTitle moduleTitle = new ModuleTitle(title);
+
         if (credits == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ModularCredits.class.getSimpleName()));
@@ -80,7 +95,6 @@ class JsonAdaptedModule {
         final ModularCredits modelCredits = new ModularCredits(credits);
 
         final Set<Tag> modelTags = new HashSet<>(moduleTags);
-        return new Module(modelCode, modelCredits, modelTags);
+        return new Module(modelCode, moduleTitle, modelCredits, modelTags);
     }
-
 }

@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CREDITS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -26,35 +25,36 @@ public class CommandTestUtil {
 
     public static final String VALID_CODE_CS2103T = "CS2103T";
     public static final String VALID_CODE_CS3216 = "CS3216";
-    public static final String VALID_CODE_CS2040 = "CS2040";
+    public static final String VALID_TITLE_CS2103T = "Software Engineering";
+    public static final String VALID_TITLE_CS3216 = "Software Product Engineering for Digital Markets";
     public static final String VALID_CREDITS_CS2103T = "4";
     public static final String VALID_CREDITS_CS3216 = "5";
-    public static final String VALID_CREDITS_CS2040 = "4";
     public static final String VALID_TAG_NON_CORE = "nonCore";
     public static final String VALID_TAG_CORE = "core";
 
-    public static final String CODE_DESC_CS2103T = " " + PREFIX_CODE + VALID_CODE_CS2103T;
-    public static final String CODE_DESC_CS3216 = " " + PREFIX_CODE + VALID_CODE_CS3216;
-    public static final String CREDITS_DESC_CS2103T = " " + PREFIX_CREDITS + VALID_CREDITS_CS2103T;
-    public static final String CREDITS_DESC_CS3216 = " " + PREFIX_CREDITS + VALID_CREDITS_CS3216;
+    public static final String CODE_DESC_CS2103T = " " + VALID_CODE_CS2103T;
+    public static final String CODE_DESC_CS2103T_WITH_PREFIX = " " + PREFIX_CODE + VALID_CODE_CS2103T;
+    public static final String CODE_DESC_CS3216 = " " + VALID_CODE_CS3216;
+    public static final String CODE_DESC_CS3216_WITH_PREFIX = " " + PREFIX_CODE + VALID_CODE_CS3216;
     public static final String TAG_DESC_CORE = " " + PREFIX_TAG + VALID_TAG_CORE;
     public static final String TAG_DESC_NON_CORE = " " + PREFIX_TAG + VALID_TAG_NON_CORE;
 
-    public static final String INVALID_CODE_DESC = " " + PREFIX_CODE + "CS1231&"; // '&' not allowed in codes
-    public static final String INVALID_CREDITS_DESC = " " + PREFIX_CREDITS + "4a"; // 'a' not allowed in credits
+    public static final String INVALID_CODE_DESC = " " + "CS1231&"; // '&' not allowed in codes
+    public static final String INVALID_CODE_DESC_WITH_PREFIX = " " + PREFIX_CODE + "CS1231&";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "core*"; // '*' not allowed in tags
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
-    public static final String PREAMBLE_NON_EMPTY = "NonEmptyPreamble";
 
     public static final EditCommand.EditModuleDescriptor DESC_CS2103T;
     public static final EditCommand.EditModuleDescriptor DESC_CS3216;
 
     static {
         DESC_CS2103T = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T)
-                .withModularCredits(VALID_CREDITS_CS2103T).withTags(VALID_TAG_CORE).build();
+            .withModuleTitle(VALID_TITLE_CS2103T).withModularCredits(VALID_CREDITS_CS2103T)
+            .withTags(VALID_TAG_CORE).build();
         DESC_CS3216 = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS3216)
-                .withModularCredits(VALID_CREDITS_CS3216).withTags(VALID_TAG_CORE).build();
+            .withModuleTitle(VALID_TITLE_CS3216).withModularCredits(VALID_CREDITS_CS3216)
+            .withTags(VALID_TAG_CORE).build();
     }
 
     /**

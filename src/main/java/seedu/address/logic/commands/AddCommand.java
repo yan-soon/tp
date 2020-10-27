@@ -1,8 +1,6 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CREDITS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -18,13 +16,11 @@ public class AddCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD + ": Adds a module to the GradPad. "
             + "Parameters: "
-            + PREFIX_CODE + "MODULE CODE "
-            + PREFIX_CREDITS + "MODULAR CREDITS "
+            + "MODULE CODE "
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
-            + PREFIX_CODE + "CS1231 "
-            + PREFIX_CREDITS + "4 "
-            + PREFIX_TAG + "core ";
+            + "CS1231 "
+            + PREFIX_TAG + "Foundation";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the GradPad";

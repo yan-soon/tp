@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 
 import java.util.Arrays;
@@ -51,8 +50,8 @@ public class GradPadParserTest {
     @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
-                DeleteCommand.COMMAND_WORD + " " + INDEX_FIRST_MODULE.getOneBased());
-        assertEquals(new DeleteCommand(INDEX_FIRST_MODULE), command);
+                DeleteCommand.COMMAND_WORD + " " + CODE_FIRST_MODULE.toString());
+        assertEquals(new DeleteCommand(CODE_FIRST_MODULE), command);
     }
 
     @Test

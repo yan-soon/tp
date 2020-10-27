@@ -6,6 +6,8 @@ import static seedu.address.storage.RequiredCommandMessages.INTERNSHIP_PATH;
 import static seedu.address.storage.RequiredCommandMessages.ITPROF_PATH;
 import static seedu.address.storage.RequiredCommandMessages.MATHANDSCI_PATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_1;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
@@ -13,6 +15,7 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_ITPROF;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_MATHANDSCI;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
@@ -161,6 +164,42 @@ public class RequiredCommand extends Command {
             leftOverModules += MESSAGE_SUCCESS_INTERN;
         }
     }
+    
+    public boolean isGEpresent(String GE) {
+        for (Module module : currentModules) {
+            String moduleCode = module.getModuleCode().toString();
+            if (moduleCode.contains(GE)) {
+                return true;
+            } 
+        }
+        return false;
+    }
+    
+    public void compareAllGEs() {
+        String uncompletedGEs = "\n";
+        boolean allGEsCleared = true;
+        if (!isGEpresent("GEH")) {
+            uncompletedGEs += "GEH" + "\n";
+            allGEsCleared = false;
+        } if (!isGEpresent("GEQ")) {
+            uncompletedGEs += "GEQ" + "\n";
+            allGEsCleared = false;
+        } if (!isGEpresent("GER")) {
+            uncompletedGEs += "GER" + "\n";
+            allGEsCleared = false;
+        } if (!isGEpresent("GES")) {
+            uncompletedGEs += "GES" + "\n";
+            allGEsCleared = false;
+        } if (!isGEpresent("GET")) {
+            uncompletedGEs += "GET" + "\n";
+            allGEsCleared = false;
+        } if (allGEsCleared) {
+            leftOverModules += MESSAGE_SUCCESS_GE + "\n";
+        } else {
+            leftOverModules += MESSAGE_FAILURE_GE_1 + uncompletedGEs + MESSAGE_FAILURE_GE_2 + "\n";
+        }
+        leftOverModules += "\n";
+    }
 
     /**
      * Sets up the reference modules and the current modules in gradPad and compares all the modules.
@@ -178,6 +217,7 @@ public class RequiredCommand extends Command {
             ObservableList<Module> requiredMathAndScience = storage.getRequiredMathAndScience();
             ObservableList<Module> requiredScience = storage.getRequiredScience();
             ObservableList<Module> requiredInternship = storage.getRequiredInternship();
+            compareAllGEs();
             compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
             compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
             compareModules(requiredMathAndScience, MESSAGE_MATHANDSCI, MESSAGE_SUCCESS_MATHANDSCI);

@@ -16,6 +16,9 @@ public class RequiredCommandMessages {
     public static final String MESSAGE_MATHANDSCI = "These are the Math and Science Modules you have yet to take:";
     public static final String MESSAGE_SUCCESS_MATHANDSCI = "You have completed your "
             + "Math and Science Module Requirement!";
+    public static final String MESSAGE_SUCCESS_GE = "You have completed all your GEM requirements!";
+    public static final String MESSAGE_FAILURE_GE_1 = "You have not completed the following GEM requirements:";
+    public static final String MESSAGE_FAILURE_GE_2 = "Use the 'gem' command to view all the available modules.";
     public static final String FOUNDATION_PATH = "data/foundationmodules.json";
     public static final String INTERNSHIP_PATH = "data/industrialexperience.json";
     public static final String ITPROF_PATH = "data/ITProfessionalism.json";

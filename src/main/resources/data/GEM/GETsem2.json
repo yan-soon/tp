@@ -1,0 +1,9 @@
+{
+  "modules" : [ {
+    "code" : "GET1046",
+    "credits" : "4"
+  }, {
+    "code" : "GET1048",
+    "credits" : "4"
+  }]
+}

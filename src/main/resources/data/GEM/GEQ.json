@@ -1,0 +1,10 @@
+{
+  "modules" : [{
+    "code" : "GEQ1000",
+    "credits" : "4"
+  }, {
+    "code" : "GEQ1917",
+    "title" : "Only for Year 1 RVRC Residents",
+    "credits" : "4"
+  }]
+}

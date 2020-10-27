@@ -1,0 +1,30 @@
+{
+  "modules" : [ {
+    "code" : "GET1002",
+    "credits" : "4"
+  }, {
+    "code" : "GET1020",
+    "credits" : "4"
+  }, {
+    "code" : "GET1023",
+    "credits" : "4"
+  }, {
+    "code" : "GET1031",
+    "credits" : "4"
+  }, {
+    "code" : "GET1034",
+    "credits" : "4"
+  }, {
+    "code" : "GET1035",
+    "credits" : "4"
+  }, {
+    "code" : "GET1037",
+    "credits" : "4"
+  }, {
+    "code" : "GET1043",
+    "credits" : "4"
+  }, {
+    "code" : "GET1048",
+    "credits" : "4"
+  }]
+}

@@ -1,0 +1,15 @@
+{
+  "modules" : [ {
+    "code" : "GEH1005",
+    "credits" : "4"
+  }, {
+    "code" : "GEH1006",
+    "credits" : "4"
+  }, {
+    "code" : "GEH1049",
+    "credits" : "4"
+  }, {
+    "code" : "GEH1074",
+    "credits" : "4"
+  }]
+}

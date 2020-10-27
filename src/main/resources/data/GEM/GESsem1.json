@@ -1,0 +1,42 @@
+{
+  "modules" : [ {
+    "code" : "GES1002",
+    "credits" : "4"
+  }, {
+    "code" : "GES1003",
+    "credits" : "4"
+  }, {
+    "code" : "GES1005",
+    "credits" : "4"
+  }, {
+    "code" : "GES1007",
+    "credits" : "4"
+  }, {
+    "code" : "GES1008",
+    "credits" : "4"
+  }, {
+    "code" : "GES1011",
+    "credits" : "4"
+  }, {
+    "code" : "GES1012",
+    "credits" : "4"
+  }, {
+    "code" : "GES1021",
+    "credits" : "4"
+  }, {
+    "code" : "GES1024",
+    "credits" : "4"
+  }, {
+    "code" : "GES1026",
+    "credits" : "4"
+  }, {
+    "code" : "GES1031",
+    "credits" : "4"
+  }, {
+    "code" : "GES1033",
+    "credits" : "4"
+  }, {
+    "code" : "GES1035",
+    "credits" : "4"
+  }]
+}

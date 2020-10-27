@@ -20,7 +20,7 @@ public class AddCommand extends Command {
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " "
             + "CS1231 "
-            + PREFIX_TAG + "boring";
+            + PREFIX_TAG + "Foundation";
 
     public static final String MESSAGE_SUCCESS = "New module added: %1$s";
     public static final String MESSAGE_DUPLICATE_MODULE = "This module already exists in the GradPad";

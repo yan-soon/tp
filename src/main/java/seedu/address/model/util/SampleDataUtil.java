@@ -21,7 +21,7 @@ public class SampleDataUtil {
             new Module(new ModuleCode("CS2103T"), new ModuleTitle("Software Engineering"),
                 new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("CS1010"), new ModuleTitle("Programming Methodology"),
-                new ModularCredits("4"), getTagSet("FOundation")),
+                new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("CS2101"), new ModuleTitle("Effective Communication for Computing "
                 + "Professionals"), new ModularCredits("4"), getTagSet("Foundation")),
             new Module(new ModuleCode("CS2105"), new ModuleTitle("Introduction to Computer Networks"),

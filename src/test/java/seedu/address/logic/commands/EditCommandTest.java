@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
-import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
@@ -20,9 +19,7 @@ import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import org.junit.jupiter.api.Test;
 
-import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
-import seedu.address.logic.parser.ParserUtil;
 import seedu.address.model.GradPad;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;

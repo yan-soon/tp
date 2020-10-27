@@ -1,6 +1,5 @@
 package seedu.address.model;
 
-
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
 import seedu.address.model.tag.UniqueTagMap;

@@ -24,8 +24,9 @@ public class SearchCommand extends Command {
             + "Example: " + COMMAND_WORD + " CS2103T";
 
     public static final String MESSAGE_SUCCESS = "Module Info for: %1$s \n"
-            + "Module Title: %2$s \n\n" + "Module Description: \n%3$s \n\n"
-            + "Preclusion: %4$s\n\n" + "Prerequisite: %5$s\n";
+            + "Modular Credits: %2$s\n"
+            + "Module Title: %3$s \n\n" + "Module Description: \n%4$s \n\n"
+            + "Preclusion: %5$s\n\n" + "Prerequisite: %6$s\n";
 
     private final String moduleCode;
 
@@ -49,8 +50,8 @@ public class SearchCommand extends Command {
         String prerequisite = Optional.ofNullable(searchResult.getPrerequisite()).orElse("None");
 
         String searchDisplay = String.format(MESSAGE_SUCCESS, searchResult.getModuleCode(),
-                searchResult.getTitle(), searchResult.getDescription(),
-                preclusion, prerequisite);
+                searchResult.getModuleCredit(), searchResult.getTitle(),
+                searchResult.getDescription(), preclusion, prerequisite);
         return new CommandResult(searchDisplay);
     }
 

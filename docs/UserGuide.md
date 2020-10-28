@@ -52,7 +52,7 @@ Follow the steps below to learn how to get started with GradPad!
    * **`exit`** : Exits the app.
    
 **Note:** <br>
-Detailed explanation of each command can be found [here](commands).
+Detailed explanation of each command can be found [here](#commands).
 
 1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 

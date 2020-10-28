@@ -164,13 +164,14 @@ You can edit a module by specifying the module code of the module in the Complet
  them with new ones.
 
 Example:<br>
-You have accidentally added a module with tags "superbmodule" and "superfun" when you actually found that module to be extremely boring and draggy.
+When you were a freshman, you added a module with tags "superbmodule" and "superfun". But now that you're graduating,
+you actually think that the module was the best you'd taken in NUS.
 
 Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags. 
 
 To edit the module:
 
-1. Type `edit cs2101 t/boring` into the command box, and press **Enter** to execute it.<br>
+1. Type `edit cs2101 t/bestModule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
 
 2. The result display box will display the message "Edited module", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.

@@ -104,7 +104,12 @@ You can add a module by specifying a valid module code. You can also include mul
 Conveniently, you don't have to specify the module title or modular credits of the module you're adding - GradPad
  automatically retrieves them for you.
 
-**Note:** You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
+
+</div>
 
 To add the module:
 
@@ -158,11 +163,16 @@ The `edit` command allows you to edit the details of a module that you have adde
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
  fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
  single `edit` command.
-
-**Note:** When you edit tags, instead of changing the descriptions of the existing tags, editing tags replaces
+ 
+ <div markdown="block" class="alert alert-info">
+ 
+ **:information_source: Note:**<br>
+* When you edit tags, instead of changing the descriptions of the existing tags, editing tags replaces
  them with new ones.
 
-Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags. 
+* Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags.
+ 
+ </div> 
 
 To edit the module:
 
@@ -275,7 +285,12 @@ The `search` command allows you to search for any module available in NUS.
 
 You can search for a module by specifying the module code of the module.
 
-**Note**: If your internet is down, you can only search for modules that are of the Computer Science curriculum.
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+If your internet is down, you can only search for modules that are of the Computer Science curriculum.
+
+</div>
 
 1. Type `search MA1521` into the command box, press **Enter** to execute it.
 

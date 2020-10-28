@@ -90,7 +90,7 @@ public class GradPad implements ReadOnlyGradPad {
 
         // Reuse existing tags if possible
         Set<Tag> replacedTags = tags.checkAndReplaceTags(m.getTags());
-        Module toAdd = new Module(m.getModuleCode(), m.getModularCredits(), replacedTags);
+        Module toAdd = new Module(m.getModuleCode(), m.getModuleTitle(), m.getModularCredits(), replacedTags);
 
         modules.add(toAdd);
     }
@@ -107,8 +107,9 @@ public class GradPad implements ReadOnlyGradPad {
         tags.remove(target.getTags());
         // Get new tags and reuse existing tags if possible
         Set<Tag> replacedTags = tags.checkAndReplaceTags(editedModule.getTags());
-        Module editedModuleToAdd = new Module(editedModule.getModuleCode(), editedModule.getModularCredits(),
-                                           replacedTags);
+        Module editedModuleToAdd =
+                new Module(editedModule.getModuleCode(), editedModule.getModuleTitle(),
+                           editedModule.getModularCredits(), replacedTags);
 
         modules.setModule(target, editedModuleToAdd);
     }

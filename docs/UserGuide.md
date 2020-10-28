@@ -12,13 +12,14 @@ title: User Guide
 
 We are a team of **Computer Science Undergraduates** working together to solve **module management** and **graduation planning** problems
 faced by fellow Computer Science students. Below is the detailed **User Guide** for effective use of GradPad which can help you
-ease and improve your **modules planning process**.
+ease and improve your **module planning process**.
 
 GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
 Planning for modules has always been a tedious process but it does not have to be.
 
-The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources which can
-be messy at times. So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
+The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
+NUSMods and websites of Faculty of Computing, which can be messy at times. 
+So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
 
 GradPad **consolidates** the modules you have taken and **displays** the **remaining required modules** to

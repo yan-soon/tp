@@ -42,7 +42,7 @@ public class GemCommand extends Command {
     }
 
     /**
-     * Loads the gemModules attribute with Semester 1 GE Modules by using
+     * Loads the sem1Storage attribute with Semester 1 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
      * @throws IOException When the path in invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
@@ -58,7 +58,7 @@ public class GemCommand extends Command {
     }
 
     /**
-     * Loads the gemModules attribute with Semester 2 GE Modules by using
+     * Loads the sem2Storage attribute with Semester 2 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
      * @throws IOException When the path in invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the

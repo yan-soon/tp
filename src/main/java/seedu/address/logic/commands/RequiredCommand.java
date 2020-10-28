@@ -167,15 +167,15 @@ public class RequiredCommand extends Command {
 
     /**
      * Checks if particular GE field is cleared in the current GradPad.
-     * @param GE The GE field that you wish to check (Eg. 'GEQ' or 'GEH').
+     * @param ge The GE field that you wish to check (Eg. 'GEQ' or 'GEH').
      * @return True if the GE field is cleared, false otherwise.
      */
-    public boolean isGEpresent(String GE) {
+    public boolean isGePresent(String ge) {
         for (Module module : currentModules) {
             String moduleCode = module.getModuleCode().toString();
-            if (moduleCode.contains(GE)) {
+            if (moduleCode.contains(ge)) {
                 return true;
-            } 
+            }
         }
         return false;
     }
@@ -188,22 +188,27 @@ public class RequiredCommand extends Command {
     public void compareAllGEs() {
         String uncompletedGEs = "\n";
         boolean allGEsCleared = true;
-        if (!isGEpresent("GEH")) {
+        if (!isGePresent("GEH")) {
             uncompletedGEs += "GEH" + "\n";
             allGEsCleared = false;
-        } if (!isGEpresent("GEQ")) {
+        }
+        if (!isGePresent("GEQ")) {
             uncompletedGEs += "GEQ" + "\n";
             allGEsCleared = false;
-        } if (!isGEpresent("GER")) {
+        }
+        if (!isGePresent("GER")) {
             uncompletedGEs += "GER" + "\n";
             allGEsCleared = false;
-        } if (!isGEpresent("GES")) {
+        }
+        if (!isGePresent("GES")) {
             uncompletedGEs += "GES" + "\n";
             allGEsCleared = false;
-        } if (!isGEpresent("GET")) {
+        }
+        if (!isGePresent("GET")) {
             uncompletedGEs += "GET" + "\n";
             allGEsCleared = false;
-        } if (allGEsCleared) {
+        }
+        if (allGEsCleared) {
             leftOverModules += MESSAGE_SUCCESS_GE + "\n";
         } else {
             leftOverModules += MESSAGE_FAILURE_GE_1 + uncompletedGEs + MESSAGE_FAILURE_GE_2 + "\n";

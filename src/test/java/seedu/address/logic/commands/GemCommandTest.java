@@ -77,7 +77,7 @@ class GemCommandTest {
         ObservableList<Module> actual = storage.getGehModules();
         assertEquals(testModules, actual);
     }
-    
+
     @Test
     public void moduleExtractor_validTest() throws IOException, DataConversionException {
         setUpSingleModule();
@@ -86,7 +86,7 @@ class GemCommandTest {
         String actual = "" + temp;
         assertEquals(expected, actual);
     }
-    
+
     @Test
     public void nullModel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> gemCommand.execute(model));

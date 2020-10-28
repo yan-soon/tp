@@ -18,7 +18,7 @@ import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 import seedu.address.storage.GemCommandStorage;
 
-public class GemCommand extends Command{
+public class GemCommand extends Command {
     public static final String COMMAND_WORD = "gem";
     public static final String MESSAGE_SUCCESS = "These are the GE Modules that you can take:";
     public static final String MESSAGE_FAILURE_SCIENCE = "There was an error loading the required GE Modules :(";
@@ -114,6 +114,6 @@ public class GemCommand extends Command{
             return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE_SCIENCE);
-        } 
+        }
     }
 }

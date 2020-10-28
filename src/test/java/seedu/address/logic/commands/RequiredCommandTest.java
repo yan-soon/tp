@@ -9,8 +9,8 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
@@ -136,14 +136,14 @@ class RequiredCommandTest {
         String expected = MESSAGE_INTERN_1 + MESSAGE_INTERN_TEST + MESSAGE_INTERN_2 + "\n" + MISSING_MODULE_2;
         assertEquals(expected, actual);
     }
-    
+
     @Test
-    public void isGEpresent_validTest() throws IOException, DataConversionException {
+    public void isGePresent_validTest() throws IOException, DataConversionException {
         setUpSingleTestModule();
         requiredCommand.setCurrentModules(testModules);
-        assertFalse(requiredCommand.isGEpresent("GEH"));
+        assertFalse(requiredCommand.isGePresent("GEH"));
     }
-    
+
     @Test
     public void compareAllGEs_validTest() throws IOException, DataConversionException {
         String expectedUncompletedGEs = "\n" + "GEH" + "\n" + "GEQ" + "\n"
@@ -155,7 +155,7 @@ class RequiredCommandTest {
         String actual = requiredCommand.getLeftOverModules();
         assertEquals(expected, actual);
     }
-    
+
     @Test
     public void nullModel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> requiredCommand.execute(model));
@@ -163,7 +163,7 @@ class RequiredCommandTest {
     @Test
     public void execute_validTest() throws IOException, DataConversionException {
         setUp();
-        String expectedMessage = "" + MESSAGE_SUCCESS_GE + "\n" + "\n" +MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
+        String expectedMessage = "" + MESSAGE_SUCCESS_GE + "\n" + "\n" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
                 + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI
                 + "\n" + "\n" + MESSAGE_SUCCESS_SCIENCE + "\n" + "\n" + MESSAGE_SUCCESS_INTERN;
         CommandResult expected = new CommandResult(expectedMessage);

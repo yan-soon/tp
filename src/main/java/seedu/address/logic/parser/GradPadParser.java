@@ -89,7 +89,7 @@ public class GradPadParser {
         case YesCommand.COMMAND_WORD:
             return new YesCommand();
 
-        case GemCommand.COMMAND_WORD:   
+        case GemCommand.COMMAND_WORD:
             return new GemCommand();
 
         default:

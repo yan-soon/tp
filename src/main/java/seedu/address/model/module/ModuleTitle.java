@@ -17,7 +17,7 @@ public class ModuleTitle {
      * The first character of the title must not be a whitespace,
      * otherwise " " (a blank string) becomes a valid input.
      */
-    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
+    public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]";
 
     public final String moduleTitle;
 
@@ -36,7 +36,8 @@ public class ModuleTitle {
      * Returns true if a given string is a valid module title.
      */
     public static boolean isValidModuleTitle(String test) {
-        return test.matches(VALIDATION_REGEX);
+        //return test.matches(VALIDATION_REGEX);
+        return true;
     }
 
 

@@ -43,7 +43,7 @@ With this guide, you'll be ready to use GradPad in no time.
 
    * **`list`** : Lists all added modules.
 
-   * **`add`** `CS2103T 4` : Adds a module named `CS2103T` with `4` modular credits to the GradPad.
+   * **`add`** `CS2103T` : Adds a module named `CS2103T` to the GradPad.
 
    * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
 
@@ -79,7 +79,8 @@ Refer to [Commands](#commands) below for details on all commands.
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
 
 * When a command requires parameters, they can be entered in any order.<br>
-For example, if the command specifies `add c/MODULE_CODE cr/MODULAR_CREDITS`, `add cr/MODULAR_CREDITS c/MODULE_CODE` is also acceptable.
+For example, if the command specifies `add c/MODULE_CODE t/core`, `add t/core c/MODULE_CODE
+` is also acceptable.
 
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
 
@@ -101,7 +102,9 @@ To show the help display:
 
 The `add` command allows you to add a module you have completed into the Completed Modules list.
 
-You can add a module by specifying a valid module code as well as the modular credits the module carries using the prefixes 'c/' and 'cr/' respectively. You can also include multiple tags using the prefix 't/' but they are optional.
+You can add a module by specifying a valid module code. You can also include multiple tags using the prefix 't/' but they are optional.
+Conveniently, you don't have to specify the module title or modular credits of the module you're adding - GradPad
+ automatically retrieves them for you.
 
 **Note:** You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
 
@@ -110,7 +113,7 @@ You have just completed the CS2101 module and you want to add the module into Gr
 
 To add the module:
 
-1. Type `add c/cs2101 cr/4 t/superbmodule t/superfun` into the command box, and press **Enter** to execute it.<br>
+1. Type `add cs2101 t/superbmodule t/superfun` into the command box, and press **Enter** to execute it.<br>
 ![Add1](images/Add1.png)
 
 2. The result display box will display the message "New module added", along with the details of the module. You will then be able to see the CS2101 module at the bottom of the Completed Modules list.<<br>
@@ -131,22 +134,44 @@ To view all modules:
 2. The result display box will display the message "Listed all modules" and you will be able to view all your previously added modules in the Completed Modules list.
 ![List2](images/List2.png)
 
+### Viewing all added tags: `tags`
+
+The `tags` command allows you to view all the tags currently in your `Completed Modules` list in
+ GradPad. This is useful when you want to see what tags you can filter your `Completed Modules` by (see the 
+ `find` command below).
+
+Example:<br>
+You wish to filter your `Completed Modules` list to display modules tagged as "foundation". However, you've added
+tons of tags to tons of modules and so you can't remember if this tag actually exists. 
+
+To view all tags:
+
+1. Type `tags` into the command box, and press **Enter** to execute it.
+![Tags1](images/Tags1.png)
+
+2. The result display box will display the message "Listed all tags" followed by a list of all current tags.
+![Tag2](images/Tags2.png)
+
 ### Editing module details: `edit`
 
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
-You can edit a module by specifying the index of the module in the Completed Modules list, followed by the fields you wish to edit with their respective prefixes, 'c/' for module code, 'cr/' for modular credits, etc. You may edit multiple fields in a single `edit` command.
+You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
+ fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
+ single `edit` command.
 
-**Note:** You can also edit tags, however, instead of changing the descriptions of the existing tags, editing tags replace them with new ones.
+**Note:** When you edit tags, instead of changing the descriptions of the existing tags, editing tags replaces
+ them with new ones.
 
 Example:<br>
-You have accidentally added a module with tags "superbmodule" and "superfun" when you actually found that module to be extremely boring and draggy.
+When you were a freshman, you added a module with tags "superbmodule" and "superfun". But now that you're graduating,
+you actually think that the module was the best you'd taken in NUS.
 
-Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags. The index of the module in the Completed Modules list is 6.
+Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags. 
 
 To edit the module:
 
-1. Type `edit 6 t/boring` into the command box, and press **Enter** to execute it.<br>
+1. Type `edit cs2101 t/bestModule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
 
 2. The result display box will display the message "Edited module", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.
@@ -154,19 +179,24 @@ To edit the module:
 
 ### Finding a specific module or a group of modules: `find`
 
-The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. You can do this by specifying parts of the module code of the module(s) you wish to display.
+The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. 
+You can do this by specifying parts of the module code of the module(s) you wish to display.
+Additionally, you can also specify the tags of the module(s) you wish to display. When specifying tags however,
+you must type out the entire tag and not just a part of it.
 
 Example:<br>
-Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you have added. You want to check and confirm that you have added the module 'CS2101'.
+Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you 
+have added. You want to check and see all CS-coded modules with the "core" tag.
 
 Instead of scrolling through the long Completed Modules list and checking the modules one by one, you can easily filter the list to display that module by `find`-ing said module.
 
 To find the module:
 
-1. Type `find cs2101` into the command box, and press **Enter** to execute it.<br>
+1. Type `find cs core` into the command box, and press **Enter** to execute it.<br>
 ![Find1](images/Find1.png)
 
-2. The result display box will display the message "1 modules listed!" and you will be able to see only the CS2101 module in the Completed Modules list.
+2. The result display box will display the message "1 modules listed!" and you will be able to see only the CS
+-coded modules that have been tagged as "core" in the Completed Modules list.
 ![Find2](images/Find2.png)
 
 ### Deleting a Module: `delete`
@@ -269,11 +299,11 @@ To exit:
 Action | Format | Example
 --------|-------|----------
 **Help** | `help`
-**Add** | `add c/ {module code} cr/ {modular credits}` | `add c/CS2100 cr/4`
-**Edit** | `edit {index} [c/module code] [cr/modular credits] [t/tags]` | `edit 1 c/CS2103T t/core`
+**Add** | `add {module code}` | `add CS2100`
+**Edit** | `edit {module code} [c/module code] [t/tags]` | `edit cs2103 c/CS2103T t/core`
 **Delete** | `delete {module code}` | `delete CS2103T`
 **Completed Modules** | `list`
-**Find** | `find {module code}` | `find CS2103T`
+**Find** | `find {module code or tag}` | `find CS2103T foundation fun`
 **Check MCs** | `checkmc`
 **Required Modules** | `required`
 **Science Modules** | `science`

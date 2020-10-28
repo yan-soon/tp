@@ -25,9 +25,10 @@ import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.TagsCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.CompoundFindPredicate;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 import seedu.address.testutil.ModuleUtil;
@@ -76,7 +77,7 @@ public class GradPadParserTest {
         List<String> keywords = Arrays.asList("foo", "bar", "baz");
         FindCommand command = (FindCommand) parser.parseCommand(
                 FindCommand.COMMAND_WORD + " " + keywords.stream().collect(Collectors.joining(" ")));
-        assertEquals(new FindCommand(new ModuleCodeContainsKeywordsPredicate(keywords)), command);
+        assertEquals(new FindCommand(new CompoundFindPredicate(keywords)), command);
     }
 
     @Test
@@ -95,6 +96,12 @@ public class GradPadParserTest {
     public void parseCommand_checkMc() throws Exception {
         assertTrue(parser.parseCommand(CHECKMC_COMMAND_WORD) instanceof CheckMcCommand);
         assertTrue(parser.parseCommand(CHECKMC_COMMAND_WORD + " 3") instanceof CheckMcCommand);
+    }
+
+    @Test
+    public void parseCommand_tags() throws Exception {
+        assertTrue(parser.parseCommand(TagsCommand.COMMAND_WORD) instanceof TagsCommand);
+        assertTrue(parser.parseCommand(TagsCommand.COMMAND_WORD + " 3") instanceof TagsCommand);
     }
 
     @Test

@@ -80,17 +80,11 @@ class JsonAdaptedModule {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ModuleTitle.class.getSimpleName()));
         }
-        if (!ModuleTitle.isValidModuleTitle(title)) {
-            throw new IllegalValueException(ModuleTitle.MESSAGE_CONSTRAINTS);
-        }
         final ModuleTitle moduleTitle = new ModuleTitle(title);
 
         if (credits == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
                     ModularCredits.class.getSimpleName()));
-        }
-        if (!ModularCredits.isValidMC(credits)) {
-            throw new IllegalValueException(ModularCredits.MESSAGE_CONSTRAINTS);
         }
         final ModularCredits modelCredits = new ModularCredits(credits);
 

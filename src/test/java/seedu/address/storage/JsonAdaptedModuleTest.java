@@ -51,25 +51,9 @@ public class JsonAdaptedModuleTest {
     }
 
     @Test
-    public void toModelType_invalidTitle_throwsIllegalValueException() {
-        JsonAdaptedModule module =
-            new JsonAdaptedModule(VALID_CODE, INVALID_TITLE, VALID_CREDITS, VALID_TAGS);
-        String expectedMessage = ModuleTitle.MESSAGE_CONSTRAINTS;
-        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
-    }
-
-    @Test
     public void toModelType_nullTitle_throwsIllegalValueException() {
         JsonAdaptedModule module = new JsonAdaptedModule(VALID_CODE, null, VALID_CREDITS, VALID_TAGS);
         String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, ModuleTitle.class.getSimpleName());
-        assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
-    }
-
-    @Test
-    public void toModelType_invalidCredits_throwsIllegalValueException() {
-        JsonAdaptedModule module =
-                new JsonAdaptedModule(VALID_CODE, VALID_TITLE, INVALID_CREDITS, VALID_TAGS);
-        String expectedMessage = ModularCredits.MESSAGE_CONSTRAINTS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
 

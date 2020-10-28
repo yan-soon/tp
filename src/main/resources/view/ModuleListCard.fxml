@@ -27,9 +27,18 @@
         </Label>
         <Label fx:id="code" styleClass="cell_big_label" text="\$first" />
       </HBox>
-      <Label fx:id="title" styleClass="cell_medium_label" text="\$title" wrapText="true" />
-      <Label fx:id="credits" styleClass="cell_small_label" text="\$modular credits" />
-      <FlowPane fx:id="tags" />
+      <Label fx:id="title" styleClass="cell_medium_label" text="\$title" wrapText="true">
+            <VBox.margin>
+               <Insets top="2.0" />
+            </VBox.margin></Label>
+      <Label fx:id="credits" styleClass="cell_small_label" text="\$modular credits">
+            <VBox.margin>
+               <Insets top="2.0" />
+            </VBox.margin></Label>
+      <FlowPane fx:id="tags">
+            <VBox.margin>
+               <Insets top="3.0" />
+            </VBox.margin></FlowPane>
     </VBox>
   </GridPane>
 </HBox>

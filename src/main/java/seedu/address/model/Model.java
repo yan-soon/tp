@@ -58,6 +58,11 @@ public interface Model {
     boolean hasModule(Module module);
 
     /**
+     * Returns true if the GradPad is empty.
+     */
+    boolean isEmpty();
+
+    /**
      * Deletes the given module.
      * The module must exist in the GradPad.
      */

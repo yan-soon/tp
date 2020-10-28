@@ -57,6 +57,12 @@ public class GradPad implements ReadOnlyGradPad {
         setModules(newData.getModuleList());
     }
 
+    //// list checking operations
+
+    public boolean isEmpty() {
+        return modules.isEmpty();
+    }
+
     //// module-level operations
 
     /**

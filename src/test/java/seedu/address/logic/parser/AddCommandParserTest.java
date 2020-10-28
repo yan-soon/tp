@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
@@ -51,7 +52,7 @@ public class AddCommandParserTest {
 
     @Test
     public void parse_compulsoryFieldMissing_failure() {
-        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE);
+        String expectedMessage = String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADD_USAGE);
 
         // missing code
         assertParseFailure(parser, " ", expectedMessage);

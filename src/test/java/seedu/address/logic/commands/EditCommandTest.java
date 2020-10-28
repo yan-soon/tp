@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
@@ -111,7 +112,7 @@ public class EditCommandTest {
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
         EditCommand editCommand = new EditCommand(CODE_SECOND_MODULE, descriptor);
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_MODULE);
     }
 
     @Test
@@ -124,7 +125,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
                 new EditModuleDescriptorBuilder(moduleInList).build());
 
-        assertCommandFailure(editCommand, model, EditCommand.MESSAGE_DUPLICATE_MODULE);
+        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_MODULE);
     }
 
     @Test

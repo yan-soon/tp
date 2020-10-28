@@ -96,6 +96,11 @@ public class ModelManager implements Model {
     }
 
     @Override
+    public boolean isEmpty() {
+        return gradPad.isEmpty();
+    }
+
+    @Override
     public void deleteModule(Module target) {
         assert target != null;
         gradPad.removeModule(target);

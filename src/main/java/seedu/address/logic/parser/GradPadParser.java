@@ -1,12 +1,14 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CHECKMC_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CheckMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -42,14 +44,14 @@ public class GradPadParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.MESSAGE_EMPTY_FIELD);
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case ADD_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
         case EditCommand.COMMAND_WORD:
@@ -58,7 +60,7 @@ public class GradPadParser {
         case DeleteCommand.COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case CLEAR_COMMAND_WORD:
             return new ClearCommand();
 
         case FindCommand.COMMAND_WORD:
@@ -73,7 +75,7 @@ public class GradPadParser {
         case HelpCommand.COMMAND_WORD:
             return new HelpCommand();
 
-        case CheckMcCommand.COMMAND_WORD:
+        case CHECKMC_COMMAND_WORD:
             return new CheckMcCommand();
 
         case SearchCommand.COMMAND_WORD:

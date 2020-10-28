@@ -2,7 +2,9 @@ package seedu.address.logic.parser;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.CHECKMC_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_FIELD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
@@ -43,8 +45,8 @@ public class GradPadParserTest {
 
     @Test
     public void parseCommand_clear() throws Exception {
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD) instanceof ClearCommand);
-        assertTrue(parser.parseCommand(ClearCommand.COMMAND_WORD + " 3") instanceof ClearCommand);
+        assertTrue(parser.parseCommand(CLEAR_COMMAND_WORD) instanceof ClearCommand);
+        assertTrue(parser.parseCommand(CLEAR_COMMAND_WORD + " 3") instanceof ClearCommand);
     }
 
     @Test
@@ -91,13 +93,13 @@ public class GradPadParserTest {
 
     @Test
     public void parseCommand_checkMc() throws Exception {
-        assertTrue(parser.parseCommand(CheckMcCommand.COMMAND_WORD) instanceof CheckMcCommand);
-        assertTrue(parser.parseCommand(CheckMcCommand.COMMAND_WORD + " 3") instanceof CheckMcCommand);
+        assertTrue(parser.parseCommand(CHECKMC_COMMAND_WORD) instanceof CheckMcCommand);
+        assertTrue(parser.parseCommand(CHECKMC_COMMAND_WORD + " 3") instanceof CheckMcCommand);
     }
 
     @Test
     public void parseCommand_unrecognisedInput_throwsParseException() {
-        assertThrows(ParseException.class, String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE), ()
+        assertThrows(ParseException.class, MESSAGE_EMPTY_FIELD, ()
             -> parser.parseCommand(""));
     }
 

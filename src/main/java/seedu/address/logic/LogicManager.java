@@ -1,5 +1,8 @@
 package seedu.address.logic;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.logging.Logger;
@@ -25,8 +28,6 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
     public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
-    public static final String MESSAGE_CONFIRMATION_SYNTAX = "\n\nType:\tyes<Enter>\tto confirm "
-            + "OR\nType:\tno<Enter>\t\tto cancel";
     public static final String MESSAGE_CONFIRMATION_CANCEL = "Command aborted - ";
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
@@ -50,12 +51,11 @@ public class LogicManager implements Logic {
     private CommandResult handleStall(Command command, String commandText) throws CommandException {
         if (command instanceof ClearCommand) {
             assignStalledComponents(command, commandText);
-            return new CommandResult(ClearCommand.MESSAGE_CONFIRMATION + MESSAGE_CONFIRMATION_SYNTAX);
+            return new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
         } else {
             Module moduleToBeDeleted = ((DeleteCommand) command).getModuleToDelete(model);
             assignStalledComponents(command, commandText);
-            return new CommandResult(DeleteCommand.MESSAGE_CONFIRMATION + moduleToBeDeleted
-                    + MESSAGE_CONFIRMATION_SYNTAX);
+            return new CommandResult(DeleteCommand.MESSAGE_CONFIRMATION + moduleToBeDeleted);
         }
     }
 
@@ -80,6 +80,9 @@ public class LogicManager implements Logic {
         boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
 
         if (command.requiresStall()) {
+            if (model.isEmpty()) {
+                return new CommandResult(MESSAGE_EMPTY_GRADPAD);
+            }
             return handleStall(command, commandText);
         } else if (isConfirmation) {
             command = stalledCommand;

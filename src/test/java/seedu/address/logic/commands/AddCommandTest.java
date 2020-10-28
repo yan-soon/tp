@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_SUCCESS;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.nio.file.Path;
@@ -37,7 +39,7 @@ public class AddCommandTest {
 
         CommandResult commandResult = new AddCommand(validModule).execute(modelStub);
 
-        assertEquals(String.format(AddCommand.MESSAGE_SUCCESS, validModule), commandResult.getFeedbackToUser());
+        assertEquals(String.format(MESSAGE_ADD_SUCCESS, validModule), commandResult.getFeedbackToUser());
         assertEquals(Arrays.asList(validModule), modelStub.modulesAdded);
     }
 
@@ -47,7 +49,8 @@ public class AddCommandTest {
         AddCommand addCommand = new AddCommand(validModule);
         ModelStub modelStub = new ModelStubWithModule(validModule);
 
-        assertThrows(CommandException.class, AddCommand.MESSAGE_DUPLICATE_MODULE, () -> addCommand.execute(modelStub));
+        assertThrows(CommandException.class, String.format(MESSAGE_DUPLICATE_MODULE,
+            validModule.getModuleCode()), () -> addCommand.execute(modelStub));
     }
 
     @Test
@@ -125,6 +128,11 @@ public class AddCommandTest {
 
         @Override
         public boolean hasModule(Module module) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public boolean isEmpty() {
             throw new AssertionError("This method should not be called.");
         }
 

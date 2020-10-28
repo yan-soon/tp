@@ -1,6 +1,7 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
@@ -36,7 +37,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADD_USAGE));
         }
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         String moduleCodeText = StringUtil.ignoreCase(moduleCode.toString());

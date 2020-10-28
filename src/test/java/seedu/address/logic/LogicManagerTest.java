@@ -1,6 +1,7 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
@@ -77,7 +78,7 @@ public class LogicManagerTest {
         logic = new LogicManager(model, storage);
 
         // Execute add command
-        String addCommand = AddCommand.COMMAND_WORD + CODE_DESC_CS2103T;
+        String addCommand = ADD_COMMAND_WORD + CODE_DESC_CS2103T;
         Module expectedModule = new ModuleBuilder(CS2103T).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addModule(expectedModule);

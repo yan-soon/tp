@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_SUCCESS;
+import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
@@ -33,13 +35,14 @@ public class AddCommandIntegrationTest {
         expectedModel.addModule(validModule);
 
         assertCommandSuccess(new AddCommand(validModule), model,
-                String.format(AddCommand.MESSAGE_SUCCESS, validModule), expectedModel);
+                String.format(MESSAGE_ADD_SUCCESS, validModule), expectedModel);
     }
 
     @Test
     public void execute_duplicateModule_throwsCommandException() {
         Module moduleInList = model.getGradPad().getModuleList().get(0);
-        assertCommandFailure(new AddCommand(moduleInList), model, AddCommand.MESSAGE_DUPLICATE_MODULE);
+        assertCommandFailure(new AddCommand(moduleInList), model,
+            String.format(MESSAGE_DUPLICATE_MODULE, moduleInList.getModuleCode()));
     }
 
 }

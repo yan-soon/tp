@@ -3,7 +3,6 @@ package seedu.address.logic.parser;
 import static java.util.Objects.requireNonNull;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
-import static seedu.address.logic.parser.CliSyntax.PREFIX_CREDITS;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Collection;
@@ -11,16 +10,21 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.Set;
 
-import seedu.address.commons.core.index.Index;
+import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
+import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.tag.Tag;
+import seedu.address.nusmods.ModuleInfo;
 
 /**
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "Module %1$s does not exist!";
+    public static final String MESSAGE_MODULE_NOT_YET_ADDED = "Module %1$s has not been added yet!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -30,23 +34,36 @@ public class EditCommandParser implements Parser<EditCommand> {
     public EditCommand parse(String args) throws ParseException {
         requireNonNull(args);
         ArgumentMultimap argMultimap =
-                ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_CREDITS, PREFIX_TAG);
+            ArgumentTokenizer.tokenize(args, PREFIX_CODE, PREFIX_TAG);
 
-        Index index;
+        String trimmedArgs = args.trim();
+        if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                EditCommand.MESSAGE_USAGE));
+        }
 
+        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
+        ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         try {
-            index = ParserUtil.parseIndex(argMultimap.getPreamble());
-        } catch (ParseException pe) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE), pe);
+            moduleInfoSearcher.searchModule(code.toString());
+        } catch (CommandException e) {
+            throw new ParseException(e.getMessage());
         }
 
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
+        ModuleInfo moduleInfo;
+
         if (argMultimap.getValue(PREFIX_CODE).isPresent()) {
-            editModuleDescriptor.setModuleCode(ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get()));
-        }
-        if (argMultimap.getValue(PREFIX_CREDITS).isPresent()) {
-            editModuleDescriptor.setModularCredits(
-                    ParserUtil.parseModularCredits(argMultimap.getValue(PREFIX_CREDITS).get()));
+            ModuleCode newCode = ParserUtil.parseModuleCode(argMultimap.getValue(PREFIX_CODE).get());
+            try {
+                moduleInfo = moduleInfoSearcher.searchModule(newCode.toString());
+                editModuleDescriptor.setModuleCode(newCode);
+                editModuleDescriptor.setModuleTitle(ParserUtil.parseModuleTitle(moduleInfo.getTitle()));
+                editModuleDescriptor.setModularCredits(
+                    ParserUtil.parseModularCredits(moduleInfo.getModuleCredit()));
+            } catch (CommandException e) {
+                throw new ParseException(e.getMessage());
+            }
         }
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editModuleDescriptor::setTags);
 
@@ -54,7 +71,7 @@ public class EditCommandParser implements Parser<EditCommand> {
             throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
         }
 
-        return new EditCommand(index, editModuleDescriptor);
+        return new EditCommand(code, editModuleDescriptor);
     }
 
     /**

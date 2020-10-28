@@ -50,9 +50,14 @@ Follow the steps below to learn how to get started with GradPad!
    * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
 
    * **`exit`** : Exits the app.
-   
-**Note:** <br>
+
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
 Detailed explanation of each command can be found [here](#commands).
+
+</div>
 
 1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 

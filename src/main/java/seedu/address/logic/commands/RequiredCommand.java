@@ -164,7 +164,12 @@ public class RequiredCommand extends Command {
             leftOverModules += MESSAGE_SUCCESS_INTERN;
         }
     }
-    
+
+    /**
+     * Checks if particular GE field is cleared in the current GradPad.
+     * @param GE The GE field that you wish to check (Eg. 'GEQ' or 'GEH').
+     * @return True if the GE field is cleared, false otherwise.
+     */
     public boolean isGEpresent(String GE) {
         for (Module module : currentModules) {
             String moduleCode = module.getModuleCode().toString();
@@ -174,7 +179,12 @@ public class RequiredCommand extends Command {
         }
         return false;
     }
-    
+
+    /**
+     * Checks which GE fields are not clear in the current GradPad and
+     * adds to the attribute leftOverModules if that particular GE field
+     * has not been cleared.
+     */
     public void compareAllGEs() {
         String uncompletedGEs = "\n";
         boolean allGEsCleared = true;

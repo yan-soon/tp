@@ -1,11 +1,15 @@
 package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_1;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
@@ -58,7 +62,7 @@ class RequiredCommandTest {
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
-    public void setUpSingleTestModules() throws IOException, DataConversionException {
+    public void setUpSingleTestModule() throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(SINGLE_MODULE_PATH);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
@@ -124,7 +128,7 @@ class RequiredCommandTest {
     }
     @Test
     public void compareInternship_validTest() throws IOException, DataConversionException {
-        setUpSingleTestModules();
+        setUpSingleTestModule();
         requiredCommand.setCurrentModules(testModules);
         setUpDoubleTestModules();
         requiredCommand.compareInternship(testModules);
@@ -132,6 +136,26 @@ class RequiredCommandTest {
         String expected = MESSAGE_INTERN_1 + MESSAGE_INTERN_TEST + MESSAGE_INTERN_2 + "\n" + MISSING_MODULE_2;
         assertEquals(expected, actual);
     }
+    
+    @Test
+    public void isGEpresent_validTest() throws IOException, DataConversionException {
+        setUpSingleTestModule();
+        requiredCommand.setCurrentModules(testModules);
+        assertFalse(requiredCommand.isGEpresent("GEH"));
+    }
+    
+    @Test
+    public void compareAllGEs_validTest() throws IOException, DataConversionException {
+        String expectedUncompletedGEs = "\n" + "GEH" + "\n" + "GEQ" + "\n"
+                + "GER" + "\n" + "GES" + "\n" + "GET" + "\n";
+        String expected = MESSAGE_FAILURE_GE_1 + expectedUncompletedGEs + MESSAGE_FAILURE_GE_2 + "\n" + "\n";
+        setUpSingleTestModule();
+        requiredCommand.setCurrentModules(testModules);
+        requiredCommand.compareAllGEs();
+        String actual = requiredCommand.getLeftOverModules();
+        assertEquals(expected, actual);
+    }
+    
     @Test
     public void nullModel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> requiredCommand.execute(model));
@@ -139,7 +163,7 @@ class RequiredCommandTest {
     @Test
     public void execute_validTest() throws IOException, DataConversionException {
         setUp();
-        String expectedMessage = "" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
+        String expectedMessage = "" + MESSAGE_SUCCESS_GE + "\n" + "\n" +MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
                 + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI
                 + "\n" + "\n" + MESSAGE_SUCCESS_SCIENCE + "\n" + "\n" + MESSAGE_SUCCESS_INTERN;
         CommandResult expected = new CommandResult(expectedMessage);

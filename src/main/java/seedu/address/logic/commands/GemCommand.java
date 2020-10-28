@@ -72,7 +72,12 @@ public class GemCommand extends Command{
         sem2Storage.setGesModules(GES_SEM2_PATH);
         sem2Storage.setGetModules(GET_SEM2_PATH);
     }
-    
+
+    /**
+     * Takes a List of Modules and extracts out their Module Code and Modular Credits.
+     * @param modules List of Modules.
+     * @return String of Module Codes and Modular Credits.
+     */
     public StringBuilder moduleExtractor(ObservableList<Module> modules) {
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
@@ -83,10 +88,10 @@ public class GemCommand extends Command{
     }
 
     /**
-     * Goes through the scienceModules attribute and parses all Science Modules, to be read by the user.
+     * Sets up the all the GE modules in the sem1Storage and sem2Storage and displays them
+     * with the CommandResult object.
      * @param model {@code Model} which the command should operate on.
-     * @return CommandResult Object with the relevant Science Modules or Failure Message if modules
-     * are absent.
+     * @return a CommandResult displaying all the available GE modules.
      */
     @Override
     public CommandResult execute(Model model) {

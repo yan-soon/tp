@@ -178,9 +178,9 @@ To find the module:
 
 ### Deleting a Module: `delete`
 
-The `delete` command allows you to remove a module you have added into GradPad.
+The `delete` command allows you to **remove** a module you have added into the GradPad that is under the Completed Modules list.
 
-You can delete a module by specifying the module code of the module.
+You can delete a module by specifying the **module code** of the module. (Case insensitive)
 
 Example:<br>
 You have added several modules into GradPad but you realised that you accidentally added an additional module 'CS2107' that you have not completed yet. If you no longer want that module in your Completed Modules list, you can simply delete it.
@@ -199,7 +199,11 @@ To delete the module:
 
 ### Checking total modular credits: `checkmc`
 
+**Note:** A **Modular Credit** (MC) is a unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload, with
+an average of 20 MCs per semester.
+
 The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
+This gives you a rough gauge of the progress of your graduation planning.
 
 To check total modular credits:
 

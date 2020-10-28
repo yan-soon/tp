@@ -29,13 +29,15 @@ With this guide, you'll be ready to use GradPad in no time.
 
 ## Quick start
 
+Follow the steps below to learn how to get started with GradPad!
+
 1. Ensure you have Java `11` or above installed in your Computer.
 
 1. Download the latest `GradPad.jar` from [here](https://github.com/AY2021S1-CS2103T-T09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GradPad.
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The Main Page similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -48,6 +50,9 @@ With this guide, you'll be ready to use GradPad in no time.
    * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
 
    * **`exit`** : Exits the app.
+   
+**Note:** <br>
+Detailed explanation of each command can be found [here](commands).
 
 1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 
@@ -57,7 +62,6 @@ With this guide, you'll be ready to use GradPad in no time.
 
  Features                         |    Description
  ----------------------------------------|------------
- View Help                               | Allows you to view a list of all possible commands
  Add a Module                            | Allows you to add any module of choice to the `Completed Modules` list for tracking purposes
  View Added Modules                      | Allows you to check all the modules you've added  to `Completed Modules`
  Find Modules from Completed Modules     | Allows you to look for modules in `Completed Modules` using keywords
@@ -65,8 +69,11 @@ With this guide, you'll be ready to use GradPad in no time.
  Edit a Module                           | Allows you to edit the details of a module you've already added to `Completed Modules`
  Check Modular Credits                   | Allows you to check your current modular credit tally
  View all Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the `Result Display`
+ View all General Education Modules      | Allows you to display all available General Education Modules offered in NUS, onto the `Result Display`
  View all Science Modules                | Allows you to display all viable Science modules in the Computer Science curriculum onto the `Result Display`
  Search for a Module                     | Allows you to search for any module available in NUS and display the module details in the `Result Display`
+ Find Tags from Completed Modules        | Allows you to check all tags that are used in `Completed Modules`
+ View Help                               | Allows you to view a list of all possible commands
  Exit the Program                        | Allows you to terminate the GradPad program
 
 
@@ -86,19 +93,10 @@ For example, if the command specifies `add c/MODULE_CODE t/core`, `add t/core c/
 
 </div>
 
-### Showing the help display: `help`
-
-The `help` command displays all of GradPad's available commands and how to use them, to you. This command is useful for first-timers or users who generally do not know how to use GradPad.
-
-To show the help display:
-
-1. Type `help` into the command box, and press **Enter** to execute it.<br>
-![Help1](images/Help1.png)
-
-1. The result display box will display all of GradPad's commands along with examples on how to use them.<br>
-![Help2](images/Help2.png)
-
 ### Adding a module: `add`
+
+Scenario:<br>
+You have just completed the CS2101 module, and you want to add the module into GradPad to track your academic progress. You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
 
 The `add` command allows you to add a module you have completed into the Completed Modules list.
 
@@ -107,9 +105,6 @@ Conveniently, you don't have to specify the module title or modular credits of t
  automatically retrieves them for you.
 
 **Note:** You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
-
-Example:<br>
-You have just completed the CS2101 module and you want to add the module into GradPad to track your academic progress. You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
 
 To add the module:
 
@@ -121,28 +116,28 @@ To add the module:
 
 ### Viewing all added modules: `list`
 
-The `list` command allows you to view all the modules you have added into the Completed Modules list in GradPad using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`) and you wish to restore the list to its original state.
-
-Example:<br>
+Scenario:<br>
 You have filtered the Completed Modules list to show modules whose module codes contain 'cs1', and you wish to restore the list to view all the modules you have added.
+
+The `list` command allows you to view all the modules you have added into the Completed Modules list in GradPad using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`) and you wish to restore the list to its original state.
 
 To view all modules:
 
 1. Type `list` into the command box, and press **Enter** to execute it.
 ![List1](images/List1.png)
 
-2. The result display box will display the message "Listed all modules" and you will be able to view all your previously added modules in the Completed Modules list.
+2. The result display box will display the message "Listed all modules", and you will be able to view all your previously added modules in the Completed Modules list.
 ![List2](images/List2.png)
 
 ### Viewing all added tags: `tags`
 
+Scenario:<br>
+You wish to filter your `Completed Modules` list to display modules tagged as "foundation". However, you've added
+tons of tags to tons of modules and so you can't remember if this tag actually exists. 
+
 The `tags` command allows you to view all the tags currently in your `Completed Modules` list in
  GradPad. This is useful when you want to see what tags you can filter your `Completed Modules` by (see the 
  `find` command below).
-
-Example:<br>
-You wish to filter your `Completed Modules` list to display modules tagged as "foundation". However, you've added
-tons of tags to tons of modules and so you can't remember if this tag actually exists. 
 
 To view all tags:
 
@@ -154,6 +149,10 @@ To view all tags:
 
 ### Editing module details: `edit`
 
+Scenario:<br>
+When you were a freshman, you added a module with tags "superbmodule" and "superfun". But now that you're graduating,
+you actually think that the module was the best you'd taken in NUS.
+
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
@@ -162,10 +161,6 @@ You can edit a module by specifying the module code of the module in the Complet
 
 **Note:** When you edit tags, instead of changing the descriptions of the existing tags, editing tags replaces
  them with new ones.
-
-Example:<br>
-When you were a freshman, you added a module with tags "superbmodule" and "superfun". But now that you're graduating,
-you actually think that the module was the best you'd taken in NUS.
 
 Instead of deleting that module and adding it again with new tags, you can simply edit the module and replace the tags. 
 
@@ -179,14 +174,14 @@ To edit the module:
 
 ### Finding a specific module or a group of modules: `find`
 
+Scenario:<br>
+Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you 
+have added. You want to check and see all CS-coded modules with the "core" tag.
+
 The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. 
 You can do this by specifying parts of the module code of the module(s) you wish to display.
 Additionally, you can also specify the tags of the module(s) you wish to display. When specifying tags however,
 you must type out the entire tag and not just a part of it.
-
-Example:<br>
-Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you 
-have added. You want to check and see all CS-coded modules with the "core" tag.
 
 Instead of scrolling through the long Completed Modules list and checking the modules one by one, you can easily filter the list to display that module by `find`-ing said module.
 
@@ -201,12 +196,12 @@ To find the module:
 
 ### Deleting a Module: `delete`
 
+Scenario:<br>
+You have added several modules into GradPad but you realised that you accidentally added an additional module 'CS2107' that you have not completed yet. If you no longer want that module in your Completed Modules list, you can simply delete it.
+
 The `delete` command allows you to remove a module you have added into GradPad.
 
 You can delete a module by specifying the module code of the module.
-
-Example:<br>
-You have added several modules into GradPad but you realised that you accidentally added an additional module 'CS2107' that you have not completed yet. If you no longer want that module in your Completed Modules list, you can simply delete it.
 
 To delete the module:
 
@@ -234,10 +229,10 @@ To check total modular credits:
 
 ### Checking required modules: `required`
 
-The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
-
-Example: <br>
+Scenario: <br>
 You have added several modules into your GradPad so far but you are unsure if they are part of the Computer Science curriculum. You can simply check by using the `required` command.
+
+The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
 
 To check required modules:
 
@@ -245,12 +240,25 @@ To check required modules:
 
 2. The result display box will then display all the modules you have yet to take for each particular field, as shown below.
 
+### Checking General Education Modules: `gem`
+
+Scenario: <br>
+You wish to take some GE modules to clear your GE requirement, but you are unsure what modules are available. You can simply check by using the `gem` command.
+
+The `gem` command allows you to check all the available General Education (GE) modules that are available in NUS. To ease your planning, the `gem` command indicates which modules are available in Semester 1 and/or 2.
+
+To check GE modules:
+
+1. Type `gem` into the command box, press **Enter** to execute it.
+
+2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2, as shown below.
+
 ### Checking Science modules: `science`
 
-The `science` command allows you to check all the available Science modules of the Computer Science curriculum.
-
-Example: <br>
+Scenario: <br>
 You wish to take a Science module to clear your Science requirement, but you forgot what modules are available. You can simply check by using the `science` command.
+
+The `science` command allows you to check all the available Science modules of the Computer Science curriculum.
 
 To check Science modules:
 
@@ -260,18 +268,34 @@ To check Science modules:
 
 ### Searching for a module: `search`
 
+Scenario: <br>
+After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? Do they have any pre-requisites?). You can simply look up those details by using the `search` command.
+
 The `search` command allows you to search for any module available in NUS.
 
 You can search for a module by specifying the module code of the module.
 
 **Note**: If your internet is down, you can only search for modules that are of the Computer Science curriculum.
 
-Example: <br>
-After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? Do they have any pre-requisites?). You can simply look up those details by using the `search` command.
-
 1. Type `search MA1521` into the command box, press **Enter** to execute it.
 
 2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
+
+
+### Showing the help display: `help`
+
+Scenario: <br>
+You are in the midst of planing your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
+
+The `help` command displays all of GradPad's available commands and how to use them, to you. This command is useful for first-timers or users who generally do not know how to use GradPad.
+
+To show the help display:
+
+1. Type `help` into the command box, and press **Enter** to execute it.<br>
+![Help1](images/Help1.png)
+
+1. The result display box will display all of GradPad's commands along with examples on how to use them.<br>
+![Help2](images/Help2.png)
 
 ### Exiting GradPad: `exit`
 
@@ -298,7 +322,6 @@ To exit:
 
 Action | Format | Example
 --------|-------|----------
-**Help** | `help`
 **Add** | `add {module code}` | `add CS2100`
 **Edit** | `edit {module code} [c/module code] [t/tags]` | `edit cs2103 c/CS2103T t/core`
 **Delete** | `delete {module code}` | `delete CS2103T`
@@ -306,6 +329,9 @@ Action | Format | Example
 **Find** | `find {module code or tag}` | `find CS2103T foundation fun`
 **Check MCs** | `checkmc`
 **Required Modules** | `required`
+**General Education Modules** | `gem`
 **Science Modules** | `science`
 **Search module details** | `search {module code}` | `search CS2103T`
+**Check existing Tags** | `tags`
+**Help** | `help`
 **Exit** | `exit`

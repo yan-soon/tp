@@ -10,19 +10,23 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 ## GradPad
 
-GradPad is a one-stop solution to module management for Computer Science Undergraduates.
+We are a team of **Computer Science Undergraduates** working together to solve **module management** and **graduation planning** problems
+faced by fellow Computer Science students. Below is the detailed **User Guide** for effective use of GradPad which can help you
+ease and improve your **modules planning process**.
+
+GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
 Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources which can
-be messy at times. So, our team has come up with the idea of an easy-to-use, all-in-one application that
-can ease the process of module management for Computer Science Undergraduates.
+be messy at times. So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
+can ease the process of **module management** for Computer Science Undergraduates.
 
-GradPad consolidates the modules you have taken and displays the remaining required modules to
-ease your module planning process. A module searching platform is also included in GradPad, providing easy
-navigation of modules.
+GradPad **consolidates** the modules you have taken and **displays** the **remaining required modules** to
+ease your module planning process. A **module searching platform** is also included in GradPad, providing easy
+**navigation** of modules.
 
 This user guide introduces what you can do with GradPad and the steps needed to do them. In addition,
-it includes a quick start guide that walks you through the installation and set-up process.
+it includes a **quick start guide** that walks you through the installation and set-up process.
 With this guide, you'll be ready to use GradPad in no time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -54,6 +58,7 @@ With this guide, you'll be ready to use GradPad in no time.
 --------------------------------------------------------------------------------------------------------------------
 
 ## Feature Summary List
+A consolidated view of GradPad feature list is listed below in a table form for easy reference.
 
  Features                         |    Description
  ----------------------------------------|------------
@@ -73,6 +78,8 @@ With this guide, you'll be ready to use GradPad in no time.
 Refer to [Commands](#commands) below for details on all commands.
 
 ## Commands
+
+Detailed explanations of each commands and their respective usage are listed under this section.
 
 <div markdown="block" class="alert alert-info">
 
@@ -265,6 +272,8 @@ To exit:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
+This section is the table of all the commands available and their respective usage example in GradPad.
 
 Action | Format | Example
 --------|-------|----------

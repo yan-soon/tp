@@ -2,17 +2,9 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
-import static seedu.address.storage.RequiredCommandStorageTest.TEST_FOUNDATION_PATH;
-import static seedu.address.storage.RequiredCommandStorageTest.TEST_SCIENCE_PATH;
+import static seedu.address.logic.commands.GemCommand.MESSAGE_SUCCESS;
+import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
+import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
@@ -32,17 +24,10 @@ import seedu.address.storage.GemCommandStorage;
 import seedu.address.storage.JsonGradPadStorage;
 
 class GemCommandTest {
-    public static final Path COMPILED_PATH = Paths.get("src/test/data/RequiredCommandTest/compiledmodules.json");
-    public static final Path INCOMPLETE_FOUNDATION_PATH =
-            Paths.get("src/test/data/RequiredCommandTest/incompletefoundationmodules.json");
-    public static final Path SINGLE_MODULE_PATH = Paths.get("src/test/data/RequiredCommandTest/singlemodule.json");
-    public static final Path DOUBLE_MODULE_PATH = Paths.get("src/test/data/RequiredCommandTest/doublemodules.json");
-    public static final String MISSING_MODULE_1 = "CS1101S (4 MCs)";
-    public static final String MISSING_MODULE_2 = "CS1231S (4 MCs)";
-    public static final String MESSAGE_INTERN_TEST = " You are currently at 4 MCs. ";
+    public static final Path COMPILED_PATH_1 = Paths.get("src/test/data/GemCommandTest/compiledsem1GEmodules.json");
+    public static final Path COMPILED_PATH_2 = Paths.get("src/test/data/GemCommandTest/compiledsem2GEmodules.json");
     public static final String TEST_GEH_SEM1_PATH = "src/main/resources/data/GEM/GEHs1.json";
     public static final String TEST_GEH_SEM2_PATH = "src/main/resources/data/GEM/GEHsem2.json";
-    public static final String TEST_SCIENCE_PATH = "src/main/resources/data/GEM/GEHsem2.json";
     private Model model;
     private GemCommand gemCommand = new GemCommand();
     private ObservableList<Module> testModules;
@@ -56,11 +41,15 @@ class GemCommandTest {
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
-    public void setUp() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(COMPILED_PATH);
+    public void setUpSingleModule() throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(SINGLE_MODULE_PATH);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        model = new ModelManager();
-        model.setGradPad(gradPad);
+        testModules = gradPad.getModuleList();
+    }
+    public void setUpCompiledModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        testModules = gradPad.getModuleList();
     }
     @Test
     public void getSem1Storage_validTest() {
@@ -88,16 +77,29 @@ class GemCommandTest {
         ObservableList<Module> actual = storage.getGehModules();
         assertEquals(testModules, actual);
     }
+    
+    @Test
+    public void moduleExtractor_validTest() throws IOException, DataConversionException {
+        setUpSingleModule();
+        String expected = "\n" + MISSING_MODULE_1;
+        StringBuilder temp = gemCommand.moduleExtractor(testModules);
+        String actual = "" + temp;
+        assertEquals(expected, actual);
+    }
+    
     @Test
     public void nullModel_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> gemCommand.execute(model));
     }
     @Test
     public void execute_validTest() throws IOException, DataConversionException {
-        setUp();
-        String expectedMessage = "" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
-                + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI
-                + "\n" + "\n" + MESSAGE_SUCCESS_SCIENCE + "\n" + "\n" + MESSAGE_SUCCESS_INTERN;
+        model = new ModelManager();
+        setUpCompiledModules(COMPILED_PATH_1);
+        String expectedMessage = MESSAGE_SUCCESS + "\n \n" + "SEMESTER 1:" + "\n";
+        expectedMessage += gemCommand.moduleExtractor(testModules);
+        setUpCompiledModules(COMPILED_PATH_2);
+        expectedMessage += "\n \n" + "SEMESTER 2:" + "\n";
+        expectedMessage += gemCommand.moduleExtractor(testModules);
         CommandResult expected = new CommandResult(expectedMessage);
         CommandResult actual = gemCommand.execute(model);
         assertEquals(expected, actual);

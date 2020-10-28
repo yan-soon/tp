@@ -107,10 +107,8 @@ public class GemCommand extends Command{
             modulesToAdd += moduleExtractor(sem2Storage.getGesModules());
             modulesToAdd += moduleExtractor(sem2Storage.getGetModules());
             return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
-        } catch (IOException e) {
+        } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE_SCIENCE);
-        } catch (IllegalValueException e) {
-            return new CommandResult("i");   
-        }
+        } 
     }
 }

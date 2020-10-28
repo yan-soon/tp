@@ -13,7 +13,7 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUN
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
 import static seedu.address.storage.RequiredCommandStorageTest.TEST_FOUNDATION_PATH;
 import static seedu.address.storage.RequiredCommandStorageTest.TEST_SCIENCE_PATH;
@@ -164,7 +164,7 @@ class RequiredCommandTest {
     public void execute_validTest() throws IOException, DataConversionException {
         setUp();
         String expectedMessage = "" + MESSAGE_SUCCESS_GE + "\n" + "\n" + MESSAGE_SUCCESS_FOUNDATION + "\n" + "\n"
-                + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATHANDSCI
+                + MESSAGE_SUCCESS_ITPROF + "\n" + "\n" + MESSAGE_SUCCESS_MATH
                 + "\n" + "\n" + MESSAGE_SUCCESS_SCIENCE + "\n" + "\n" + MESSAGE_SUCCESS_INTERN;
         CommandResult expected = new CommandResult(expectedMessage);
         CommandResult actual = requiredCommand.execute(model);

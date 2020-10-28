@@ -16,7 +16,7 @@ import seedu.address.model.module.Module;
 public class RequiredCommandStorage {
     private ObservableList<Module> requiredFoundation;
     private ObservableList<Module> requiredITprof;
-    private ObservableList<Module> requiredMathAndScience;
+    private ObservableList<Module> requiredMath;
     private ObservableList<Module> requiredScience;
     private ObservableList<Module> requiredInternship;
 
@@ -99,21 +99,21 @@ public class RequiredCommandStorage {
     }
 
     /**
-     * Returns requiredMathAndScience attribute of RequiredCommandStorage object.
-     * @return requiredMathAndScience attribute of type ObservableList<Module/>.
+     * Returns requiredMath attribute of RequiredCommandStorage object.
+     * @return requiredMath attribute of type ObservableList<Module/>.
      */
-    public ObservableList<Module> getRequiredMathAndScience() {
-        return requiredMathAndScience;
+    public ObservableList<Module> getRequiredMath() {
+        return requiredMath;
     }
     /**
-     * Loads the requiredMathAndScience attribute with Math and Science Modules.
+     * Loads the requiredMath attribute with Math Modules.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredMathAndScience(String path) throws IOException, IllegalValueException {
+    public void setRequiredMath(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredMathAndScience = getModulesFromJsonFile(file);
+        requiredMath = getModulesFromJsonFile(file);
     }
 
     /**

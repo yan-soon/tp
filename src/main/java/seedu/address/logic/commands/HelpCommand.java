@@ -12,7 +12,7 @@ public class HelpCommand extends Command {
     public static final String EDIT_COMMAND = "edit CS1231 c/CS1101S :"
             + "Replaces the module 'CS1231' with module 'CS1101S'.";
     public static final String FIND_COMMAND = "find CS1 : Displays all modules that contain the prefix 'CS1'. \n"
-            +"find core : Displays all modules that contain the 'core' tag.";
+            + "find core : Displays all modules that contain the 'core' tag.";
     public static final String DELETE_COMMAND = "delete CS1231 : Deletes the 'CS1231' module from your GradPad.";
     public static final String CHECKMC_COMMAND = "checkmc : Checks the current total credits achieved by all modules.";
     public static final String REQUIRED_COMMAND = "required : Displays left over required modules that you have yet"
@@ -30,7 +30,7 @@ public class HelpCommand extends Command {
 
     public static final String SHOWING_HELP_MESSAGE = HELP_COMMAND + "\n\n" + ADD_COMMAND + "\n\n" + LIST_COMMAND
             + "\n\n" + EDIT_COMMAND + "\n\n" + DELETE_COMMAND + "\n\n" + FIND_COMMAND + "\n\n" + CHECKMC_COMMAND
-            + "\n\n" + REQUIRED_COMMAND+ "\n\n" + GEM_COMMAND + "\n\n" + SCIENCE_COMMAND + "\n\n"
+            + "\n\n" + REQUIRED_COMMAND + "\n\n" + GEM_COMMAND + "\n\n" + SCIENCE_COMMAND + "\n\n"
             + SEARCH_COMMAND + "\n\n" + TAGS_COMMAND + "\n\n" + EXIT_COMMAND;
 
     @Override

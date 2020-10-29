@@ -47,9 +47,6 @@ public class ParserUtil {
     public static ModuleTitle parseModuleTitle(String moduleTitle) throws ParseException {
         requireNonNull(moduleTitle);
         String trimmedModuleTitle = moduleTitle.trim();
-        if (!ModuleTitle.isValidModuleTitle(trimmedModuleTitle)) {
-            throw new ParseException(MESSAGE_CONSTRAINTS_TITLE);
-        }
         return new ModuleTitle(trimmedModuleTitle);
     }
 
@@ -77,9 +74,6 @@ public class ParserUtil {
     public static ModularCredits parseModularCredits(String credits) throws ParseException {
         requireNonNull(credits);
         String trimmedCredits = credits.trim();
-        if (!ModularCredits.isValidMC(trimmedCredits)) {
-            throw new ParseException(MESSAGE_CONSTRAINTS_CREDITS);
-        }
         return new ModularCredits(trimmedCredits);
     }
 

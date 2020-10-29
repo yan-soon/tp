@@ -8,7 +8,6 @@ import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 import java.io.IOException;
 
 import javafx.collections.ObservableList;
-import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
@@ -30,7 +29,8 @@ public class ScienceCommand extends Command {
      * Loads the scienceModules attribute with Science Modules by using
      * the setRequiredScience() method from the RequiredCommandStorage class.
      * @throws IOException When the path in invalid.
-     * @throws DataConversionException When there is an error converting from the JSON file.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setScienceModules(String path) throws IOException, IllegalValueException {
         RequiredCommandStorage storage = new RequiredCommandStorage();

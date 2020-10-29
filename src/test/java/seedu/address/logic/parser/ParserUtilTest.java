@@ -79,11 +79,6 @@ public class ParserUtilTest {
     }
 
     @Test
-    public void parseCredits_invalidValue_throwsParseException() {
-        assertThrows(ParseException.class, () -> ParserUtil.parseModularCredits(INVALID_CREDITS));
-    }
-
-    @Test
     public void parseCredits_validValueWithoutWhitespace_returnCredits() throws Exception {
         ModularCredits expectedCredits = new ModularCredits(VALID_CREDITS);
         assertEquals(expectedCredits, ParserUtil.parseModularCredits(VALID_CREDITS));

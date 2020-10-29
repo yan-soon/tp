@@ -6,7 +6,7 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's no. of modular credits in the GradPad.
- * Guarantees: immutable; is valid as declared in {@link #isValidMC(String)}
+ *  * Guarantees: immutable.
  */
 public class ModularCredits {
 
@@ -22,13 +22,6 @@ public class ModularCredits {
         requireNonNull(credits);
         checkArgument(isValidMC(credits), MESSAGE_CONSTRAINTS_CREDITS);
         value = credits;
-    }
-
-    /**
-     * Returns true if a given string is a valid no. of modular credits.
-     */
-    public static boolean isValidMC(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

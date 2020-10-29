@@ -4,18 +4,21 @@ import static java.util.Objects.requireNonNull;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 import static seedu.address.storage.RequiredCommandMessages.INTERNSHIP_PATH;
 import static seedu.address.storage.RequiredCommandMessages.ITPROF_PATH;
-import static seedu.address.storage.RequiredCommandMessages.MATHANDSCI_PATH;
+import static seedu.address.storage.RequiredCommandMessages.MATH_PATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_1;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FAILURE_GE_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_FOUNDATION;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_1;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_INTERN_2;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_ITPROF;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_MATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SCIENCE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_FOUNDATION;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_GE;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTERN;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
-import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATHANDSCI;
+import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
@@ -58,7 +61,7 @@ public class RequiredCommand extends Command {
         storage = new RequiredCommandStorage();
         storage.setRequiredFoundation(FOUNDATION_PATH);
         storage.setRequiredITprof(ITPROF_PATH);
-        storage.setRequiredMathAndScience(MATHANDSCI_PATH);
+        storage.setRequiredMath(MATH_PATH);
         storage.setRequiredScience(SCIENCE_PATH);
         storage.setRequiredInternship(INTERNSHIP_PATH);
     }
@@ -162,6 +165,57 @@ public class RequiredCommand extends Command {
     }
 
     /**
+     * Checks if particular GE field is cleared in the current GradPad.
+     * @param ge The GE field that you wish to check (Eg. 'GEQ' or 'GEH').
+     * @return True if the GE field is cleared, false otherwise.
+     */
+    public boolean isGePresent(String ge) {
+        for (Module module : currentModules) {
+            String moduleCode = module.getModuleCode().toString();
+            if (moduleCode.startsWith(ge)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Checks which GE fields are not clear in the current GradPad and
+     * adds to the attribute leftOverModules if that particular GE field
+     * has not been cleared.
+     */
+    public void compareAllGEs() {
+        String uncompletedGEs = "\n";
+        boolean allGEsCleared = true;
+        if (!isGePresent("GEH")) {
+            uncompletedGEs += "GEH" + "\n";
+            allGEsCleared = false;
+        }
+        if (!isGePresent("GEQ")) {
+            uncompletedGEs += "GEQ" + "\n";
+            allGEsCleared = false;
+        }
+        if (!isGePresent("GER")) {
+            uncompletedGEs += "GER" + "\n";
+            allGEsCleared = false;
+        }
+        if (!isGePresent("GES")) {
+            uncompletedGEs += "GES" + "\n";
+            allGEsCleared = false;
+        }
+        if (!isGePresent("GET")) {
+            uncompletedGEs += "GET" + "\n";
+            allGEsCleared = false;
+        }
+        if (allGEsCleared) {
+            leftOverModules += MESSAGE_SUCCESS_GE + "\n";
+        } else {
+            leftOverModules += MESSAGE_FAILURE_GE_1 + uncompletedGEs + MESSAGE_FAILURE_GE_2 + "\n";
+        }
+        leftOverModules += "\n";
+    }
+
+    /**
      * Sets up the reference modules and the current modules in gradPad and compares all the modules.
      * @param model {@code Model} which the command should operate on.
      * @return a CommandResult displaying all the undone modules.
@@ -174,12 +228,13 @@ public class RequiredCommand extends Command {
             setStorage();
             ObservableList<Module> requiredFoundation = storage.getRequiredFoundation();
             ObservableList<Module> requiredITprof = storage.getRequiredITprof();
-            ObservableList<Module> requiredMathAndScience = storage.getRequiredMathAndScience();
+            ObservableList<Module> requiredMath = storage.getRequiredMath();
             ObservableList<Module> requiredScience = storage.getRequiredScience();
             ObservableList<Module> requiredInternship = storage.getRequiredInternship();
+            compareAllGEs();
             compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
             compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
-            compareModules(requiredMathAndScience, MESSAGE_MATHANDSCI, MESSAGE_SUCCESS_MATHANDSCI);
+            compareModules(requiredMath, MESSAGE_MATH, MESSAGE_SUCCESS_MATH);
             compareScience(requiredScience);
             compareInternship(requiredInternship);
             return new CommandResult(leftOverModules);

@@ -1,5 +1,30 @@
 {
   "modules" : [ {
+    "tagged" : [ "GEH" ],
+    "code" : "GEH1002",
+    "title" : "Economic Issues in the Developing World",
+    "credits" : "4"
+  },{
+    "tagged" : [ "GEQ" ],
+    "code" : "GEQ1000",
+    "title" : "Asking Questions",
+    "credits" : "4"
+  },{
+    "tagged" : [ "GER" ],
+    "code" : "GER1000",
+    "title" : "Quantitative Reasoning",
+    "credits" : "4"
+  },{
+    "tagged" : [ "GES" ],
+    "code" : "GES1002",
+    "title" : "Global Economic Dimensions of Singapore",
+    "credits" : "4"
+  },{
+    "tagged" : [ "GET" ],
+    "code" : "GET1002",
+    "title" : "Bridging East And West: Exploring Chinese Communication",
+    "credits" : "4"
+  },{
     "tagged" : [ "Foundation" ],
     "code" : "CS1101S",
     "title" : "Programming Methodology",

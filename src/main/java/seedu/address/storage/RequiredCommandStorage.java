@@ -16,7 +16,7 @@ import seedu.address.model.module.Module;
 public class RequiredCommandStorage {
     private ObservableList<Module> requiredFoundation;
     private ObservableList<Module> requiredITprof;
-    private ObservableList<Module> requiredMathAndScience;
+    private ObservableList<Module> requiredMath;
     private ObservableList<Module> requiredScience;
     private ObservableList<Module> requiredInternship;
 
@@ -50,19 +50,6 @@ public class RequiredCommandStorage {
     }
 
     /**
-     * Converts a given JSON file via its runtime path, into a list of Modules.
-     * @param file Converted file content of type String.
-     * @return List of modules taken from the JSON file via the runtime path.
-     * @throws IOException When the file is invalid.
-     * @throws IllegalValueException When the data from the JSON file does not match the
-     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
-     */
-    public ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
-        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
-        return jsonGradPad.toModelType().getModuleList();
-    }
-
-    /**
      * Returns requiredFoundation attribute of RequiredCommandStorage object.
      * @return requiredFoundation attribute of type ObservableList<Module/>.
      */
@@ -77,7 +64,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredFoundation(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredFoundation = getModulesFromJsonFile(file);
+        requiredFoundation = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -95,25 +82,25 @@ public class RequiredCommandStorage {
      */
     public void setRequiredITprof(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredITprof = getModulesFromJsonFile(file);
+        requiredITprof = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
-     * Returns requiredMathAndScience attribute of RequiredCommandStorage object.
-     * @return requiredMathAndScience attribute of type ObservableList<Module/>.
+     * Returns requiredMath attribute of RequiredCommandStorage object.
+     * @return requiredMath attribute of type ObservableList<Module/>.
      */
-    public ObservableList<Module> getRequiredMathAndScience() {
-        return requiredMathAndScience;
+    public ObservableList<Module> getRequiredMath() {
+        return requiredMath;
     }
     /**
-     * Loads the requiredMathAndScience attribute with Math and Science Modules.
+     * Loads the requiredMath attribute with Math Modules.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
-    public void setRequiredMathAndScience(String path) throws IOException, IllegalValueException {
+    public void setRequiredMath(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredMathAndScience = getModulesFromJsonFile(file);
+        requiredMath = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -131,7 +118,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredScience(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredScience = getModulesFromJsonFile(file);
+        requiredScience = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -149,7 +136,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredInternship(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredInternship = getModulesFromJsonFile(file);
+        requiredInternship = JsonUtil.getModulesFromJsonFile(file);
     }
 }
 

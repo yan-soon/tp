@@ -40,8 +40,8 @@ To streamline your module searching process with added convenience, GradPad inte
 you no longer have to visit NUSMods separately to look up module information. Instead, GradPad offers you all that data 
 in the same app you use to plan your modules itself.
 
-We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogue
-and **module information**. These data are retrieved on the go in **realtime**, using the data provided by NUSMods.
+We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogues
+and **module information**. These data are retrieved on the go in **realtime**, directly from NUSMods.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -57,7 +57,7 @@ Follow the steps below to learn how to get started with GradPad!
 
 1. Ensure you have **internet connectivity** to fully utilise GradPad with the latest data from [NUSMods](https://nusmods.com/).
 
-1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The Main Page similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
    ![Ui](images/Ui.png)
 

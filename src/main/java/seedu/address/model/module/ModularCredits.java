@@ -20,7 +20,6 @@ public class ModularCredits {
      */
     public ModularCredits(String credits) {
         requireNonNull(credits);
-        checkArgument(isValidMC(credits), MESSAGE_CONSTRAINTS_CREDITS);
         value = credits;
     }
 

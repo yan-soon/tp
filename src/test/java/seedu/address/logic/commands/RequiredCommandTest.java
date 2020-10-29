@@ -35,7 +35,7 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.JsonGradPadStorage;
 import seedu.address.storage.RequiredCommandStorage;
 
-class RequiredCommandTest {
+public class RequiredCommandTest {
     public static final Path COMPILED_PATH = Paths.get("src/test/data/RequiredCommandTest/compiledmodules.json");
     public static final Path INCOMPLETE_FOUNDATION_PATH =
             Paths.get("src/test/data/RequiredCommandTest/incompletefoundationmodules.json");
@@ -47,31 +47,12 @@ class RequiredCommandTest {
     private Model model;
     private RequiredCommand requiredCommand = new RequiredCommand();
     private ObservableList<Module> testModules;
-    public void setUpTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_FOUNDATION_PATH));
+    public void setUpTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
-    public void setUpIncompleteTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(INCOMPLETE_FOUNDATION_PATH);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        testModules = gradPad.getModuleList();
-    }
-    public void setUpWrongTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_SCIENCE_PATH));
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        testModules = gradPad.getModuleList();
-    }
-    public void setUpSingleTestModule() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(SINGLE_MODULE_PATH);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        testModules = gradPad.getModuleList();
-    }
-    public void setUpDoubleTestModules() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(DOUBLE_MODULE_PATH);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        testModules = gradPad.getModuleList();
-    }
+
     public void setUp() throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(COMPILED_PATH);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
@@ -90,7 +71,7 @@ class RequiredCommandTest {
     }
     @Test
     public void setStorage_validTest() throws IOException, DataConversionException, IllegalValueException {
-        setUpTestModules();
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
         requiredCommand.setStorage();
         RequiredCommandStorage storage = requiredCommand.getStorage();
         ObservableList<Module> actual = storage.getRequiredFoundation();
@@ -108,9 +89,9 @@ class RequiredCommandTest {
     }
     @Test
     public void compareModules_validTest() throws IOException, DataConversionException {
-        setUpIncompleteTestModules();
+        setUpTestModules(INCOMPLETE_FOUNDATION_PATH);
         requiredCommand.setCurrentModules(testModules);
-        setUpTestModules();
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
         requiredCommand.compareModules(testModules, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
         String expected = MESSAGE_FOUNDATION + "\n" + MISSING_MODULE_1 + "\n" + "\n";
         String actual = requiredCommand.getLeftOverModules();
@@ -118,9 +99,9 @@ class RequiredCommandTest {
     }
     @Test
     public void compareScience_validTest() throws IOException, DataConversionException {
-        setUpIncompleteTestModules();
+        setUpTestModules(INCOMPLETE_FOUNDATION_PATH);
         requiredCommand.setCurrentModules(testModules);
-        setUpWrongTestModules();
+        setUpTestModules(Paths.get(TEST_SCIENCE_PATH));
         requiredCommand.compareScience(testModules);
         String actual = requiredCommand.getLeftOverModules();
         String expected = MESSAGE_SCIENCE + "\n" + "\n";
@@ -128,9 +109,9 @@ class RequiredCommandTest {
     }
     @Test
     public void compareInternship_validTest() throws IOException, DataConversionException {
-        setUpSingleTestModule();
+        setUpTestModules(SINGLE_MODULE_PATH);
         requiredCommand.setCurrentModules(testModules);
-        setUpDoubleTestModules();
+        setUpTestModules(DOUBLE_MODULE_PATH);
         requiredCommand.compareInternship(testModules);
         String actual = requiredCommand.getLeftOverModules();
         String expected = MESSAGE_INTERN_1 + MESSAGE_INTERN_TEST + MESSAGE_INTERN_2 + "\n" + MISSING_MODULE_2;
@@ -139,7 +120,7 @@ class RequiredCommandTest {
 
     @Test
     public void isGePresent_validTest() throws IOException, DataConversionException {
-        setUpSingleTestModule();
+        setUpTestModules(SINGLE_MODULE_PATH);
         requiredCommand.setCurrentModules(testModules);
         assertFalse(requiredCommand.isGePresent("GEH"));
     }
@@ -149,7 +130,7 @@ class RequiredCommandTest {
         String expectedUncompletedGEs = "\n" + "GEH" + "\n" + "GEQ" + "\n"
                 + "GER" + "\n" + "GES" + "\n" + "GET" + "\n";
         String expected = MESSAGE_FAILURE_GE_1 + expectedUncompletedGEs + MESSAGE_FAILURE_GE_2 + "\n" + "\n";
-        setUpSingleTestModule();
+        setUpTestModules(SINGLE_MODULE_PATH);
         requiredCommand.setCurrentModules(testModules);
         requiredCommand.compareAllGEs();
         String actual = requiredCommand.getLeftOverModules();

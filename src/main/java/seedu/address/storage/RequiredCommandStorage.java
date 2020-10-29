@@ -50,19 +50,6 @@ public class RequiredCommandStorage {
     }
 
     /**
-     * Converts a given JSON file via its runtime path, into a list of Modules.
-     * @param file Converted file content of type String.
-     * @return List of modules taken from the JSON file via the runtime path.
-     * @throws IOException When the file is invalid.
-     * @throws IllegalValueException When the data from the JSON file does not match the
-     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
-     */
-    public ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
-        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
-        return jsonGradPad.toModelType().getModuleList();
-    }
-
-    /**
      * Returns requiredFoundation attribute of RequiredCommandStorage object.
      * @return requiredFoundation attribute of type ObservableList<Module/>.
      */
@@ -77,7 +64,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredFoundation(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredFoundation = getModulesFromJsonFile(file);
+        requiredFoundation = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -95,7 +82,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredITprof(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredITprof = getModulesFromJsonFile(file);
+        requiredITprof = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -113,7 +100,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredMath(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredMath = getModulesFromJsonFile(file);
+        requiredMath = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -131,7 +118,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredScience(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredScience = getModulesFromJsonFile(file);
+        requiredScience = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -149,7 +136,7 @@ public class RequiredCommandStorage {
      */
     public void setRequiredInternship(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        requiredInternship = getModulesFromJsonFile(file);
+        requiredInternship = JsonUtil.getModulesFromJsonFile(file);
     }
 }
 

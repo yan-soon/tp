@@ -3,10 +3,19 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.logic.commands.GemCommandTest.COMPILED_PATH_1;
+import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
+import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;
 import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
+import static seedu.address.storage.GemCommandPaths.GEH_SEM1_PATH;
+import static seedu.address.storage.GemCommandPaths.GEQ_PATH;
+import static seedu.address.storage.GemCommandPaths.GER_PATH;
+import static seedu.address.storage.GemCommandPaths.GES_SEM1_PATH;
+import static seedu.address.storage.GemCommandPaths.GET_SEM1_PATH;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 
 import java.io.IOException;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
@@ -19,14 +28,15 @@ import seedu.address.model.module.Module;
 
 public class GemCommandStorageTest {
     public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
-    public static final String TEST_SCIENCE_PATH = "src/main/resources/data/sciencemodules.json";
     private GemCommandStorage storage = new GemCommandStorage();
-    private ObservableList<Module> requiredFoundation;
-    public void setUpRequiredFoundation() throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_FOUNDATION_PATH));
+    private ObservableList<Module> testModules;
+
+    public void setUpTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        requiredFoundation = gradPad.getModuleList();
+        testModules = gradPad.getModuleList();
     }
+
     @Test
     public void getGehModules_validTest() {
         ObservableList<Module> actual = storage.getGehModules();
@@ -75,46 +85,80 @@ public class GemCommandStorageTest {
     @Test
     public void setGehModulesValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
-        setUpRequiredFoundation();
-        ObservableList<Module> actual = requiredFoundation;
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        ObservableList<Module> expected = testModules;
         storage.setGehModules(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getGehModules();
+        ObservableList<Module> actual = storage.getGehModules();
         assertEquals(expected, actual);
     }
     @Test
     public void setGeqModulesValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
-        setUpRequiredFoundation();
-        ObservableList<Module> actual = requiredFoundation;
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        ObservableList<Module> expected = testModules;
         storage.setGeqModules(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getGeqModules();
+        ObservableList<Module> actual = storage.getGeqModules();
         assertEquals(expected, actual);
     }
     @Test
     public void setGerModulesValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
-        setUpRequiredFoundation();
-        ObservableList<Module> actual = requiredFoundation;
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        ObservableList<Module> expected = testModules;
         storage.setGerModules(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getGerModules();
+        ObservableList<Module> actual = storage.getGerModules();
         assertEquals(expected, actual);
     }
     @Test
     public void setGesModulesValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
-        setUpRequiredFoundation();
-        ObservableList<Module> actual = requiredFoundation;
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        ObservableList<Module> expected = testModules;
         storage.setGesModules(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getGesModules();
+        ObservableList<Module> actual = storage.getGesModules();
         assertEquals(expected, actual);
     }
     @Test
     public void setGetModulesValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
-        setUpRequiredFoundation();
-        ObservableList<Module> actual = requiredFoundation;
+        setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        ObservableList<Module> expected = testModules;
         storage.setGetModules(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getGetModules();
+        ObservableList<Module> actual = storage.getGetModules();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void moduleExtractor_validTest() throws IOException, DataConversionException {
+        setUpTestModules(SINGLE_MODULE_PATH);
+        String expected = "\n" + MISSING_MODULE_1;
+        StringBuilder temp = storage.moduleExtractor(testModules);
+        String actual = "" + temp;
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getCompiledModules_validTest() {
+        String actual = storage.getCompiledModules();
+        assertNull(actual);
+    }
+
+    @Test
+    public void setCompiledModules_invalidTest() {
+        assertThrows(AssertionError.class, () -> storage.setCompiledModules());
+    }
+
+    @Test
+    public void setCompiledModules_validTest() throws IOException, IllegalValueException, DataConversionException {
+        setUpTestModules(COMPILED_PATH_1);
+        String expected = "" + storage.moduleExtractor(testModules);
+        storage.setGehModules(GEH_SEM1_PATH);
+        storage.setGeqModules(GEQ_PATH);
+        storage.setGerModules(GER_PATH);
+        storage.setGesModules(GES_SEM1_PATH);
+        storage.setGetModules(GET_SEM1_PATH);
+        storage.setCompiledModules();
+        String actual = storage.getCompiledModules();
         assertEquals(expected, actual);
     }
 }

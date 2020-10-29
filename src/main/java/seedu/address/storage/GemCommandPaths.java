@@ -1,6 +1,6 @@
 package seedu.address.storage;
 
-public class GemCommandMessages {
+public class GemCommandPaths {
     public static final String GEH_SEM1_PATH = "data/GEM/GEHs1.json";
     public static final String GEH_SEM2_PATH = "data/GEM/GEHsem2.json";
     public static final String GEQ_PATH = "data/GEM/GEQ.json";

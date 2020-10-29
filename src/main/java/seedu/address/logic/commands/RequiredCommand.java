@@ -173,7 +173,7 @@ public class RequiredCommand extends Command {
     public boolean isGePresent(String ge) {
         for (Module module : currentModules) {
             String moduleCode = module.getModuleCode().toString();
-            if (moduleCode.contains(ge)) {
+            if (moduleCode.startsWith(ge)) {
                 return true;
             }
         }

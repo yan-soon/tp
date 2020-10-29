@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Module's module title in the GradPad.
+ * * Guarantees: immutable.
  */
 public class ModuleTitle {
 

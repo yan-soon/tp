@@ -17,7 +17,7 @@ import seedu.address.model.module.Module;
  * An Immutable GradPad that is serializable to JSON format.
  */
 @JsonRootName(value = "gradpad")
-class JsonSerializableGradPad {
+public class JsonSerializableGradPad {
 
     public static final String MESSAGE_DUPLICATE_MODULE = "Modules list contains duplicate module(s).";
 

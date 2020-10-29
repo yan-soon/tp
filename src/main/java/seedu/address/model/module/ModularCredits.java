@@ -4,6 +4,7 @@ import static java.util.Objects.requireNonNull;
 
 /**
  * Represents a Module's no. of modular credits in the GradPad.
+ *  * Guarantees: immutable.
  */
 public class ModularCredits {
 

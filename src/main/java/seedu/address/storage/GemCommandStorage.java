@@ -19,6 +19,7 @@ public class GemCommandStorage {
     private ObservableList<Module> gerModules;
     private ObservableList<Module> gesModules;
     private ObservableList<Module> getModules;
+    private String compiledModules;
 
     /**
      * Makes use of classLoaders to convert the original file path
@@ -50,19 +51,6 @@ public class GemCommandStorage {
     }
 
     /**
-     * Converts a given JSON file via its runtime path, into a list of Modules.
-     * @param file Converted file content of type String.
-     * @return List of modules taken from the JSON file via the runtime path.
-     * @throws IOException When the file is invalid.
-     * @throws IllegalValueException When the data from the JSON file does not match the
-     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
-     */
-    public ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
-        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
-        return jsonGradPad.toModelType().getModuleList();
-    }
-
-    /**
      * Returns gehModules attribute of GemCommandStorage object.
      * @return gehModules attribute of type ObservableList<Module/>.
      */
@@ -77,7 +65,7 @@ public class GemCommandStorage {
      */
     public void setGehModules(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        gehModules = getModulesFromJsonFile(file);
+        gehModules = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -95,7 +83,7 @@ public class GemCommandStorage {
      */
     public void setGeqModules(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        geqModules = getModulesFromJsonFile(file);
+        geqModules = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -113,7 +101,7 @@ public class GemCommandStorage {
      */
     public void setGerModules(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        gerModules = getModulesFromJsonFile(file);
+        gerModules = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -131,7 +119,7 @@ public class GemCommandStorage {
      */
     public void setGesModules(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        gesModules = getModulesFromJsonFile(file);
+        gesModules = JsonUtil.getModulesFromJsonFile(file);
     }
 
     /**
@@ -149,6 +137,41 @@ public class GemCommandStorage {
      */
     public void setGetModules(String path) throws IOException, IllegalValueException {
         String file = getFileFromResource(path);
-        getModules = getModulesFromJsonFile(file);
+        getModules = JsonUtil.getModulesFromJsonFile(file);
+    }
+
+    /**
+     * Takes a List of Modules and extracts out their Module Code and Modular Credits.
+     * @param modules List of Modules.
+     * @return String of Module Codes and Modular Credits.
+     */
+    public StringBuilder moduleExtractor(ObservableList<Module> modules) {
+        assert modules != null;
+        StringBuilder modulesToAdd = new StringBuilder();
+        for (Module module : modules) {
+            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+            modulesToAdd.append("\n").append(moduleToAdd);
+        }
+        return modulesToAdd;
+    }
+
+    /**
+     * Returns compiledModules attribute of GemCommandStorage object.
+     * @return compiledModules attribute of type String.
+     */
+    public String getCompiledModules() {
+        return compiledModules;
+    }
+
+    /**
+     * Loads the compiledModules attribute with all the relevant GE modules in String form.
+     */
+    public void setCompiledModules() {
+        compiledModules = "";
+        compiledModules += moduleExtractor(gehModules);
+        compiledModules += moduleExtractor(geqModules);
+        compiledModules += moduleExtractor(gerModules);
+        compiledModules += moduleExtractor(gesModules);
+        compiledModules += moduleExtractor(getModules);
     }
 }

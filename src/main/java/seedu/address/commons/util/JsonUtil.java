@@ -20,8 +20,12 @@ import com.fasterxml.jackson.databind.deser.std.FromStringDeserializer;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.databind.ser.std.ToStringSerializer;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.core.LogsCenter;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.module.Module;
+import seedu.address.storage.JsonSerializableGradPad;
 
 /**
  * Converts a Java object instance to JSON and vice versa
@@ -140,4 +144,16 @@ public class JsonUtil {
         }
     }
 
+    /**
+     * Converts a given JSON file via its runtime path, into a list of Modules.
+     * @param file Converted file content of type String.
+     * @return List of modules taken from the JSON file via the runtime path.
+     * @throws IOException When the file is invalid.
+     * @throws IllegalValueException When the data from the JSON file does not match the
+     * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
+     */
+    public static ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
+        JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
+        return jsonGradPad.toModelType().getModuleList();
+    }
 }

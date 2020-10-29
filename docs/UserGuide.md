@@ -18,7 +18,8 @@ GradPad is a one-stop solution to **module management** for Computer Science Und
 Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
-NUSMods and websites of Faculty of Computing, which can be messy at times. 
+[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of Faculty of Computing, 
+which can be messy at times. 
 So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
 

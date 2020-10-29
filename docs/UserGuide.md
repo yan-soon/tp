@@ -11,7 +11,7 @@ title: User Guide
 ## GradPad
 
 We are a team of **Computer Science Undergraduates** working together to solve **module management** and **graduation planning** problems
-faced by fellow Computer Science students. Below is the detailed **User Guide** for effective use of GradPad which can help you
+faced by fellow Computer Science students. Below is the detailed User Guide for effective use of GradPad which can help you
 ease and improve your **module planning process**.
 
 GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
@@ -32,6 +32,14 @@ it includes a **quick start guide** that walks you through the installation and 
 With this guide, you'll be ready to use GradPad in no time.
 
 --------------------------------------------------------------------------------------------------------------------
+## NUSMods integration  
+
+![NUSMods](images/nusmods.png)
+
+We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogue
+and module information. These data are retrieved on the go in realtime, using the [API](https://api.nusmods.com/v2/) provided by NUSMods.
+
+--------------------------------------------------------------------------------------------------------------------
 
 ## Quick start
 
@@ -40,6 +48,8 @@ With this guide, you'll be ready to use GradPad in no time.
 1. Download the latest `GradPad.jar` from [here](https://github.com/AY2021S1-CS2103T-T09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GradPad.
+
+1. Ensure you have internet connectivity to fully utilise GradPad with the latest data from [NUSMods](https://nusmods.com/).
 
 1. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
    ![Ui](images/Ui.png)
@@ -50,10 +60,13 @@ With this guide, you'll be ready to use GradPad in no time.
    * **`list`** : Lists all added modules.
 
    * **`add`** `CS2103T 4` : Adds a module named `CS2103T` with `4` modular credits to the GradPad.
-
+   
    * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
+   
+   * **`search`** : Search for a module from NUSMods database(if internet is available) or from local saved file.
 
    * **`exit`** : Exits the app.
+   
 
 1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 

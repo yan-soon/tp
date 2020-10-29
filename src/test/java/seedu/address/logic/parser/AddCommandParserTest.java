@@ -1,8 +1,8 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TAG;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
-import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS3216;
@@ -22,8 +22,6 @@ import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.AddCommand;
 import seedu.address.model.module.Module;
-import seedu.address.model.module.ModuleCode;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.ModuleBuilder;
 
 public class AddCommandParserTest {

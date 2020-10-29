@@ -148,7 +148,7 @@ To add the module:
 1. Type `add cs2101 t/superbmodule t/superfun` into the command box, and press **Enter** to execute it.<br>
 ![Add1](images/Add1.png)
 
-2. The result display box will display the message "New module added", along with the details of the module. You will then be able to see the CS2101 module at the bottom of the Completed Modules list.<<br>
+2. The result display box will display the message "The following module has been successfully added", along with the details of the module. You will then be able to see the CS2101 module at the bottom of the Completed Modules list.<br>
 ![Add2](images/Add2.png)
 
 ### Viewing all added modules: `list`
@@ -163,7 +163,7 @@ To view all modules:
 1. Type `list` into the command box, and press **Enter** to execute it.
 ![List1](images/List1.png)
 
-2. The result display box will display the message "Listed all modules", and you will be able to view all your previously added modules in the Completed Modules list.
+2. The result display box will display the message "All your modules have been listed!", and you will be able to view all your previously added modules in the Completed Modules list.
 ![List2](images/List2.png)
 
 ### Viewing all added tags: `tags`
@@ -181,7 +181,7 @@ To view all tags:
 1. Type `tags` into the command box, and press **Enter** to execute it.
 ![Tags1](images/Tags1.png)
 
-2. The result display box will display the message "Listed all tags" followed by a list of all current tags.
+2. The result display box will display a list of all existing tags.
 ![Tag2](images/Tags2.png)
 
 ### Editing module details: `edit`
@@ -210,10 +210,10 @@ Module title and modular credits for respective module code will be automaticall
 
 To edit the module:
 
-1. Type `edit cs2101 t/bestModule` into the command box, and press **Enter** to execute it.<br>
+1. Type `edit cs2101 t/bestmodule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
 
-2. The result display box will display the message "Edited module", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.
+2. The result display box will display the message "The following module has been successfully edited", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.
 ![Edit2](images/Edit2.png)
 
 ### Finding a specific module or a group of modules: `find`
@@ -231,11 +231,11 @@ Instead of scrolling through the long Completed Modules list and checking the mo
 
 To find the module:
 
-1. Type `find cs core` into the command box, and press **Enter** to execute it.<br>
+1. Type `find ma bestmodule` into the command box, and press **Enter** to execute it.<br>
 ![Find1](images/Find1.png)
 
-2. The result display box will display the message "1 modules listed!" and you will be able to see only the CS
--coded modules that have been tagged as "core" in the Completed Modules list.
+2. The result display box will display the message "2 modules found!" and you will be able to see only the modules 
+whose module codes contain "ma" and modules with "bestmodule" as a tag in the Completed Modules list.
 ![Find2](images/Find2.png)
 
 ### Deleting a Module: `delete`
@@ -252,12 +252,15 @@ To delete the module:
 1. Type `delete cs2107` into the command box, and press **Enter** to execute it.<br>
 ![Delete1](images/Delete1.png)
 
-2. The result display will display the message "Deleted Module" along with the details of the module you deleted.
+2. When you are prompted for a confirmation, type `yes` into the command box, and press **Enter**.<br>
 ![Delete2](images/Delete2.png)
 
-3. You can then confirm that the module no longer exists in the Completed Modules list by `find`-ing the module Type `find cs2107` into the command box, and press **Enter** to execute it. You will see that you can no longer `find` the module in the Completed Modules list.<br>
+3. The result display will display the message "The following module has been successfully deleted" along with the details of the module you deleted.
 ![Delete3](images/Delete3.png)
+
+4. You can then confirm that the module no longer exists in the Completed Modules list by `find`-ing the module. Type `find cs2107` into the command box, and press **Enter** to execute it. You will see that you can no longer `find` the module in the Completed Modules list.<br>
 ![Delete4](images/Delete4.png)
+![Delete5](images/Delete5.png)
 
 ### Checking total modular credits: `checkmc`
 
@@ -275,7 +278,7 @@ To check total modular credits:
 1. Type `checkmc` into the command box, and press **Enter** to execute it.
 ![CheckMc1](images/CheckMc1.png)
 
-2. The result display box will display the message "Total MC has been calculated" along with your total modular credits amount.
+2. The result display box will display a message telling you how many modular credits you have accumulated so far.
 ![CheckMc2](images/CheckMc2.png)
 
 ### Checking required modules: `required`
@@ -288,8 +291,10 @@ The `required` command allows you to check the modules of the Computer Science c
 To check required modules:
 
 1. Type `required` into the command box, press **Enter** to execute it.
+![Required1](images/Required1.png)
 
-2. The result display box will then display all the modules you have yet to take for each particular field, as shown below.
+2. The result display box will then display all the modules you have yet to take for each particular field.
+![Required2](images/Required2.png)
 
 ### Checking General Education Modules: `gem`
 
@@ -301,8 +306,10 @@ The `gem` command allows you to check all the available General Education (GE) m
 To check GE modules:
 
 1. Type `gem` into the command box, press **Enter** to execute it.
+![Gem1](images/Gem1.png)
 
-2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2, as shown below.
+2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2.
+![Gem2](images/Gem2.png)
 
 ### Checking Science modules: `science`
 
@@ -314,8 +321,10 @@ The `science` command allows you to check all the available Science modules of t
 To check Science modules:
 
 1. Type `science` into the command box, press **Enter** to execute it.
+![Science1](images/Science1.png)
 
-2. The result display box will then display all the available Science modules that you can take, as shown below.
+2. The result display box will then display all the available Science modules that you can take.
+![Science2](images/Science2.png)
 
 ### Searching for a module: `search`
 
@@ -336,8 +345,10 @@ If your internet is down, you can only search for modules that are of the Comput
 </div>
 
 1. Type `search MA1521` into the command box, press **Enter** to execute it.
+![Search1](images/Search1.png)
 
-2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
+2. The result display box will then display all the relevant information about the module "MA1521".
+![Search2](images/Search2.png)
 
 
 ### Showing the help display: `help`
@@ -364,7 +375,7 @@ To exit:
 1. Type `exit` into the command box, and press **Enter** to execute it.<br>
 ![Exit](images/Exit1.png)
 
-2. The result display box will display the message "Exiting GradPad as requested ..." and after a 1.5 second delay, the application will terminate.<br>
+2. The result display box will display the message "Take care!" and after a 1.5 second delay, the application will terminate.<br>
 ![Exit2](images/Exit2.png)
 
 --------------------------------------------------------------------------------------------------------------------

@@ -42,14 +42,8 @@ public class EditCommandParser implements Parser<EditCommand> {
                 MESSAGE_EDIT_USAGE));
         }
 
-        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getPreamble());
-        try {
-            moduleInfoSearcher.searchModule(code.toString());
-        } catch (CommandException e) {
-            throw new ParseException(e.getMessage());
-        }
-
+        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         ModuleInfo moduleInfo;
 

@@ -1,17 +1,15 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's no. of modular credits in the GradPad.
- * Guarantees: immutable; is valid as declared in {@link #isValidMC(String)}
+ *  * Guarantees: immutable.
  */
 public class ModularCredits {
 
     public static final String MESSAGE_CONSTRAINTS =
             "ModularCredits should only contain numbers, and it should be either 1 or 2 digits long";
-    public static final String VALIDATION_REGEX = "\\d{1,2}";
     public final String value;
 
     /**
@@ -21,15 +19,7 @@ public class ModularCredits {
      */
     public ModularCredits(String credits) {
         requireNonNull(credits);
-        checkArgument(isValidMC(credits), MESSAGE_CONSTRAINTS);
         value = credits;
-    }
-
-    /**
-     * Returns true if a given string is a valid no. of modular credits.
-     */
-    public static boolean isValidMC(String test) {
-        return test.matches(VALIDATION_REGEX);
     }
 
     @Override

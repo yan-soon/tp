@@ -31,6 +31,7 @@ public class MainWindow extends UiPart<Stage> {
     // Independent Ui parts residing in this Ui container
     private ModuleListPanel moduleListPanel;
     private ResultDisplay resultDisplay;
+    private IntroDisplay introDisplay;
 
     @FXML
     private StackPane commandBoxPlaceholder;
@@ -69,8 +70,11 @@ public class MainWindow extends UiPart<Stage> {
         moduleListPanel = new ModuleListPanel(logic.getFilteredModuleList());
         moduleListPanelPlaceholder.getChildren().add(moduleListPanel.getRoot());
 
+        introDisplay = new IntroDisplay();
         resultDisplay = new ResultDisplay();
+        resultDisplay.hide();
         resultDisplayPlaceholder.getChildren().add(resultDisplay.getRoot());
+        resultDisplayPlaceholder.getChildren().add(introDisplay.getRoot());
 
         StatusBarFooter statusBarFooter = new StatusBarFooter(logic.getGradPadFilePath());
         statusbarPlaceholder.getChildren().add(statusBarFooter.getRoot());
@@ -108,10 +112,6 @@ public class MainWindow extends UiPart<Stage> {
         delay.play();
     }
 
-    public ModuleListPanel getModuleListPanel() {
-        return moduleListPanel;
-    }
-
     /**
      * Executes the command and returns the result.
      *
@@ -119,6 +119,11 @@ public class MainWindow extends UiPart<Stage> {
      */
     private CommandResult executeCommand(String commandText) throws CommandException, ParseException {
         try {
+            if (introDisplay.isShowing()) {
+                introDisplay.hide();
+                resultDisplay.show();
+            }
+
             CommandResult commandResult = logic.execute(commandText.trim().replaceAll("\\s+", " "));
             logger.info("Result: " + commandResult.getFeedbackToUser());
             resultDisplay.setFeedbackToUser(commandResult.getFeedbackToUser());

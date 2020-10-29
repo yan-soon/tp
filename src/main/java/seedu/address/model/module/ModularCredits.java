@@ -1,8 +1,6 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
-import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
  * Represents a Module's no. of modular credits in the GradPad.

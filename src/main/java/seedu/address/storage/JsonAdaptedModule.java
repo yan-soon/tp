@@ -1,8 +1,6 @@
 package seedu.address.storage;
 
 import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
 
 import java.util.ArrayList;
 import java.util.HashSet;

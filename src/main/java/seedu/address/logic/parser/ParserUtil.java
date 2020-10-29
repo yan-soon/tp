@@ -1,9 +1,6 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TAG;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
 

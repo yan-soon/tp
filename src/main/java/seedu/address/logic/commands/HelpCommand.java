@@ -11,7 +11,7 @@ public class HelpCommand extends Command {
     public static final String LIST_COMMAND = "list : Displays list of current modules stored.";
     public static final String EDIT_COMMAND = "edit CS1231 c/CS1101S :"
             + "Replaces the module 'CS1231' with module 'CS1101S'.";
-    public static final String FIND_COMMAND = "find CS1 : Displays all modules that contain the prefix 'CS1'. \n"
+    public static final String FIND_COMMAND = "find CS1 : Displays all modules that contain the keyword 'CS1'. \n"
             + "find core : Displays all modules that contain the 'core' tag.";
     public static final String DELETE_COMMAND = "delete CS1231 : Deletes the 'CS1231' module from your GradPad.";
     public static final String CHECKMC_COMMAND = "checkmc : Checks the current total credits achieved by all modules.";
@@ -19,8 +19,8 @@ public class HelpCommand extends Command {
             + " to clear.";
     public static final String GEM_COMMAND = "gem : Displays all available General Education modules by the Semester.";
     public static final String SCIENCE_COMMAND = "science : Displays all available Science modules.";
-    public static final String SEARCH_COMMAND = "search MA1521 : Searches and displays all relevant information about"
-            + " the module 'MA1521'.";
+    public static final String SEARCH_COMMAND = "search MA1521 : Searches NUSMODS and displays all relevant "
+            + "information about the module 'MA1521'";
     public static final String TAGS_COMMAND = "tags : Displays all existing tags that are being used in your GradPad.";
     public static final String EXIT_COMMAND = "exit : exits GradPad.";
     public static final String COMMAND_WORD = "help";

@@ -2,8 +2,6 @@ package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
 import static seedu.address.storage.JsonAdaptedModule.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
@@ -21,8 +19,6 @@ import seedu.address.model.module.ModuleTitle;
 
 public class JsonAdaptedModuleTest {
     private static final String INVALID_CODE = "CS1#212";
-    private static final String INVALID_TITLE = "Software#Engineering";
-    private static final String INVALID_CREDITS = "4#";
     private static final String INVALID_TAG = "#friend";
 
     private static final String VALID_CODE = CS2103T.getModuleCode().toString();

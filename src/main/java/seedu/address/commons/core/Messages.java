@@ -13,7 +13,8 @@ public class Messages {
         + "more characters as a suffix. It is also case-insensitive.";
     public static final String MESSAGE_CONSTRAINTS_TITLE = "Module titles should only contain alphanumeric "
         + "characters and spaces.";
-    public static final String MESSAGE_CONSTRAINTS_TAG = "Tags names should be alphanumeric";
+    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and "
+        + "should not contain spaces.";
 
     // general
     public static final String MESSAGE_NEED_HELP = "If you need help, type \"help\".";
@@ -29,13 +30,18 @@ public class Messages {
         + "GradPad!";
     public static final String MESSAGE_EMPTY_GRADPAD = "GradPad is empty!";
     public static final String MESSAGE_MODULES_FOUND_OVERVIEW = "%1$d modules found!";
-    public static final String MESSAGE_INVALID_MODULE_CODE = "Please enter a valid module code.\n\n"
+    public static final String MESSAGE_INVALID_MODULE_CODE = "%1$s is an invalid module code. Please try"
+        + " again.\n\n"
         + "Note:\n" + MESSAGE_CONSTRAINTS_CODE;
+    public static final String MESSAGE_INVALID_TAG = "\"%1$s\" is an invalid tag. Please try again.\n\n"
+        + "Note:\n" + MESSAGE_CONSTRAINTS_TAG;
+    public static final String LINE = "----------------------------------------------------------------------"
+        + "--------------------------------------\n\n";
 
     // add command
     public static final String ADD_COMMAND_WORD = "add";
     public static final String MESSAGE_ADD_USAGE = ADD_COMMAND_WORD + "\n\n"
-        + "Format: add MODULE_CODE [t/TAG]...\n\nNote:\n"
+        + "Format:\nadd MODULE_CODE [t/TAG]...\n\nNote:\n"
         + "\u2022 [ ] indicate optional fields.\n"
         + "\u2022 ... indicate fields that may have multiple instances.\n\n"
         + MESSAGE_MORE_INFO;
@@ -55,7 +61,7 @@ public class Messages {
     // delete command
     public static final String DELETE_COMMAND_WORD = "delete";
     public static final String MESSAGE_DELETE_USAGE = DELETE_COMMAND_WORD + "\n\n"
-        + "Format: delete MODULE_CODE\n\n"
+        + "Format:\ndelete MODULE_CODE\n\n"
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_DELETE_SUCCESS = "The following module has been successfully "
         + "deleted:\n\n%1$s";
@@ -65,7 +71,7 @@ public class Messages {
     // edit command
     public static final String EDIT_COMMAND_WORD = "edit";
     public static final String MESSAGE_EDIT_USAGE = EDIT_COMMAND_WORD + "\n\n"
-        + "Format: edit MODULE_CODE [c/NEW_MODULE_CODE] [t/TAG]...\n\nNote:\n"
+        + "Format:\nedit MODULE_CODE [c/NEW_MODULE_CODE] [t/TAG]...\n\nNote:\n"
         + "\u2022 At least 1 field to edit must be specified.\n"
         + "\u2022 [ ] indicate optional fields.\n"
         + "\u2022 ... indicate fields that may have multiple instances.\n\n"
@@ -81,7 +87,7 @@ public class Messages {
     // find command
     public static final String FIND_COMMAND_WORD = "find";
     public static final String MESSAGE_FIND_USAGE = FIND_COMMAND_WORD + "\n\n"
-        + "Format: find [KEYWORD]... [TAG]...\n\nNote:\n"
+        + "Format:\nfind [KEYWORD]... [TAG]...\n\nNote:\n"
         + "\u2022 At least 1 keyword or tag to find must be specified.\n"
         + "\u2022 [ ] indicate optional fields.\n"
         + "\u2022 ... indicate fields that may have multiple instances.\n\n"
@@ -127,18 +133,33 @@ public class Messages {
         + "\t\t\t\tExample(s):\tsearch cs1231\n\n";
     public static final String REQUIRED_COMMAND = "To view all" + "\t\t\tType \"required\".\n"
         + "your required\nmodules:\n\n";
+    public static final String SCIENCE_COMMAND = "To view all" + "\t\t\tType \"science\".\n"
+        + "available Science\n"
+        + "modules:" + "\t\t\tNote:\n"
+        + "\t\t\t\tThis command shows a list of Science modules you can take\n"
+        + "\t\t\t\tto satisfy the Science component of your module requirements.\n"
+        + "\t\t\t\tOnce you have completed one of the modules specified in the\n"
+        + "\t\t\t\tlist, this command will be of zero significance to you.\n\n";
+    public static final String GEM_COMMAND = "To view all" + "\t\t\tType \"gem\".\n"
+        + "available GE\n"
+        + "modules:" + "\t\t\tNote:\n"
+        + "\t\t\t\tThis command shows a list of General Education (GE) modules you\n"
+        + "\t\t\t\tcan take to satisfy your University Level Requirements. Once you\n"
+        + "\t\t\t\thave completed one module for each of the five GE pillars, this\n"
+        + "\t\t\t\tcommand will be of zero significance to you.\n\n";
     public static final String CHECKMC_COMMAND = "To check\t\t\tType \"checkmc\".\n"
         + "your total MCs:\n\n";
-    public static final String TAG_COMMAND = "To view all" + "\t\t\tType \"tags\"\n"
+    public static final String TAG_COMMAND = "To view all" + "\t\t\tType \"tags\".\n"
         + "your tags:\n\n";
     public static final String LIST_COMMAND = "To list all" + "\t\t\tType \"list\".\n"
         + "your completed\nmodules:\n\n";
-    public static final String CLEAR_COMMAND = "To clear GradPad:\tType \"clear\"\n\n";
-    public static final String EXIT_COMMAND = "To exit GradPad:\t\tType \"exit\".\n\n";
+    public static final String CLEAR_COMMAND = "To clear GradPad:\tType \"clear\".\n\n";
+    public static final String EXIT_COMMAND = "To exit:\t\t\tType \"exit\".";
 
-    public static final String SHOWING_HELP_MESSAGE = ADD_COMMAND + DELETE_COMMAND + EDIT_COMMAND
-        + FIND_COMMAND + SEARCH_COMMAND + REQUIRED_COMMAND + CHECKMC_COMMAND + TAG_COMMAND + LIST_COMMAND
-        + CLEAR_COMMAND + EXIT_COMMAND;
+    public static final String SHOWING_HELP_MESSAGE = ADD_COMMAND + LINE + DELETE_COMMAND + LINE + EDIT_COMMAND
+        + LINE + FIND_COMMAND + LINE + SEARCH_COMMAND + LINE + REQUIRED_COMMAND + LINE + SCIENCE_COMMAND + LINE
+        + GEM_COMMAND + LINE + CHECKMC_COMMAND + LINE + TAG_COMMAND + LINE + LIST_COMMAND + LINE + CLEAR_COMMAND
+        + LINE + EXIT_COMMAND;
 
     // list command
     public static final String LIST_COMMAND_WORD = "list";
@@ -156,7 +177,7 @@ public class Messages {
     // search command
     public static final String SEARCH_COMMAND_WORD = "search";
     public static final String MESSAGE_SEARCH_USAGE = SEARCH_COMMAND_WORD + "\n\n"
-        + "Format: search MODULE_CODE\n\n"
+        + "Format:\nsearch MODULE_CODE\n\n"
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_SEARCH_SUCCESS = "Module details for %1$s \n\n"
         + "Module Title: %3$s \n"

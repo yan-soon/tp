@@ -1,6 +1,5 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
 import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TAG;
 import static seedu.address.commons.core.Messages.MESSAGE_EDIT_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;

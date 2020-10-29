@@ -3,6 +3,7 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static seedu.address.commons.core.Messages.MESSAGE_SCIENCE_SUCCESS;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 import static seedu.address.storage.RequiredCommandStorageTest.TEST_SCIENCE_PATH;
 
@@ -23,7 +24,6 @@ import seedu.address.storage.JsonGradPadStorage;
 
 public class ScienceCommandTest {
     public static final String INVALID_PATH = "data/science.json";
-    public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
     private Model model;
     private ScienceCommand scienceCommand = new ScienceCommand();
     private String moduleNames = "";
@@ -54,7 +54,7 @@ public class ScienceCommandTest {
     public void validPathExecuteScienceCommand_success() throws IOException, DataConversionException {
         model = new ModelManager();
         setUp();
-        CommandResult expected = new CommandResult(MESSAGE_SUCCESS + moduleNames);
+        CommandResult expected = new CommandResult(MESSAGE_SCIENCE_SUCCESS + moduleNames);
         CommandResult actual = scienceCommand.execute(model);
         assertEquals(expected, actual);
     }

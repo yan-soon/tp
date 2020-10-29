@@ -1,11 +1,11 @@
 package seedu.address.testutil;
 
+import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
 import java.util.Set;
 
-import seedu.address.logic.commands.AddCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.module.Module;
 import seedu.address.model.tag.Tag;
@@ -19,7 +19,7 @@ public class ModuleUtil {
      * Returns an add command string for adding the {@code module}.
      */
     public static String getAddCommand(Module module) {
-        return AddCommand.COMMAND_WORD + " " + getModuleDetails(module);
+        return ADD_COMMAND_WORD + " " + getModuleDetails(module);
     }
 
     /**

@@ -1,6 +1,8 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -56,7 +58,7 @@ public class ParserUtil {
         requireNonNull(code);
         String modifiedCode = code.trim().toUpperCase();
         if (!ModuleCode.isValidModuleCode(modifiedCode)) {
-            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(MESSAGE_INVALID_MODULE_CODE, modifiedCode));
         }
         return new ModuleCode(modifiedCode);
     }
@@ -83,7 +85,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(String.format(MESSAGE_INVALID_TAG, trimmedTag));
         }
         return new Tag(trimmedTag);
     }

@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_FAILURE_SCIENCE;
+import static seedu.address.commons.core.Messages.MESSAGE_SCIENCE_SUCCESS;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
@@ -12,9 +14,7 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.RequiredCommandStorage;
 
 public class ScienceCommand extends Command {
-    public static final String COMMAND_WORD = "science";
-    public static final String MESSAGE_SUCCESS = "These are the Science Modules that you can take:";
-    public static final String MESSAGE_FAILURE_SCIENCE = "There was an error loading the required Science Modules :(";
+
     private ObservableList<Module> scienceModules;
 
     /**
@@ -54,7 +54,7 @@ public class ScienceCommand extends Command {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
             }
-            return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
+            return new CommandResult(MESSAGE_SCIENCE_SUCCESS + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE_SCIENCE);
         }

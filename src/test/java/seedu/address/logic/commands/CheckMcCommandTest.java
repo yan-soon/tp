@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CHECKMC_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 import static seedu.address.testutil.TypicalModules.getTypicalTotalMc;
@@ -16,7 +17,7 @@ public class CheckMcCommandTest {
 
     @Test
     public void execute_checkmc_success() {
-        assertCommandSuccess(new CheckMcCommand(), model, String.format(CheckMcCommand.MESSAGE_SUCCESS,
+        assertCommandSuccess(new CheckMcCommand(), model, String.format(MESSAGE_CHECKMC_SUCCESS,
                 getTypicalTotalMc()), expectedModel);
     }
 }

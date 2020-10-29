@@ -1,6 +1,8 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_TAGS;
+import static seedu.address.commons.core.Messages.MESSAGE_TAGS_SUCCESS;
 
 import java.util.List;
 
@@ -10,12 +12,6 @@ import seedu.address.model.Model;
  * Lists all tags in GradPad.
  */
 public class TagsCommand extends Command {
-
-    public static final String COMMAND_WORD = "tags";
-
-    public static final String MESSAGE_SUCCESS = "Listed all tags:\n";
-    public static final String MESSAGE_NO_TAGS = "There are no tags.";
-
 
     @Override
     public CommandResult execute(Model model) {
@@ -27,6 +23,6 @@ public class TagsCommand extends Command {
         }
 
         String tags = String.join("\n", tagNames);
-        return new CommandResult(MESSAGE_SUCCESS + tags);
+        return new CommandResult(MESSAGE_TAGS_SUCCESS + tags);
     }
 }

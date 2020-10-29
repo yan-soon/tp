@@ -1,10 +1,12 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_SEARCH_USAGE;
 
 import seedu.address.commons.util.StringUtil;
 import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
+import seedu.address.model.module.ModuleCode;
 
 /**
  * Parses input arguments and creates a new SearchCommand object
@@ -21,14 +23,15 @@ public class SearchCommandParser implements Parser<SearchCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty()) {
             throw new ParseException(
-                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, SearchCommand.MESSAGE_USAGE));
+                    String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_SEARCH_USAGE));
         }
         try {
-            String moduleCode = StringUtil.ignoreCase(trimmedArgs);
-            return new SearchCommand(moduleCode);
+            String moduleCodeText = StringUtil.ignoreCase(trimmedArgs);
+            ModuleCode moduleCode = ParserUtil.parseModuleCode(moduleCodeText);
+            return new SearchCommand(moduleCodeText);
         } catch (IllegalArgumentException e) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    SearchCommand.MESSAGE_USAGE));
+                    MESSAGE_SEARCH_USAGE));
         }
     }
 }

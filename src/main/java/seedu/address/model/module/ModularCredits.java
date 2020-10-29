@@ -8,8 +8,7 @@ import static java.util.Objects.requireNonNull;
  */
 public class ModularCredits {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "ModularCredits should only contain numbers, and it should be either 1 or 2 digits long";
+    public static final String VALIDATION_REGEX = "\\d{1,2}";
     public final String value;
 
     /**

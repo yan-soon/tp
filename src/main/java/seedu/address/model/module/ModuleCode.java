@@ -1,6 +1,7 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,9 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleCode(String)}
  */
 public class ModuleCode {
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Module codes should only contain alphanumeric characters and spaces, and it should not be blank";
 
     /*
     A module code must have 2 or more characters as its prefix followed by 1 or more digits as its numerical
@@ -28,7 +26,7 @@ public class ModuleCode {
      */
     public ModuleCode(String moduleCode) {
         requireNonNull(moduleCode);
-        checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleCode(moduleCode), MESSAGE_CONSTRAINTS_CODE);
         this.moduleCode = moduleCode;
     }
 

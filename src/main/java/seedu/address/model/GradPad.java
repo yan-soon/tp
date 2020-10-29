@@ -71,6 +71,12 @@ public class GradPad implements ReadOnlyGradPad {
         setTags(newData.getTags());
     }
 
+    //// list checking operations
+
+    public boolean isEmpty() {
+        return modules.isEmpty();
+    }
+
     //// module-level operations
 
     /**

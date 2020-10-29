@@ -1,5 +1,7 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +74,7 @@ class JsonAdaptedModule {
                     ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(code)) {
-            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_CODE);
         }
         final ModuleCode modelCode = new ModuleCode(code);
 

@@ -14,13 +14,6 @@ import seedu.address.model.module.Module;
  */
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Finds all modules whose names or tags contain any of "
-            + "the specified keywords (case-insensitive) and displays them as a list with index numbers.\n"
-            + "Parameters: KEYWORD [MORE_KEYWORDS]...\n"
-            + "Example: " + COMMAND_WORD + " CS2103T CS1101s CS2030";
-
     private final Predicate<Module> predicate;
 
     /**
@@ -38,7 +31,7 @@ public class FindCommand extends Command {
         requireNonNull(model);
         model.updateFilteredModuleList(predicate);
         return new CommandResult(
-                String.format(Messages.MESSAGE_MODULES_LISTED_OVERVIEW, model.getFilteredModuleList().size()));
+                String.format(Messages.MESSAGE_MODULES_FOUND_OVERVIEW, model.getFilteredModuleList().size()));
     }
 
     @Override

@@ -10,20 +10,38 @@ title: User Guide
 --------------------------------------------------------------------------------------------------------------------
 ## GradPad
 
-GradPad is a one-stop solution to module management for Computer Science Undergraduates.
+We are a team of **Computer Science Undergraduates** working together to solve **module management** and **graduation planning** problems
+faced by fellow Computer Science students. Below is the detailed User Guide for effective use of GradPad which can help you
+ease and improve your **module planning process**.
+
+GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
 Planning for modules has always been a tedious process but it does not have to be.
 
-The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources which can
-be messy at times. So, our team has come up with the idea of an easy-to-use, all-in-one application that
-can ease the process of module management for Computer Science Undergraduates.
+The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
+[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of Faculty of Computing, 
+which can be messy at times. 
+So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
+can ease the process of **module management** for Computer Science Undergraduates.
 
-GradPad consolidates the modules you have taken and displays the remaining required modules to
-ease your module planning process. A module searching platform is also included in GradPad, providing easy
-navigation of modules.
+GradPad **consolidates** the modules you have taken and **displays** the remaining required modules to
+ease your module planning process. A **module searching platform** is also included in GradPad, providing easy
+**navigation** of modules.
 
 This user guide introduces what you can do with GradPad and the steps needed to do them. In addition,
-it includes a quick start guide that walks you through the installation and set-up process.
+it includes a [quick start guide](#quick-start) that walks you through the installation and set-up process.
 With this guide, you'll be ready to use GradPad in no time.
+
+--------------------------------------------------------------------------------------------------------------------
+## NUSMods integration  
+
+![NUSMods](images/nusmods.png)
+
+To streamline your module searching process with added convenience, GradPad integrates data from [NUSMods](https://nusmods.com/). With this, 
+you no longer have to visit NUSMods separately to look up module information. Instead, GradPad offers you all that data 
+in the same app you use to plan your modules itself.
+
+We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogues
+and **module information**. These data are retrieved on the go in **realtime**, directly from NUSMods.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -37,7 +55,10 @@ Follow the steps below to learn how to get started with GradPad!
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GradPad.
 
-1. Double-click the file to start the app. The Main Page similar to below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Ensure you have **internet connectivity** to fully utilise GradPad with the latest data from [NUSMods](https://nusmods.com/).
+
+1. Double-click the file to start the app. The Main Page similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+
    ![Ui](images/Ui.png)
 
 1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
@@ -47,9 +68,12 @@ Follow the steps below to learn how to get started with GradPad!
 
    * **`add`** `CS2103T` : Adds a module named `CS2103T` to the GradPad.
 
-   * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
+   * **`delete`** `CS2103T` : Deletes the module named `CS2103T` in the current list.
+   
+   * **`search`** `CS2103T` : Search for module named `CS2103T` from NUSMods database(if internet is available) or from local saved file.
 
    * **`exit`** : Exits the app.
+   
 
 
 <div markdown="block" class="alert alert-info">
@@ -63,6 +87,7 @@ Refer to the [Feature Summary List](#feature-summary-list) below for a summary o
 --------------------------------------------------------------------------------------------------------------------
 
 ## Feature Summary List
+A consolidated view of GradPad feature list is listed below in a table form for easy reference.
 
  Features                         |    Description
  ----------------------------------------|------------
@@ -85,6 +110,8 @@ Refer to [Commands](#commands) below for details on all commands.
 
 ## Commands
 
+Detailed explanations of each commands and their respective usage are listed under this section.
+
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
@@ -100,13 +127,14 @@ For example, if the command specifies `add c/MODULE_CODE t/core`, `add t/core c/
 ### Adding a module: `add`
 
 Scenario:<br>
-You have just completed the CS2101 module, and you want to add the module into GradPad to track your academic progress. You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
+You have just completed the CS2101 module, and you want to add the module into GradPad to track your academic progress. 
+You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
 
 The `add` command allows you to add a module you have completed into the Completed Modules list.
 
 You can add a module by specifying a valid module code. You can also include multiple tags using the prefix 't/' but they are optional.
-Conveniently, you don't have to specify the module title or modular credits of the module you're adding - GradPad
- automatically retrieves them for you.
+Conveniently, you don't have to specify the module title or modular credits of the module you are adding - GradPad
+automatically retrieves them for you using data from NUSMods.
 
 <div markdown="block" class="alert alert-info">
 
@@ -165,8 +193,10 @@ you actually think that the module was the best you'd taken in NUS.
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
- fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
- single `edit` command.
+fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
+single `edit` command.
+
+Module title and modular credits for respective module code will be automatically updated with data from NUSMods.
  
  <div markdown="block" class="alert alert-info">
  
@@ -215,7 +245,7 @@ You have added several modules into GradPad but you realised that you accidental
 
 The `delete` command allows you to remove a module you have added into GradPad.
 
-You can delete a module by specifying the module code of the module.
+You can delete a module by specifying the **module code** of the module. (Case insensitive)
 
 To delete the module:
 
@@ -231,7 +261,14 @@ To delete the module:
 
 ### Checking total modular credits: `checkmc`
 
+**Note:** A **Modular Credit** (MC) is a unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload, with
+an average of 20 MCs per semester.
+
+Scenario:<br>
+You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
+
 The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
+This gives you a rough gauge of the progress of your graduation planning.
 
 To check total modular credits:
 
@@ -283,11 +320,13 @@ To check Science modules:
 ### Searching for a module: `search`
 
 Scenario: <br>
-After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? Do they have any pre-requisites?). You can simply look up those details by using the `search` command.
+After viewing the required modules you have yet to take, you wish to find out more about those modules (Eg. What are they about? 
+Do they have any pre-requisites?). You can simply look up those details by using the `search` command.
 
 The `search` command allows you to search for any module available in NUS.
 
-You can search for a module by specifying the module code of the module.
+You can search for a module by specifying the module code of the module. The essential module details will then be retrieved 
+from NUSMods database directly and displayed in the result display box.
 
 <div markdown="block" class="alert alert-info">
 
@@ -338,6 +377,8 @@ To exit:
 --------------------------------------------------------------------------------------------------------------------
 
 ## Command summary
+
+This section is the table of all the commands available and their respective usage example in GradPad.
 
 Action | Format | Example
 --------|-------|----------

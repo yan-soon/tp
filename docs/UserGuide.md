@@ -23,12 +23,12 @@ which can be messy at times.
 So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
 
-GradPad **consolidates** the modules you have taken and **displays** the **remaining required modules** to
+GradPad **consolidates** the modules you have taken and **displays** the remaining required modules to
 ease your module planning process. A **module searching platform** is also included in GradPad, providing easy
 **navigation** of modules.
 
 This user guide introduces what you can do with GradPad and the steps needed to do them. In addition,
-it includes a **quick start guide** that walks you through the installation and set-up process.
+it includes a [quick start guide](#quick-start) that walks you through the installation and set-up process.
 With this guide, you'll be ready to use GradPad in no time.
 
 --------------------------------------------------------------------------------------------------------------------
@@ -41,7 +41,7 @@ you no longer have to visit NUSMods separately to look up module information. In
 in the same app you use to plan your modules itself.
 
 We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogue
-and module information. These data are retrieved on the go in realtime, using the data provided by NUSMods.
+and **module information**. These data are retrieved on the go in **realtime**, using the data provided by NUSMods.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -68,9 +68,9 @@ Follow the steps below to learn how to get started with GradPad!
 
    * **`add`** `CS2103T` : Adds a module named `CS2103T` to the GradPad.
 
-   * **`delete`** `CS2103T` : Deletes the module titled `CS2103T` in the current list.
+   * **`delete`** `CS2103T` : Deletes the module named `CS2103T` in the current list.
    
-   * **`search`** : Search for a module from NUSMods database(if internet is available) or from local saved file.
+   * **`search`** `CS2103T` : Search for module named `CS2103T` from NUSMods database(if internet is available) or from local saved file.
 
    * **`exit`** : Exits the app.
    

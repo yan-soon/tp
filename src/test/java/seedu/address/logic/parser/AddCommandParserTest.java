@@ -1,12 +1,13 @@
 package seedu.address.logic.parser;
 
 import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
-import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TAG;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.PREAMBLE_WHITESPACE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CORE;
@@ -65,14 +66,14 @@ public class AddCommandParserTest {
     public void parse_invalidValue_failure() {
         // invalid code
         assertParseFailure(parser, INVALID_CODE_DESC + TAG_DESC_CORE + TAG_DESC_NON_CORE,
-            MESSAGE_INVALID_MODULE_CODE);
+            String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE_DESC.trim()));
 
         // invalid tag
-        assertParseFailure(parser, CODE_DESC_CS3216 + INVALID_TAG_DESC + VALID_TAG_NON_CORE,
-            MESSAGE_CONSTRAINTS_TAG);
+        assertParseFailure(parser, CODE_DESC_CS3216 + INVALID_TAG_DESC + TAG_DESC_NON_CORE,
+            String.format(MESSAGE_INVALID_TAG, INVALID_TAG));
 
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_CODE_DESC + INVALID_TAG_DESC,
-            MESSAGE_INVALID_MODULE_CODE);
+            String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE_DESC.trim()));
     }
 }

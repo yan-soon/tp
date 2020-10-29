@@ -2,7 +2,11 @@ package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
+import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE;
+import static seedu.address.commons.core.Messages.MESSAGE_LIST_SUCCESS;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -58,13 +62,13 @@ public class LogicManagerTest {
     @Test
     public void execute_commandExecutionError_throwsCommandException() {
         String deleteCommand = "delete cs2103t";
-        assertCommandException(deleteCommand, String.format(MESSAGE_INVALID_MODULE, "CS2103T"));
+        assertCommandException(deleteCommand, MESSAGE_EMPTY_GRADPAD);
     }
 
     @Test
     public void execute_validCommand_success() throws Exception {
-        String listCommand = ListCommand.COMMAND_WORD;
-        assertCommandSuccess(listCommand, ListCommand.MESSAGE_SUCCESS, model);
+        String listCommand = LIST_COMMAND_WORD;
+        assertCommandSuccess(listCommand, MESSAGE_LIST_SUCCESS, model);
     }
 
     @Test
@@ -82,7 +86,7 @@ public class LogicManagerTest {
         Module expectedModule = new ModuleBuilder(CS2103T).withTags().build();
         ModelManager expectedModel = new ModelManager();
         expectedModel.addModule(expectedModule);
-        String expectedMessage = LogicManager.FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
+        String expectedMessage = FILE_OPS_ERROR_MESSAGE + DUMMY_IO_EXCEPTION;
         assertCommandFailure(addCommand, CommandException.class, expectedMessage, expectedModel);
     }
 

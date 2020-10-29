@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_NO_TAGS;
+import static seedu.address.commons.core.Messages.MESSAGE_TAGS_SUCCESS;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.util.List;
@@ -25,7 +27,7 @@ public class TagsCommandTest {
     @Test
     public void execute_modelWithTags_printsTags() {
         List<String> tagNames = modelWithTags.getGradPad().getTags().getTagNames();
-        String expectedMessage = TagsCommand.MESSAGE_SUCCESS + String.join("\n", tagNames);
+        String expectedMessage = MESSAGE_TAGS_SUCCESS + String.join("\n", tagNames);
         TagsCommand tagsCommand = new TagsCommand();
 
         // actual and expected model are the same as there should be no change
@@ -34,7 +36,7 @@ public class TagsCommandTest {
 
     @Test
     public void execute_modelWithoutTags_noTagsMessage() {
-        String expectedMessage = TagsCommand.MESSAGE_NO_TAGS;
+        String expectedMessage = MESSAGE_NO_TAGS;
         TagsCommand tagsCommand = new TagsCommand();
 
         // actual and expected model are the same as there should be no change

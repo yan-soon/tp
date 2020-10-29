@@ -1,6 +1,7 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -9,8 +10,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class ModularCredits {
 
-    public static final String MESSAGE_CONSTRAINTS =
-            "ModularCredits should only contain numbers, and it should be either 1 or 2 digits long";
     public static final String VALIDATION_REGEX = "\\d{1,2}";
     public final String value;
 
@@ -21,7 +20,7 @@ public class ModularCredits {
      */
     public ModularCredits(String credits) {
         requireNonNull(credits);
-        checkArgument(isValidMC(credits), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidMC(credits), MESSAGE_CONSTRAINTS_CREDITS);
         value = credits;
     }
 

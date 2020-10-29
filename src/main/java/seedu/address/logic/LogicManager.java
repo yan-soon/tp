@@ -1,6 +1,9 @@
 package seedu.address.logic;
 
+import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
+import static seedu.address.commons.core.Messages.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 
 import java.io.IOException;
@@ -27,8 +30,7 @@ import seedu.address.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-    public static final String FILE_OPS_ERROR_MESSAGE = "Could not save data to file: ";
-    public static final String MESSAGE_CONFIRMATION_CANCEL = "Command aborted - ";
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
@@ -55,7 +57,7 @@ public class LogicManager implements Logic {
         } else {
             Module moduleToBeDeleted = ((DeleteCommand) command).getModuleToDelete(model);
             assignStalledComponents(command, commandText);
-            return new CommandResult(DeleteCommand.MESSAGE_CONFIRMATION + moduleToBeDeleted);
+            return new CommandResult(MESSAGE_DELETE_CONFIRMATION + moduleToBeDeleted);
         }
     }
 
@@ -81,7 +83,7 @@ public class LogicManager implements Logic {
 
         if (command.requiresStall()) {
             if (model.isEmpty()) {
-                return new CommandResult(MESSAGE_EMPTY_GRADPAD);
+                throw new CommandException(MESSAGE_EMPTY_GRADPAD);
             }
             return handleStall(command, commandText);
         } else if (isConfirmation) {

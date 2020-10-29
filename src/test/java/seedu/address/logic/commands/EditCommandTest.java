@@ -3,6 +3,8 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
+import static seedu.address.commons.core.Messages.MESSAGE_EDIT_SUCCESS;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
@@ -42,8 +44,10 @@ public class EditCommandTest {
         Module editedModule = new ModuleBuilder().build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE, descriptor);
+        Module moduleToEdit = model.getGradPad().getModuleList().stream()
+            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+        String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, moduleToEdit, editedModule);
 
         Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
         expectedModel.setModule(model.getFilteredModuleList().get(0), editedModule);
@@ -65,7 +69,7 @@ public class EditCommandTest {
             .withModularCredits(VALID_CREDITS_CS3216).withTags(VALID_TAG_CORE).build();
         EditCommand editCommand = new EditCommand(moduleCodeLastModule, descriptor);
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+        String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, lastModule, editedModule);
 
         Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
         expectedModel.setModule(lastModule, editedModule);
@@ -76,10 +80,12 @@ public class EditCommandTest {
     @Test
     public void execute_noFieldSpecifiedUnfilteredList_success() {
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE, new EditModuleDescriptor());
+        Module moduleToEdit = model.getGradPad().getModuleList().stream()
+            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
         Module editedModule = model.getFilteredModuleList().stream()
             .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+        String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, moduleToEdit, editedModule);
 
         Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
 
@@ -97,7 +103,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
                 new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build());
 
-        String expectedMessage = String.format(EditCommand.MESSAGE_EDIT_MODULE_SUCCESS, editedModule);
+        String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, moduleInFilteredList, editedModule);
 
         Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
         expectedModel.setModule(moduleInFilteredList, editedModule);
@@ -112,7 +118,8 @@ public class EditCommandTest {
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
         EditCommand editCommand = new EditCommand(CODE_SECOND_MODULE, descriptor);
 
-        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_MODULE);
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_DUPLICATE_MODULE,
+            firstModule.getModuleCode()));
     }
 
     @Test
@@ -125,7 +132,8 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
                 new EditModuleDescriptorBuilder(moduleInList).build());
 
-        assertCommandFailure(editCommand, model, MESSAGE_DUPLICATE_MODULE);
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_DUPLICATE_MODULE,
+            moduleInList.getModuleCode()));
     }
 
     @Test
@@ -135,7 +143,7 @@ public class EditCommandTest {
             .withModuleCode(VALID_CODE_CS3216).build();
         EditCommand editCommand = new EditCommand(moduleNotYetAdded, descriptor);
 
-        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_MODULE_NOT_YET_ADDED,
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_MODULE,
             moduleNotYetAdded));
     }
 
@@ -150,7 +158,7 @@ public class EditCommandTest {
         EditCommand editCommand = new EditCommand(moduleNotYetAdded,
             new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS3216).build());
 
-        assertCommandFailure(editCommand, model, String.format(EditCommand.MESSAGE_MODULE_NOT_YET_ADDED,
+        assertCommandFailure(editCommand, model, String.format(MESSAGE_INVALID_MODULE,
             moduleNotYetAdded));
     }
 

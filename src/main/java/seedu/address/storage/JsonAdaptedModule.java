@@ -1,5 +1,9 @@
 package seedu.address.storage;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -72,7 +76,7 @@ class JsonAdaptedModule {
                     ModuleCode.class.getSimpleName()));
         }
         if (!ModuleCode.isValidModuleCode(code)) {
-            throw new IllegalValueException(ModuleCode.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_CODE);
         }
         final ModuleCode modelCode = new ModuleCode(code);
 
@@ -81,7 +85,7 @@ class JsonAdaptedModule {
                     ModuleTitle.class.getSimpleName()));
         }
         if (!ModuleTitle.isValidModuleTitle(title)) {
-            throw new IllegalValueException(ModuleTitle.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_TITLE);
         }
         final ModuleTitle moduleTitle = new ModuleTitle(title);
 
@@ -90,7 +94,7 @@ class JsonAdaptedModule {
                     ModularCredits.class.getSimpleName()));
         }
         if (!ModularCredits.isValidMC(credits)) {
-            throw new IllegalValueException(ModularCredits.MESSAGE_CONSTRAINTS);
+            throw new IllegalValueException(MESSAGE_CONSTRAINTS_CREDITS);
         }
         final ModularCredits modelCredits = new ModularCredits(credits);
 

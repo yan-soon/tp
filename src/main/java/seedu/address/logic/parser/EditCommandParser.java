@@ -1,7 +1,9 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_EDIT_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_CODE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -23,8 +25,6 @@ import seedu.address.nusmods.ModuleInfo;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
-    public static final String MESSAGE_MODULE_DOES_NOT_EXIST = "Module %1$s does not exist!";
-    public static final String MESSAGE_MODULE_NOT_YET_ADDED = "Module %1$s has not been added yet!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -39,7 +39,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                EditCommand.MESSAGE_USAGE));
+                MESSAGE_EDIT_USAGE));
         }
 
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
@@ -68,7 +68,7 @@ public class EditCommandParser implements Parser<EditCommand> {
         parseTagsForEdit(argMultimap.getAllValues(PREFIX_TAG)).ifPresent(editModuleDescriptor::setTags);
 
         if (!editModuleDescriptor.isAnyFieldEdited()) {
-            throw new ParseException(EditCommand.MESSAGE_NOT_EDITED);
+            throw new ParseException(MESSAGE_NOT_EDITED);
         }
 
         return new EditCommand(code, editModuleDescriptor);

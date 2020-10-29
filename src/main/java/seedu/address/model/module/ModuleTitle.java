@@ -1,6 +1,7 @@
 package seedu.address.model.module;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
 import static seedu.address.commons.util.AppUtil.checkArgument;
 
 /**
@@ -8,10 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  * Guarantees: immutable; is valid as declared in {@link #isValidModuleTitle(String)}
  */
 public class ModuleTitle {
-
-    public static final String MESSAGE_CONSTRAINTS =
-            "Module titles should only contain alphanumeric characters and spaces, and it should not be "
-                    + "blank";
 
     /*
      * The first character of the title must not be a whitespace,
@@ -28,7 +25,7 @@ public class ModuleTitle {
      */
     public ModuleTitle(String moduleTitle) {
         requireNonNull(moduleTitle);
-        checkArgument(isValidModuleTitle(moduleTitle), MESSAGE_CONSTRAINTS);
+        checkArgument(isValidModuleTitle(moduleTitle), MESSAGE_CONSTRAINTS_TITLE);
         this.moduleTitle = moduleTitle;
     }
 

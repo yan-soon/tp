@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_SEARCH_SUCCESS;
 
 import java.util.Optional;
 
@@ -14,19 +15,6 @@ import seedu.address.nusmods.ModuleInfo;
  * Module Code matching is case insensitive.
  */
 public class SearchCommand extends Command {
-
-    public static final String COMMAND_WORD = "search";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Search for a module with "
-            + "the specified ModuleCode (case-insensitive) and display all the module details in the "
-            + "Command Line Interface\n"
-            + "Parameters: MODULE CODE\n"
-            + "Example: " + COMMAND_WORD + " CS2103T";
-
-    public static final String MESSAGE_SUCCESS = "Module Info for: %1$s \n"
-            + "Modular Credits: %2$s\n"
-            + "Module Title: %3$s \n\n" + "Module Description: \n%4$s \n\n"
-            + "Preclusion: %5$s\n\n" + "Prerequisite: %6$s\n";
 
     private final String moduleCode;
 
@@ -49,7 +37,7 @@ public class SearchCommand extends Command {
         String preclusion = Optional.ofNullable(searchResult.getPreclusion()).orElse("None");
         String prerequisite = Optional.ofNullable(searchResult.getPrerequisite()).orElse("None");
 
-        String searchDisplay = String.format(MESSAGE_SUCCESS, searchResult.getModuleCode(),
+        String searchDisplay = String.format(MESSAGE_SEARCH_SUCCESS, searchResult.getModuleCode(),
                 searchResult.getModuleCredit(), searchResult.getTitle(),
                 searchResult.getDescription(), preclusion, prerequisite);
         return new CommandResult(searchDisplay);

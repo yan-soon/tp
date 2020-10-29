@@ -28,7 +28,6 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.RequiredCommandStorage;
 
 public class RequiredCommand extends Command {
-    public static final String COMMAND_WORD = "required";
 
     private ObservableList<Module> currentModules;
     private String leftOverModules = "";

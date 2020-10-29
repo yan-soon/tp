@@ -98,13 +98,17 @@ public class Module {
     public String toString() {
         final StringBuilder builder = new StringBuilder();
         builder.append("Module Code: ")
-                .append(getModuleCode())
+                .append("\t\t" + getModuleCode())
                 .append("\nModule Title: ")
-                .append(getModuleTitle())
+                .append("\t\t" + getModuleTitle())
                 .append("\nModular Credits: ")
-                .append(getModularCredits())
-                .append("\nTags: ");
-        getTags().forEach(builder::append);
+                .append("\t" + getModularCredits())
+                .append("\nTags: \t\t\t");
+        if (tags.isEmpty()) {
+            builder.append("None");
+        } else {
+            getTags().forEach(builder::append);
+        }
         return builder.toString();
     }
 }

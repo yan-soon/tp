@@ -1,6 +1,10 @@
 package seedu.address.logic.parser;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TAG;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -44,7 +48,7 @@ public class ParserUtil {
         requireNonNull(moduleTitle);
         String trimmedModuleTitle = moduleTitle.trim();
         if (!ModuleTitle.isValidModuleTitle(trimmedModuleTitle)) {
-            throw new ParseException(ModuleTitle.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_CONSTRAINTS_TITLE);
         }
         return new ModuleTitle(trimmedModuleTitle);
     }
@@ -59,7 +63,7 @@ public class ParserUtil {
         requireNonNull(code);
         String modifiedCode = code.trim().toUpperCase();
         if (!ModuleCode.isValidModuleCode(modifiedCode)) {
-            throw new ParseException(ModuleCode.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_INVALID_MODULE_CODE);
         }
         return new ModuleCode(modifiedCode);
     }
@@ -74,7 +78,7 @@ public class ParserUtil {
         requireNonNull(credits);
         String trimmedCredits = credits.trim();
         if (!ModularCredits.isValidMC(trimmedCredits)) {
-            throw new ParseException(ModularCredits.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_CONSTRAINTS_CREDITS);
         }
         return new ModularCredits(trimmedCredits);
     }
@@ -89,7 +93,7 @@ public class ParserUtil {
         requireNonNull(tag);
         String trimmedTag = tag.trim();
         if (!Tag.isValidTagName(trimmedTag)) {
-            throw new ParseException(Tag.MESSAGE_CONSTRAINTS);
+            throw new ParseException(MESSAGE_CONSTRAINTS_TAG);
         }
         return new Tag(trimmedTag);
     }

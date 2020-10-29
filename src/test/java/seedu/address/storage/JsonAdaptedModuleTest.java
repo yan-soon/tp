@@ -1,6 +1,9 @@
 package seedu.address.storage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CODE;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_CREDITS;
+import static seedu.address.commons.core.Messages.MESSAGE_CONSTRAINTS_TITLE;
 import static seedu.address.storage.JsonAdaptedModule.MISSING_FIELD_MESSAGE_FORMAT;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
@@ -39,7 +42,7 @@ public class JsonAdaptedModuleTest {
     public void toModelType_invalidCode_throwsIllegalValueException() {
         JsonAdaptedModule module =
                 new JsonAdaptedModule(INVALID_CODE, VALID_TITLE, VALID_CREDITS, VALID_TAGS);
-        String expectedMessage = ModuleCode.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_CONSTRAINTS_CODE;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
 
@@ -54,7 +57,7 @@ public class JsonAdaptedModuleTest {
     public void toModelType_invalidTitle_throwsIllegalValueException() {
         JsonAdaptedModule module =
             new JsonAdaptedModule(VALID_CODE, INVALID_TITLE, VALID_CREDITS, VALID_TAGS);
-        String expectedMessage = ModuleTitle.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_CONSTRAINTS_TITLE;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
 
@@ -69,7 +72,7 @@ public class JsonAdaptedModuleTest {
     public void toModelType_invalidCredits_throwsIllegalValueException() {
         JsonAdaptedModule module =
                 new JsonAdaptedModule(VALID_CODE, VALID_TITLE, INVALID_CREDITS, VALID_TAGS);
-        String expectedMessage = ModularCredits.MESSAGE_CONSTRAINTS;
+        String expectedMessage = MESSAGE_CONSTRAINTS_CREDITS;
         assertThrows(IllegalValueException.class, expectedMessage, module::toModelType);
     }
 

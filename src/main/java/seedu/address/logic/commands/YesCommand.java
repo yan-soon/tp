@@ -1,5 +1,7 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_NO_CONFIRMATION;
+
 import seedu.address.model.Model;
 
 /**
@@ -7,11 +9,8 @@ import seedu.address.model.Model;
  */
 public class YesCommand extends Command {
 
-    public static final String COMMAND_WORD = "yes";
-    public static final String NO_CONFIRMATION_MESSAGE = "There is nothing to confirm!";
-
     @Override
     public CommandResult execute(Model model) {
-        return new CommandResult(NO_CONFIRMATION_MESSAGE);
+        return new CommandResult(MESSAGE_NO_CONFIRMATION);
     }
 }

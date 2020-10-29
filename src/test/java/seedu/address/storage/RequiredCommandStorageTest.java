@@ -38,8 +38,8 @@ public class RequiredCommandStorageTest {
         assertNull(actual);
     }
     @Test
-    public void getRequiredMathAndScience_validTest() {
-        ObservableList<Module> actual = storage.getRequiredMathAndScience();
+    public void getRequiredMath_validTest() {
+        ObservableList<Module> actual = storage.getRequiredMath();
         assertNull(actual);
     }
     @Test
@@ -61,8 +61,8 @@ public class RequiredCommandStorageTest {
         assertThrows(IOException.class, () -> storage.setRequiredITprof(INVALID_PATH));
     }
     @Test
-    public void setRequiredMathAndScienceInvalidPath_throwsIOexception() {
-        assertThrows(IOException.class, () -> storage.setRequiredMathAndScience(INVALID_PATH));
+    public void setRequiredMathInvalidPath_throwsIOexception() {
+        assertThrows(IOException.class, () -> storage.setRequiredMath(INVALID_PATH));
     }
     @Test
     public void setRequiredScienceInvalidPath_throwsIOexception() {
@@ -91,12 +91,12 @@ public class RequiredCommandStorageTest {
         assertEquals(expected, actual);
     }
     @Test
-    public void setRequiredMathAndScienceValidPath_success() throws IOException,
+    public void setRequiredMathValidPath_success() throws IOException,
             DataConversionException, IllegalValueException {
         setUpRequiredFoundation();
         ObservableList<Module> actual = requiredFoundation;
-        storage.setRequiredMathAndScience(FOUNDATION_PATH);
-        ObservableList<Module> expected = storage.getRequiredMathAndScience();
+        storage.setRequiredMath(FOUNDATION_PATH);
+        ObservableList<Module> expected = storage.getRequiredMath();
         assertEquals(expected, actual);
     }
     @Test

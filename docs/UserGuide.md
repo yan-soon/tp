@@ -207,6 +207,9 @@ an average of 20 MCs per semester.
 The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
 This gives you a rough gauge of the progress of your graduation planning.
 
+Example:<br>
+You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
+
 To check total modular credits:
 
 1. Type `checkmc` into the command box, and press **Enter** to execute it.

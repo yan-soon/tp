@@ -57,9 +57,8 @@ Follow the steps below to learn how to get started with GradPad!
 **:information_source: Note:**<br>
 Detailed explanation of each command can be found [here](#commands).
 
+Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 </div>
-
-1. Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 
 --------------------------------------------------------------------------------------------------------------------
 

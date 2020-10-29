@@ -36,8 +36,12 @@ With this guide, you'll be ready to use GradPad in no time.
 
 ![NUSMods](images/nusmods.png)
 
+To streamline your module searching process with added convenience, GradPad integrates data from [NUSMods](https://nusmods.com/). With this, 
+you no longer have to visit NUSMods separately to look up module information. Instead, GradPad offers you all that data 
+in the same app you use to plan your modules itself.
+
 We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogue
-and module information. These data are retrieved on the go in realtime, using the [API](https://api.nusmods.com/v2/) provided by NUSMods.
+and module information. These data are retrieved on the go in realtime, using the data provided by NUSMods.
 
 --------------------------------------------------------------------------------------------------------------------
 

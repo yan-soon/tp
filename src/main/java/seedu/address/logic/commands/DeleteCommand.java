@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_DELETE_SUCCESS;
 
 import java.util.List;
 import java.util.Optional;
@@ -15,17 +16,6 @@ import seedu.address.model.module.ModuleCode;
  * Deletes a Module identified using it's displayed index from the GradPad.
  */
 public class DeleteCommand extends Command {
-
-    public static final String COMMAND_WORD = "delete";
-
-    public static final String MESSAGE_USAGE = COMMAND_WORD
-            + ": Deletes the module identified by the module code used in the Completed Modules.\n"
-            + "Parameters: MODULE CODE\n"
-            + "Example: " + COMMAND_WORD + " cs2103t";
-
-    public static final String MESSAGE_DELETE_MODULE_SUCCESS = "Deleted Module: %1$s";
-    public static final String MESSAGE_CONFIRMATION = "Are you sure you wish to delete the following"
-            + " module?\n\n";
 
     private final ModuleCode code;
 
@@ -56,7 +46,7 @@ public class DeleteCommand extends Command {
         requireNonNull(model);
         Module moduleToDelete = getModuleToDelete(model);
         model.deleteModule(moduleToDelete);
-        return new CommandResult(String.format(MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete));
+        return new CommandResult(String.format(MESSAGE_DELETE_SUCCESS, moduleToDelete));
     }
 
     @Override

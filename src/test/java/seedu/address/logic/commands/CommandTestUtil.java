@@ -41,7 +41,9 @@ public class CommandTestUtil {
 
     public static final String INVALID_CODE_DESC = " " + "CS1231&"; // '&' not allowed in codes
     public static final String INVALID_CODE_DESC_WITH_PREFIX = " " + PREFIX_CODE + "CS1231&";
+    public static final String INVALID_CODE = "CS1231&";
     public static final String INVALID_TAG_DESC = " " + PREFIX_TAG + "core*"; // '*' not allowed in tags
+    public static final String INVALID_TAG = "core*";
 
     public static final String PREAMBLE_WHITESPACE = "\t  \r  \n";
 

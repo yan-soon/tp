@@ -1,10 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_EDIT_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
+import static seedu.address.commons.core.Messages.MESSAGE_INVALID_TAG;
+import static seedu.address.commons.core.Messages.MESSAGE_NOT_EDITED;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T_WITH_PREFIX;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS3216_WITH_PREFIX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_CODE_DESC_WITH_PREFIX;
+import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG;
 import static seedu.address.logic.commands.CommandTestUtil.INVALID_TAG_DESC;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.TAG_DESC_NON_CORE;
@@ -28,7 +34,6 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.model.module.ModuleCode;
-import seedu.address.model.tag.Tag;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
 public class EditCommandParserTest {
@@ -36,7 +41,7 @@ public class EditCommandParserTest {
     private static final String TAG_EMPTY = " " + PREFIX_TAG;
 
     private static final String MESSAGE_INVALID_FORMAT =
-            String.format(MESSAGE_INVALID_COMMAND_FORMAT, EditCommand.MESSAGE_USAGE);
+            String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_EDIT_USAGE);
 
     private EditCommandParser parser = new EditCommandParser();
 
@@ -46,7 +51,7 @@ public class EditCommandParserTest {
         assertParseFailure(parser, CODE_DESC_CS2103T_WITH_PREFIX, MESSAGE_INVALID_FORMAT);
 
         // no field specified
-        assertParseFailure(parser, CODE_DESC_CS2103T, EditCommand.MESSAGE_NOT_EDITED);
+        assertParseFailure(parser, CODE_DESC_CS2103T, MESSAGE_NOT_EDITED);
 
         // no index and no field specified
         assertParseFailure(parser, "", MESSAGE_INVALID_FORMAT);
@@ -55,38 +60,42 @@ public class EditCommandParserTest {
     @Test
     public void parse_invalidPreamble_failure() {
         // module code invalid format
-        assertParseFailure(parser, "c2222" + CODE_DESC_CS2103T, ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "c2222" + CODE_DESC_CS2103T_WITH_PREFIX,
+            String.format(MESSAGE_INVALID_MODULE_CODE, "C2222"));
 
         // invalid arguments being parsed as preamble
-        assertParseFailure(parser, "cs2100 some random string", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "cs2100 some random string",
+            String.format(MESSAGE_INVALID_MODULE_CODE, "CS2100 SOME RANDOM STRING"));
 
         // invalid prefix being parsed as preamble
-        assertParseFailure(parser, "cs2100 i/ string", ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "cs2100 i/ string",
+            String.format(MESSAGE_INVALID_MODULE_CODE, "CS2100 I/ STRING"));
     }
 
     @Test
     public void parse_invalidValue_failure() {
         assertParseFailure(parser, "cs2100" + INVALID_CODE_DESC_WITH_PREFIX,
-            ModuleCode.MESSAGE_CONSTRAINTS); // invalid code
-        assertParseFailure(parser, "cs2100" + INVALID_TAG_DESC, Tag.MESSAGE_CONSTRAINTS); // invalid tag
+            String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE)); // invalid code
+        assertParseFailure(parser, "cs2100" + INVALID_TAG_DESC,
+            String.format(MESSAGE_INVALID_TAG, INVALID_TAG)); // invalid tag
 
         // valid code followed by invalid code. The test case for invalid code followed by valid code
         // is tested at {@code parse_invalidValueFollowedByValidValue_success()}
         assertParseFailure(parser, "cs2100" + CODE_DESC_CS2103T_WITH_PREFIX + INVALID_CODE_DESC_WITH_PREFIX,
-                ModuleCode.MESSAGE_CONSTRAINTS);
+            String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE));
 
         // while parsing {@code PREFIX_TAG} alone will reset the tags of the {@code Module} being edited,
         // parsing it together with a valid tag results in error
         assertParseFailure(parser, "cs2100" + TAG_DESC_CORE + TAG_DESC_NON_CORE + TAG_EMPTY,
-            Tag.MESSAGE_CONSTRAINTS);
+            String.format(MESSAGE_INVALID_TAG, ""));
         assertParseFailure(parser, "cs2100" + TAG_DESC_CORE + TAG_EMPTY + TAG_DESC_NON_CORE,
-            Tag.MESSAGE_CONSTRAINTS);
+            String.format(MESSAGE_INVALID_TAG, ""));
         assertParseFailure(parser, "cs2100" + TAG_EMPTY + TAG_DESC_CORE + TAG_DESC_NON_CORE,
-            Tag.MESSAGE_CONSTRAINTS);
+            String.format(MESSAGE_INVALID_TAG, ""));
 
         // multiple invalid values, but only the first invalid value is captured
-        assertParseFailure(parser, "cs2100" + INVALID_CODE_DESC_WITH_PREFIX + VALID_CREDITS_CS2103T,
-                ModuleCode.MESSAGE_CONSTRAINTS);
+        assertParseFailure(parser, "cs2100" + INVALID_CODE_DESC_WITH_PREFIX + INVALID_TAG_DESC,
+            String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE));
     }
 
     @Test

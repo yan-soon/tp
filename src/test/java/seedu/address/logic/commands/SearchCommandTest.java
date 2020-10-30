@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static seedu.address.commons.core.Messages.MESSAGE_SEARCH_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
@@ -71,7 +72,7 @@ public class SearchCommandTest {
         String expectedPreclusion = Optional.ofNullable(cs1010x.getPreclusion()).orElse("None");
         String expectedPrerequisite = Optional.ofNullable(cs1010x.getPrerequisite()).orElse("None");
 
-        String expectedMessage = String.format(SearchCommand.MESSAGE_SUCCESS,
+        String expectedMessage = String.format(MESSAGE_SEARCH_SUCCESS,
                 cs1010x.getModuleCode(), cs1010x.getModuleCredit(),
                 cs1010x.getTitle(), cs1010x.getDescription(),
                 expectedPreclusion, expectedPrerequisite);

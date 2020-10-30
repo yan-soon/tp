@@ -1,5 +1,6 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.MESSAGE_ADD_USAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 
@@ -21,7 +22,6 @@ import seedu.address.nusmods.ModuleInfo;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
-    public static final String MESSAGE_INVALID_MODULE = "There is no such module in the CS curriculum!";
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -36,7 +36,7 @@ public class AddCommandParser implements Parser<AddCommand> {
 
         String trimmedArgs = args.trim();
         if (trimmedArgs.isEmpty() || argMultimap.getPreamble().isEmpty()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
+            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_ADD_USAGE));
         }
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         String moduleCodeText = StringUtil.ignoreCase(moduleCode.toString());

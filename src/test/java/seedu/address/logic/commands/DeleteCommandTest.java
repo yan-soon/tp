@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_DELETE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
@@ -31,7 +32,7 @@ public class DeleteCommandTest {
                 .filter(module -> module.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
         DeleteCommand deleteCommand = new DeleteCommand(CODE_FIRST_MODULE);
 
-        String expectedMessage = String.format(DeleteCommand.MESSAGE_DELETE_MODULE_SUCCESS, moduleToDelete);
+        String expectedMessage = String.format(MESSAGE_DELETE_SUCCESS, moduleToDelete);
 
         ModelManager expectedModel = new ModelManager(model.getGradPad(), new UserPrefs());
         expectedModel.deleteModule(moduleToDelete);

@@ -1,25 +1,34 @@
 package seedu.address.logic.parser;
 
-import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT;
+import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CHECKMC_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.EDIT_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.REQUIRED_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.SCIENCE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.SEARCH_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.TAGS_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import seedu.address.logic.commands.AddCommand;
+import seedu.address.commons.core.Messages;
 import seedu.address.logic.commands.CheckMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
-import seedu.address.logic.commands.DeleteCommand;
-import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.ExitCommand;
-import seedu.address.logic.commands.FindCommand;
 import seedu.address.logic.commands.GemCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
 import seedu.address.logic.commands.RequiredCommand;
 import seedu.address.logic.commands.ScienceCommand;
-import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.TagsCommand;
 import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -44,53 +53,53 @@ public class GradPadParser {
     public Command parseCommand(String userInput) throws ParseException {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, HelpCommand.MESSAGE_USAGE));
+            throw new ParseException(Messages.MESSAGE_EMPTY_FIELD);
         }
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
-        case AddCommand.COMMAND_WORD:
+        case ADD_COMMAND_WORD:
             return new AddCommandParser().parse(arguments);
 
-        case EditCommand.COMMAND_WORD:
+        case EDIT_COMMAND_WORD:
             return new EditCommandParser().parse(arguments);
 
-        case DeleteCommand.COMMAND_WORD:
+        case DELETE_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
-        case ClearCommand.COMMAND_WORD:
+        case CLEAR_COMMAND_WORD:
             return new ClearCommand();
 
-        case FindCommand.COMMAND_WORD:
+        case FIND_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
 
-        case ListCommand.COMMAND_WORD:
+        case LIST_COMMAND_WORD:
             return new ListCommand();
 
-        case ExitCommand.COMMAND_WORD:
+        case EXIT_COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD:
+        case HELP_COMMAND_WORD:
             return new HelpCommand();
 
-        case CheckMcCommand.COMMAND_WORD:
+        case CHECKMC_COMMAND_WORD:
             return new CheckMcCommand();
 
-        case SearchCommand.COMMAND_WORD:
+        case SEARCH_COMMAND_WORD:
             return new SearchCommandParser().parse(arguments);
 
-        case RequiredCommand.COMMAND_WORD:
+        case REQUIRED_COMMAND_WORD:
             return new RequiredCommand();
 
-        case ScienceCommand.COMMAND_WORD:
+        case SCIENCE_COMMAND_WORD:
             return new ScienceCommand();
 
-        case YesCommand.COMMAND_WORD:
+        case YES_COMMAND_WORD:
             return new YesCommand();
 
-        case TagsCommand.COMMAND_WORD:
+        case TAGS_COMMAND_WORD:
             return new TagsCommand();
 
         case GemCommand.COMMAND_WORD:

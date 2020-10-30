@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_SUCCESS;
 
 import seedu.address.model.GradPad;
 import seedu.address.model.Model;
@@ -10,16 +11,11 @@ import seedu.address.model.Model;
  */
 public class ClearCommand extends Command {
 
-    public static final String COMMAND_WORD = "clear";
-    public static final String MESSAGE_SUCCESS = "GradPad has been cleared!";
-
-    public static final String MESSAGE_CONFIRMATION = "Are you sure you wish to clear all modules?";
-
     @Override
     public CommandResult execute(Model model) {
         requireNonNull(model);
         model.setGradPad(new GradPad());
-        return new CommandResult(MESSAGE_SUCCESS);
+        return new CommandResult(MESSAGE_CLEAR_SUCCESS);
     }
 
     @Override

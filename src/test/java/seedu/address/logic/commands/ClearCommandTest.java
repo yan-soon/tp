@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
@@ -17,7 +18,7 @@ public class ClearCommandTest {
         Model model = new ModelManager();
         Model expectedModel = new ModelManager();
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEAR_SUCCESS, expectedModel);
     }
 
     @Test
@@ -26,7 +27,7 @@ public class ClearCommandTest {
         Model expectedModel = new ModelManager(getTypicalGradPad(), new UserPrefs());
         expectedModel.setGradPad(new GradPad());
 
-        assertCommandSuccess(new ClearCommand(), model, ClearCommand.MESSAGE_SUCCESS, expectedModel);
+        assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEAR_SUCCESS, expectedModel);
     }
 
 }

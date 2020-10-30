@@ -258,10 +258,6 @@ To delete the module:
 3. The result display will display the message "The following module has been successfully deleted" along with the details of the module you deleted.
 ![Delete3](images/Delete3.png)
 
-4. You can then confirm that the module no longer exists in the Completed Modules list by `find`-ing the module. Type `find cs2107` into the command box, and press **Enter** to execute it. You will see that you can no longer `find` the module in the Completed Modules list.<br>
-![Delete4](images/Delete4.png)
-![Delete5](images/Delete5.png)
-
 ### Checking total modular credits: `checkmc`
 
 **Note:** A **Modular Credit** (MC) is a unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload, with
@@ -293,7 +289,7 @@ To check required modules:
 1. Type `required` into the command box, press **Enter** to execute it.
 ![Required1](images/Required1.png)
 
-2. The result display box will then display all the modules you have yet to take for each particular field.
+2. The result display box will then display all the modules you have yet to take for each particular field, as shown below.
 ![Required2](images/Required2.png)
 
 ### Checking General Education Modules: `gem`
@@ -308,7 +304,7 @@ To check GE modules:
 1. Type `gem` into the command box, press **Enter** to execute it.
 ![Gem1](images/Gem1.png)
 
-2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2.
+2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2, as shown below.
 ![Gem2](images/Gem2.png)
 
 ### Checking Science modules: `science`
@@ -323,7 +319,7 @@ To check Science modules:
 1. Type `science` into the command box, press **Enter** to execute it.
 ![Science1](images/Science1.png)
 
-2. The result display box will then display all the available Science modules that you can take.
+2. The result display box will then display all the available Science modules that you can take, as shown below.
 ![Science2](images/Science2.png)
 
 ### Searching for a module: `search`
@@ -347,7 +343,7 @@ If your internet is down, you can only search for modules that are of the Comput
 1. Type `search MA1521` into the command box, press **Enter** to execute it.
 ![Search1](images/Search1.png)
 
-2. The result display box will then display all the relevant information about the module "MA1521".
+2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
 ![Search2](images/Search2.png)
 
 

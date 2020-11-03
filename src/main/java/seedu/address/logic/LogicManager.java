@@ -66,10 +66,15 @@ public class LogicManager implements Logic {
         stalledCommandText = commandText;
     }
 
+    private boolean isYes(String commandText) {
+        return commandText.equalsIgnoreCase("yes") || commandText.equalsIgnoreCase("ye")
+            || commandText.equalsIgnoreCase("y");
+    }
+
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        boolean isCancel = stalledCommand != null && !commandText.equalsIgnoreCase("yes");
+        boolean isCancel = stalledCommand != null && !isYes(commandText);
 
         if (isCancel) {
             stalledCommand = null;
@@ -78,6 +83,9 @@ public class LogicManager implements Logic {
         }
 
         CommandResult commandResult;
+        if (isYes(commandText)) {
+            commandText = "yes";
+        }
         Command command = gradPadParser.parseCommand(commandText);
         boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
 

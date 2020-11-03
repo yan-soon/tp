@@ -12,7 +12,7 @@ import seedu.address.model.module.Module;
  */
 public class CheckMcCommand extends Command {
     private ObservableList<Module> modules;
-    private int totalMc = 0;
+    private double totalMc = 0;
 
     @Override
     public CommandResult execute(Model model) {
@@ -20,7 +20,7 @@ public class CheckMcCommand extends Command {
         modules = model.getGradPad().getModuleList();
 
         for (Module module : modules) {
-            totalMc += Integer.parseInt(module.getModularCredits().toString());
+            totalMc += Double.parseDouble(module.getModularCredits().toString());
         }
         return new CommandResult(String.format(MESSAGE_CHECKMC_SUCCESS, totalMc));
     }

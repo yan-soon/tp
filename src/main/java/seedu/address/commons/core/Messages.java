@@ -50,7 +50,8 @@ public class Messages {
 
     // checkmc command
     public static final String CHECKMC_COMMAND_WORD = "checkmc";
-    public static final String MESSAGE_CHECKMC_SUCCESS = "You have accumulated a total of %1$d MCs so far!";
+    public static final String MESSAGE_CHECKMC_SUCCESS = "You have accumulated a total of %.1f MCs so "
+        + "far!";
 
     // clear command
     public static final String CLEAR_COMMAND_WORD = "clear";

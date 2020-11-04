@@ -266,7 +266,7 @@ an average of 20 MCs per semester.
 Scenario:<br>
 You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
 
-The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
+The `checkmc` command allows you to check the total amount of modular credits you have accumulated so far using this command.
 This gives you a rough gauge of the progress of your graduation planning.
 
 To check total modular credits:
@@ -350,7 +350,7 @@ If your internet is down, you can only search for modules that are of the Comput
 ### Showing the help display: `help`
 
 Scenario: <br>
-You are in the midst of planing your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
+You are in the midst of planning your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
 
 The `help` command displays all of GradPad's available commands and how to use them, to you. This command is useful for first-timers or users who generally do not know how to use GradPad.
 

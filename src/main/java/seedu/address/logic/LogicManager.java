@@ -2,6 +2,7 @@ package seedu.address.logic;
 
 import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
 import static seedu.address.commons.core.Messages.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 
@@ -30,14 +31,14 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
 
-    private static Command stalledCommand;
-    private static String stalledCommandText;
-
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
     private final GradPadParser gradPadParser;
+
+    private Command stalledCommand;
+    private String stalledCommandText;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -65,24 +66,24 @@ public class LogicManager implements Logic {
         stalledCommandText = commandText;
     }
 
-    public static Command getStalledCommand() {
-        return stalledCommand;
-    }
-
-    public static String getStalledCommandText() {
-        return stalledCommandText;
-    }
-
-    public static void setStalledCommandToNull() {
-        stalledCommand = null;
-    }
-
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-
+        Command command;
         CommandResult commandResult;
-        Command command = gradPadParser.parseCommand(commandText);
+
+        try {
+            command = gradPadParser.parseCommand(commandText);
+        } catch (ParseException e) {
+            if (stalledCommand != null) {
+                stalledCommand = null;
+                return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                    + String.format("\"%s\"", stalledCommandText));
+            } else {
+                throw e;
+            }
+        }
+
         boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
 
         if (command.requiresStall()) {

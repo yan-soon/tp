@@ -193,6 +193,8 @@ public class Messages {
 
     // yes command
     public static final String YES_COMMAND_WORD = "yes";
+    public static final String YE_COMMAND_WORD = "ye";
+    public static final String Y_COMMAND_WORD = "y";
     public static final String MESSAGE_NO_CONFIRMATION = "There is nothing to confirm!";
 
     // logic manager messages

@@ -9,17 +9,21 @@ import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.commons.core.Messages.REQUIRED_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.SCIENCE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.SEARCH_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.TAGS_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.YE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.Y_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import seedu.address.commons.core.Messages;
+import seedu.address.logic.LogicManager;
 import seedu.address.logic.commands.CheckMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
@@ -99,6 +103,12 @@ public class GradPadParser {
         case YES_COMMAND_WORD:
             return new YesCommand();
 
+        case YE_COMMAND_WORD:
+            return new YesCommand();
+
+        case Y_COMMAND_WORD:
+            return new YesCommand();
+
         case TAGS_COMMAND_WORD:
             return new TagsCommand();
 
@@ -106,7 +116,13 @@ public class GradPadParser {
             return new GemCommand();
 
         default:
-            throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            if (LogicManager.getStalledCommand() != null) {
+                LogicManager.setStalledCommandToNull();
+                throw new ParseException(MESSAGE_CONFIRMATION_CANCEL
+                    + String.format("\"%s\"", LogicManager.getStalledCommandText()));
+            } else {
+                throw new ParseException(MESSAGE_UNKNOWN_COMMAND);
+            }
         }
     }
 

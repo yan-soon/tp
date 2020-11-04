@@ -2,7 +2,6 @@ package seedu.address.logic;
 
 import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
-import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
 import static seedu.address.commons.core.Messages.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 
@@ -31,14 +30,14 @@ import seedu.address.storage.Storage;
  */
 public class LogicManager implements Logic {
 
+    private static Command stalledCommand;
+    private static String stalledCommandText;
+
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
 
     private final Model model;
     private final Storage storage;
     private final GradPadParser gradPadParser;
-
-    private Command stalledCommand;
-    private String stalledCommandText;
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
@@ -66,26 +65,23 @@ public class LogicManager implements Logic {
         stalledCommandText = commandText;
     }
 
-    private boolean isYes(String commandText) {
-        return commandText.equalsIgnoreCase("yes") || commandText.equalsIgnoreCase("ye")
-            || commandText.equalsIgnoreCase("y");
+    public static Command getStalledCommand() {
+        return stalledCommand;
+    }
+
+    public static String getStalledCommandText() {
+        return stalledCommandText;
+    }
+
+    public static void setStalledCommandToNull() {
+        stalledCommand = null;
     }
 
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        boolean isCancel = stalledCommand != null && !isYes(commandText);
-
-        if (isCancel) {
-            stalledCommand = null;
-            return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
-                    + String.format("\"%s\"", stalledCommandText));
-        }
 
         CommandResult commandResult;
-        if (isYes(commandText)) {
-            commandText = "yes";
-        }
         Command command = gradPadParser.parseCommand(commandText);
         boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
 

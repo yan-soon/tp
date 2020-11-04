@@ -17,7 +17,12 @@ public class CheckMcCommandTest {
 
     @Test
     public void execute_checkmc_success() {
+        // with modules
         assertCommandSuccess(new CheckMcCommand(), model, String.format(MESSAGE_CHECKMC_SUCCESS,
                 getTypicalTotalMc()), expectedModel);
+
+        // no modules
+        assertCommandSuccess(new CheckMcCommand(), new ModelManager(),
+            String.format(MESSAGE_CHECKMC_SUCCESS, 0.0), new ModelManager());
     }
 }

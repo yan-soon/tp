@@ -117,7 +117,7 @@ Detailed explanations of each commands and their respective usage are listed und
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
 
 * When a command requires parameters, they can be entered in any order.<br>
-For example, if the command specifies `add c/MODULE_CODE t/core`, `add t/core c/MODULE_CODE
+For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core`, `add MODULE_CODE t/core c/NEW_MODULE_CODE
 ` is also acceptable.
 
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
@@ -386,6 +386,16 @@ To exit:
 ## Command summary
 
 This section is the table of all the commands available and their respective usage example in GradPad.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Command summary:**<br>
+
+* Words in curly braces (e.g. `{module code}`) refers to **compulsory** input that is required for the command to function.
+
+* Words in square brackets (e.g. `[c/module code]`) refers to **optional** input that can be entered.
+
+</div>
 
 Action | Format | Example
 --------|-------|----------

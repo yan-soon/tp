@@ -2,6 +2,9 @@ package seedu.address.logic.commands;
 
 import seedu.address.model.module.ModuleCode;
 
+/**
+ * Force deletes a Module identified using a Module's ModuleCode.
+ */
 public class ForceDeleteCommand extends DeleteCommand {
 
     /**

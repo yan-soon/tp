@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -34,11 +35,7 @@ public class ModuleInfo {
     }
 
     public String getSemesters() {
-        StringBuilder semesterResult = new StringBuilder();
-        for (Integer sem: semesters) {
-            semesterResult.append(sem).append(", ");
-        }
-        return semesterResult.substring(0, semesterResult.length() - 2);
+        return semesters.stream().map(Object::toString).map(this::parseSemester).collect(Collectors.joining(", "));
     }
 
     public String getDescription() {
@@ -51,6 +48,17 @@ public class ModuleInfo {
 
     public String getPrerequisite() {
         return prerequisite;
+    }
+
+    private String parseSemester(String semester) {
+        switch (semester) {
+        case "3":
+            return "Special Term I";
+        case "4":
+            return "Special Term II";
+        default:
+            return semester;
+        }
     }
 
     @SuppressWarnings("unchecked")

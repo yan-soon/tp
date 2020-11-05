@@ -169,7 +169,7 @@ public class Messages {
         + "your completed\nmodules:\n\n";
     public static final String CLEAR_COMMAND = "To clear GradPad:\tType \"clear\".\n\n"
         + "\t\t\t\tNote:\n" + "\t\t\t\tThis command prompts for a confirmation before clearing.\n\n";
-    public static final String FORCE_CLEAR_COMMAND = "To force clear" + "\t\tType \"fclear\"\n"
+    public static final String FORCE_CLEAR_COMMAND = "To force clear" + "\t\tType \"fclear\".\n"
         + "GradPad:\n"
         + "\t\t\t\tNote:\n" + "\t\t\t\tThis command does not prompt for a confirmation before\n"
         + "\t\t\t\tclearing.\n\n";

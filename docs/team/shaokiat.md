@@ -13,7 +13,7 @@ ease your module planning process. A **module searching platform** is also inclu
 Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=shaokiat&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other&tabOpen=true&tabType=zoom&zA=shaokiat&zR=AY2021S1-CS2103T-T09-1%2Ftp%5Bmaster%5D&zACS=239.02341137123747&zS=2020-08-14&zFS=t09&zU=2020-11-05&zMG=false&zFTF=commit&zFGS=groupByRepos&zFR=false)
-* **New Feature**: Added a search feature to search for modules from NUSMods and display it to the user. [\#100](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/100)
+* **New Feature**: Added a `search` feature to search for modules from NUSMods and display it to the user. [\#100](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/100)
   * What it does: Allows users to search for module details using module code and displaying all module information
     onto the Result Display. Module information are fetch directly from NUSMods if internet is available, else it will 
     be fetched from local saved JSON file.

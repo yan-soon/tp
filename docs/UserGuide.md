@@ -18,7 +18,7 @@ GradPad is a one-stop solution to **module management** for Computer Science Und
 Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
-[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of Faculty of Computing, 
+[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of School of Computing, 
 which can be messy at times. 
 So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
@@ -117,7 +117,7 @@ Detailed explanations of each commands and their respective usage are listed und
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
 
 * When a command requires parameters, they can be entered in any order.<br>
-For example, if the command specifies `add c/MODULE_CODE t/core`, `add t/core c/MODULE_CODE
+For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core`, `edit MODULE_CODE t/core c/NEW_MODULE_CODE
 ` is also acceptable.
 
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
@@ -132,7 +132,7 @@ You found the module to be enjoyable so you would like to add tags to remind you
 
 The `add` command allows you to add a module you have completed into the Completed Modules list.
 
-You can add a module by specifying a valid module code. You can also include multiple tags using the prefix 't/' but they are optional.
+You can add a module by specifying a valid module code. You can also include multiple tags using the prefix `t/` but they are optional.
 Conveniently, you don't have to specify the module title or modular credits of the module you are adding - GradPad
 automatically retrieves them for you using data from NUSMods.
 
@@ -193,8 +193,8 @@ you actually think that the module was the best you'd taken in NUS.
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
-fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
-single `edit` command.
+fields you wish to edit with their respective prefixes, `c/` for new module code, `t/` for new tag. You may edit multiple fields in a
+single `edit` command. 
 
 Module title and modular credits for respective module code will be automatically updated with data from NUSMods.
  
@@ -208,7 +208,7 @@ Module title and modular credits for respective module code will be automaticall
  
  </div> 
 
-To edit the module:
+To edit the tag of an existing module:
 
 1. Type `edit cs2101 t/bestmodule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
@@ -266,7 +266,7 @@ an average of 20 MCs per semester.
 Scenario:<br>
 You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
 
-The `checkmc` allows you to check the total amount of modular credits you have accumulated so far using this command.
+The `checkmc` command allows you to check the total amount of modular credits you have accumulated so far using this command.
 This gives you a rough gauge of the progress of your graduation planning.
 
 To check total modular credits:
@@ -350,7 +350,7 @@ If your internet is down, you can only search for modules that are of the Comput
 ### Showing the help display: `help`
 
 Scenario: <br>
-You are in the midst of planing your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
+You are in the midst of planning your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
 
 The `help` command displays all of GradPad's available commands and how to use them, to you. This command is useful for first-timers or users who generally do not know how to use GradPad.
 
@@ -387,9 +387,19 @@ To exit:
 
 This section is the table of all the commands available and their respective usage example in GradPad.
 
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the Command summary:**<br>
+
+* Words in curly braces (e.g. `{module code}`) refers to **compulsory** input that is required for the command to function.
+
+* Words in square brackets (e.g. `[c/module code]`) refers to **optional** input that can be entered.
+
+</div>
+
 Action | Format | Example
 --------|-------|----------
-**Add** | `add {module code}` | `add CS2100`
+**Add** | `add {module code} [t/tags]` | `add CS2100 t/core`
 **Edit** | `edit {module code} [c/module code] [t/tags]` | `edit cs2103 c/CS2103T t/core`
 **Delete** | `delete {module code}` | `delete CS2103T`
 **Completed Modules** | `list`

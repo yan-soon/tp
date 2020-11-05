@@ -1,5 +1,7 @@
 package seedu.address.nusmods;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -14,7 +16,7 @@ public class ModuleInfo {
     private String moduleCode;
     private String title;
     private String moduleCredit;
-    private String semesters;
+    private List<Integer> semesters = new ArrayList<>();
     private String description;
     private String preclusion;
     private String prerequisite;
@@ -32,7 +34,11 @@ public class ModuleInfo {
     }
 
     public String getSemesters() {
-        return semesters;
+        StringBuilder semesterResult = new StringBuilder();
+        for (Integer sem: semesters) {
+            semesterResult.append(sem).append(", ");
+        }
+        return semesterResult.substring(0, semesterResult.length() - 2);
     }
 
     public String getDescription() {
@@ -49,8 +55,11 @@ public class ModuleInfo {
 
     @SuppressWarnings("unchecked")
     @JsonProperty("semesterData")
-    private void unpackNested(Map<String, Object> semesterData) {
-        this.semesters = (String) semesterData.get("semester");
+    private void unpackNested(List<Map<String, Object>> semesterData) {
+        for (Map<String, Object> semester : semesterData) {
+            Object sem = semester.get("semester");
+            semesters.add((Integer) sem);
+        }
     }
 
     @Override

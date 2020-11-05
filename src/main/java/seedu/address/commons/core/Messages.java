@@ -182,7 +182,8 @@ public class Messages {
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_SEARCH_SUCCESS = "Module details for %1$s \n\n"
         + "Module Title: %3$s \n"
-        + "Modular Credits: %2$s\n\n"
+        + "Modular Credits: %2$s\n"
+        + "Semesters: %7$s \n\n"
         + "Module Description: \n%4$s \n\n"
         + "Preclusion(s): \n%5$s\n\n"
         + "Prerequisite(s): \n%6$s\n";

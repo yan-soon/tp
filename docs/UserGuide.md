@@ -139,7 +139,8 @@ automatically retrieves them for you using data from NUSMods.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
+* You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
+* You can use multiple words in a tag. However, there should only be a single space between any 2 words.
 
 </div>
 
@@ -224,8 +225,8 @@ have added. You want to check and see all CS-coded modules with the "core" tag.
 
 The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. 
 You can do this by specifying parts of the module code of the module(s) you wish to display.
-Additionally, you can also specify the tags of the module(s) you wish to display. When specifying tags however,
-you must type out the entire tag and not just a part of it.
+Additionally, you can also specify the tags of the module(s) you wish to display. Likewise, you can also simply
+specify parts of a tag instead of the entire tag.
 
 Instead of scrolling through the long Completed Modules list and checking the modules one by one, you can easily filter the list to display that module by `find`-ing said module.
 

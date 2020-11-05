@@ -404,7 +404,7 @@ The following sequence diagram illustrates how the `checkmc` command is executed
 
 ![CheckMcDiagram](images/CheckMcSequenceDiagram.png)
 
-### [Implementation in progress] Check required modules feature
+### Check required modules feature
 
 The `required` command allows users to view the required modules in the NUS Computer Science curriculum 
 that they have yet to take.
@@ -427,15 +427,98 @@ object.
 
 5. This command object is then passed back to the `LogicManager` in step 2.
 
-6. `LogicManager` executes the newly created `RequiredCommand`, which contains a hard-coded list of required modules
-in the syllabus.
+6. `LogicManager` executes the newly created `RequiredCommand`, which will contain a list of `currentModules` in GradPad,
+all the `leftOverModules` and a `RequiredCommandStorage` to store all modules in the syllabus.
 
 7. Then, `RequiredCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules
-` field within the `GradPad`.
+` field within the `GradPad` with a few method calls, before storing it in `currentModules`.
 
-8. It filters the list of required modules by removing those that are present in `modules`.
+8. `RequiredCommand.execute()` then calls its own method `setStorage` to create a `RequiredCommandStorage` object.
 
-9. Finally, a `CommandResult` is created to show the filtered list of remaining required modules.
+9. Within the `setStorage` method, multiple method calls are made to set up the `RequiredCommandStorage` object with the
+all the relevant modules.
+
+10. Then, `RequireCommand.execute()` call its own method `compareAllGEs()` to check if any GE pillars have not been cleared.
+It then keeps track of which pillars have not been cleared.
+
+11. `RequireCommand.execute()` then proceeds to call its own methods `compareModules`, `compareScience` and `compareInternship`
+to keep track of undone modules based on the `currentModules` list.
+
+12. Finally, a `CommandResult` is created with the `leftOverModules` to show the filtered list of remaining required modules.
+
+The following sequence diagram illustrates how the `required` command is executed.
+
+![RequiredDiagram](images/RequiredSequenceDiagram.png)
+
+### Check all available Science Modules
+
+The `science` command allows users to view all available Science modules available on the Computer Science curriculum.
+
+When the command is executed, a list of all available Science modules will be displayed on the `Command Line Display`.
+
+As with all operations in GradPad, the `ScienceCommand` class handles the execution of `science` operations.
+
+Given below is a series of steps to show how a `science` operation behaves during its execution.
+
+1. The user enters the `science` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a science command and thus creates a `ScienceCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `ScienceCommand`, which will contain a list of `scienceModules` hard coded in.
+
+7. Then, the `ScienceCommand.execute()` calls its own method, `setScienceModules` which sets the `scienceModules` with 
+the list of available modules.
+
+8. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
+
+The following sequence diagram illustrates how the `science` command is executed.
+
+![ScienceDiagram](images/ScienceSequenceDiagram.png)
+
+### Check all available General Education Modules
+
+The `gem` command allows users to view all available General Education (GE) modules available in NUS.
+
+When the command is executed, a list of all available GE modules will be displayed on the `Command Line Display`.
+
+As with all operations in GradPad, the `GemCommand` class handles the execution of `gem` operations.
+
+Given below is a series of steps to show how a `gem` operation behaves during its execution.
+
+1. The user enters the `gem` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a gem command and thus creates a `GemCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `GemCommand`, which will contain 2 `GemCommandStorage` attributes,
+`sem1Storage` and `sem2Storage`.
+
+7. `GemCommand.execute()` then calls its own method `setSem1Storage` and `setSem2Storage` to create 2 `GemCommandStorage`
+objects.
+
+8. Within the `setSem1Storage` and `setSem2Storage` methods, multiple method calls are made to set up the
+`sem1Storage` and `sem2Storage` objects with the all the relevant GE modules.
+
+9. Then, all the modules from both storages are compiled with `setCompiledModules` from the `GemCommandStorage` class.
+
+10. Finally, a `CommandResult` is created with the compiled modules, displaying all the available GE modules by Semester.
+
+The following sequence diagram illustrates how the `gem` command is executed.
+
+![GemDiagram](images/GemSequenceDiagram.png)
 
 ### [Implementation in progress] Search all modules feature
 

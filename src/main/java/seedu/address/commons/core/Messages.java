@@ -13,8 +13,7 @@ public class Messages {
         + "more characters as a suffix. It is also case-insensitive.";
     public static final String MESSAGE_CONSTRAINTS_TITLE = "Module titles should only contain alphanumeric "
         + "characters and spaces.";
-    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and "
-        + "should not contain spaces.";
+    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and non-empty.";
 
     // general
     public static final String MESSAGE_NEED_HELP = "If you need help, type \"help\".";

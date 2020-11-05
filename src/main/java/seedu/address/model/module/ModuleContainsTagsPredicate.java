@@ -3,6 +3,8 @@ package seedu.address.model.module;
 import java.util.List;
 import java.util.function.Predicate;
 
+import seedu.address.commons.util.StringUtil;
+
 /**
  * Tests that a {@code Module} contains a {@code Tag} matching any of the tag names given.
  */
@@ -23,6 +25,6 @@ public class ModuleContainsTagsPredicate implements Predicate<Module> {
     public boolean test(Module module) {
         return tagNames.stream().anyMatch(name ->
               module.getTags().stream().anyMatch(tag ->
-                     tag.tagName.equalsIgnoreCase(name)));
+                     StringUtil.containsCharSequenceIgnoreCase(tag.tagName, name)));
     }
 }

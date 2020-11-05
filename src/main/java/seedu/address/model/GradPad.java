@@ -95,9 +95,7 @@ public class GradPad implements ReadOnlyGradPad {
         assert m != null;
 
         // Reuse existing tags if possible
-        Set<Tag> replacedTags = tags.checkAndReplaceTags(m.getTags());
-        Module toAdd = new Module(m.getModuleCode(), m.getModuleTitle(), m.getModularCredits(), replacedTags);
-
+        Module toAdd = getModuleWithReplacedTags(m);
         modules.add(toAdd);
     }
 
@@ -112,11 +110,7 @@ public class GradPad implements ReadOnlyGradPad {
         // "untag" all tags in the module we're going to edit
         tags.remove(target.getTags());
         // Get new tags and reuse existing tags if possible
-        Set<Tag> replacedTags = tags.checkAndReplaceTags(editedModule.getTags());
-        Module editedModuleToAdd =
-                new Module(editedModule.getModuleCode(), editedModule.getModuleTitle(),
-                           editedModule.getModularCredits(), replacedTags);
-
+        Module editedModuleToAdd = getModuleWithReplacedTags(editedModule);
         modules.setModule(target, editedModuleToAdd);
     }
 
@@ -131,6 +125,11 @@ public class GradPad implements ReadOnlyGradPad {
     }
 
     //// util methods
+    private Module getModuleWithReplacedTags(Module m) {
+        Set<Tag> replacedTags = tags.checkAndReplaceTags(m.getTags());
+        return new Module(m.getModuleCode(), m.getModuleTitle(),
+                          m.getModularCredits(), replacedTags);
+    }
 
     @Override
     public String toString() {

@@ -84,16 +84,21 @@ public class LogicManager implements Logic {
             }
         }
 
-        boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
+        boolean isCancel = stalledCommand != null && !(command instanceof YesCommand);
+        boolean isConfirmation = stalledCommand != null && command instanceof YesCommand;
 
-        if (command.requiresStall()) {
+        if (isCancel) {
+            stalledCommand = null;
+            return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                + String.format("\"%s\"", stalledCommandText));
+        } else if (isConfirmation) {
+            command = stalledCommand;
+            stalledCommand = null;
+        } else if (command.requiresStall()) {
             if (model.isEmpty()) {
                 throw new CommandException(MESSAGE_EMPTY_GRADPAD);
             }
             return handleStall(command, commandText);
-        } else if (isConfirmation) {
-            command = stalledCommand;
-            stalledCommand = null;
         }
 
         commandResult = command.execute(model);

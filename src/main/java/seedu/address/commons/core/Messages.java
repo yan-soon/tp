@@ -13,8 +13,7 @@ public class Messages {
         + "more characters as a suffix. It is also case-insensitive.";
     public static final String MESSAGE_CONSTRAINTS_TITLE = "Module titles should only contain alphanumeric "
         + "characters and spaces.";
-    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and "
-        + "should not contain spaces.";
+    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and non-empty.";
 
     // general
     public static final String MESSAGE_NEED_HELP = "If you need help, type \"help\".";
@@ -80,6 +79,8 @@ public class Messages {
     public static final String MESSAGE_EDIT_SUCCESS = "The following module has been successfully edited:"
         + "\n\n%1$s\n\nEdited module:\n\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit!";
+    public static final String MESSAGE_ALL_EDIT_FIELDS_SAME = "The new fields provided have the same values as the "
+                                                                      + "current ones.";
 
     // exit command
     public static final String EXIT_COMMAND_WORD = "exit";
@@ -182,7 +183,8 @@ public class Messages {
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_SEARCH_SUCCESS = "Module details for %1$s \n\n"
         + "Module Title: %3$s \n"
-        + "Modular Credits: %2$s\n\n"
+        + "Modular Credits: %2$s\n"
+        + "Semesters: %7$s \n\n"
         + "Module Description: \n%4$s \n\n"
         + "Preclusion(s): \n%5$s\n\n"
         + "Prerequisite(s): \n%6$s\n";

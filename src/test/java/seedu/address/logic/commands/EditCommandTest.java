@@ -2,11 +2,13 @@ package seedu.address.logic.commands;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static seedu.address.commons.core.Messages.MESSAGE_ALL_EDIT_FIELDS_SAME;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
 import static seedu.address.commons.core.Messages.MESSAGE_EDIT_SUCCESS;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.DESC_CS3216;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS2103T;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CODE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_CREDITS_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
@@ -33,7 +35,7 @@ import seedu.address.testutil.EditModuleDescriptorBuilder;
 import seedu.address.testutil.ModuleBuilder;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for EditCommand.
+ * Contains integration tests (interaction with the Model) and unit tests for EditCommand.
  */
 public class EditCommandTest {
 
@@ -44,8 +46,7 @@ public class EditCommandTest {
         Module editedModule = new ModuleBuilder().build();
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(editedModule).build();
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE, descriptor);
-        Module moduleToEdit = model.getGradPad().getModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
+        Module moduleToEdit = getModuleFromModel(CODE_FIRST_MODULE);
 
         String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, moduleToEdit, editedModule);
 
@@ -58,8 +59,7 @@ public class EditCommandTest {
     @Test
     public void execute_someFieldsSpecifiedUnfilteredList_success() {
         ModuleCode moduleCodeLastModule = CODE_SECOND_MODULE;
-        Module lastModule = model.getFilteredModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(moduleCodeLastModule)).findFirst().get();
+        Module lastModule = getModuleFromFilteredList(moduleCodeLastModule);
 
         ModuleBuilder moduleInList = new ModuleBuilder(lastModule);
         Module editedModule = moduleInList.withTags(VALID_TAG_CORE).build();
@@ -78,26 +78,39 @@ public class EditCommandTest {
     }
 
     @Test
-    public void execute_noFieldSpecifiedUnfilteredList_success() {
+    public void execute_noFieldSpecified_failure() {
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE, new EditModuleDescriptor());
-        Module moduleToEdit = model.getGradPad().getModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
-        Module editedModule = model.getFilteredModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
+        assertCommandFailure(editCommand, model, MESSAGE_ALL_EDIT_FIELDS_SAME);
+    }
 
-        String expectedMessage = String.format(MESSAGE_EDIT_SUCCESS, moduleToEdit, editedModule);
+    @Test
+    public void execute_allFieldsNoChange_failure() {
+        Module moduleInList = getModuleFromModel(CODE_FIRST_MODULE);
 
-        Model expectedModel = new ModelManager(new GradPad(model.getGradPad()), new UserPrefs());
+        EditModuleDescriptor descriptor;
+        EditCommand editCommand;
 
-        assertCommandSuccess(editCommand, model, expectedMessage, expectedModel);
+        // only module code is "edited", but it's actually the same as the original
+        descriptor = new EditModuleDescriptorBuilder().withModuleCode(VALID_CODE_CS2103T).build();
+        editCommand = new EditCommand(CODE_FIRST_MODULE, descriptor);
+        assertCommandFailure(editCommand, model, MESSAGE_ALL_EDIT_FIELDS_SAME);
+
+        // only tags are "edited", but it's actually the same as the original
+        descriptor = new EditModuleDescriptorBuilder().withTags(VALID_TAG_CORE).build();
+        editCommand = new EditCommand(CODE_FIRST_MODULE, descriptor);
+        assertCommandFailure(editCommand, model, MESSAGE_ALL_EDIT_FIELDS_SAME);
+
+        // module code AND tags are "edited", but they are all the same as the original
+        descriptor = new EditModuleDescriptorBuilder(moduleInList).build();
+        editCommand = new EditCommand(CODE_FIRST_MODULE, descriptor);
+        assertCommandFailure(editCommand, model, MESSAGE_ALL_EDIT_FIELDS_SAME);
     }
 
     @Test
     public void execute_filteredList_success() {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
-        Module moduleInFilteredList = model.getFilteredModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
+        Module moduleInFilteredList = getModuleFromFilteredList(CODE_FIRST_MODULE);
         Module editedModule = new ModuleBuilder(moduleInFilteredList)
             .withTags(VALID_TAG_CORE, VALID_TAG_NON_CORE).build();
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
@@ -113,8 +126,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateModuleUnfilteredList_failure() {
-        Module firstModule = model.getFilteredModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_FIRST_MODULE)).findFirst().get();
+        Module firstModule = getModuleFromFilteredList(CODE_FIRST_MODULE);
         EditModuleDescriptor descriptor = new EditModuleDescriptorBuilder(firstModule).build();
         EditCommand editCommand = new EditCommand(CODE_SECOND_MODULE, descriptor);
 
@@ -127,8 +139,7 @@ public class EditCommandTest {
         showModuleAtIndex(model, INDEX_FIRST_MODULE);
 
         // edit module in filtered list into a duplicate in GradPad
-        Module moduleInList = model.getGradPad().getModuleList().stream()
-            .filter(x -> x.getModuleCode().equals(CODE_SECOND_MODULE)).findFirst().get();
+        Module moduleInList = getModuleFromModel(CODE_SECOND_MODULE);
         EditCommand editCommand = new EditCommand(CODE_FIRST_MODULE,
                 new EditModuleDescriptorBuilder(moduleInList).build());
 
@@ -187,4 +198,13 @@ public class EditCommandTest {
         assertFalse(standardCommand.equals(new EditCommand(CODE_FIRST_MODULE, DESC_CS3216)));
     }
 
+    private Module getModuleFromModel(ModuleCode code) {
+        return model.getGradPad().getModuleList().stream()
+                .filter(x -> x.getModuleCode().equals(code)).findFirst().get();
+    }
+
+    private Module getModuleFromFilteredList(ModuleCode code) {
+        return model.getFilteredModuleList().stream()
+                       .filter(x -> x.getModuleCode().equals(code)).findFirst().get();
+    }
 }

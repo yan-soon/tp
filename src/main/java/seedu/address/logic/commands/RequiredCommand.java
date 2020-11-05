@@ -99,14 +99,21 @@ public class RequiredCommand extends Command {
         }
         return false;
     }
-    
+
+    /**
+     * Checks if a Module is a valid preclusion.
+     * @param module Module to check.
+     * @param modules Module list to check against.
+     * @param preclusionMap Map that contains pairings of valid preclusions.
+     * @return True if module is a preclusion, false otherwise.
+     */
     public boolean isModuleAPreclusion(Module module, ObservableList<Module> modules,
                                        Map<String, String> preclusionMap) {
         for (Module mod : modules) {
             String currentModName = mod.getModuleCode().toString();
-            String ModToCheckAgainst = module.getModuleCode().toString();
+            String modToCheckAgainst = module.getModuleCode().toString();
             if (preclusionMap.containsKey(currentModName)) {
-                if (preclusionMap.get(currentModName).equals(ModToCheckAgainst)) {
+                if (preclusionMap.get(currentModName).equals(modToCheckAgainst)) {
                     return true;
                 }
             }
@@ -127,8 +134,8 @@ public class RequiredCommand extends Command {
         boolean areModulesCleared = true;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
-            if (!doesModuleAlreadyExist(module, currentModules) &&
-                    !isModuleAPreclusion(module, currentModules, preclusionMap)) {
+            if (!doesModuleAlreadyExist(module, currentModules)
+                    && !isModuleAPreclusion(module, currentModules, preclusionMap)) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;

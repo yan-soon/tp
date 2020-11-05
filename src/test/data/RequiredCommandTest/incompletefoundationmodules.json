@@ -1,7 +1,7 @@
 {
   "modules" : [ {
     "tagged" : [ "Foundation" ],
-    "code" : "CS1231S",
+    "code" : "CS1231",
     "title" : "Discrete Structures",
     "credits" : "4"
   }, {

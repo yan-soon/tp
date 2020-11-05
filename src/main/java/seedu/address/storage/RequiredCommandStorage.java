@@ -53,7 +53,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns preclusionMap attribute of RequiredCommandStorage object.
-     * @return preclusionMap attribute of type Map<String, String/>.
+     * @return preclusionMap attribute of type Map.
      */
     public Map<String, String> getPreclusionMap() {
         return preclusionMap;

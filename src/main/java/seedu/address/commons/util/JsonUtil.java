@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -160,7 +159,7 @@ public class JsonUtil {
         JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
         return jsonGradPad.toModelType().getModuleList();
     }
-    
+
     public static Map<String, String> getPreclusionMapFromJsonFile(String file) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         TypeReference<HashMap<String, String>> targetType = new TypeReference<>() {};

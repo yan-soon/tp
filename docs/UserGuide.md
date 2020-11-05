@@ -117,7 +117,7 @@ Detailed explanations of each commands and their respective usage are listed und
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
 
 * When a command requires parameters, they can be entered in any order.<br>
-For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core`, `add MODULE_CODE t/core c/NEW_MODULE_CODE
+For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core`, `edit MODULE_CODE t/core c/NEW_MODULE_CODE
 ` is also acceptable.
 
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
@@ -399,7 +399,7 @@ This section is the table of all the commands available and their respective usa
 
 Action | Format | Example
 --------|-------|----------
-**Add** | `add {module code}` | `add CS2100`
+**Add** | `add {module code} [t/tags]` | `add CS2100 t/core`
 **Edit** | `edit {module code} [c/module code] [t/tags]` | `edit cs2103 c/CS2103T t/core`
 **Delete** | `delete {module code}` | `delete CS2103T`
 **Completed Modules** | `list`

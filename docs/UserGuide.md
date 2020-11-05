@@ -132,7 +132,7 @@ You found the module to be enjoyable so you would like to add tags to remind you
 
 The `add` command allows you to add a module you have completed into the Completed Modules list.
 
-You can add a module by specifying a valid module code. You can also include multiple tags using the prefix 't/' but they are optional.
+You can add a module by specifying a valid module code. You can also include multiple tags using the prefix `t/` but they are optional.
 Conveniently, you don't have to specify the module title or modular credits of the module you are adding - GradPad
 automatically retrieves them for you using data from NUSMods.
 
@@ -193,8 +193,8 @@ you actually think that the module was the best you'd taken in NUS.
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
-fields you wish to edit with their respective prefixes, 'c/' for module code, 't/' for tags. You may edit multiple fields in a
-single `edit` command.
+fields you wish to edit with their respective prefixes, `c/` for new module code, `t/` for new tag. You may edit multiple fields in a
+single `edit` command. 
 
 Module title and modular credits for respective module code will be automatically updated with data from NUSMods.
  

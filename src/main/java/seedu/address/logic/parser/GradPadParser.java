@@ -7,6 +7,7 @@ import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EDIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FORCE_DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -26,6 +27,7 @@ import seedu.address.logic.commands.CheckMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ForceDeleteCommand;
 import seedu.address.logic.commands.GemCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -70,6 +72,9 @@ public class GradPadParser {
 
         case DELETE_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
+
+        case FORCE_DELETE_COMMAND_WORD:
+            return new ForceDeleteCommandParser().parse(arguments);
 
         case CLEAR_COMMAND_WORD:
             return new ClearCommand();

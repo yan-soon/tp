@@ -1,6 +1,7 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.MESSAGE_ALL_EDIT_FIELDS_SAME;
 import static seedu.address.commons.core.Messages.MESSAGE_DUPLICATE_MODULE;
 import static seedu.address.commons.core.Messages.MESSAGE_EDIT_SUCCESS;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE;
@@ -53,6 +54,11 @@ public class EditCommand extends Command {
         }
 
         Module editedModule = createEditedModule(moduleToEdit.get(), editModuleDescriptor);
+
+        if (moduleToEdit.get().equals(editedModule)) {
+            throw new CommandException(MESSAGE_ALL_EDIT_FIELDS_SAME);
+        }
+
         if (!moduleToEdit.get().isSameModule(editedModule) && model.hasModule(editedModule)) {
             throw new CommandException(String.format(MESSAGE_DUPLICATE_MODULE, editedModule.getModuleCode()));
         }

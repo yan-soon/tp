@@ -39,7 +39,7 @@ public class SearchCommand extends Command {
 
         String searchDisplay = String.format(MESSAGE_SEARCH_SUCCESS, searchResult.getModuleCode(),
                 searchResult.getModuleCredit(), searchResult.getTitle(),
-                searchResult.getDescription(), preclusion, prerequisite);
+                searchResult.getDescription(), preclusion, prerequisite, searchResult.getSemesters());
         return new CommandResult(searchDisplay);
     }
 

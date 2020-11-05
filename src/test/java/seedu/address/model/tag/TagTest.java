@@ -22,18 +22,32 @@ public class TagTest {
     }
 
     @Test
-    public void isValidTagName_null_throwsNullPointerException() {
-        // null tag name
-        assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
-    }
-
-    @Test
     public void constructor_validTagName_tagWithDefaultModuleCount() {
         String expectedTagName = "core";
         int expectedModuleCount = 1;
         Tag actualTag = new Tag(expectedTagName);
         assertEquals(expectedTagName, actualTag.tagName);
         assertEquals(expectedModuleCount, actualTag.getModuleCount());
+    }
+
+    @Test
+    public void isValidTagName() {
+        // null name --> throw NPE
+        assertThrows(NullPointerException.class, () -> Tag.isValidTagName(null));
+        // single word with letters
+        assertTrue(Tag.isValidTagName("core"));
+        // multiword with letters
+        assertTrue(Tag.isValidTagName("core module"));
+        // single word with number
+        assertTrue(Tag.isValidTagName("core1"));
+        // uppercase letter
+        assertTrue(Tag.isValidTagName("Core"));
+        // empty name
+        assertFalse(Tag.isValidTagName(""));
+        // only whitespace
+        assertFalse(Tag.isValidTagName("  "));
+        // multiword with extra space in between
+        assertFalse(Tag.isValidTagName("core   module"));
     }
 
     @Test

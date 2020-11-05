@@ -96,8 +96,12 @@ public class ParserUtil {
     public static Set<Tag> parseTags(Collection<String> tags) throws ParseException {
         requireNonNull(tags);
         final Set<Tag> tagSet = new HashSet<>();
+        final Set<String> tagNameSet = new HashSet<>();
         for (String tagName : tags) {
-            tagSet.add(parseTag(tagName));
+            if (!tagNameSet.contains(tagName.toLowerCase())) {
+                tagSet.add(parseTag(tagName));
+                tagNameSet.add(tagName.toLowerCase());
+            }
         }
         return tagSet;
     }

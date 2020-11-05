@@ -75,7 +75,7 @@ public class SearchCommandTest {
         String expectedMessage = String.format(MESSAGE_SEARCH_SUCCESS,
                 cs1010x.getModuleCode(), cs1010x.getModuleCredit(),
                 cs1010x.getTitle(), cs1010x.getDescription(),
-                expectedPreclusion, expectedPrerequisite);
+                expectedPreclusion, expectedPrerequisite, cs1010x.getSemesters());
 
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
     }

@@ -66,7 +66,7 @@ Given below are my contributions to the project.
   [(Example: #111)](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
 
 * **Enhancements to existing features**:
-  * Refactored Command, Parser and Storage Component of AB3 code base
+  * Refactored `Command`, `Parser` and `Storage` Component of AB3 code base
   (Pull request [\#35](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/35))
   * Updated `help` command to display instructions directly instead of a link to the UG.
   (Pull request [\#70](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/70))
@@ -94,7 +94,7 @@ Given below are my contributions to the project.
     (Pull request [\#70](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/70))
     * Added Target User Profile, Value Proposition, User Stories and Use Cases to the DG.
     (Pull request [\#19](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/19))
-    * Refactored Logic component portion of DG.
+    * Refactored `Logic` component portion of DG.
     (Pull request [\#45](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/45))
 
 * **Community**:

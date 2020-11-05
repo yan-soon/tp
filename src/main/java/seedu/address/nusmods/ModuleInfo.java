@@ -1,8 +1,10 @@
 package seedu.address.nusmods;
 
+import java.util.Map;
 import java.util.Objects;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
  * Represents jackson-friendly module information from NUSMods.
@@ -12,6 +14,7 @@ public class ModuleInfo {
     private String moduleCode;
     private String title;
     private String moduleCredit;
+    private String semesters;
     private String description;
     private String preclusion;
     private String prerequisite;
@@ -28,6 +31,10 @@ public class ModuleInfo {
         return moduleCredit;
     }
 
+    public String getSemesters() {
+        return semesters;
+    }
+
     public String getDescription() {
         return description;
     }
@@ -38,6 +45,12 @@ public class ModuleInfo {
 
     public String getPrerequisite() {
         return prerequisite;
+    }
+
+    @SuppressWarnings("unchecked")
+    @JsonProperty("semesterData")
+    private void unpackNested(Map<String, Object> semesterData) {
+        this.semesters = (String) semesterData.get("semester");
     }
 
     @Override
@@ -54,6 +67,7 @@ public class ModuleInfo {
         return otherModuleInfo.getModuleCode().equals(getModuleCode())
                        && otherModuleInfo.getTitle().equals(getTitle())
                        && otherModuleInfo.getModuleCredit().equals(getModuleCredit())
+                       && otherModuleInfo.getSemesters().equals(getSemesters())
                        && otherModuleInfo.getDescription().equals(getDescription())
                        && equalsIfNotNull(otherModuleInfo.getPreclusion(), getPreclusion())
                        && equalsIfNotNull(otherModuleInfo.getPrerequisite(), getPrerequisite());
@@ -65,7 +79,7 @@ public class ModuleInfo {
 
     @Override
     public int hashCode() {
-        return Objects.hash(moduleCode, title, moduleCredit, description, preclusion, prerequisite);
+        return Objects.hash(moduleCode, title, moduleCredit, semesters, description, preclusion, prerequisite);
     }
 
     @Override

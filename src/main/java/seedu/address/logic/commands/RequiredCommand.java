@@ -20,9 +20,11 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_INTE
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPROF;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
+import static seedu.address.storage.RequiredCommandMessages.PRECLUSION_PATH;
 import static seedu.address.storage.RequiredCommandMessages.SCIENCE_PATH;
 
 import java.io.IOException;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -64,6 +66,7 @@ public class RequiredCommand extends Command {
         storage.setRequiredMath(MATH_PATH);
         storage.setRequiredScience(SCIENCE_PATH);
         storage.setRequiredInternship(INTERNSHIP_PATH);
+        storage.setPreclusionMap(PRECLUSION_PATH);
     }
 
     /**
@@ -96,6 +99,20 @@ public class RequiredCommand extends Command {
         }
         return false;
     }
+    
+    public boolean isModuleAPreclusion(Module module, ObservableList<Module> modules,
+                                       Map<String, String> preclusionMap) {
+        for (Module mod : modules) {
+            String currentModName = mod.getModuleCode().toString();
+            String ModToCheckAgainst = module.getModuleCode().toString();
+            if (preclusionMap.containsKey(currentModName)) {
+                if (preclusionMap.get(currentModName).equals(ModToCheckAgainst)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 
     /**
      * Cross references the user's current list of Modules against the given
@@ -105,11 +122,13 @@ public class RequiredCommand extends Command {
      * @param failMessage Fail message for particular category of Modules.
      * @param successMessage Success message for particular category of Modules.
      */
-    public void compareModules(ObservableList<Module> modules, String failMessage, String successMessage) {
+    public void compareModules(ObservableList<Module> modules, Map<String, String> preclusionMap,
+                               String failMessage, String successMessage) {
         boolean areModulesCleared = true;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
-            if (!doesModuleAlreadyExist(module, currentModules)) {
+            if (!doesModuleAlreadyExist(module, currentModules) &&
+                    !isModuleAPreclusion(module, currentModules, preclusionMap)) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;
@@ -231,10 +250,11 @@ public class RequiredCommand extends Command {
             ObservableList<Module> requiredMath = storage.getRequiredMath();
             ObservableList<Module> requiredScience = storage.getRequiredScience();
             ObservableList<Module> requiredInternship = storage.getRequiredInternship();
+            Map<String, String> preclusionMap = storage.getPreclusionMap();
             compareAllGEs();
-            compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
-            compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
-            compareModules(requiredMath, MESSAGE_MATH, MESSAGE_SUCCESS_MATH);
+            compareModules(requiredFoundation, preclusionMap, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+            compareModules(requiredITprof, preclusionMap, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
+            compareModules(requiredMath, preclusionMap, MESSAGE_MATH, MESSAGE_SUCCESS_MATH);
             compareScience(requiredScience);
             compareInternship(requiredInternship);
             return new CommandResult(leftOverModules);

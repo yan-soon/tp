@@ -5,6 +5,9 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -12,6 +15,7 @@ import java.util.logging.Logger;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -155,5 +159,11 @@ public class JsonUtil {
     public static ObservableList<Module> getModulesFromJsonFile(String file) throws IOException, IllegalValueException {
         JsonSerializableGradPad jsonGradPad = JsonUtil.fromJsonString(file, JsonSerializableGradPad.class);
         return jsonGradPad.toModelType().getModuleList();
+    }
+    
+    public static Map<String, String> getPreclusionMapFromJsonFile(String file) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        TypeReference<HashMap<String, String>> targetType = new TypeReference<>() {};
+        return mapper.readValue(file, targetType);
     }
 }

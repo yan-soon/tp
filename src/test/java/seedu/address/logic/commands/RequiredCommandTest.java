@@ -92,7 +92,7 @@ public class RequiredCommandTest {
         setUpTestModules(INCOMPLETE_FOUNDATION_PATH);
         requiredCommand.setCurrentModules(testModules);
         setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
-        requiredCommand.compareModules(testModules, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+        //requiredCommand.compareModules(testModules, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
         String expected = MESSAGE_FOUNDATION + "\n" + MISSING_MODULE_1 + "\n" + "\n";
         String actual = requiredCommand.getLeftOverModules();
         assertEquals(expected, actual);

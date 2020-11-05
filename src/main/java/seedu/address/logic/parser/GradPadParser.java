@@ -15,6 +15,8 @@ import static seedu.address.commons.core.Messages.SCIENCE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.SEARCH_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.TAGS_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.YE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.Y_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,7 +58,7 @@ public class GradPadParser {
             throw new ParseException(Messages.MESSAGE_EMPTY_FIELD);
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
@@ -97,6 +99,8 @@ public class GradPadParser {
             return new ScienceCommand();
 
         case YES_COMMAND_WORD:
+        case YE_COMMAND_WORD:
+        case Y_COMMAND_WORD:
             return new YesCommand();
 
         case TAGS_COMMAND_WORD:

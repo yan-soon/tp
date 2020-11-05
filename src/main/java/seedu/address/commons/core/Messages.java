@@ -50,7 +50,8 @@ public class Messages {
 
     // checkmc command
     public static final String CHECKMC_COMMAND_WORD = "checkmc";
-    public static final String MESSAGE_CHECKMC_SUCCESS = "You have accumulated a total of %1$d MCs so far!";
+    public static final String MESSAGE_CHECKMC_SUCCESS = "You have accumulated a total of %.1f MCs so "
+        + "far!";
 
     // clear command
     public static final String CLEAR_COMMAND_WORD = "clear";
@@ -193,6 +194,8 @@ public class Messages {
 
     // yes command
     public static final String YES_COMMAND_WORD = "yes";
+    public static final String YE_COMMAND_WORD = "ye";
+    public static final String Y_COMMAND_WORD = "y";
     public static final String MESSAGE_NO_CONFIRMATION = "There is nothing to confirm!";
 
     // logic manager messages

@@ -208,7 +208,7 @@ Module title and modular credits for respective module code will be automaticall
  
  </div> 
 
-To edit the module:
+To edit the tag of an existing module:
 
 1. Type `edit cs2101 t/bestmodule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)

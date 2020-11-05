@@ -27,6 +27,8 @@ public class ParserUtilTest {
     private static final String VALID_CREDITS = "4";
     private static final String VALID_TAG_1 = "core";
     private static final String VALID_TAG_2 = "nonCore";
+    private static final String VALID_LOWERCASE_TAG = "foundation";
+    private static final String VALID_UPPERCASE_TAG = "FOUNDATION";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -133,6 +135,14 @@ public class ParserUtilTest {
     public void parseTags_collectionWithValidTags_returnsTagSet() throws Exception {
         Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_TAG_1, VALID_TAG_2));
         Set<Tag> expectedTagSet = new HashSet<Tag>(Arrays.asList(new Tag(VALID_TAG_1), new Tag(VALID_TAG_2)));
+
+        assertEquals(expectedTagSet, actualTagSet);
+    }
+
+    @Test
+    public void parseTags_collectionWithDuplicateLettercaseTags_tagSetOnlyIncludesFirst() throws Exception {
+        Set<Tag> actualTagSet = ParserUtil.parseTags(Arrays.asList(VALID_LOWERCASE_TAG, VALID_UPPERCASE_TAG));
+        Set<Tag> expectedTagSet = new HashSet<>(Collections.singletonList(new Tag(VALID_LOWERCASE_TAG)));
 
         assertEquals(expectedTagSet, actualTagSet);
     }

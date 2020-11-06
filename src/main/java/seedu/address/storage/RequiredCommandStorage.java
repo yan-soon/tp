@@ -26,6 +26,7 @@ public class RequiredCommandStorage {
      * Makes use of classLoaders to convert the original file path
      * into one that can be readable during runtime, such that it
      * can be used to retrieve the File's content.
+     *
      * @param filePath Original file path.
      * @return Converted file content of type String.
      * @throws IOException When the provided fileName is invalid.
@@ -61,6 +62,7 @@ public class RequiredCommandStorage {
 
     /**
      * Loads the preclusionMap attribute with Precluded Modules.
+     *
      * @param path Path of the Precluded Modules file.
      * @throws IOException When path is invalid.
      */
@@ -78,6 +80,7 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredFoundation attribute with Foundation Modules.
+     *
      * @param path Path of the Foundation Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
@@ -97,6 +100,7 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredITprof attribute with IT Professionalism Modules.
+     *
      * @param path Path of the IT Professionalism Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
@@ -116,6 +120,7 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredMath attribute with Math Modules.
+     *
      * @param path Path of the Math Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
@@ -135,6 +140,7 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredScience attribute with Science Modules.
+     *
      * @param path Path of the Science Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
@@ -154,6 +160,7 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredInternship attribute with Internship Modules.
+     *
      * @param path Path of the Internship Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the

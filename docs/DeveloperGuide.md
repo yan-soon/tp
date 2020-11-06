@@ -927,7 +927,7 @@ Test Cases:
    Expected: No module added. _Invalid command format_ message is shown in the result display.
    
 1. Test case: `addd cs2100`<br>
-   Expected: No module added. _Unknown command format_ message is shown in the result display.
+   Expected: No module added. _Unknown command_ message is shown in the result display.
 
 #### Delete a Module
 
@@ -956,7 +956,7 @@ Test Cases:
    Expected: No module deleted. _Invalid command format_ message is shown in the result display.
    
 1. Test case: `deleteee cs2100`<br>
-   Expected: No module deleted. _Unknown command format_ message is shown in the result display.
+   Expected: No module deleted. _Unknown command_ message is shown in the result display.
  
 #### Force Delete a module
 
@@ -981,7 +981,7 @@ Test Cases:
    Expected: No module deleted. _Invalid command format_ message is shown in the result display.
    
 1. Test case: `fdeleteee cs2100`<br>
-   Expected: No module deleted. _Unknown command format_ message is shown in the result display.
+   Expected: No module deleted. _Unknown command_ message is shown in the result display.
 
 #### Clear current list of Modules
 
@@ -1052,7 +1052,7 @@ Test Cases:
    Expected: No module edited. _Invalid command format_ message is shown in the result display.
   
 1. Test case: `edittt cs2100 t/cool`<br>
-   Expected: No module edited. _Unknown command format_ message is shown in the result display.
+   Expected: No module edited. _Unknown command_ message is shown in the result display.
       
 #### List All Modules
 
@@ -1125,7 +1125,7 @@ Test Cases:
    Expected: Help page is displayed.
    
 1. Test case: `helppppp` <br>
-   Expected: Help page is not displayed. _Unknown command format_ message is shown in the result display.
+   Expected: Help page is not displayed. _Unknown command_ message is shown in the result display.
    
 #### Show Required Modules
 
@@ -1137,7 +1137,7 @@ Test Cases:
    Expected: All required modules are displayed in the result display. Modules already in the 'Completed Modules' list in GradPad would not be displayed in the 'Required Modules' list.
    
 1. Test case: `requiredddd` <br>
-   Expected: Required modules are not displayed. _Unknown command format_ message is shown in the result display.
+   Expected: Required modules are not displayed. _Unknown command_ message is shown in the result display.
    
 #### Show available Science Modules
 
@@ -1150,7 +1150,7 @@ Test Cases:
    list would not be displayed.
    
 1. Test case: `scienceeeee` <br>
-   Expected: Science modules are not displayed. _Unknown command format_ message is shown in the result display.
+   Expected: Science modules are not displayed. _Unknown command_ message is shown in the result display.
    
 #### Show available General Education Modules
 
@@ -1163,7 +1163,7 @@ Test Cases:
    list would not be displayed.
    
 1. Test case: `gemmmmm` <br>
-   Expected: General Education modules are not displayed. _Unknown command format_ message is shown in the result display.
+   Expected: General Education modules are not displayed. _Unknown command_ message is shown in the result display.
 
 #### Search Module Information
 
@@ -1188,19 +1188,19 @@ Test Cases:
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
 1. Test case: `searchh cs2100`<br>
-   Expected: No module information is displayed. _Unknown command format_ message is shown in the result display.
+   Expected: No module information is displayed. _Unknown command_ message is shown in the result display.
 
 #### List all current Tags
 
 Prerequisites:
-   1. Command must follow the `tag` format.
+   1. Command must follow the `tags` format.
    
 Test Cases:
-1. Test case: tags<br>
+1. Test case: `tags`<br>
    Expected: All tags currently in use will be shown in the result display.
    
-1. Test case: tagss<br>
-   Expected: No tags displayed. _Unknown command format_ message is shown in the result display.
+1. Test case: `tagss`<br>
+   Expected: No tags displayed. _Unknown command_ message is shown in the result display.
 
 ### Saving data
 

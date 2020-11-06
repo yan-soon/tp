@@ -904,6 +904,7 @@ Prerequisites:
    1. Module code format must be valid, e.g. 'CS2100' is a valid module code.
    1. Module to be added must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 is a
    valid module, whereas module code CS1000 is an invalid module.
+   1. Module added must not already exist in GradPad.
    1. Command must follow the `add` format.
 
 Test Cases:

@@ -907,11 +907,14 @@ Prerequisites:
    1. Command must follow the `add` format.
 
 Test Cases:
+1. Test case: `add cs2100 t/fun`<br>
+   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+   
 1. Test case: `add cs2100`<br>
-   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
-      
-1. Test case: `add cs2100 tag/hardestmoduleever`<br>
-   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+   Expected: No module added. _Duplicate module_ message is shown in the result display.
+
+1. Test case: `add cs2100 t/funnn`<br>
+   Expected: No module added. _Duplicate module_ message is shown in the result display.
    
 1. Test case: `add cs2100 Computer Organisation`<br>
    Expected: No module added. _Invalid module code format_ message is shown in the result display.

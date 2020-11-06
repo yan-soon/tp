@@ -983,32 +983,54 @@ testers are expected to do more *exploratory* testing.
 
 1. Prerequisite: Command must not be accompanied by any arguments.
 
-1. Test case: `checkmc`
+1. Test case: `checkmc` <br>
    Expected: Total modular credits are calculated and displayed. If there are no modules in 'Completed Modules', total modular credits will be 0.
    
-1. Test case: `checkmc modules`
+1. Test case: `checkmc modules` <br>
    Expected: Total modular credits are not calculated. _Invalid command format_ message is shown in the result display.
    
 ### Open Help Page
 
 1. Prerequisite: Command must not be accompanied by any arguments.
 
-1. Test case: `help`
+1. Test case: `help` <br>
    Expected: Help page is displayed.
    
-1. Test case: `help modules`
+1. Test case: `help modules` <br>
    Expected: Help page is not displayed. _Invalid command format_ message is shown in the result display.
    
 ### Show Required Modules
 
 1. Prerequisite: Command must not be accompanied by any arguments.
 
-1. Test case: `required`
+1. Test case: `required` <br>
    Expected: All required modules are displayed in the result display. Modules already in the 'Completed Modules' list in GradPad would not be displayed in the 'Required Modules' list.
    
-1. Test case: `required modules`
-   Expected: Required modules are not displayed. _Invalid command format_ message is shown in the result display.
+1. Test case: `requiredmodules` <br>
+   Expected: Required modules are not displayed. _Unknown command format_ message is shown in the result display.
    
+### Show available Science Modules
+
+1. Prerequisite: Command must not be accompanied by any arguments.
+
+1. Test case: `science` <br>
+   Expected: All available Science modules are displayed in the result display. Modules already in the 'Completed Modules'
+   list would not be displayed.
+   
+1. Test case: `sciencemodules` <br>
+   Expected: Science modules are not displayed. _Unknown command format_ message is shown in the result display.
+   
+### Show available General Education Modules
+
+1. Prerequisite: Command must not be accompanied by any arguments.
+
+1. Test case: `gem` <br>
+   Expected: All available General Education modules are displayed in the result display. Modules already in the 'Completed Modules'
+   list would not be displayed.
+   
+1. Test case: `gemmodules` <br>
+   Expected: General Education modules are not displayed. _Unknown command format_ message is shown in the result display.
+
 ### Check Module Information
 
 1. Prerequisites: 

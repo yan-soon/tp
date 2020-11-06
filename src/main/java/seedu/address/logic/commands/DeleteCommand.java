@@ -13,12 +13,15 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Deletes a Module identified using it's displayed index from the GradPad.
+ * Deletes a Module identified using a Module's ModuleCode.
  */
 public class DeleteCommand extends Command {
 
     private final ModuleCode code;
 
+    /**
+     * Creates a DeleteCommand to delete the module with the specified {@code ModuleCode}
+     */
     public DeleteCommand(ModuleCode code) {
         this.code = code;
     }

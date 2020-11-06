@@ -427,6 +427,10 @@ that they have yet to take.
 When the command is executed, it checks through the current modules in the `Completed Modules` list and ensures
 that modules that have already been taken are not displayed in the list of remaining required modules.
 
+This is achieved with the `RequiredCommand` and `RequiredCommandStorage` class. The `RequiredCommandStorage` class
+handles the extracting and parsing of JSON module data while the `RequiredCommand` handles the logic behind filtering
+the undone modules.
+
 As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.
 
 Given below is a series of steps to show how a `required` operation behaves during its execution.
@@ -471,6 +475,10 @@ The `science` command allows users to view all available Science modules availab
 
 When the command is executed, a list of all available Science modules will be displayed on the `Command Line Display`.
 
+This is achieved by tapping into the `RequiredCommandStorage` class to extract and parse the Science modules, while the
+`ScienceCommand` class handles the logic of displaying the modules. This command is separated from the `required`
+command to avoid cluttering of the `Command Line Display`. 
+
 As with all operations in GradPad, the `ScienceCommand` class handles the execution of `science` operations.
 
 Given below is a series of steps to show how a `science` operation behaves during its execution.
@@ -502,6 +510,11 @@ The following sequence diagram illustrates how the `science` command is executed
 The `gem` command allows users to view all available General Education (GE) modules available in NUS.
 
 When the command is executed, a list of all available GE modules will be displayed on the `Command Line Display`.
+
+This is achieved with the `GemCommand` and `GemCommandStorage` class. The `GemCommandStorage` class
+handles the extracting and parsing of JSON module data while the `GemCommand` handles the logic of displaying the
+modules. This command is separated from `required` to avoid cluttering up the `Command Line Display` due to the hefty
+amount of GE modules displayed.
 
 As with all operations in GradPad, the `GemCommand` class handles the execution of `gem` operations.
 

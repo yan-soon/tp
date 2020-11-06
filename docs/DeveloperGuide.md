@@ -435,14 +435,14 @@ all the `leftOverModules` and a `RequiredCommandStorage` to store all modules in
 
 8. `RequiredCommand.execute()` then calls its own method `setStorage` to create a `RequiredCommandStorage` object.
 
-9. Within the `setStorage` method, multiple method calls are made to set up the `RequiredCommandStorage` object with the
-all the relevant modules.
+9. Within the `setStorage` method, various method calls are made for each module category (Eg. Foundation, IT Professionalism)
+ to set up the `RequiredCommandStorage` object with the all the relevant modules.
 
 10. Then, `RequireCommand.execute()` call its own method `compareAllGEs()` to check if any GE pillars have not been cleared.
 It then keeps track of which pillars have not been cleared.
 
 11. `RequireCommand.execute()` then proceeds to call its own methods `compareModules`, `compareScience` and `compareInternship`
-to keep track of undone modules based on the `currentModules` list.
+to keep track of undone modules by cross-referring to the `currentModules` list.
 
 12. Finally, a `CommandResult` is created with the `leftOverModules` to show the filtered list of remaining required modules.
 
@@ -509,12 +509,11 @@ object.
 7. `GemCommand.execute()` then calls its own method `setSem1Storage` and `setSem2Storage` to create 2 `GemCommandStorage`
 objects.
 
-8. Within the `setSem1Storage` and `setSem2Storage` methods, multiple method calls are made to set up the
-`sem1Storage` and `sem2Storage` objects with the all the relevant GE modules.
+8. Within the `setSem1Storage` and `setSem2Storage` methods, various method calls are made for each GE pillar (Eg. GET, GER)
+to set up the `sem1Storage` and `sem2Storage` objects with the all the relevant `sem1GeModules` and `sem2GeModules`.
 
-9. Then, all the modules from both storages are compiled with `setCompiledModules` from the `GemCommandStorage` class.
-
-10. Finally, a `CommandResult` is created with the compiled modules, displaying all the available GE modules by Semester.
+9. Finally, a `CommandResult` is created with both the `sem1GeModules` and `sem2GeModules`, displaying all the available
+GE modules by Semester.
 
 The following sequence diagram illustrates how the `gem` command is executed.
 

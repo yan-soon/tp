@@ -52,35 +52,12 @@ activate RequiredCommandStorage
 RequiredCommandStorage --> RequiredCommand :Rs
 deactivate RequiredCommandStorage
 
-RequiredCommand -> RequiredCommandStorage : setRequiredFoundation(FOUNDATION_PATH)
+RequiredCommand -> RequiredCommandStorage : setRequiredXXX(XXX_PATH)
 activate RequiredCommandStorage
 
-RequiredCommandStorage --> RequiredCommand : requiredFoundation
+RequiredCommandStorage --> RequiredCommand : requiredXXX
 deactivate RequiredCommandStorage
 
-RequiredCommand -> RequiredCommandStorage : setRequiredITprof(ITPROF_PATH)
-activate RequiredCommandStorage
-
-RequiredCommandStorage --> RequiredCommand : requiredITprof
-deactivate RequiredCommandStorage
-
-RequiredCommand -> RequiredCommandStorage : setRequiredMath(MATH_PATH)
-activate RequiredCommandStorage
-
-RequiredCommandStorage --> RequiredCommand : requiredMath
-deactivate RequiredCommandStorage
-
-RequiredCommand -> RequiredCommandStorage : setRequiredScience(SCIENCE_PATH)
-activate RequiredCommandStorage
-
-RequiredCommandStorage --> RequiredCommand : requiredScience
-deactivate RequiredCommandStorage
-
-RequiredCommand -> RequiredCommandStorage : setRequiredInternship(INTERNSHIP_PATH)
-activate RequiredCommandStorage
-
-RequiredCommandStorage --> RequiredCommand : requiredInternship
-deactivate RequiredCommandStorage
 deactivate RequiredCommand
 
 RequiredCommand -> RequiredCommand : compareAllGEs()
@@ -94,9 +71,7 @@ RequiredCommand -> RequiredCommand : MESSAGE_FAILURE_GE
 end
 deactivate RequiredCommand
 
-RequiredCommand -> RequiredCommand : compareModules(FOUNDATION_PATH)
-RequiredCommand -> RequiredCommand : compareModules(ITPROF_PATH)
-RequiredCommand -> RequiredCommand : compareModules(MATH_PATH)
+RequiredCommand -> RequiredCommand : compareModules(XXX_PATH)
 RequiredCommand -> RequiredCommand : compareScience(SCIENCE_PATH)
 RequiredCommand -> RequiredCommand : compareInternship(INTERNSHIP_PATH)
 

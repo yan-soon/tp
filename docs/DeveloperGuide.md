@@ -147,6 +147,19 @@ The `Storage` component,
 * stores required modules that are on the Computer Science curriculum, in the `RequiredCommandStorage` class.
 * stores all General Education modules available in NUS, in the `GemCommandStorage` class.
 
+### Design considerations
+
+We chose to set up the Storage classes, with the sole purpose of extracting and parsing JSON data
+so that GradPad can interact with it.
+
+### Rationale
+
+This is done so that the `RequiredCommand` and `GemCommand` classes do not have to worry about data retrieval and
+storage, such that they can focus on executing the command logic.
+
+The two Storage classes are separated to avoid cluttering up `RequiredCommandStorage`, due to the hefty size of
+General Education Modules.
+
 ### Nusmods component
 
 ![Structure of the Nusmods Component](images/NusmodsClassDiagram.png)

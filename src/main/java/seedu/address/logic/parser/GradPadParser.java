@@ -7,6 +7,8 @@ import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EDIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FORCE_CLEAR_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FORCE_DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -15,6 +17,8 @@ import static seedu.address.commons.core.Messages.SCIENCE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.SEARCH_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.TAGS_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.YE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.Y_COMMAND_WORD;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,6 +28,7 @@ import seedu.address.logic.commands.CheckMcCommand;
 import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.ExitCommand;
+import seedu.address.logic.commands.ForceClearCommand;
 import seedu.address.logic.commands.GemCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
@@ -56,7 +61,7 @@ public class GradPadParser {
             throw new ParseException(Messages.MESSAGE_EMPTY_FIELD);
         }
 
-        final String commandWord = matcher.group("commandWord");
+        final String commandWord = matcher.group("commandWord").toLowerCase();
         final String arguments = matcher.group("arguments");
         switch (commandWord) {
 
@@ -69,8 +74,14 @@ public class GradPadParser {
         case DELETE_COMMAND_WORD:
             return new DeleteCommandParser().parse(arguments);
 
+        case FORCE_DELETE_COMMAND_WORD:
+            return new ForceDeleteCommandParser().parse(arguments);
+
         case CLEAR_COMMAND_WORD:
             return new ClearCommand();
+
+        case FORCE_CLEAR_COMMAND_WORD:
+            return new ForceClearCommand();
 
         case FIND_COMMAND_WORD:
             return new FindCommandParser().parse(arguments);
@@ -97,6 +108,8 @@ public class GradPadParser {
             return new ScienceCommand();
 
         case YES_COMMAND_WORD:
+        case YE_COMMAND_WORD:
+        case Y_COMMAND_WORD:
             return new YesCommand();
 
         case TAGS_COMMAND_WORD:

@@ -69,26 +69,36 @@ public class LogicManager implements Logic {
     @Override
     public CommandResult execute(String commandText) throws CommandException, ParseException {
         logger.info("----------------[USER COMMAND][" + commandText + "]");
-        boolean isCancel = stalledCommand != null && !commandText.equalsIgnoreCase("yes");
+        Command command;
+        CommandResult commandResult;
+
+        try {
+            command = gradPadParser.parseCommand(commandText);
+        } catch (ParseException e) {
+            if (stalledCommand != null) {
+                stalledCommand = null;
+                return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                    + String.format("\"%s\"", stalledCommandText));
+            } else {
+                throw e;
+            }
+        }
+
+        boolean isCancel = stalledCommand != null && !(command instanceof YesCommand);
+        boolean isConfirmation = stalledCommand != null && command instanceof YesCommand;
 
         if (isCancel) {
             stalledCommand = null;
             return new CommandResult(MESSAGE_CONFIRMATION_CANCEL
-                    + String.format("\"%s\"", stalledCommandText));
-        }
-
-        CommandResult commandResult;
-        Command command = gradPadParser.parseCommand(commandText);
-        boolean isConfirmation = command instanceof YesCommand && stalledCommand != null;
-
-        if (command.requiresStall()) {
+                + String.format("\"%s\"", stalledCommandText));
+        } else if (isConfirmation) {
+            command = stalledCommand;
+            stalledCommand = null;
+        } else if (command.requiresStall()) {
             if (model.isEmpty()) {
                 throw new CommandException(MESSAGE_EMPTY_GRADPAD);
             }
             return handleStall(command, commandText);
-        } else if (isConfirmation) {
-            command = stalledCommand;
-            stalledCommand = null;
         }
 
         commandResult = command.execute(model);

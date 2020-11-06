@@ -13,8 +13,7 @@ public class Messages {
         + "more characters as a suffix. It is also case-insensitive.";
     public static final String MESSAGE_CONSTRAINTS_TITLE = "Module titles should only contain alphanumeric "
         + "characters and spaces.";
-    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and "
-        + "should not contain spaces.";
+    public static final String MESSAGE_CONSTRAINTS_TAG = "Tag descriptions should be alphanumeric and non-empty.";
 
     // general
     public static final String MESSAGE_NEED_HELP = "If you need help, type \"help\".";
@@ -55,14 +54,19 @@ public class Messages {
 
     // clear command
     public static final String CLEAR_COMMAND_WORD = "clear";
+    public static final String FORCE_CLEAR_COMMAND_WORD = "fclear";
     public static final String MESSAGE_CLEAR_SUCCESS = "GradPad has been cleared!";
     public static final String MESSAGE_CLEAR_CONFIRMATION = "Are you sure you wish to clear all modules? "
         + "(yes/no)";
 
     // delete command
     public static final String DELETE_COMMAND_WORD = "delete";
+    public static final String FORCE_DELETE_COMMAND_WORD = "fdelete";
     public static final String MESSAGE_DELETE_USAGE = DELETE_COMMAND_WORD + "\n\n"
         + "Format:\ndelete MODULE_CODE\n\n"
+        + MESSAGE_MORE_INFO;
+    public static final String MESSAGE_FORCE_DELETE_USAGE = FORCE_DELETE_COMMAND_WORD + "\n\n"
+        + "Format:\nfdelete MODULE_CODE\n\n"
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_DELETE_SUCCESS = "The following module has been successfully "
         + "deleted:\n\n%1$s";
@@ -80,6 +84,8 @@ public class Messages {
     public static final String MESSAGE_EDIT_SUCCESS = "The following module has been successfully edited:"
         + "\n\n%1$s\n\nEdited module:\n\n%2$s";
     public static final String MESSAGE_NOT_EDITED = "You must provide at least one field to edit!";
+    public static final String MESSAGE_ALL_EDIT_FIELDS_SAME = "The new fields provided have the same values as the "
+                                                                      + "current ones.";
 
     // exit command
     public static final String EXIT_COMMAND_WORD = "exit";
@@ -103,7 +109,14 @@ public class Messages {
         + "\t\t\t\t\t\t\tadd cs1231 t/Foundation t/Core\n\n";
     public static final String DELETE_COMMAND = "To delete a module:\tType \"delete\" followed by a valid "
         + "module code.\n\n"
+        + "\t\t\t\tNote:\n" + "\t\t\t\tThis command prompts for a confirmation before deleting.\n\n"
         + "\t\t\t\tExample(s):\tdelete cs1231\n\n";
+    public static final String FORCE_DELETE_COMMAND = "To force delete" + "\t\tType \"fdelete\" followed by"
+        + " a valid module code.\n"
+        + "a module:\n"
+        + "\t\t\t\tNote:\n" + "\t\t\t\tThis command does not prompt for a confirmation before\n"
+        + "\t\t\t\tdeleting.\n\n"
+        + "\t\t\t\tExample(s):\tfdelete cs1231\n\n";
     public static final String EDIT_COMMAND = "To edit a module:\tType \"edit\" followed by a valid module "
         + "code and the fields\n"
         + "\t\t\t\tyou wish to edit (at least 1 field must be provided). You can\n"
@@ -154,13 +167,19 @@ public class Messages {
         + "your tags:\n\n";
     public static final String LIST_COMMAND = "To list all" + "\t\t\tType \"list\".\n"
         + "your completed\nmodules:\n\n";
-    public static final String CLEAR_COMMAND = "To clear GradPad:\tType \"clear\".\n\n";
+    public static final String CLEAR_COMMAND = "To clear GradPad:\tType \"clear\".\n\n"
+        + "\t\t\t\tNote:\n" + "\t\t\t\tThis command prompts for a confirmation before clearing.\n\n";
+    public static final String FORCE_CLEAR_COMMAND = "To force clear" + "\t\tType \"fclear\".\n"
+        + "GradPad:\n"
+        + "\t\t\t\tNote:\n" + "\t\t\t\tThis command does not prompt for a confirmation before\n"
+        + "\t\t\t\tclearing.\n\n";
     public static final String EXIT_COMMAND = "To exit:\t\t\tType \"exit\".";
 
-    public static final String SHOWING_HELP_MESSAGE = ADD_COMMAND + LINE + DELETE_COMMAND + LINE + EDIT_COMMAND
-        + LINE + FIND_COMMAND + LINE + SEARCH_COMMAND + LINE + REQUIRED_COMMAND + LINE + SCIENCE_COMMAND + LINE
-        + GEM_COMMAND + LINE + CHECKMC_COMMAND + LINE + TAG_COMMAND + LINE + LIST_COMMAND + LINE + CLEAR_COMMAND
-        + LINE + EXIT_COMMAND;
+    public static final String SHOWING_HELP_MESSAGE = ADD_COMMAND + LINE + DELETE_COMMAND + LINE
+        + FORCE_DELETE_COMMAND + LINE + EDIT_COMMAND + LINE + FIND_COMMAND + LINE + SEARCH_COMMAND + LINE
+        + REQUIRED_COMMAND + LINE + SCIENCE_COMMAND + LINE + GEM_COMMAND + LINE + CHECKMC_COMMAND + LINE
+        + TAG_COMMAND + LINE + LIST_COMMAND + LINE + CLEAR_COMMAND + LINE + FORCE_CLEAR_COMMAND + LINE
+        + EXIT_COMMAND;
 
     // list command
     public static final String LIST_COMMAND_WORD = "list";
@@ -182,7 +201,8 @@ public class Messages {
         + MESSAGE_MORE_INFO;
     public static final String MESSAGE_SEARCH_SUCCESS = "Module details for %1$s \n\n"
         + "Module Title: %3$s \n"
-        + "Modular Credits: %2$s\n\n"
+        + "Modular Credits: %2$s\n"
+        + "Semesters: %7$s \n\n"
         + "Module Description: \n%4$s \n\n"
         + "Preclusion(s): \n%5$s\n\n"
         + "Prerequisite(s): \n%6$s\n";
@@ -194,6 +214,8 @@ public class Messages {
 
     // yes command
     public static final String YES_COMMAND_WORD = "yes";
+    public static final String YE_COMMAND_WORD = "ye";
+    public static final String Y_COMMAND_WORD = "y";
     public static final String MESSAGE_NO_CONFIRMATION = "There is nothing to confirm!";
 
     // logic manager messages

@@ -144,6 +144,8 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the GradPad data in json format and read it back.
+* stores required modules that are on the Computer Science curriculum, in the `RequiredCommandStorage` class.
+* stores all General Education modules available in NUS, in the `GemCommandStorage` class.
 
 ### Nusmods component
 

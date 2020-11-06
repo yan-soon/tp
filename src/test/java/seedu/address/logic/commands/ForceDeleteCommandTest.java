@@ -1,7 +1,8 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_DELETE_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
@@ -54,20 +55,20 @@ public class ForceDeleteCommandTest {
         ForceDeleteCommand forceDeleteSecondCommand = new ForceDeleteCommand(CODE_SECOND_MODULE);
 
         // same object -> returns true
-        assertTrue(forceDeleteFirstCommand.equals(forceDeleteFirstCommand));
+        assertEquals(forceDeleteFirstCommand, forceDeleteFirstCommand);
 
         // same values -> returns true
         ForceDeleteCommand forceDeleteFirstCommandCopy = new ForceDeleteCommand(CODE_FIRST_MODULE);
-        assertTrue(forceDeleteFirstCommand.equals(forceDeleteFirstCommandCopy));
+        assertEquals(forceDeleteFirstCommand, forceDeleteFirstCommandCopy);
 
         // different types -> returns false
-        assertFalse(forceDeleteFirstCommand.equals(1));
+        assertNotEquals(1, forceDeleteFirstCommand);
 
         // null -> returns false
-        assertFalse(forceDeleteFirstCommand.equals(null));
+        assertNotEquals(null, forceDeleteFirstCommand);
 
         // different module -> returns false
-        assertFalse(forceDeleteFirstCommand.equals(forceDeleteSecondCommand));
+        assertNotEquals(forceDeleteFirstCommand, forceDeleteSecondCommand);
     }
 
     @Test

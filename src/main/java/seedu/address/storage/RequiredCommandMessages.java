@@ -23,4 +23,5 @@ public class RequiredCommandMessages {
     public static final String ITPROF_PATH = "data/ITProfessionalism.json";
     public static final String MATH_PATH = "data/mathmodules.json";
     public static final String SCIENCE_PATH = "data/sciencemodules.json";
+    public static final String PRECLUSION_PATH = "data/precludedmodules.json";
 }

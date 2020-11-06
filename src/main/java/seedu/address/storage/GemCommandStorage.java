@@ -26,6 +26,7 @@ public class GemCommandStorage {
      * Makes use of classLoaders to convert the original file path
      * into one that can be readable during runtime, such that it
      * can be used to retrieve the File's content.
+     *
      * @param filePath Original file path.
      * @return Converted file content of type String.
      * @throws IOException When the provided fileName is invalid.
@@ -60,6 +61,8 @@ public class GemCommandStorage {
     }
     /**
      * Loads the gehModules attribute with GEH Modules.
+     *
+     * @param path Path of the GEH Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -78,6 +81,8 @@ public class GemCommandStorage {
     }
     /**
      * Loads the geqModules attribute with GEQ Modules.
+     *
+     * @param path Path of the GEQ Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -96,6 +101,8 @@ public class GemCommandStorage {
     }
     /**
      * Loads the gerModules attribute with GER Modules.
+     *
+     * @param path Path of the GER Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -114,6 +121,8 @@ public class GemCommandStorage {
     }
     /**
      * Loads the gesModules attribute with GES Modules.
+     *
+     * @param path Path of the GES Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -132,6 +141,8 @@ public class GemCommandStorage {
     }
     /**
      * Loads the getModules attribute with GET Modules.
+     *
+     * @param path Path of the GET Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -143,6 +154,7 @@ public class GemCommandStorage {
 
     /**
      * Takes a List of Modules and extracts out their Module Code and Modular Credits.
+     *
      * @param modules List of Modules.
      * @return String of Module Codes and Modular Credits.
      */

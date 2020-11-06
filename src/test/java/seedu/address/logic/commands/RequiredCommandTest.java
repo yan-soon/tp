@@ -52,7 +52,6 @@ public class RequiredCommandTest {
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
     }
-
     public void setUp() throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(COMPILED_PATH);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
@@ -88,10 +87,11 @@ public class RequiredCommandTest {
         assertNull(requiredCommand.getCurrentModules());
     }
     @Test
-    public void compareModules_validTest() throws IOException, DataConversionException {
+    public void compareModules_validTest() throws IOException, DataConversionException, IllegalValueException {
         setUpTestModules(INCOMPLETE_FOUNDATION_PATH);
         requiredCommand.setCurrentModules(testModules);
         setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
+        requiredCommand.setStorage();
         requiredCommand.compareModules(testModules, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
         String expected = MESSAGE_FOUNDATION + "\n" + MISSING_MODULE_1 + "\n" + "\n";
         String actual = requiredCommand.getLeftOverModules();

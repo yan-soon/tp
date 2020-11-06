@@ -7,6 +7,7 @@ import java.io.InputStreamReader;
 import java.io.Reader;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
+import java.util.Map;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
@@ -19,11 +20,13 @@ public class RequiredCommandStorage {
     private ObservableList<Module> requiredMath;
     private ObservableList<Module> requiredScience;
     private ObservableList<Module> requiredInternship;
+    private Map<String, String> preclusionMap;
 
     /**
      * Makes use of classLoaders to convert the original file path
      * into one that can be readable during runtime, such that it
      * can be used to retrieve the File's content.
+     *
      * @param filePath Original file path.
      * @return Converted file content of type String.
      * @throws IOException When the provided fileName is invalid.
@@ -50,6 +53,25 @@ public class RequiredCommandStorage {
     }
 
     /**
+     * Returns preclusionMap attribute of RequiredCommandStorage object.
+     * @return preclusionMap attribute of type Map.
+     */
+    public Map<String, String> getPreclusionMap() {
+        return preclusionMap;
+    }
+
+    /**
+     * Loads the preclusionMap attribute with Precluded Modules.
+     *
+     * @param path Path of the Precluded Modules file.
+     * @throws IOException When path is invalid.
+     */
+    public void setPreclusionMap(String path) throws IOException {
+        String file = getFileFromResource(path);
+        preclusionMap = JsonUtil.getPreclusionMapFromJsonFile(file);
+    }
+
+    /**
      * Returns requiredFoundation attribute of RequiredCommandStorage object.
      * @return requiredFoundation attribute of type ObservableList<Module/>.
      */
@@ -58,6 +80,8 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredFoundation attribute with Foundation Modules.
+     *
+     * @param path Path of the Foundation Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -76,6 +100,8 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredITprof attribute with IT Professionalism Modules.
+     *
+     * @param path Path of the IT Professionalism Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -94,6 +120,8 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredMath attribute with Math Modules.
+     *
+     * @param path Path of the Math Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -112,6 +140,8 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredScience attribute with Science Modules.
+     *
+     * @param path Path of the Science Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -130,6 +160,8 @@ public class RequiredCommandStorage {
     }
     /**
      * Loads the requiredInternship attribute with Internship Modules.
+     *
+     * @param path Path of the Internship Modules file.
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').

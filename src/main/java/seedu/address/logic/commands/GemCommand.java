@@ -75,6 +75,7 @@ public class GemCommand extends Command {
     /**
      * Sets up the all the GE modules in the sem1Storage and sem2Storage and displays them
      * with the CommandResult object.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return a CommandResult displaying all the available GE modules.
      */

@@ -28,6 +28,8 @@ public class ScienceCommand extends Command {
     /**
      * Loads the scienceModules attribute with Science Modules by using
      * the setRequiredScience() method from the RequiredCommandStorage class.
+     *
+     * @param path Path of the Science Modules file.
      * @throws IOException When the path in invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -40,6 +42,7 @@ public class ScienceCommand extends Command {
 
     /**
      * Goes through the scienceModules attribute and parses all Science Modules, to be read by the user.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return CommandResult Object with the relevant Science Modules or Failure Message if modules
      * are absent.

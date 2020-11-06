@@ -19,8 +19,8 @@ import seedu.address.model.module.Module;
 import seedu.address.model.module.ModuleCode;
 
 /**
- * Contains integration tests (interaction with the Model, UndoCommand and RedoCommand) and unit tests for
- * {@code DeleteCommand}.
+ * Contains integration tests (interaction with the Model) and unit tests for
+ * {@code ForceDeleteCommand}.
  */
 public class ForceDeleteCommandTest {
 
@@ -74,14 +74,5 @@ public class ForceDeleteCommandTest {
     public void requiresStall() {
         ForceDeleteCommand forceDeleteCommand = new ForceDeleteCommand(CODE_FIRST_MODULE);
         assertFalse(forceDeleteCommand.requiresStall());
-    }
-
-    /**
-     * Updates {@code model}'s filtered list to show no one.
-     */
-    private void showNoModule(Model model) {
-        model.updateFilteredModuleList(p -> false);
-
-        assertTrue(model.getFilteredModuleList().isEmpty());
     }
 }

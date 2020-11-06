@@ -51,12 +51,11 @@ public class ScienceCommand extends Command {
             setScienceModules(SCIENCE_PATH);
             StringBuilder modulesToAdd = new StringBuilder();
             for (Module module : scienceModules) {
-                if (model.hasModule(module)) {
-                    continue;
+                if (!model.hasModule(module)) {
+                    String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                        + " (" + module.getModularCredits() + " MCs)";
+                    modulesToAdd.append("\n").append(moduleToAdd);
                 }
-                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
-                    + " (" + module.getModularCredits() + " MCs)";
-                modulesToAdd.append("\n").append(moduleToAdd);
             }
             return new CommandResult(MESSAGE_SCIENCE_SUCCESS + "\n" + modulesToAdd);
         } catch (IOException | IllegalValueException e) {

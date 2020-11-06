@@ -24,73 +24,27 @@ import seedu.address.storage.JsonGradPadStorage;
 
 public class GemCommandTest {
 
-    public static final Path GEH_PATH_1 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem1GEHmodules.json");
-    public static final Path GET_PATH_1 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem1GETmodules.json");
-    public static final Path GES_PATH_1 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem1GESmodules.json");
-    public static final Path GEQ_PATH_1 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem1GEQmodules.json");
-    public static final Path GER_PATH_1 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem1GERmodules.json");
+    public static final Path GEH_PATH_1 = Paths.get("src/main/resources/data/GEM/GEHsem1.json");
+    public static final Path GET_PATH_1 = Paths.get("src/main/resources/data/GEM/GETsem1.json");
+    public static final Path GES_PATH_1 = Paths.get("src/main/resources/data/GEM/GESsem1.json");
 
-    public static final Path GEH_PATH_2 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem2GEHmodules.json");
-    public static final Path GET_PATH_2 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem2GETmodules.json");
-    public static final Path GES_PATH_2 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem2GESmodules.json");
-    public static final Path GEQ_PATH_2 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem2GEQmodules.json");
-    public static final Path GER_PATH_2 = Paths.get("src/test/data/GemCommandTest"
-        + "/sem2GERmodules.json");
+    public static final Path GEH_PATH_2 = Paths.get("src/main/resources/data/GEM/GEHsem2.json");
+    public static final Path GET_PATH_2 = Paths.get("src/main/resources/data/GEM/GETsem2.json");
+    public static final Path GES_PATH_2 = Paths.get("src/main/resources/data/GEM/GESsem2.json");
 
-    public static final Path TEST_GEH_SEM1_PATH = Paths.get("src/main/resources/data/GEM/GEHs1.json");
+    public static final Path GEQ_PATH_1 = Paths.get("src/main/resources/data/GEM/GEQ.json");
+    public static final Path GER_PATH_1 = Paths.get("src/main/resources/data/GEM/GER.json");
+
+    public static final Path TEST_GEH_SEM1_PATH = Paths.get("src/main/resources/data/GEM/GEHsem1.json");
     public static final Path TEST_GEH_SEM2_PATH = Paths.get("src/main/resources/data/GEM/GEHsem2.json");
     private Model model;
     private GemCommand gemCommand = new GemCommand();
     private ObservableList<Module> testModules;
-    private ObservableList<Module> gehTestModules;
-    private ObservableList<Module> getTestModules;
-    private ObservableList<Module> gesTestModules;
-    private ObservableList<Module> geqTestModules;
-    private ObservableList<Module> gerTestModules;
 
     public void setUpTestModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
-    }
-
-    public void setUpGehTestModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        gehTestModules = gradPad.getModuleList();
-    }
-
-    public void setUpGetTestModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        getTestModules = gradPad.getModuleList();
-    }
-
-    public void setUpGesTestModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        gesTestModules = gradPad.getModuleList();
-    }
-
-    public void setUpGeqTestModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        geqTestModules = gradPad.getModuleList();
-    }
-
-    public void setUpGerTestModules(Path path) throws IOException, DataConversionException {
-        JsonGradPadStorage storage = new JsonGradPadStorage(path);
-        ReadOnlyGradPad gradPad = storage.readGradPad().get();
-        gerTestModules = gradPad.getModuleList();
     }
 
     @Test
@@ -129,31 +83,30 @@ public class GemCommandTest {
         model = new ModelManager();
         GemCommandStorage storage = new GemCommandStorage();
 
-        setUpGehTestModules(GEH_PATH_1);
-        setUpGetTestModules(GET_PATH_1);
-        setUpGesTestModules(GES_PATH_1);
-        setUpGeqTestModules(GEQ_PATH_1);
-        setUpGerTestModules(GER_PATH_1);
-
-        String expectedMessage = MESSAGE_GEM_SUCCESS + "\n\n" + "Semester 1:" + "\n\n";
-        expectedMessage += "Human Cultures\n" + storage.moduleExtractor(gehTestModules, model);
-        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(getTestModules, model);
-        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(gesTestModules, model);
-        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(geqTestModules, model);
-        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(gerTestModules, model);
-
-        setUpGehTestModules(GEH_PATH_2);
-        setUpGetTestModules(GET_PATH_2);
-        setUpGesTestModules(GES_PATH_2);
-        setUpGeqTestModules(GEQ_PATH_2);
-        setUpGerTestModules(GER_PATH_2);
+        String expectedMessage = MESSAGE_GEM_SUCCESS + "\n\n" + "Semester 1:";
+        setUpTestModules(GEH_PATH_1);
+        expectedMessage += "\n\nHuman Cultures\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GET_PATH_1);
+        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GES_PATH_1);
+        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GEQ_PATH_1);
+        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GER_PATH_1);
+        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(testModules, model);
 
         expectedMessage += "\n\n" + LINE + "Semester 2:";
-        expectedMessage += "\n\nHuman Cultures\n" + storage.moduleExtractor(gehTestModules, model);
-        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(getTestModules, model);
-        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(gesTestModules, model);
-        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(geqTestModules, model);
-        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(gerTestModules, model);
+        setUpTestModules(GEH_PATH_2);
+        expectedMessage += "\n\nHuman Cultures\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GET_PATH_2);
+        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GES_PATH_2);
+        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GEQ_PATH_1);
+        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(testModules, model);
+        setUpTestModules(GER_PATH_1);
+        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(testModules, model);
+
 
         CommandResult expected = new CommandResult(expectedMessage);
         CommandResult actual = gemCommand.execute(model);

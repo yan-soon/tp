@@ -150,12 +150,11 @@ public class GemCommandStorage {
         assert modules != null;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
-            if (model.hasModule(module)) {
-                continue;
+            if (!model.hasModule(module)) {
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
+                modulesToAdd.append("\n").append(moduleToAdd);
             }
-            String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
-                + " (" + module.getModularCredits() + " MCs)";
-            modulesToAdd.append("\n").append(moduleToAdd);
         }
         return modulesToAdd;
     }

@@ -129,7 +129,7 @@ public class RequiredCommand extends Command {
      * modules argument and marks out any undone Modules. Displays a successMessage
      * if all modules are done, and a failMessage if there are left over modules.
      *
-     * @param modules List of Modules of a certain category (Eg. Foundation, IT Professsionalism)
+     * @param modules List of Modules of a certain category (Eg. Foundation, IT Professsionalism).
      * @param failMessage Fail message for particular category of Modules.
      * @param successMessage Success message for particular category of Modules.
      */
@@ -154,6 +154,8 @@ public class RequiredCommand extends Command {
     /**
      * Cross references the user's current list of Modules and marks out
      * any undone Science Modules.
+     *
+     * @param requiredScience List of required Science Modules.
      */
     public void compareScience(ObservableList<Module> requiredScience) {
         boolean isScienceCleared = false;
@@ -173,6 +175,8 @@ public class RequiredCommand extends Command {
      * Cross references the user's current list of Modules and marks out
      * any undone Internship Modules. Also calculates current MC score
      * achieved from Internship Modules.
+     *
+     * @param requiredInternship List of required Internship Modules.
      */
     public void compareInternship(ObservableList<Module> requiredInternship) {
         int modularScore = 0;

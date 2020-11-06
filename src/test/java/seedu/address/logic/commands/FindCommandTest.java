@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_MODULES_FOUND_OVERVIEW;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
+import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.CS3216;
@@ -78,21 +79,21 @@ public class FindCommandTest {
     @Test
     public void execute_oneTagKeyword_oneModuleFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_FOUND_OVERVIEW, 1);
-        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE);
+        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_NON_CORE);
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(CS2103T), model.getFilteredModuleList());
+        assertEquals(Collections.singletonList(CS3216), model.getFilteredModuleList());
     }
 
     @Test
     public void execute_oneCapitalizedTagKeyword_oneModuleFound() {
         String expectedMessage = String.format(MESSAGE_MODULES_FOUND_OVERVIEW, 1);
-        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_CORE.toUpperCase());
+        CompoundFindPredicate predicate = preparePredicate(VALID_TAG_NON_CORE.toUpperCase());
         FindCommand command = new FindCommand(predicate);
         expectedModel.updateFilteredModuleList(predicate);
         assertCommandSuccess(command, model, expectedMessage, expectedModel);
-        assertEquals(Collections.singletonList(CS2103T), model.getFilteredModuleList());
+        assertEquals(Collections.singletonList(CS3216), model.getFilteredModuleList());
     }
 
     @Test

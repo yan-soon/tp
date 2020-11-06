@@ -110,7 +110,8 @@ public class RequiredCommand extends Command {
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
             if (!doesModuleAlreadyExist(module, currentModules)) {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;
             }
@@ -153,7 +154,8 @@ public class RequiredCommand extends Command {
                 int modularCredits = Integer.parseInt(module.getModularCredits().toString());
                 modularScore += modularCredits;
             } else {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
                 leftOverInternship.append("\n").append(moduleToAdd);
             }
         } if (modularScore < 12) {

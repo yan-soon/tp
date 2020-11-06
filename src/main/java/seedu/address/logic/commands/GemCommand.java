@@ -1,6 +1,9 @@
 package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
+import static seedu.address.commons.core.Messages.LINE;
+import static seedu.address.commons.core.Messages.MESSAGE_GEM_FAILURE;
+import static seedu.address.commons.core.Messages.MESSAGE_GEM_SUCCESS;
 import static seedu.address.storage.GemCommandPaths.GEH_SEM1_PATH;
 import static seedu.address.storage.GemCommandPaths.GEH_SEM2_PATH;
 import static seedu.address.storage.GemCommandPaths.GEQ_PATH;
@@ -17,9 +20,7 @@ import seedu.address.model.Model;
 import seedu.address.storage.GemCommandStorage;
 
 public class GemCommand extends Command {
-    public static final String COMMAND_WORD = "gem";
-    public static final String MESSAGE_SUCCESS = "These are the GE Modules that you can take:";
-    public static final String MESSAGE_FAILURE_GEM = "There was an error loading the required GE Modules :(";
+
     private GemCommandStorage sem1Storage;
     private GemCommandStorage sem2Storage;
 
@@ -83,15 +84,15 @@ public class GemCommand extends Command {
             requireNonNull(model);
             setSem1Storage();
             setSem2Storage();
-            sem1Storage.setCompiledModules();
-            sem2Storage.setCompiledModules();
-            String modulesToAdd = "\n \n" + "SEMESTER 1:" + "\n";
+            sem1Storage.setCompiledModules(model);
+            sem2Storage.setCompiledModules(model);
+            String modulesToAdd = "\n\nSemester 1:" + "\n\n";
             modulesToAdd += sem1Storage.getCompiledModules();
-            modulesToAdd += "\n \n" + "SEMESTER 2:" + "\n";
+            modulesToAdd += "\n\n" + LINE + "Semester 2:" + "\n\n";
             modulesToAdd += sem2Storage.getCompiledModules();
-            return new CommandResult(MESSAGE_SUCCESS + modulesToAdd);
+            return new CommandResult(MESSAGE_GEM_SUCCESS + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
-            return new CommandResult(MESSAGE_FAILURE_GEM);
+            return new CommandResult(MESSAGE_GEM_FAILURE);
         }
     }
 }

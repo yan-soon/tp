@@ -170,9 +170,15 @@ public class Messages {
     // required command
     public static final String REQUIRED_COMMAND_WORD = "required";
 
+    // gem command
+    public static final String GEM_COMMAND_WORD = "gem";
+    public static final String MESSAGE_GEM_SUCCESS = "--------------- Available GE Modules ---------------";
+    public static final String MESSAGE_GEM_FAILURE = "There was an error loading the required GE Modules.";
+
     // science command
     public static final String SCIENCE_COMMAND_WORD = "science";
-    public static final String MESSAGE_SCIENCE_SUCCESS = "Science modules:";
+    public static final String MESSAGE_SCIENCE_SUCCESS = "--------------- Available Science Modules "
+        + "---------------";
     public static final String MESSAGE_FAILURE_SCIENCE = "Oh no, there was an error loading the required "
         + "Science Modules...";
 

@@ -11,6 +11,7 @@ import java.nio.charset.StandardCharsets;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.commons.util.JsonUtil;
+import seedu.address.model.Model;
 import seedu.address.model.module.Module;
 
 public class GemCommandStorage {
@@ -145,11 +146,15 @@ public class GemCommandStorage {
      * @param modules List of Modules.
      * @return String of Module Codes and Modular Credits.
      */
-    public StringBuilder moduleExtractor(ObservableList<Module> modules) {
+    public StringBuilder moduleExtractor(ObservableList<Module> modules, Model model) {
         assert modules != null;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
-            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+            if (model.hasModule(module)) {
+                continue;
+            }
+            String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                + " (" + module.getModularCredits() + " MCs)";
             modulesToAdd.append("\n").append(moduleToAdd);
         }
         return modulesToAdd;
@@ -166,12 +171,12 @@ public class GemCommandStorage {
     /**
      * Loads the compiledModules attribute with all the relevant GE modules in String form.
      */
-    public void setCompiledModules() {
+    public void setCompiledModules(Model model) {
         compiledModules = "";
-        compiledModules += moduleExtractor(gehModules);
-        compiledModules += moduleExtractor(geqModules);
-        compiledModules += moduleExtractor(gerModules);
-        compiledModules += moduleExtractor(gesModules);
-        compiledModules += moduleExtractor(getModules);
+        compiledModules += "Human Cultures\n" + moduleExtractor(gehModules, model) + "\n\n";
+        compiledModules += "Thinking and Expression\n" + moduleExtractor(getModules, model) + "\n\n";
+        compiledModules += "Singapore Studies\n" + moduleExtractor(gesModules, model) + "\n\n";
+        compiledModules += "Asking Questions\n" + moduleExtractor(geqModules, model) + "\n\n";
+        compiledModules += "Quantitative Reasoning\n" + moduleExtractor(gerModules, model);
     }
 }

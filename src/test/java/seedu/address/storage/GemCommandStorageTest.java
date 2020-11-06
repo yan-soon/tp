@@ -3,7 +3,12 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.GemCommandTest.COMPILED_PATH_1;
+import static seedu.address.commons.core.Messages.MESSAGE_GEM_SUCCESS;
+import static seedu.address.logic.commands.GemCommandTest.GEH_PATH_1;
+import static seedu.address.logic.commands.GemCommandTest.GEQ_PATH_1;
+import static seedu.address.logic.commands.GemCommandTest.GER_PATH_1;
+import static seedu.address.logic.commands.GemCommandTest.GES_PATH_1;
+import static seedu.address.logic.commands.GemCommandTest.GET_PATH_1;
 import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
 import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;
 import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
@@ -23,6 +28,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.model.Model;
+import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 
@@ -30,11 +37,47 @@ public class GemCommandStorageTest {
     public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
     private GemCommandStorage storage = new GemCommandStorage();
     private ObservableList<Module> testModules;
+    private ObservableList<Module> gehTestModules;
+    private ObservableList<Module> getTestModules;
+    private ObservableList<Module> gesTestModules;
+    private ObservableList<Module> geqTestModules;
+    private ObservableList<Module> gerTestModules;
+    private Model model;
 
     public void setUpTestModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
+    }
+
+    public void setUpGehTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        gehTestModules = gradPad.getModuleList();
+    }
+
+    public void setUpGetTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        getTestModules = gradPad.getModuleList();
+    }
+
+    public void setUpGesTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        gesTestModules = gradPad.getModuleList();
+    }
+
+    public void setUpGeqTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        geqTestModules = gradPad.getModuleList();
+    }
+
+    public void setUpGerTestModules(Path path) throws IOException, DataConversionException {
+        JsonGradPadStorage storage = new JsonGradPadStorage(path);
+        ReadOnlyGradPad gradPad = storage.readGradPad().get();
+        gerTestModules = gradPad.getModuleList();
     }
 
     @Test
@@ -130,9 +173,10 @@ public class GemCommandStorageTest {
 
     @Test
     public void moduleExtractor_validTest() throws IOException, DataConversionException {
+        model = new ModelManager();
         setUpTestModules(SINGLE_MODULE_PATH);
         String expected = "\n" + MISSING_MODULE_1;
-        StringBuilder temp = storage.moduleExtractor(testModules);
+        StringBuilder temp = storage.moduleExtractor(testModules, model);
         String actual = "" + temp;
         assertEquals(expected, actual);
     }
@@ -145,20 +189,34 @@ public class GemCommandStorageTest {
 
     @Test
     public void setCompiledModules_invalidTest() {
-        assertThrows(AssertionError.class, () -> storage.setCompiledModules());
+        model = new ModelManager();
+        assertThrows(AssertionError.class, () -> storage.setCompiledModules(model));
     }
 
     @Test
     public void setCompiledModules_validTest() throws IOException, IllegalValueException, DataConversionException {
-        setUpTestModules(COMPILED_PATH_1);
-        String expected = "" + storage.moduleExtractor(testModules);
+        model = new ModelManager();
+
+        setUpGehTestModules(GEH_PATH_1);
+        setUpGetTestModules(GET_PATH_1);
+        setUpGesTestModules(GES_PATH_1);
+        setUpGeqTestModules(GEQ_PATH_1);
+        setUpGerTestModules(GER_PATH_1);
+
+        String expected = MESSAGE_GEM_SUCCESS + "\n\n" + "Semester 1:" + "\n\n";
+        expected += "Human Cultures\n" + storage.moduleExtractor(gehTestModules, model);
+        expected += "\n\nThinking and Expression\n" + storage.moduleExtractor(getTestModules, model);
+        expected += "\n\nSingapore Studies\n" + storage.moduleExtractor(gesTestModules, model);
+        expected += "\n\nAsking Questions\n" + storage.moduleExtractor(geqTestModules, model);
+        expected += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(gerTestModules, model);
+
         storage.setGehModules(GEH_SEM1_PATH);
         storage.setGeqModules(GEQ_PATH);
         storage.setGerModules(GER_PATH);
         storage.setGesModules(GES_SEM1_PATH);
         storage.setGetModules(GET_SEM1_PATH);
-        storage.setCompiledModules();
-        String actual = storage.getCompiledModules();
+        storage.setCompiledModules(model);
+        String actual = MESSAGE_GEM_SUCCESS + "\n\nSemester 1:\n\n" + storage.getCompiledModules();
         assertEquals(expected, actual);
     }
 }

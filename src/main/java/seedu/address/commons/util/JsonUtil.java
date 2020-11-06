@@ -5,7 +5,6 @@ import static java.util.Objects.requireNonNull;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
 import java.util.logging.Level;
@@ -161,8 +160,7 @@ public class JsonUtil {
     }
 
     public static Map<String, String> getPreclusionMapFromJsonFile(String file) throws IOException {
-        ObjectMapper mapper = new ObjectMapper();
-        TypeReference<HashMap<String, String>> targetType = new TypeReference<>() {};
-        return mapper.readValue(file, targetType);
+        TypeReference<Map<String, String>> targetType = new TypeReference<>() {};
+        return objectMapper.readValue(file, targetType);
     }
 }

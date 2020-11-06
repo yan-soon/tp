@@ -79,6 +79,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Sets the argument modules as the attribute currentModules.
+     *
      * @param modules target argument of type ObservableList<Module/>.
      */
     public void setCurrentModules(ObservableList<Module> modules) {
@@ -87,6 +88,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Checks if a Module already exists in a given Module List.
+     *
      * @param module Module that you wish to check.
      * @param modules Module List that you wish to check against.
      * @return True if the module already exists, false otherwise.
@@ -102,18 +104,19 @@ public class RequiredCommand extends Command {
 
     /**
      * Checks if a Module is a valid preclusion.
+     *
      * @param module Module to check.
      * @param modules Module list to check against.
-     * @param preclusionMap Map that contains pairings of valid preclusions.
      * @return True if module is a preclusion, false otherwise.
      */
-    public boolean isModuleAPreclusion(Module module, ObservableList<Module> modules,
-                                       Map<String, String> preclusionMap) {
-        for (Module mod : modules) {
-            String currentModName = mod.getModuleCode().toString();
-            String modToCheckAgainst = module.getModuleCode().toString();
-            if (preclusionMap.containsKey(currentModName)) {
-                if (preclusionMap.get(currentModName).equals(modToCheckAgainst)) {
+    public boolean isModuleAPreclusion(Module module, ObservableList<Module> modules) {
+        Map <String, String> preclusionMap = storage.getPreclusionMap();
+        String modToCheckAgainst = module.getModuleCode().toString();
+        if (preclusionMap.containsKey(modToCheckAgainst)) {
+            String modulePreclusion = preclusionMap.get(modToCheckAgainst);
+            for (Module mod : modules) {
+                String currentModName = mod.getModuleCode().toString();
+                if (modulePreclusion.contains(currentModName)) {
                     return true;
                 }
             }
@@ -125,17 +128,17 @@ public class RequiredCommand extends Command {
      * Cross references the user's current list of Modules against the given
      * modules argument and marks out any undone Modules. Displays a successMessage
      * if all modules are done, and a failMessage if there are left over modules.
+     *
      * @param modules List of Modules of a certain category (Eg. Foundation, IT Professsionalism)
      * @param failMessage Fail message for particular category of Modules.
      * @param successMessage Success message for particular category of Modules.
      */
-    public void compareModules(ObservableList<Module> modules, Map<String, String> preclusionMap,
-                               String failMessage, String successMessage) {
+    public void compareModules(ObservableList<Module> modules, String failMessage, String successMessage) {
         boolean areModulesCleared = true;
         StringBuilder modulesToAdd = new StringBuilder();
         for (Module module : modules) {
             if (!doesModuleAlreadyExist(module, currentModules)
-                    && !isModuleAPreclusion(module, currentModules, preclusionMap)) {
+                    && !isModuleAPreclusion(module, currentModules)) {
                 String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;
@@ -192,6 +195,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Checks if particular GE field is cleared in the current GradPad.
+     *
      * @param ge The GE field that you wish to check (Eg. 'GEQ' or 'GEH').
      * @return True if the GE field is cleared, false otherwise.
      */
@@ -243,6 +247,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Sets up the reference modules and the current modules in gradPad and compares all the modules.
+     *
      * @param model {@code Model} which the command should operate on.
      * @return a CommandResult displaying all the undone modules.
      */
@@ -257,11 +262,10 @@ public class RequiredCommand extends Command {
             ObservableList<Module> requiredMath = storage.getRequiredMath();
             ObservableList<Module> requiredScience = storage.getRequiredScience();
             ObservableList<Module> requiredInternship = storage.getRequiredInternship();
-            Map<String, String> preclusionMap = storage.getPreclusionMap();
             compareAllGEs();
-            compareModules(requiredFoundation, preclusionMap, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
-            compareModules(requiredITprof, preclusionMap, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
-            compareModules(requiredMath, preclusionMap, MESSAGE_MATH, MESSAGE_SUCCESS_MATH);
+            compareModules(requiredFoundation, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+            compareModules(requiredITprof, MESSAGE_ITPROF, MESSAGE_SUCCESS_ITPROF);
+            compareModules(requiredMath, MESSAGE_MATH, MESSAGE_SUCCESS_MATH);
             compareScience(requiredScience);
             compareInternship(requiredInternship);
             return new CommandResult(leftOverModules);

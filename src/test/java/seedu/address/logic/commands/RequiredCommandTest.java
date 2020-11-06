@@ -16,21 +16,18 @@ import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_ITPR
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_MATH;
 import static seedu.address.storage.RequiredCommandMessages.MESSAGE_SUCCESS_SCIENCE;
 import static seedu.address.storage.RequiredCommandStorageTest.TEST_FOUNDATION_PATH;
-import static seedu.address.storage.RequiredCommandStorageTest.TEST_PRECLUSION_PATH;
 import static seedu.address.storage.RequiredCommandStorageTest.TEST_SCIENCE_PATH;
 import static seedu.address.testutil.Assert.assertThrows;
 
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.commons.util.JsonUtil;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
@@ -50,14 +47,10 @@ public class RequiredCommandTest {
     private Model model;
     private RequiredCommand requiredCommand = new RequiredCommand();
     private ObservableList<Module> testModules;
-    private Map preclusionMap;
     public void setUpTestModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();
-    }
-    public void setUpPreclusionMap() throws DataConversionException {
-        preclusionMap = JsonUtil.readJsonFile(Paths.get(TEST_PRECLUSION_PATH), Map.class).get();
     }
     public void setUp() throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(COMPILED_PATH);
@@ -94,12 +87,12 @@ public class RequiredCommandTest {
         assertNull(requiredCommand.getCurrentModules());
     }
     @Test
-    public void compareModules_validTest() throws IOException, DataConversionException {
+    public void compareModules_validTest() throws IOException, DataConversionException, IllegalValueException {
         setUpTestModules(INCOMPLETE_FOUNDATION_PATH);
         requiredCommand.setCurrentModules(testModules);
         setUpTestModules(Paths.get(TEST_FOUNDATION_PATH));
-        setUpPreclusionMap();
-        requiredCommand.compareModules(testModules, preclusionMap, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
+        requiredCommand.setStorage();
+        requiredCommand.compareModules(testModules, MESSAGE_FOUNDATION, MESSAGE_SUCCESS_FOUNDATION);
         String expected = MESSAGE_FOUNDATION + "\n" + MISSING_MODULE_1 + "\n" + "\n";
         String actual = requiredCommand.getLeftOverModules();
         assertEquals(expected, actual);

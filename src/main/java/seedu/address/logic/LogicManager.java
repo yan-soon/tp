@@ -44,7 +44,7 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        assert(model != null && storage != null);
+        assert (model != null && storage != null);
         this.model = model;
         this.storage = storage;
         gradPadParser = new GradPadParser();

@@ -11,6 +11,8 @@ import java.util.Set;
 import org.junit.jupiter.api.Test;
 
 public class UniqueTagMapTest {
+
+    public static final String TEST_EMPTY_TAG_MAP = "{}";
     @Test
     public void checkAndReplaceTags_emptySet_noChange() {
         UniqueTagMap map = new UniqueTagMap();
@@ -113,4 +115,10 @@ public class UniqueTagMapTest {
         map.setTags(replacement);
         assertEquals(replacement.getTagNames(), map.getTagNames());
     }
+
+    @Test
+    public void toStringMethod_validTest() {
+        UniqueTagMap testMap = new UniqueTagMap();
+        assertEquals(testMap.toString(), TEST_EMPTY_TAG_MAP);
+    } 
 }

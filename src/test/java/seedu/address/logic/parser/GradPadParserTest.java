@@ -142,7 +142,7 @@ public class GradPadParserTest {
     public void parseCommand_search() throws Exception {
         SearchCommand command = (SearchCommand) parser.parseCommand(
                 SEARCH_COMMAND_WORD + " " + CODE_FIRST_MODULE.toString());
-        assertEquals(new SearchCommand(CODE_FIRST_MODULE.toString()), command);
+        assertEquals(new SearchCommand(CODE_FIRST_MODULE), command);
     }
 
     @Test

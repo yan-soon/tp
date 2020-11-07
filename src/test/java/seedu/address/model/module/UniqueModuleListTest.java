@@ -2,6 +2,7 @@ package seedu.address.model.module;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.testutil.Assert.assertThrows;
@@ -164,5 +165,20 @@ public class UniqueModuleListTest {
     public void asUnmodifiableObservableList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, ()
             -> uniqueModuleList.asUnmodifiableObservableList().remove(0));
+    }
+
+    @Test
+    public void hashCodeTest() {
+        // same list -> return true
+        assertEquals(uniqueModuleList.hashCode(), uniqueModuleList.hashCode());
+
+        // different items in list -> return false
+        uniqueModuleList.add(CS2103T);
+        assertNotEquals(uniqueModuleList.hashCode(), new UniqueModuleList());
+
+        // same items in list -> return true
+        UniqueModuleList newList = new UniqueModuleList();
+        newList.add(CS2103T);
+        assertNotEquals(uniqueModuleList.hashCode(), newList);
     }
 }

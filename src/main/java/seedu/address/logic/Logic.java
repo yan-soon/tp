@@ -4,6 +4,7 @@ import java.nio.file.Path;
 
 import javafx.collections.ObservableList;
 import seedu.address.commons.core.GuiSettings;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -47,4 +48,30 @@ public interface Logic {
      * Set the user prefs' GUI settings.
      */
     void setGuiSettings(GuiSettings guiSettings);
+
+    /**
+     * Assigns the parameters to the various attributes.
+     *
+     * @param command Command that requires stalling.
+     * @param commandText User input.
+     */
+    void assignStalledComponents(Command command, String commandText);
+
+    /**
+     * Returns the Stalled Command.
+     */
+    Command getStalledCommand();
+
+    /**
+     * Returns the Stalled Command's accompanying arguments.
+     */
+    String getStalledCommandText();
+
+    /**
+     * Checks if the command given requires stalling.
+     *
+     * @param command Command to check.
+     * @param commandText User input.
+     */
+    CommandResult handleStall(Command command, String commandText) throws CommandException;
 }

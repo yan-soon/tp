@@ -8,11 +8,18 @@ import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EDIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FORCE_CLEAR_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.FORCE_DELETE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.GEM_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_FIELD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.REQUIRED_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.SCIENCE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.SEARCH_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.TAGS_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 
@@ -30,9 +37,16 @@ import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
 import seedu.address.logic.commands.ExitCommand;
 import seedu.address.logic.commands.FindCommand;
+import seedu.address.logic.commands.ForceClearCommand;
+import seedu.address.logic.commands.ForceDeleteCommand;
+import seedu.address.logic.commands.GemCommand;
 import seedu.address.logic.commands.HelpCommand;
 import seedu.address.logic.commands.ListCommand;
+import seedu.address.logic.commands.RequiredCommand;
+import seedu.address.logic.commands.ScienceCommand;
+import seedu.address.logic.commands.SearchCommand;
 import seedu.address.logic.commands.TagsCommand;
+import seedu.address.logic.commands.YesCommand;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.CompoundFindPredicate;
 import seedu.address.model.module.Module;
@@ -58,10 +72,23 @@ public class GradPadParserTest {
     }
 
     @Test
+    public void parseCommand_forceClear() throws Exception {
+        assertTrue(parser.parseCommand(FORCE_CLEAR_COMMAND_WORD) instanceof ForceClearCommand);
+        assertTrue(parser.parseCommand(FORCE_CLEAR_COMMAND_WORD + " 3") instanceof ForceClearCommand);
+    }
+
+    @Test
     public void parseCommand_delete() throws Exception {
         DeleteCommand command = (DeleteCommand) parser.parseCommand(
                 DELETE_COMMAND_WORD + " " + CODE_FIRST_MODULE.toString());
         assertEquals(new DeleteCommand(CODE_FIRST_MODULE), command);
+    }
+
+    @Test
+    public void parseCommand_forceDelete() throws Exception {
+        ForceDeleteCommand command = (ForceDeleteCommand) parser.parseCommand(
+                FORCE_DELETE_COMMAND_WORD + " " + CODE_FIRST_MODULE.toString());
+        assertEquals(new ForceDeleteCommand(CODE_FIRST_MODULE), command);
     }
 
     @Test
@@ -109,6 +136,37 @@ public class GradPadParserTest {
     public void parseCommand_tags() throws Exception {
         assertTrue(parser.parseCommand(TAGS_COMMAND_WORD) instanceof TagsCommand);
         assertTrue(parser.parseCommand(TAGS_COMMAND_WORD + " 3") instanceof TagsCommand);
+    }
+
+    @Test
+    public void parseCommand_search() throws Exception {
+        SearchCommand command = (SearchCommand) parser.parseCommand(
+                SEARCH_COMMAND_WORD + " " + CODE_FIRST_MODULE.toString());
+        assertEquals(new SearchCommand(CODE_FIRST_MODULE.toString()), command);
+    }
+
+    @Test
+    public void parseCommand_required() throws Exception {
+        assertTrue(parser.parseCommand(REQUIRED_COMMAND_WORD) instanceof RequiredCommand);
+        assertTrue(parser.parseCommand(REQUIRED_COMMAND_WORD + " 3") instanceof RequiredCommand);
+    }
+
+    @Test
+    public void parseCommand_science() throws Exception {
+        assertTrue(parser.parseCommand(SCIENCE_COMMAND_WORD) instanceof ScienceCommand);
+        assertTrue(parser.parseCommand(SCIENCE_COMMAND_WORD + " 3") instanceof ScienceCommand);
+    }
+
+    @Test
+    public void parseCommand_gem() throws Exception {
+        assertTrue(parser.parseCommand(GEM_COMMAND_WORD) instanceof GemCommand);
+        assertTrue(parser.parseCommand(GEM_COMMAND_WORD + " 3") instanceof GemCommand);
+    }
+
+    @Test
+    public void parseCommand_yes() throws Exception {
+        assertTrue(parser.parseCommand(YES_COMMAND_WORD) instanceof YesCommand);
+        assertTrue(parser.parseCommand(YES_COMMAND_WORD + " 3") instanceof YesCommand);
     }
 
     @Test

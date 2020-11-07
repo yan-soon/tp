@@ -50,7 +50,8 @@ public class LogicManager implements Logic {
         gradPadParser = new GradPadParser();
     }
 
-    private CommandResult handleStall(Command command, String commandText) throws CommandException {
+    @Override
+    public CommandResult handleStall(Command command, String commandText) throws CommandException {
         if (command instanceof ClearCommand) {
             assignStalledComponents(command, commandText);
             return new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
@@ -61,7 +62,8 @@ public class LogicManager implements Logic {
         }
     }
 
-    private void assignStalledComponents(Command command, String commandText) {
+    @Override
+    public void assignStalledComponents(Command command, String commandText) {
         stalledCommand = command;
         stalledCommandText = commandText;
     }
@@ -135,5 +137,15 @@ public class LogicManager implements Logic {
     @Override
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
+    }
+
+    @Override
+    public Command getStalledCommand() {
+        return stalledCommand;
+    }
+
+    @Override
+    public String getStalledCommandText() {
+        return stalledCommandText;
     }
 }

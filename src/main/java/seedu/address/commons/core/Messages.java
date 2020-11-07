@@ -188,6 +188,9 @@ public class Messages {
     // required command
     public static final String REQUIRED_COMMAND_WORD = "required";
 
+    // gem command
+    public static final String GEM_COMMAND_WORD = "gem";
+
     // science command
     public static final String SCIENCE_COMMAND_WORD = "science";
     public static final String MESSAGE_SCIENCE_SUCCESS = "Science modules:";

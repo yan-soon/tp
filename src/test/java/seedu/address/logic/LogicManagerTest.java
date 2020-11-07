@@ -1,12 +1,18 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
+import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
+import static seedu.address.commons.core.Messages.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 import static seedu.address.commons.core.Messages.MESSAGE_LIST_SUCCESS;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
+import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
@@ -18,8 +24,12 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
+import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.logic.commands.ClearCommand;
+import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
+import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -90,6 +100,120 @@ public class LogicManagerTest {
     @Test
     public void getFilteredModuleList_modifyList_throwsUnsupportedOperationException() {
         assertThrows(UnsupportedOperationException.class, () -> logic.getFilteredModuleList().remove(0));
+    }
+
+    @Test
+    public void getStalledCommand_validTest() {
+        Command actual = logic.getStalledCommand();
+        assertNull(actual);
+    }
+
+    @Test
+    public void getStalledCommandText_validTest() {
+        String actual = logic.getStalledCommandText();
+        assertNull(actual);
+    }
+
+    @Test
+    public void assignStalledComponents_validTest() {
+        ClearCommand expectedCommand = new ClearCommand();
+        String expectedCommandText = "";
+        logic.assignStalledComponents(expectedCommand, "");
+        Command actualCommand = logic.getStalledCommand();
+        String actualCommandText = logic.getStalledCommandText();
+        assertEquals(expectedCommand, actualCommand);
+        assertEquals(expectedCommandText, actualCommandText);
+    }
+
+    @Test
+    public void handleStallClearCommand_validTest() throws CommandException {
+        CommandResult expected = new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
+        ClearCommand testCommand = new ClearCommand();
+        String testCommandText = "";
+        CommandResult actual = logic.handleStall(testCommand, testCommandText);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void handleStallDeleteCommand_validTest() throws CommandException {
+        model.addModule(CS2103T);
+        CommandResult expected = new CommandResult(MESSAGE_DELETE_CONFIRMATION + CS2103T);
+        DeleteCommand testCommand = new DeleteCommand(CS2103T.getModuleCode());
+        String testCommandText = "CS2103T";
+        CommandResult actual = logic.handleStall(testCommand, testCommandText);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getGradPad_validTest() {
+        ReadOnlyGradPad actual = logic.getGradPad();
+        Model testModel = new ModelManager();
+        ReadOnlyGradPad expected = testModel.getGradPad();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getGradPadFilePath_validTest() {
+        Path actual = logic.getGradPadFilePath();
+        Model testModel = new ModelManager();
+        Path expected = testModel.getGradPadFilePath();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void getGuiSettings_validTest() {
+        GuiSettings actual = logic.getGuiSettings();
+        Model testModel = new ModelManager();
+        GuiSettings expected = testModel.getGuiSettings();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void setGuiSettings_validTest() {
+        GuiSettings expected = new GuiSettings();
+        logic.setGuiSettings(expected);
+        GuiSettings actual = logic.getGuiSettings();
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void execute_abortCommand_validTest1() throws CommandException, ParseException {
+        ClearCommand testCommand = new ClearCommand();
+        String testCommandText = "";
+        logic.assignStalledComponents(testCommand, testCommandText);
+        CommandResult expected = new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                + String.format("\"%s\"", testCommandText));
+        CommandResult actual = logic.execute("n");
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void execute_abortCommand_validTest2() throws CommandException, ParseException {
+        ClearCommand testCommand = new ClearCommand();
+        String testCommandText = "";
+        logic.assignStalledComponents(testCommand, testCommandText);
+        CommandResult expected = new CommandResult(MESSAGE_CONFIRMATION_CANCEL
+                + String.format("\"%s\"", testCommandText));
+        CommandResult actual = logic.execute(LIST_COMMAND_WORD);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void execute_confirmCommand_validTest() throws CommandException, ParseException {
+        ClearCommand testCommand = new ClearCommand();
+        String testCommandText = "";
+        logic.assignStalledComponents(testCommand, testCommandText);
+        logic.execute(YES_COMMAND_WORD);
+        Command actual = logic.getStalledCommand();
+        assertNull(actual);
+    }
+
+    @Test
+    public void execute_requiresStall_validTest() throws CommandException, ParseException {
+        model.addModule(CS2103T);
+        CommandResult expected = new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
+        CommandResult actual = logic.execute(CLEAR_COMMAND_WORD);
+        assertEquals(expected, actual);
     }
 
     /**

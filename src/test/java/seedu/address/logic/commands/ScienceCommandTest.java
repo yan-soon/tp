@@ -27,12 +27,14 @@ public class ScienceCommandTest {
     private Model model;
     private ScienceCommand scienceCommand = new ScienceCommand();
     private String moduleNames = "";
+
     public void setUp() throws IOException, DataConversionException {
         StringBuilder modulesToAdd = new StringBuilder();
         JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_SCIENCE_PATH));
         ObservableList<Module> modules = storage.readGradPad().get().getModuleList();
         for (Module module : modules) {
-            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+            String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                + " (" + module.getModularCredits() + " MCs)";
             modulesToAdd.append("\n").append(moduleToAdd);
         }
         moduleNames += modulesToAdd;
@@ -54,7 +56,7 @@ public class ScienceCommandTest {
     public void validPathExecuteScienceCommand_success() throws IOException, DataConversionException {
         model = new ModelManager();
         setUp();
-        CommandResult expected = new CommandResult(MESSAGE_SCIENCE_SUCCESS + moduleNames);
+        CommandResult expected = new CommandResult(MESSAGE_SCIENCE_SUCCESS + "\n" + moduleNames);
         CommandResult actual = scienceCommand.execute(model);
         assertEquals(expected, actual);
     }

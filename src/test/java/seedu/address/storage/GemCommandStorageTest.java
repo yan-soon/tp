@@ -3,15 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.logic.commands.GemCommandTest.COMPILED_PATH_1;
-import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
-import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;
 import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
-import static seedu.address.storage.GemCommandPaths.GEH_SEM1_PATH;
-import static seedu.address.storage.GemCommandPaths.GEQ_PATH;
-import static seedu.address.storage.GemCommandPaths.GER_PATH;
-import static seedu.address.storage.GemCommandPaths.GES_SEM1_PATH;
-import static seedu.address.storage.GemCommandPaths.GET_SEM1_PATH;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 
 import java.io.IOException;
@@ -23,6 +15,8 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.GemCommand;
+import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 
@@ -30,6 +24,8 @@ public class GemCommandStorageTest {
     public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
     private GemCommandStorage storage = new GemCommandStorage();
     private ObservableList<Module> testModules;
+    private Model model;
+    private GemCommand gemCommand = new GemCommand();
 
     public void setUpTestModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
@@ -125,40 +121,6 @@ public class GemCommandStorageTest {
         ObservableList<Module> expected = testModules;
         storage.setGetModules(FOUNDATION_PATH);
         ObservableList<Module> actual = storage.getGetModules();
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void moduleExtractor_validTest() throws IOException, DataConversionException {
-        setUpTestModules(SINGLE_MODULE_PATH);
-        String expected = "\n" + MISSING_MODULE_1;
-        StringBuilder temp = storage.moduleExtractor(testModules);
-        String actual = "" + temp;
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void getCompiledModules_validTest() {
-        String actual = storage.getCompiledModules();
-        assertNull(actual);
-    }
-
-    @Test
-    public void setCompiledModules_invalidTest() {
-        assertThrows(AssertionError.class, () -> storage.setCompiledModules());
-    }
-
-    @Test
-    public void setCompiledModules_validTest() throws IOException, IllegalValueException, DataConversionException {
-        setUpTestModules(COMPILED_PATH_1);
-        String expected = "" + storage.moduleExtractor(testModules);
-        storage.setGehModules(GEH_SEM1_PATH);
-        storage.setGeqModules(GEQ_PATH);
-        storage.setGerModules(GER_PATH);
-        storage.setGesModules(GES_SEM1_PATH);
-        storage.setGetModules(GET_SEM1_PATH);
-        storage.setCompiledModules();
-        String actual = storage.getCompiledModules();
         assertEquals(expected, actual);
     }
 }

@@ -149,8 +149,8 @@ The `Storage` component,
 
 ### Design considerations
 
-We chose to set up the module-specific Storage classes, with the sole purpose of extracting, parsing
-and finally writing the JSON data so that GradPad can interact with it.
+We chose to set up the module-specific Storage classes, with the sole purpose of extracting and parsing the JSON data
+so that GradPad can interact with it.
 
 ### Rationale
 
@@ -428,7 +428,7 @@ When the command is executed, it checks through the current modules in the `Comp
 that modules that have already been taken are not displayed in the list of remaining required modules.
 
 This is achieved with the `RequiredCommand` and `RequiredCommandStorage` class. The `RequiredCommandStorage` class
-handles the extracting, parsing and writing of JSON module data while the `RequiredCommand` handles the logic
+handles the extracting, parsing of JSON module data while the `RequiredCommand` handles the logic
 behind filtering the undone modules.
 
 As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.

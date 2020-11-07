@@ -25,6 +25,7 @@ Class UniqueModuleList
 
 Package Tag {
 Class Tag
+Class UniqueTagMap
 }
 }
 
@@ -40,11 +41,13 @@ ModelManager o-left-> "1" UserPrefs
 UserPrefs .up.|> ReadOnlyUserPrefs
 
 GradPad *--> "1" UniqueModuleList
+GradPad *--> "1" UniqueTagMap
+UniqueTagMap o--> "*" Tag
 UniqueModuleList o--> "*" Module
 Module *--> ModuleCode
 Module *--> ModularCredits
 Module *--> ModuleName
-Module *--> "*" Tag
+Module --> "*" Tag
 
 ModuleCode -[hidden]right-> ModularCredits
 ModularCredits -[hidden]right-> ModuleName

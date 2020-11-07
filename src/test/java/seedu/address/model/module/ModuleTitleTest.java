@@ -12,7 +12,6 @@ public class ModuleTitleTest {
     public void constructor_null_throwsNullPointerException() {
         assertThrows(NullPointerException.class, () -> new ModuleTitle(null));
     }
-    
     @Test
     public void hashCodeTest() {
         ModuleTitle title1 = new ModuleTitle("cs2100");

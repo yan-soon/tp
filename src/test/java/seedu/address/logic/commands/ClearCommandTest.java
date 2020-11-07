@@ -1,5 +1,6 @@
 package seedu.address.logic.commands;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
@@ -30,4 +31,9 @@ public class ClearCommandTest {
         assertCommandSuccess(new ClearCommand(), model, MESSAGE_CLEAR_SUCCESS, expectedModel);
     }
 
+    @Test
+    public void requiresStall_validTest() {
+        ClearCommand testCommand = new ClearCommand();
+        assertTrue(testCommand.requiresStall());
+    }
 }

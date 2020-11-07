@@ -24,12 +24,7 @@ public class SearchCommandParser implements Parser<SearchCommand> {
             throw new ParseException(
                     String.format(MESSAGE_INVALID_COMMAND_FORMAT, MESSAGE_SEARCH_USAGE));
         }
-        try {
-            ModuleCode moduleCode = ParserUtil.parseModuleCode(trimmedArgs);
-            return new SearchCommand(moduleCode);
-        } catch (IllegalArgumentException e) {
-            throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    MESSAGE_SEARCH_USAGE));
-        }
+        ModuleCode moduleCode = ParserUtil.parseModuleCode(trimmedArgs);
+        return new SearchCommand(moduleCode);
     }
 }

@@ -59,7 +59,7 @@ activate ModuleInfoSearcher
 ModuleInfoSearcher --> SearchCommand
 deactivate ModuleInfoSearcher
 
-SearchCommand -> ModuleInfoSearcher : searchModule("CS2103T)
+SearchCommand -> ModuleInfoSearcher : searchModule("CS2103T")
 activate ModuleInfoSearcher
 
 ModuleInfoSearcher --> SearchCommand : ModuleInfo

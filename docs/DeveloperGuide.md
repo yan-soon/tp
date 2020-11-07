@@ -957,8 +957,6 @@ testers are expected to do more *exploratory* testing.
 
    1. Download the jar file and copy into an empty folder.
    
-   1. Ensure there is internet connectivity to utilize NusMods data.
-
    1. Double-click the jar file.<br>
       Expected: GUI runs with a set of sample modules. The window size may not be optimum.
 

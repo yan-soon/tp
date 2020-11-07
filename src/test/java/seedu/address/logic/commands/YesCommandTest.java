@@ -9,7 +9,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 
 class YesCommandTest {
-
     @Test
     public void execute_validTest() {
         YesCommand testCommand = new YesCommand();

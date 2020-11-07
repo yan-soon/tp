@@ -19,7 +19,6 @@ public class GemCommandStorage {
     private ObservableList<Module> gerModules;
     private ObservableList<Module> gesModules;
     private ObservableList<Module> getModules;
-    private String compiledModules;
 
     /**
      * Makes use of classLoaders to convert the original file path
@@ -53,11 +52,13 @@ public class GemCommandStorage {
 
     /**
      * Returns gehModules attribute of GemCommandStorage object.
+     *
      * @return gehModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getGehModules() {
         return gehModules;
     }
+
     /**
      * Loads the gehModules attribute with GEH Modules.
      *
@@ -73,11 +74,13 @@ public class GemCommandStorage {
 
     /**
      * Returns geqModules attribute of GemCommandStorage object.
+     *
      * @return geqModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getGeqModules() {
         return geqModules;
     }
+
     /**
      * Loads the geqModules attribute with GEQ Modules.
      *
@@ -93,11 +96,13 @@ public class GemCommandStorage {
 
     /**
      * Returns gerModules attribute of GemCommandStorage object.
+     *
      * @return gerModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getGerModules() {
         return gerModules;
     }
+
     /**
      * Loads the gerModules attribute with GER Modules.
      *
@@ -113,11 +118,13 @@ public class GemCommandStorage {
 
     /**
      * Returns gesModules attribute of GemCommandStorage object.
+     *
      * @return gesModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getGesModules() {
         return gesModules;
     }
+
     /**
      * Loads the gesModules attribute with GES Modules.
      *
@@ -133,11 +140,13 @@ public class GemCommandStorage {
 
     /**
      * Returns getModules attribute of GemCommandStorage object.
+     *
      * @return getModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getGetModules() {
         return getModules;
     }
+
     /**
      * Loads the getModules attribute with GET Modules.
      *

@@ -37,6 +37,10 @@ public class Messages {
     public static final String LINE = "----------------------------------------------------------------------"
         + "--------------------------------------\n\n";
 
+    // ModuleInfoSearcher
+    public static final String MESSAGE_FAILED_TO_FIND_MODULE = "Failed to find module: %s";
+    public static final String MESSAGE_EMPTY_SEARCH = "Search is empty";
+
     // add command
     public static final String ADD_COMMAND_WORD = "add";
     public static final String MESSAGE_ADD_USAGE = ADD_COMMAND_WORD + "\n\n"
@@ -188,9 +192,15 @@ public class Messages {
     // required command
     public static final String REQUIRED_COMMAND_WORD = "required";
 
+    // gem command
+    public static final String GEM_COMMAND_WORD = "gem";
+    public static final String MESSAGE_GEM_SUCCESS = "--------------- Available GE Modules ---------------";
+    public static final String MESSAGE_GEM_FAILURE = "There was an error loading the required GE Modules.";
+
     // science command
     public static final String SCIENCE_COMMAND_WORD = "science";
-    public static final String MESSAGE_SCIENCE_SUCCESS = "Science modules:";
+    public static final String MESSAGE_SCIENCE_SUCCESS = "--------------- Available Science Modules "
+        + "---------------";
     public static final String MESSAGE_FAILURE_SCIENCE = "Oh no, there was an error loading the required "
         + "Science Modules...";
 

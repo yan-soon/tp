@@ -40,6 +40,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Retrieves the leftOverModules attribute of a RequiredCommand object.
+     *
      * @return leftOverModules of type String.
      */
     public String getLeftOverModules() {
@@ -48,6 +49,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Retrieves the attribute storage of a RequiredCommand object.
+     *
      * @return storage attribute of type RequiredCommandStorage.
      */
     public RequiredCommandStorage getStorage() {
@@ -56,6 +58,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Sets up the storage attribute with all the relevant modules from various fields.
+     *
      * @throws IOException When path is invalid.
      * @throws IllegalValueException When the data from the JSON file violates some constraints.
      */
@@ -71,6 +74,7 @@ public class RequiredCommand extends Command {
 
     /**
      * Retrieves the currentModules attribute of an Required Command object.
+     *
      * @return currentModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getCurrentModules() {
@@ -139,7 +143,8 @@ public class RequiredCommand extends Command {
         for (Module module : modules) {
             if (!doesModuleAlreadyExist(module, currentModules)
                     && !isModuleAPreclusion(module, currentModules)) {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
                 modulesToAdd.append("\n").append(moduleToAdd);
                 areModulesCleared = false;
             }
@@ -186,7 +191,8 @@ public class RequiredCommand extends Command {
                 int modularCredits = Integer.parseInt(module.getModularCredits().toString());
                 modularScore += modularCredits;
             } else {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
                 leftOverInternship.append("\n").append(moduleToAdd);
             }
         } if (modularScore < 12) {

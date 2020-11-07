@@ -19,6 +19,7 @@ public class ScienceCommand extends Command {
 
     /**
      * Returns the scienceModules attribute of a given ScienceCommand object.
+     *
      * @return scienceModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getScienceModules() {
@@ -54,10 +55,13 @@ public class ScienceCommand extends Command {
             setScienceModules(SCIENCE_PATH);
             StringBuilder modulesToAdd = new StringBuilder();
             for (Module module : scienceModules) {
-                String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-                modulesToAdd.append("\n").append(moduleToAdd);
+                if (!model.hasModule(module)) {
+                    String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                        + " (" + module.getModularCredits() + " MCs)";
+                    modulesToAdd.append("\n").append(moduleToAdd);
+                }
             }
-            return new CommandResult(MESSAGE_SCIENCE_SUCCESS + modulesToAdd);
+            return new CommandResult(MESSAGE_SCIENCE_SUCCESS + "\n" + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_FAILURE_SCIENCE);
         }

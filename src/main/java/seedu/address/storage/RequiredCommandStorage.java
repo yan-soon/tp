@@ -54,6 +54,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns preclusionMap attribute of RequiredCommandStorage object.
+     *
      * @return preclusionMap attribute of type Map.
      */
     public Map<String, String> getPreclusionMap() {
@@ -73,6 +74,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns requiredFoundation attribute of RequiredCommandStorage object.
+     *
      * @return requiredFoundation attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getRequiredFoundation() {
@@ -93,6 +95,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns requiredITprof attribute of RequiredCommandStorage object.
+     *
      * @return requiredITprof attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getRequiredITprof() {
@@ -113,6 +116,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns requiredMath attribute of RequiredCommandStorage object.
+     *
      * @return requiredMath attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getRequiredMath() {
@@ -133,6 +137,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns requiredScience attribute of RequiredCommandStorage object.
+     *
      * @return requiredScience attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getRequiredScience() {
@@ -153,6 +158,7 @@ public class RequiredCommandStorage {
 
     /**
      * Returns requiredInternship attribute of RequiredCommandStorage object.
+     *
      * @return requiredInternship attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getRequiredInternship() {

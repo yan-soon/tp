@@ -37,6 +37,14 @@ public class LogsCenter {
     }
 
     /**
+     * Retrieves the currentLogLevel attribute.
+     * @return currentLogLevel attribute of type Level.
+     */
+    public Level getCurrentLogLevel() {
+        return currentLogLevel;
+    }
+
+    /**
      * Creates a logger with the given name.
      */
     public static Logger getLogger(String name) {

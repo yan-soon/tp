@@ -9,6 +9,7 @@ import static seedu.address.commons.core.Messages.EXIT_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FIND_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FORCE_CLEAR_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FORCE_DELETE_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.GEM_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.HELP_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
@@ -115,7 +116,7 @@ public class GradPadParser {
         case TAGS_COMMAND_WORD:
             return new TagsCommand();
 
-        case GemCommand.COMMAND_WORD:
+        case GEM_COMMAND_WORD:
             return new GemCommand();
 
         default:

@@ -11,6 +11,8 @@ Interface GradPadStorage <<Interface>>
 Class StorageManager
 Class JsonUserPrefsStorage
 Class JsonGradPadStorage
+Class RequiredCommandStorage
+Class GemCommandStorage
 
 StorageManager .left.|> Storage
 StorageManager o-right-> UserPrefsStorage
@@ -21,4 +23,7 @@ JsonGradPadStorage .left.|> GradPadStorage
 JsonGradPadStorage .down.> JsonSerializableGradPad
 JsonSerializableGradPad .right.> JsonAdaptedModule
 JsonAdaptedModule .right.> JsonAdaptedTag
+
+RequiredCommandStorage .down.> JsonSerializableGradPad
+GemCommandStorage .down.> JsonSerializableGradPad
 @enduml

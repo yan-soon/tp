@@ -128,13 +128,6 @@ The `Model`,
 * exposes an unmodifiable `ObservableList<Module>` that can be 'observed' e.g. the UI can be bound to this list so that the UI automatically updates when the data in the list change.
 * does not depend on any of the other three components.
 
-
-<div markdown="span" class="alert alert-info">:information_source: **Note:** An alternative (arguably, a more OOP) model is given below. It has a `Tag` list in the `GradPad`, which `Module` references. This allows `GradPad` to only require one `Tag` object per unique `Tag`, instead of each `Module` needing their own `Tag` object.<br>
-![BetterModelClassDiagram](images/BetterModelClassDiagram.png)
-
-</div>
-
-
 ### Storage component
 
 ![Structure of the Storage Component](images/StorageClassDiagram.png)
@@ -582,6 +575,80 @@ object.
 `NusmodsData.getModuleInfo()` in the `Nusmods` package.
 
 9. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+
+### Tags feature
+
+GradPad allows users to add tags to modules that they add, remove tags from existing modules, list out all
+existing tags in GradPad, and filter the `Completed Modules` list by tags.
+
+Tags are represented by `Tag` objects which are referenced by `Module` objects when modules are tagged. 
+
+To prevent duplicate tags from being created everytime a module is tagged (as was the case in the original AB3),
+the `GradPad` class uses a `UniqueTagMap` class to keep track of a collection of unique `Tag` objects. With this,
+when a user tags a module with an existing tag, `UniqueTagMap` looks for the existing `Tag` object and adds it to
+that `Module` object. As such, all modules who use a particular tag now reference that corresponding singular `Tag
+` object.
+
+The main benefit of this is evident when GradPad needs to print out a list of all tags, which can be simply done
+by printing out `UniqueTagMap`'s tags. Otherwise, one would have to iterate through all `Module` objects,
+retrieve all their tags, and then filter them to remove any duplicates.
+
+Following this, `UniqueTagMap` also has to handle the addition and deletion of modules, which is utilized by 
+the `GradPad` class's add, edit, and delete operations for modules.
+
+#### Adding a module with tags
+
+1. When a module with tags is going to be added, the `GradPad` class within the `Model` component is passed that newly
+ constructed `Module` object from the `Logic` component (see [add feature](#add-feature)).
+
+2. Its `addModule` method is invoked with this object as a parameter.
+
+3. Before adding this module to its list of modules, this new module's tags will first be parsed and replaced with
+existing tags where possible. This is done using the`checkAndReplaceTags` method in the `UniqueTagMap` class.
+
+4. The `checkAndReplaceTags` method basically loops through a list of `Tag` objects and checks each one against
+the collection of existing `Tag` objects it already holds. If it comes across a "new" `Tag` that already exists
+within its collection of tags, it replaces that "new" `Tag` with its existing equivalent `Tag` object in the list.
+Otherwise, it adds genuinely new `Tag` objects to its collection.
+
+5. Now that the new `Module` object's tags have been checked and replaced, the model adds this `Module` to its
+`UniqueModuleList`.
+
+The following diagram illustrates this flow of logic.
+
+![AddModuleTagsSequenceDiagram](images/AddModuleTagsSequenceDiagram.png)
+
+#### Deleting a module with tags
+
+When a module is being deleted, its `Tag` objects within cannot simply be deleted, since multiple
+`Module`s may share the same `Tag` object. Yet at the same time, when a `Tag` is no longer referenced by any `Module`,
+it should be removed so that it doesn't loiter around in `UniqueTagMap`. To achieve this, `Tag` objects
+store a count of the no. of modules that are currently using it. When this count hits 0, the `Tag` can be safely
+ removed.
+ 
+This is the execution flow when a module is deleted:
+
+1. The `removeModule` method in the `GradPad` class is invoked.
+
+2. The `remove` method in `UniqueTagMap` is then invoked with a set of all `Tag` objects belonging to the `Module` that
+is to be removed.
+
+3. Within the `remove` method, each `Tag`'s module count is decremented. If the count reaches 0 at this point,
+then the `Tag` must be unused by all modules. It is thus removed from the collection of `Tag`s within
+`UniqueTagMap`.
+
+4. The `Module` object can now be deleted from the `UniqueModuleList` in the `GradPad` class.
+
+The diagram illustrates this flow of logic:
+
+![DeleteModuleTagsSequenceDiagram](images/DeleteModuleTagsSequenceDiagram.png)
+
+#### Editing a module's tags
+
+When editing a module's tags, the old tags are simply "removed" as when 
+[a module is deleted](#deleting-a-module-with-tags), followed by "adding" the new tags, as when
+[a module is added](#adding-a-module-with-tags).
+
 
 ### \[Proposed\] Undo/redo feature
 

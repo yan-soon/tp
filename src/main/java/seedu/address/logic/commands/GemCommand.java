@@ -15,14 +15,17 @@ import static seedu.address.storage.GemCommandPaths.GET_SEM2_PATH;
 
 import java.io.IOException;
 
+import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.Model;
+import seedu.address.model.module.Module;
 import seedu.address.storage.GemCommandStorage;
 
 public class GemCommand extends Command {
 
     private GemCommandStorage sem1Storage;
     private GemCommandStorage sem2Storage;
+    private String compiledModules;
 
     /**
      * Retrieves the attribute sem1Storage of a GemCommand object.
@@ -85,15 +88,56 @@ public class GemCommand extends Command {
             requireNonNull(model);
             setSem1Storage();
             setSem2Storage();
-            sem1Storage.setCompiledModules(model);
-            sem2Storage.setCompiledModules(model);
             String modulesToAdd = "\n\nSemester 1:" + "\n\n";
-            modulesToAdd += sem1Storage.getCompiledModules();
+            setCompiledModules(sem1Storage, model);
+            modulesToAdd += compiledModules;
             modulesToAdd += "\n\n" + LINE + "Semester 2:" + "\n\n";
-            modulesToAdd += sem2Storage.getCompiledModules();
+            setCompiledModules(sem2Storage, model);
+            modulesToAdd += compiledModules;
             return new CommandResult(MESSAGE_GEM_SUCCESS + modulesToAdd);
         } catch (IOException | IllegalValueException e) {
             return new CommandResult(MESSAGE_GEM_FAILURE);
         }
+    }
+
+    /**
+     * Takes a List of Modules and extracts out their Module Code and Modular Credits.
+     *
+     * @param modules List of Modules.
+     * @param model {@code Model} which the command should operate on.
+     * @return String of Module Codes and Modular Credits.
+     */
+    public StringBuilder moduleExtractor(ObservableList<Module> modules, Model model) {
+        assert modules != null;
+        StringBuilder modulesToAdd = new StringBuilder();
+        for (Module module : modules) {
+            if (!model.hasModule(module)) {
+                String moduleToAdd = module.getModuleCode() + "\t" + module.getModuleTitle()
+                    + " (" + module.getModularCredits() + " MCs)";
+                modulesToAdd.append("\n").append(moduleToAdd);
+            }
+        }
+        return modulesToAdd;
+    }
+
+    /**
+     * Loads the compiledModules attribute with all the relevant GE modules in String form.
+     */
+    public void setCompiledModules(GemCommandStorage storage, Model model) {
+        compiledModules = "";
+        compiledModules += "Human Cultures\n" + moduleExtractor(storage.getGehModules(), model) + "\n\n";
+        compiledModules += "Thinking and Expression\n" + moduleExtractor(storage.getGetModules(), model)
+            + "\n\n";
+        compiledModules += "Singapore Studies\n" + moduleExtractor(storage.getGesModules(), model) + "\n\n";
+        compiledModules += "Asking Questions\n" + moduleExtractor(storage.getGeqModules(), model) + "\n\n";
+        compiledModules += "Quantitative Reasoning\n" + moduleExtractor(storage.getGerModules(), model);
+    }
+
+    /**
+     * Returns compiledModules attribute of GemCommandStorage object.
+     * @return compiledModules attribute of type String.
+     */
+    public String getCompiledModules() {
+        return compiledModules;
     }
 }

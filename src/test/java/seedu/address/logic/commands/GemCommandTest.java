@@ -81,31 +81,30 @@ public class GemCommandTest {
     @Test
     public void execute_validTest() throws IOException, DataConversionException {
         model = new ModelManager();
-        GemCommandStorage storage = new GemCommandStorage();
 
         String expectedMessage = MESSAGE_GEM_SUCCESS + "\n\n" + "Semester 1:";
         setUpTestModules(GEH_PATH_1);
-        expectedMessage += "\n\nHuman Cultures\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nHuman Cultures\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GET_PATH_1);
-        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nThinking and Expression\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GES_PATH_1);
-        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nSingapore Studies\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GEQ_PATH_1);
-        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nAsking Questions\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GER_PATH_1);
-        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nQuantitative Reasoning\n" + gemCommand.moduleExtractor(testModules, model);
 
         expectedMessage += "\n\n" + LINE + "Semester 2:";
         setUpTestModules(GEH_PATH_2);
-        expectedMessage += "\n\nHuman Cultures\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nHuman Cultures\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GET_PATH_2);
-        expectedMessage += "\n\nThinking and Expression\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nThinking and Expression\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GES_PATH_2);
-        expectedMessage += "\n\nSingapore Studies\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nSingapore Studies\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GEQ_PATH_1);
-        expectedMessage += "\n\nAsking Questions\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nAsking Questions\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GER_PATH_1);
-        expectedMessage += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(testModules, model);
+        expectedMessage += "\n\nQuantitative Reasoning\n" + gemCommand.moduleExtractor(testModules, model);
 
 
         CommandResult expected = new CommandResult(expectedMessage);

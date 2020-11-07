@@ -28,6 +28,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
+import seedu.address.logic.commands.GemCommand;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
@@ -38,6 +39,7 @@ public class GemCommandStorageTest {
     private GemCommandStorage storage = new GemCommandStorage();
     private ObservableList<Module> testModules;
     private Model model;
+    private GemCommand gemCommand = new GemCommand();
 
     public void setUpTestModules(Path path) throws IOException, DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
@@ -141,21 +143,21 @@ public class GemCommandStorageTest {
         model = new ModelManager();
         setUpTestModules(SINGLE_MODULE_PATH);
         String expected = "\n" + MISSING_MODULE_1;
-        StringBuilder temp = storage.moduleExtractor(testModules, model);
+        StringBuilder temp = gemCommand.moduleExtractor(testModules, model);
         String actual = "" + temp;
         assertEquals(expected, actual);
     }
 
     @Test
     public void getCompiledModules_validTest() {
-        String actual = storage.getCompiledModules();
+        String actual = gemCommand.getCompiledModules();
         assertNull(actual);
     }
 
     @Test
     public void setCompiledModules_invalidTest() {
         model = new ModelManager();
-        assertThrows(AssertionError.class, () -> storage.setCompiledModules(model));
+        assertThrows(AssertionError.class, () -> gemCommand.setCompiledModules(storage, model));
     }
 
     @Test
@@ -164,23 +166,23 @@ public class GemCommandStorageTest {
 
         String expected = MESSAGE_GEM_SUCCESS + "\n\n" + "Semester 1:" + "\n\n";
         setUpTestModules(GEH_PATH_1);
-        expected += "Human Cultures\n" + storage.moduleExtractor(testModules, model);
+        expected += "Human Cultures\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GET_PATH_1);
-        expected += "\n\nThinking and Expression\n" + storage.moduleExtractor(testModules, model);
+        expected += "\n\nThinking and Expression\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GES_PATH_1);
-        expected += "\n\nSingapore Studies\n" + storage.moduleExtractor(testModules, model);
+        expected += "\n\nSingapore Studies\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GEQ_PATH_1);
-        expected += "\n\nAsking Questions\n" + storage.moduleExtractor(testModules, model);
+        expected += "\n\nAsking Questions\n" + gemCommand.moduleExtractor(testModules, model);
         setUpTestModules(GER_PATH_1);
-        expected += "\n\nQuantitative Reasoning\n" + storage.moduleExtractor(testModules, model);
+        expected += "\n\nQuantitative Reasoning\n" + gemCommand.moduleExtractor(testModules, model);
 
         storage.setGehModules(GEH_SEM1_PATH);
         storage.setGeqModules(GEQ_PATH);
         storage.setGerModules(GER_PATH);
         storage.setGesModules(GES_SEM1_PATH);
         storage.setGetModules(GET_SEM1_PATH);
-        storage.setCompiledModules(model);
-        String actual = MESSAGE_GEM_SUCCESS + "\n\nSemester 1:\n\n" + storage.getCompiledModules();
+        gemCommand.setCompiledModules(storage, model);
+        String actual = MESSAGE_GEM_SUCCESS + "\n\nSemester 1:\n\n" + gemCommand.getCompiledModules();
 
         assertEquals(expected, actual);
     }

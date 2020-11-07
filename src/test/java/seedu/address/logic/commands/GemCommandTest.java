@@ -3,7 +3,6 @@ package seedu.address.logic.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.commons.core.Messages.LINE;
-import static seedu.address.commons.core.Messages.MESSAGE_GEM_FAILURE;
 import static seedu.address.commons.core.Messages.MESSAGE_GEM_SUCCESS;
 import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
 import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;

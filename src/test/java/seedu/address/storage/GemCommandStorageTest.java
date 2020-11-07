@@ -3,20 +3,7 @@ package seedu.address.storage;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static seedu.address.commons.core.Messages.MESSAGE_GEM_SUCCESS;
-import static seedu.address.logic.commands.GemCommandTest.GEH_PATH_1;
-import static seedu.address.logic.commands.GemCommandTest.GEQ_PATH_1;
-import static seedu.address.logic.commands.GemCommandTest.GER_PATH_1;
-import static seedu.address.logic.commands.GemCommandTest.GES_PATH_1;
-import static seedu.address.logic.commands.GemCommandTest.GET_PATH_1;
-import static seedu.address.logic.commands.RequiredCommandTest.MISSING_MODULE_1;
-import static seedu.address.logic.commands.RequiredCommandTest.SINGLE_MODULE_PATH;
 import static seedu.address.logic.commands.ScienceCommandTest.INVALID_PATH;
-import static seedu.address.storage.GemCommandPaths.GEH_SEM1_PATH;
-import static seedu.address.storage.GemCommandPaths.GEQ_PATH;
-import static seedu.address.storage.GemCommandPaths.GER_PATH;
-import static seedu.address.storage.GemCommandPaths.GES_SEM1_PATH;
-import static seedu.address.storage.GemCommandPaths.GET_SEM1_PATH;
 import static seedu.address.storage.RequiredCommandMessages.FOUNDATION_PATH;
 
 import java.io.IOException;
@@ -30,7 +17,6 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.logic.commands.GemCommand;
 import seedu.address.model.Model;
-import seedu.address.model.ModelManager;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 

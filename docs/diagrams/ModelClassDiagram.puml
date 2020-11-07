@@ -47,7 +47,7 @@ UniqueModuleList o--> "*" Module
 Module *--> ModuleCode
 Module *--> ModularCredits
 Module *--> ModuleName
-Module *--> "*" Tag
+Module --> "*" Tag
 
 ModuleCode -[hidden]right-> ModularCredits
 ModularCredits -[hidden]right-> ModuleName

@@ -41,8 +41,8 @@ public class RequiredCommandTest {
             Paths.get("src/test/data/RequiredCommandTest/incompletefoundationmodules.json");
     public static final Path SINGLE_MODULE_PATH = Paths.get("src/test/data/RequiredCommandTest/singlemodule.json");
     public static final Path DOUBLE_MODULE_PATH = Paths.get("src/test/data/RequiredCommandTest/doublemodules.json");
-    public static final String MISSING_MODULE_1 = "CS1101S (4 MCs)";
-    public static final String MISSING_MODULE_2 = "CS1231S (4 MCs)";
+    public static final String MISSING_MODULE_1 = "CS1101S\tProgramming Methodology (4 MCs)";
+    public static final String MISSING_MODULE_2 = "CS1231S\tDiscrete Structures (4 MCs)";
     public static final String MESSAGE_INTERN_TEST = " You are currently at 4 MCs. ";
     private Model model;
     private RequiredCommand requiredCommand = new RequiredCommand();

@@ -4,13 +4,10 @@ import static seedu.address.commons.core.Messages.MESSAGE_INVALID_COMMAND_FORMAT
 import static seedu.address.commons.core.Messages.MESSAGE_SEARCH_USAGE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
-import static seedu.address.testutil.Assert.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.SearchCommand;
-import seedu.address.logic.parser.exceptions.ParseException;
-
 
 class SearchCommandParserTest {
     private SearchCommandParser parser = new SearchCommandParser();
@@ -29,10 +26,5 @@ class SearchCommandParserTest {
 
         // multiple whitespaces between keywords
         assertParseSuccess(parser, " \n CS2103T \n", expectedSearchCommand);
-    }
-
-    @Test
-    public void parse_invalidArgs_throwsParseException() {
-        assertThrows(ParseException.class, () -> parser.parse("search !!!"));
     }
 }

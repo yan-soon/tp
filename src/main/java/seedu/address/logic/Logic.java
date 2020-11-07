@@ -50,14 +50,6 @@ public interface Logic {
     void setGuiSettings(GuiSettings guiSettings);
 
     /**
-     * Assigns the parameters to the various attributes.
-     *
-     * @param command Command that requires stalling.
-     * @param commandText User input.
-     */
-    void assignStalledComponents(Command command, String commandText);
-
-    /**
      * Returns the Stalled Command.
      */
     Command getStalledCommand();
@@ -66,12 +58,4 @@ public interface Logic {
      * Returns the Stalled Command's accompanying arguments.
      */
     String getStalledCommandText();
-
-    /**
-     * Checks if the command given requires stalling.
-     *
-     * @param command Command to check.
-     * @param commandText User input.
-     */
-    CommandResult handleStall(Command command, String commandText) throws CommandException;
 }

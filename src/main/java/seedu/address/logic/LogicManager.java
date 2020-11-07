@@ -44,14 +44,13 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
-        assert(model != null && storage != null);
+        assert (model != null && storage != null);
         this.model = model;
         this.storage = storage;
         gradPadParser = new GradPadParser();
     }
 
-    @Override
-    public CommandResult handleStall(Command command, String commandText) throws CommandException {
+    private CommandResult handleStall(Command command, String commandText) throws CommandException {
         if (command instanceof ClearCommand) {
             assignStalledComponents(command, commandText);
             return new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
@@ -62,8 +61,7 @@ public class LogicManager implements Logic {
         }
     }
 
-    @Override
-    public void assignStalledComponents(Command command, String commandText) {
+    private void assignStalledComponents(Command command, String commandText) {
         stalledCommand = command;
         stalledCommandText = commandText;
     }

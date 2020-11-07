@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
+import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.FILE_OPS_ERROR_MESSAGE;
 import static seedu.address.commons.core.Messages.LIST_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_CLEAR_CONFIRMATION;
@@ -26,10 +27,8 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.logic.commands.ClearCommand;
 import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
-import seedu.address.logic.commands.DeleteCommand;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
@@ -115,36 +114,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void assignStalledComponents_validTest() {
-        ClearCommand expectedCommand = new ClearCommand();
-        String expectedCommandText = "";
-        logic.assignStalledComponents(expectedCommand, "");
-        Command actualCommand = logic.getStalledCommand();
-        String actualCommandText = logic.getStalledCommandText();
-        assertEquals(expectedCommand, actualCommand);
-        assertEquals(expectedCommandText, actualCommandText);
-    }
-
-    @Test
-    public void handleStallClearCommand_validTest() throws CommandException {
-        CommandResult expected = new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
-        ClearCommand testCommand = new ClearCommand();
-        String testCommandText = "";
-        CommandResult actual = logic.handleStall(testCommand, testCommandText);
-        assertEquals(expected, actual);
-    }
-
-    @Test
-    public void handleStallDeleteCommand_validTest() throws CommandException {
-        model.addModule(CS2103T);
-        CommandResult expected = new CommandResult(MESSAGE_DELETE_CONFIRMATION + CS2103T);
-        DeleteCommand testCommand = new DeleteCommand(CS2103T.getModuleCode());
-        String testCommandText = "CS2103T";
-        CommandResult actual = logic.handleStall(testCommand, testCommandText);
-        assertEquals(expected, actual);
-    }
-
-    @Test
     public void getGradPad_validTest() {
         ReadOnlyGradPad actual = logic.getGradPad();
         Model testModel = new ModelManager();
@@ -178,41 +147,46 @@ public class LogicManagerTest {
 
     @Test
     public void execute_abortCommand_validTest1() throws CommandException, ParseException {
-        ClearCommand testCommand = new ClearCommand();
-        String testCommandText = "";
-        logic.assignStalledComponents(testCommand, testCommandText);
+        model.addModule(CS2103T);
+        logic.execute(CLEAR_COMMAND_WORD);
         CommandResult expected = new CommandResult(MESSAGE_CONFIRMATION_CANCEL
-                + String.format("\"%s\"", testCommandText));
+                + String.format("\"%s\"", CLEAR_COMMAND_WORD));
         CommandResult actual = logic.execute("n");
         assertEquals(expected, actual);
     }
 
     @Test
     public void execute_abortCommand_validTest2() throws CommandException, ParseException {
-        ClearCommand testCommand = new ClearCommand();
-        String testCommandText = "";
-        logic.assignStalledComponents(testCommand, testCommandText);
+        model.addModule(CS2103T);
+        logic.execute(CLEAR_COMMAND_WORD);
         CommandResult expected = new CommandResult(MESSAGE_CONFIRMATION_CANCEL
-                + String.format("\"%s\"", testCommandText));
+                + String.format("\"%s\"", CLEAR_COMMAND_WORD));
         CommandResult actual = logic.execute(LIST_COMMAND_WORD);
         assertEquals(expected, actual);
     }
 
     @Test
     public void execute_confirmCommand_validTest() throws CommandException, ParseException {
-        ClearCommand testCommand = new ClearCommand();
-        String testCommandText = "";
-        logic.assignStalledComponents(testCommand, testCommandText);
+        model.addModule(CS2103T);
+        logic.execute(CLEAR_COMMAND_WORD);
         logic.execute(YES_COMMAND_WORD);
         Command actual = logic.getStalledCommand();
         assertNull(actual);
     }
 
     @Test
-    public void execute_requiresStall_validTest() throws CommandException, ParseException {
+    public void execute_requiresStallClear_validTest() throws CommandException, ParseException {
         model.addModule(CS2103T);
         CommandResult expected = new CommandResult(MESSAGE_CLEAR_CONFIRMATION);
         CommandResult actual = logic.execute(CLEAR_COMMAND_WORD);
+        assertEquals(expected, actual);
+    }
+
+    @Test
+    public void execute_requiresStallDelete_validTest() throws CommandException, ParseException {
+        model.addModule(CS2103T);
+        CommandResult expected = new CommandResult(MESSAGE_DELETE_CONFIRMATION + CS2103T);
+        CommandResult actual = logic.execute(DELETE_COMMAND_WORD + " " + CS2103T.getModuleCode());
         assertEquals(expected, actual);
     }
 

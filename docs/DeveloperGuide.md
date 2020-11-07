@@ -841,6 +841,8 @@ testers are expected to do more *exploratory* testing.
 1. Initial Launch
 
    1. Download the jar file and copy into an empty folder.
+   
+   1. Ensure there is internet connectivity to utilize NusMods data.
 
    1. Double-click the jar file.<br>
       Expected: GUI runs with a set of sample modules. The window size may not be optimum.
@@ -868,25 +870,22 @@ testers are expected to do more *exploratory* testing.
    1. Modular credits format must be valid. e.g. '4' is a valid module code.
    1. Module to be added must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 with 4 modular credits is a valid module, whereas module code CS1000 with 4 modular credits is an invalid module.
 
-1. Test case: `add c/cs2100 cr/4`<br>
+1. Test case: `add cs2100`<br>
    Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
       
-1. Test case: `add c/cs2100 cr/4 tag/hardestmoduleever`<br>
+1. Test case: `add cs2100 t/hardestmoduleever`<br>
    Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
    
-1. Test case: `add c/cs2100 Computer Organisation cr/4`<br>
+1. Test case: `add cs2100 Computer Organisation`<br>
    Expected: No module added. _Invalid module code format_ message is shown in the result display.
       
-1. Test case: `add c/cs2100 cr/4a`<br>
-   Expected: No module added. _Invalid modular credit format_ message is shown in the result display.
-      
-1. Test case: `add c/cs1000 cr/4`<br>
-   Expected: No module added. _Invalid module_ message is shown in the result display.
-      
 1. Test case: `add c/cs2100`<br>
-   Expected: No module added. _Invalid command format_ message is shown in the result display.
-      
-1. Other invalid add commands to try: `add`, `add cs1000 4`, `add cr/4`<br>
+   Expected: No module added. _Invalid module code format_ message is shown in the result display.
+            
+1. Test case: `add cs1000 `<br>
+   Expected: No module added. _Module not found_ message is shown in the result display.
+   
+1. Other invalid add commands to try: `add`, `add cs1000 4`, `t/best`<br>
    Expected: No module added. _Invalid command format_ message is shown in the result display.
 
 ### Delete a Module
@@ -917,14 +916,20 @@ testers are expected to do more *exploratory* testing.
    1. Module code of module to be edited must be specified.
    1. Module code format of module to be edited must be valid.
    1. Module to be edited must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
-   1. At least 1 field to edit must be specified (module code/modular credits/tags)
+   1. At least 1 field to edit must be specified (module code/tags)
    1. Format of field to edit must be valid.
    
-1. Test case: `edit cs2100 c/cs2100s`<br>
+1. Test case: `edit cs2030 c/cs2030s`<br>
    Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
       
-1. Test case: `edit cs2103t cr/5`<br>
+1. Test case: `edit cs2100 t/y1s1`<br>
    Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
+
+1. Test case: `edit cs2100 c/cs2100s`<br>
+   Expected: No module edited. _Module not found_ message is shown in the result display.
+
+1. Test case: `edit cs2103t`<br>
+   Expected: No module edited. _No field edited_ message is shown in the result display.
       
 1. Test case: `edit cs2100 Computer Organisation c/cs1000s`<br>
    Expected: No module edited. _Invalid module code format_ message is shown in the result display.
@@ -934,9 +939,6 @@ testers are expected to do more *exploratory* testing.
    
 1. Test case: `edit cs2100 c/cs2100s Computer Organisation II`<br>
    Expected: No module edited. _Invalid module code format_ message is shown in the result display.
-   
-1. Test case: `edit cs2100 cr/4a`<br>
-   Expected: No module edited. _Invalid modular credits format_ message is shown in the result display.
    
 1. Test case: `edit c/cs2100s cr/5`<br>
    Expected: No module edited. _Invalid command format_ message is shown in the result display.
@@ -1025,7 +1027,7 @@ testers are expected to do more *exploratory* testing.
 1. Test case: `search`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
-1. Other invalid delete commands to try: `search c/cs2103t`, `search 1`<br>
+1. Other invalid search commands to try: `search c/cs2103t`, `search 1`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
 ### Saving data

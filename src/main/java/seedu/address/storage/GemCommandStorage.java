@@ -150,40 +150,4 @@ public class GemCommandStorage {
         String file = getFileFromResource(path);
         getModules = JsonUtil.getModulesFromJsonFile(file);
     }
-
-    /**
-     * Takes a List of Modules and extracts out their Module Code and Modular Credits.
-     *
-     * @param modules List of Modules.
-     * @return String of Module Codes and Modular Credits.
-     */
-    public StringBuilder moduleExtractor(ObservableList<Module> modules) {
-        assert modules != null;
-        StringBuilder modulesToAdd = new StringBuilder();
-        for (Module module : modules) {
-            String moduleToAdd = module.getModuleCode() + " (" + module.getModularCredits() + " MCs)";
-            modulesToAdd.append("\n").append(moduleToAdd);
-        }
-        return modulesToAdd;
-    }
-
-    /**
-     * Returns compiledModules attribute of GemCommandStorage object.
-     * @return compiledModules attribute of type String.
-     */
-    public String getCompiledModules() {
-        return compiledModules;
-    }
-
-    /**
-     * Loads the compiledModules attribute with all the relevant GE modules in String form.
-     */
-    public void setCompiledModules() {
-        compiledModules = "";
-        compiledModules += moduleExtractor(gehModules);
-        compiledModules += moduleExtractor(geqModules);
-        compiledModules += moduleExtractor(gerModules);
-        compiledModules += moduleExtractor(gesModules);
-        compiledModules += moduleExtractor(getModules);
-    }
 }

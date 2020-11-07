@@ -137,6 +137,21 @@ The `Model`,
 The `Storage` component,
 * can save `UserPref` objects in json format and read it back.
 * can save the GradPad data in json format and read it back.
+* stores required modules that are on the Computer Science curriculum, in the `RequiredCommandStorage` class.
+* stores all General Education modules available in NUS, in the `GemCommandStorage` class.
+
+### Design considerations
+
+We chose to set up the module-specific Storage classes, with the sole purpose of extracting and parsing the JSON data
+so that GradPad can interact with it.
+
+### Rationale
+
+This is done so that the `RequiredCommand`, `GemCommand` and `ScienceCommand` classes do not have to worry about
+data retrieval and storage, such that they can focus on executing the command logic.
+
+The two Storage classes are separated to avoid cluttering up `RequiredCommandStorage`, due to the hefty size of
+General Education Modules.
 
 ### Nusmods component
 
@@ -397,13 +412,17 @@ The following sequence diagram illustrates how the `checkmc` command is executed
 
 ![CheckMcDiagram](images/CheckMcSequenceDiagram.png)
 
-### [Implementation in progress] Check required modules feature
+### Check required modules feature
 
 The `required` command allows users to view the required modules in the NUS Computer Science curriculum 
 that they have yet to take.
 
 When the command is executed, it checks through the current modules in the `Completed Modules` list and ensures
 that modules that have already been taken are not displayed in the list of remaining required modules.
+
+This is achieved with the `RequiredCommand` and `RequiredCommandStorage` class. The `RequiredCommandStorage` class
+handles the extracting, parsing of JSON module data while the `RequiredCommand` handles the logic
+behind filtering the undone modules.
 
 As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.
 
@@ -420,15 +439,111 @@ object.
 
 5. This command object is then passed back to the `LogicManager` in step 2.
 
-6. `LogicManager` executes the newly created `RequiredCommand`, which contains a hard-coded list of required modules
+6. `LogicManager` executes the newly created `RequiredCommand`, which will contain the following uninitialised attributes,
+list of `currentModules` in GradPad, all the `leftOverModules` and a `RequiredCommandStorage` to store all modules
 in the syllabus.
 
 7. Then, `RequiredCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules
-` field within the `GradPad`.
+` field within the `GradPad` with a few method calls, before storing it in `currentModules`.
 
-8. It filters the list of required modules by removing those that are present in `modules`.
+8. `RequiredCommand.execute()` then calls its own method `setStorage` to create a `RequiredCommandStorage` object.
 
-9. Finally, a `CommandResult` is created to show the filtered list of remaining required modules.
+9. Within the `setStorage` method, various method calls are made for each module category (Eg. Foundation, IT Professionalism)
+ to set up the `RequiredCommandStorage` object with the all the relevant modules.
+
+10. Then, `RequireCommand.execute()` call its own method `compareAllGEs()` to check if any GE pillars have not been cleared.
+It then keeps track of which pillars have not been cleared.
+
+11. `RequireCommand.execute()` then proceeds to call its own methods `compareModules`, `compareScience` and `compareInternship`
+to keep track of undone modules by cross-referring to the `currentModules` list.
+
+12. Finally, a `CommandResult` is created with the `leftOverModules` to show the filtered list of remaining required modules.
+
+The following sequence diagram illustrates how the `required` command is executed.
+
+![RequiredDiagram](images/RequiredSequenceDiagram.png)
+
+### Check all available Science Modules
+
+The `science` command allows users to view all available Science modules available on the Computer Science curriculum.
+
+When the command is executed, a list of all available Science modules will be displayed on the `Command Line Display`.
+
+This is achieved by tapping into the `RequiredCommandStorage` class to extract and parse the Science modules, while the
+`ScienceCommand` class handles the logic of displaying the modules. This command is separated from the `required`
+command to avoid cluttering of the `Command Line Display`. 
+
+As with all operations in GradPad, the `ScienceCommand` class handles the execution of `science` operations.
+
+Given below is a series of steps to show how a `science` operation behaves during its execution.
+
+1. The user enters the `science` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a science command and thus creates a `ScienceCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `ScienceCommand`, which will contain an empty list of `scienceModules`,
+to be filled up by fetching a `RequiredCommandStorage` object.
+
+7. Then, the `ScienceCommand.execute()` calls its own method, `setScienceModules()` which creates a
+`RequiredCommandStorage` object.
+
+8. Inside the `setScienceModules()` method, the `setRequiredScience` method of the `RequiredCommandStorage` class
+is invoked, which sets `scienceModules` with the list of available Science modules.
+
+9. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
+
+The following sequence diagram illustrates how the `science` command is executed.
+
+![ScienceDiagram](images/ScienceSequenceDiagram.png)
+
+### Check all available General Education Modules
+
+The `gem` command allows users to view all available General Education (GE) modules available in NUS.
+
+When the command is executed, a list of all available GE modules will be displayed on the `Command Line Display`.
+
+This is achieved with the `GemCommand` and `GemCommandStorage` class. The `GemCommandStorage` class
+handles the extracting and parsing of JSON module data while the `GemCommand` handles the logic of displaying the
+modules. This command is separated from `required` to avoid cluttering up the `Command Line Display` due to the hefty
+amount of GE modules displayed.
+
+As with all operations in GradPad, the `GemCommand` class handles the execution of `gem` operations.
+
+Given below is a series of steps to show how a `gem` operation behaves during its execution.
+
+1. The user enters the `gem` command string.
+
+2. This calls the `execute` method of the `LogicManager` class with the user input passed in as a string.
+
+3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
+
+4. `GradPadParser.parseCommand()` identifies the command as a gem command and thus creates a `GemCommand`
+object.
+
+5. This command object is then passed back to the `LogicManager` in step 2.
+
+6. `LogicManager` executes the newly created `GemCommand`, which will contain 2  uninitialised
+`GemCommandStorage` attributes, used to store Semester 1 and 2 General Education Modules.
+
+7. `GemCommand.execute()` then calls its own method `setSem1Storage` and `setSem2Storage` to create 2 `GemCommandStorage`
+objects.
+
+8. Within the `setSem1Storage` and `setSem2Storage` methods, various method calls are made for each GE pillar (Eg. GET, GER)
+to set up the `sem1Storage` and `sem2Storage` objects with the all the relevant `sem1GeModules` and `sem2GeModules`.
+
+9. Finally, a `CommandResult` is created with both the `sem1GeModules` and `sem2GeModules`, displaying all the available
+GE modules by Semester.
+
+The following sequence diagram illustrates how the `gem` command is executed.
+
+![GemDiagram](images/GemSequenceDiagram.png)
 
 ### Search feature
 
@@ -860,43 +975,62 @@ testers are expected to do more *exploratory* testing.
       Expected: The window closes immediately.
       
    1. Test case: `exit`<br>
-      Expected: GUI shows a farewell message,"Exiting GradPad as requested ..." and delays for 1.5 seconds, after which the window closes.
+      Expected: GUI shows a farewell message,"Exiting GradPad as requested ..." and delays for 1.5 seconds,
+      after which the window closes.
       
-### Add a Module
+   1. Test case: `exitt`<br>
+      Expected: Window does not close. _Unknown command_ message is shown in the result display.
 
-1. Prerequisites: 
-   1. Both module code and modular credits must be specified.
+### Testing features
+
+#### Add a Module
+
+Prerequisites: 
+   1. Module code must be specified.
    1. Module code format must be valid, e.g. 'CS2100' is a valid module code.
-   1. Modular credits format must be valid. e.g. '4' is a valid module code.
-   1. Module to be added must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 with 4 modular credits is a valid module, whereas module code CS1000 with 4 modular credits is an invalid module.
+   1. Module to be added must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 is a
+   valid module, whereas module code CS1000 is an invalid module.
+   1. Module added must not already exist in GradPad.
+   1. Command must follow the `add` format.
 
+Test Cases:
+1. Test case: `add cs2100 t/fun`<br>
+   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+   
 1. Test case: `add cs2100`<br>
-   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
-      
-1. Test case: `add cs2100 t/hardestmoduleever`<br>
-   Expected: CS2100 module is added into 'Completed Modules' in GradPad. Details of the added module are shown in the result display.
+   Expected: No module added. _Duplicate module_ message is shown in the result display.
+
+1. Test case: `add cs2100 t/funnn`<br>
+   Expected: No module added. _Duplicate module_ message is shown in the result display.
    
 1. Test case: `add cs2100 Computer Organisation`<br>
    Expected: No module added. _Invalid module code format_ message is shown in the result display.
       
-1. Test case: `add c/cs2100`<br>
-   Expected: No module added. _Invalid module code format_ message is shown in the result display.
-            
-1. Test case: `add cs1000 `<br>
-   Expected: No module added. _Module not found_ message is shown in the result display.
-   
-1. Other invalid add commands to try: `add`, `add cs1000 4`, `t/best`<br>
+1. Test case: `add cs1000`<br>
+   Expected: No module added. _Invalid module_ message is shown in the result display.
+      
+1. Test case: `add`<br>
    Expected: No module added. _Invalid command format_ message is shown in the result display.
+   
+1. Test case: `addd cs2100`<br>
+   Expected: No module added. _Unknown command_ message is shown in the result display.
 
-### Delete a Module
+#### Delete a Module
 
-1. Prerequisites: 
+Prerequisites: 
    1. Module code must be specified.
    1. Module code format must be valid.
    1. Module to be deleted must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
-      
-1. Test case: `delete cs2100`<br>
-   Expected: CS2100 module is deleted from 'Completed Modules' in GradPad. Details of the deleted module are shown in the result display.
+   1. Command must follow the `delete` format, followed by `y`, `ye`, or `yes` formats for confirmation.
+ 
+Test Cases:     
+1. Test case: `delete cs2100` followed by `y`<br>
+   Expected: CS2100 module is deleted from 'Completed Modules' in GradPad. _Confirmation_ message followed by
+   details of the deleted module are shown in the result display.
+   
+1. Test case: `delete cs2100` followed by `n`<br>
+   Expected: No module deleted. _Confirmation_ message followed by _Command aborted_ message are shown in the
+   result display.
    
 1. Test case: `delete cs2100 Computer Ogranisation`<br>
    Expected: No module deleted. _Invalid module code format_ message is shown in the result display.
@@ -906,119 +1040,231 @@ testers are expected to do more *exploratory* testing.
       
 1. Test case: `delete`<br>
    Expected: No module deleted. _Invalid command format_ message is shown in the result display.
+   
+1. Test case: `deleteee cs2100`<br>
+   Expected: No module deleted. _Unknown command_ message is shown in the result display.
+ 
+#### Force Delete a module
 
-1. Other invalid delete commands to try: `delete cs2103t 4`, `delete c/cs2103t`, `delete 1`<br>
-   Expected: No module deleted. _Invalid command format_ message is shown in the result display.
+Prerequisites: 
+   1. Module code must be specified.
+   1. Module code format must be valid.
+   1. Module to be deleted must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
+   1. Command must follow the `fdelete` format.
+ 
+Test Cases:     
+1. Test case: `fdelete cs2100`<br>
+   Expected: CS2100 module is deleted from 'Completed Modules' in GradPad. Details of the deleted module are shown
+   in the result display.
+   
+1. Test case: `fdelete cs2100 Computer Ogranisation`<br>
+   Expected: No module deleted. _Invalid module code format_ message is shown in the result display.
+
+1. Test case: `fdelete cs2106`<br>
+   Expected: No module deleted. _Module not found_ message is shown in the result display.
       
-### Edit a Module
+1. Test case: `fdelete`<br>
+   Expected: No module deleted. _Invalid command format_ message is shown in the result display.
+   
+1. Test case: `fdeleteee cs2100`<br>
+   Expected: No module deleted. _Unknown command_ message is shown in the result display.
 
-1. Prerequisites:
+#### Clear current list of Modules
+
+Prerequisites:
+   1. Command must follow the `clear` format followed by `y`, `ye`, or `yes` formats for confirmation.
+   
+Test Cases:
+1. Test case: `clear` followed by `y`<br>
+   Expected: All modules are cleared from GradPad. _Confirmation_ message followed by _GradPad cleared_ message
+   are shown in the result display.
+   
+1. Test case: `clearrr`
+   Expected: Modules are not cleared from GradPad. _Unknown command_ message is shown in the result display.
+   
+#### Force Clear current list of Modules
+
+Prerequisites:
+   1. Command must follow the `fclear` format.
+   
+Test Cases:
+1. Test case: `fclear`<br>
+   Expected: All modules are cleared from GradPad. _GradPad cleared_ message is shown in the result display.
+   
+1. Test case: `fclearrr`
+   Expected: Modules are not cleared from GradPad. _Unknown command_ message is shown in the result display.
+
+#### Edit a Module
+
+Prerequisites:
    1. Module code of module to be edited must be specified.
    1. Module code format of module to be edited must be valid.
    1. Module to be edited must exist in the list being displayed in GradPad, e.g. CS2100 is in the list and CS2106 is not.
+   1. Module replaced must be an existing module in NUS.
    1. At least 1 field to edit must be specified (module code/tags)
    1. Format of field to edit must be valid.
-   
-1. Test case: `edit cs2030 c/cs2030s`<br>
-   Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
+   1. Replaced fields must be different from current fields.
+   1. Command must follow the `edit` format.
+ 
+Test Cases:  
+1. Test case: `edit cs2100 c/cs2103t`<br>
+   Expected: CS2100 module is replaced with CS2103T. Details of the edited module are shown in the result display.
       
-1. Test case: `edit cs2100 t/y1s1`<br>
-   Expected: CS2100 module is edited. Details of the edited module are shown in the result display.
-
-1. Test case: `edit cs2100 c/cs2100s`<br>
-   Expected: No module edited. _Module not found_ message is shown in the result display.
-
-1. Test case: `edit cs2103t`<br>
-   Expected: No module edited. _No field edited_ message is shown in the result display.
-      
-1. Test case: `edit cs2100 Computer Organisation c/cs1000s`<br>
+1. Test case: `edit cs2100 Computer Organisation c/cs2103t`<br>
    Expected: No module edited. _Invalid module code format_ message is shown in the result display.
       
-1. Test case: `edit cs2106 c/cs2106s`<br>
+1. Test case: `edit cs2106 c/cs2103t`<br>
    Expected: No module edited. _Module not found_ message is shown in the result display.
+   
+1. Test case: `edit cs2100 c/cs1000`<br>
+   Expected: No module edited. _Invalid module_ message is shown in the result display.
    
 1. Test case: `edit cs2100 c/cs2100s Computer Organisation II`<br>
    Expected: No module edited. _Invalid module code format_ message is shown in the result display.
    
-1. Test case: `edit c/cs2100s cr/5`<br>
-   Expected: No module edited. _Invalid command format_ message is shown in the result display.
-      
-1. Other invalid edit commands to try: `edit`, `edit cs2103t 2103 5`, `edit 1`<br>
-   Expected: No module edited. _Invalid command format_ message is shown in the result display.
-      
-### List All Modules
+1. Test case: `edit cs2100 c/cs2100`<br>
+   Expected: No module edited. _Same module_ message is shown in the result display.
+   
+1. Test case: `edit cs2100 t/fun`<br>
+   Expected: CS2100 module tag is replaced with "fun" tag. Details of the edited module are shown in the result display.
+   
+1. Test case: `edit cs2100 t/fun`<br>
+   Expected: No module edited. _Same tag_ message is shown in the result display.
 
-1. Prerequisite: 
-   1. Command must not be accompanied by any arguments.
+1. Test case: `edit cs2100 t/fun!!!`<br>
+   Expected: No module edited. _Invalid tag format_ message is shown in the result display.
+      
+1. Test case: `edit`<br>
+   Expected: No module edited. _Invalid command format_ message is shown in the result display.
+  
+1. Test case: `edittt cs2100 t/cool`<br>
+   Expected: No module edited. _Unknown command_ message is shown in the result display.
+      
+#### List All Modules
 
+Prerequisite: 
+   1. Command must follow the `list` format.
+
+Test Cases:
 1. Test case: `list`<br>
    Expected: The full list of 'Completed Modules' is displayed. "Listed all modules" message shown in the result display.
    
-1. Test case: `list modules`<br>
-   Expected: Current list remains unchanged. _Invalid command format_ message is shown in the result display.
+1. Test case: `listttt`<br>
+   Expected: Current list remains unchanged. _Unknown command_ message is shown in the result display.
 
-### Find a Specific Module or a Group of Modules
+#### Find a Specific Module or a Group of Modules
 
-1. Prerequisites: 
+Prerequisites: 
    1. Arguments must be specified.
-   1. Module to be included must exist in the 'Completed Modules' in GradPad, e.g. CS2100, CS2101, CS3230 and ST2334 are in the list and CS2106 is not.
-      
+   1. Module to be included must exist in the 'Completed Modules' in GradPad, e.g. CS2100 (fun), CS2101 (fun),
+   ST2334 (fun) and CS3230 are in the list and CS2106 is not. The words in the bracket represent the module tags.
+   1. Command must follow the `find` format.
+
+Test Cases:    
 1. Test case: `find cs2`<br>
-   Expected: CS2100 and CS2101 are displayed. "2 modules listed!" message shown in the result display.
+   Expected: CS2100 and CS2101 are displayed. "2 modules found!" message shown in the result display.
    
 1. Test case: `find cs2 st`<br>
-   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules listed!" message shown in the result display.
+   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules found!" message shown in the result display.
    
 1. Test case: `find cs3230`<br>
-   Expected: CS3230 is displayed. "1 modules listed!" message shown in the result display.
+   Expected: CS3230 is displayed. "1 modules found!" message shown in the result display.
 
 1. Test case: `find cs2106`<br>
-   Expected: No modules displayed. "0 modules listed!" message shown in the result display.
+   Expected: No modules displayed. "0 modules found!" message shown in the result display.
+   
+1. Test case: `find fu`<br>
+   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules found!" message shown in the result display.
+
+1. Test case: `find fun`<br>
+   Expected: CS2100, CS2101 and ST2334 are displayed. "3 modules found!" message shown in the result display.
+   
+1. Test case: `find funnnn`<br>
+   Expected: No modules displayed. "0 modules found!" message shown in the result display.  
       
 1. Test case: `find`<br>
    Expected: Current list is unchanged. _Invalid command format_ message is shown in the result display.
    
-### Check Total Modular Credits
-
-1. Prerequisite: Command must not be accompanied by any arguments.
-
-1. Test case: `checkmc`
-   Expected: Total modular credits are calculated and displayed. If there are no modules in 'Completed Modules', total modular credits will be 0.
+1. Test case: `findd CS2101` <br>
+   Expected: No modules displayed. _Unknown command_ message is shown in the result display.
    
-1. Test case: `checkmc modules`
-   Expected: Total modular credits are not calculated. _Invalid command format_ message is shown in the result display.
+#### Check Total Modular Credits
+
+Prerequisite:
+   1. Command must follow the `checkmc` format.
+
+Test Cases:
+1. Test case: `checkmc` <br>
+   Expected: Total modular credits are calculated and displayed. If there are no modules in 'Completed Modules',
+   total modular credits will be 0.
    
-### Open Help Page
+1. Test case: `checkmccccc` <br>
+   Expected: Total modular credits are not calculated. _Unknown command_ message is shown in the result display.
+   
+#### Open Help Page
 
-1. Prerequisite: Command must not be accompanied by any arguments.
+Prerequisite:
+   1. Command must follow the `help` format.
 
-1. Test case: `help`
+Test Cases:
+1. Test case: `help` <br>
    Expected: Help page is displayed.
    
-1. Test case: `help modules`
-   Expected: Help page is not displayed. _Invalid command format_ message is shown in the result display.
+1. Test case: `helppppp` <br>
+   Expected: Help page is not displayed. _Unknown command_ message is shown in the result display.
    
-### Show Required Modules
+#### Show Required Modules
 
-1. Prerequisite: Command must not be accompanied by any arguments.
+Prerequisite:
+   1. Command must follow the `required` format.
 
-1. Test case: `required`
+Test Cases:
+1. Test case: `required` <br>
    Expected: All required modules are displayed in the result display. Modules already in the 'Completed Modules' list in GradPad would not be displayed in the 'Required Modules' list.
    
-1. Test case: `required modules`
-   Expected: Required modules are not displayed. _Invalid command format_ message is shown in the result display.
+1. Test case: `requiredddd` <br>
+   Expected: Required modules are not displayed. _Unknown command_ message is shown in the result display.
    
-### Check Module Information
+#### Show available Science Modules
 
-1. Prerequisites: 
+Prerequisite:
+   1. Command must follow the `science` format.
+
+Test Cases:
+1. Test case: `science` <br>
+   Expected: All available Science modules are displayed in the result display. Modules already in the 'Completed Modules'
+   list would not be displayed.
+   
+1. Test case: `scienceeeee` <br>
+   Expected: Science modules are not displayed. _Unknown command_ message is shown in the result display.
+   
+#### Show available General Education Modules
+
+Prerequisite: 
+   1. Command must follow the `gem` format.
+
+Test Cases:
+1. Test case: `gem` <br>
+   Expected: All available General Education modules are displayed in the result display. Modules already in the 'Completed Modules'
+   list would not be displayed.
+   
+1. Test case: `gemmmmm` <br>
+   Expected: General Education modules are not displayed. _Unknown command_ message is shown in the result display.
+
+#### Search Module Information
+
+Prerequisites: 
    1. Module code must be specified.
    1. Module code format must be valid.
-   1. Module to be searched must exist in the valid modules list fetched from NUSMods, e.g. module code CS2100 is a valid module, whereas module code CS1000 is an invalid module.
- 
+   1. Module to be searched must exist in the valid modules list fetched from NUSMods,e.g. module code CS2100
+   is a valid module, whereas module code CS1000 is an invalid module.
+   1. Command must follow the `search` format.
+
+Test Cases:
 1. Test case: `search cs2100`<br>
    Expected: CS2100 module information is displayed in the result display.
    
-1. Test case: `search cs2100 Computer Ogranisation`<br>
+1. Test case: `search cs2100 Computer Organisation`<br>
    Expected: No module information is displayed. _Invalid module code format_ message is shown in the result display.
 
 1. Test case: `search cs1000`<br>
@@ -1029,6 +1275,20 @@ testers are expected to do more *exploratory* testing.
 
 1. Other invalid search commands to try: `search c/cs2103t`, `search 1`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
+1. Test case: `searchh cs2100`<br>
+   Expected: No module information is displayed. _Unknown command_ message is shown in the result display.
+
+#### List all current Tags
+
+Prerequisites:
+   1. Command must follow the `tags` format.
+   
+Test Cases:
+1. Test case: `tags`<br>
+   Expected: All tags currently in use will be shown in the result display.
+   
+1. Test case: `tagss`<br>
+   Expected: No tags displayed. _Unknown command_ message is shown in the result display.
 
 ### Saving data
 

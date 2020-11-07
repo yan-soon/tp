@@ -5,16 +5,17 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.core.GuiSettings;
-
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Objects;
 
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.core.GuiSettings;
+
 public class UserPrefsTest {
 
-    UserPrefs testUserPrefs = new UserPrefs();
+    private final UserPrefs testUserPrefs = new UserPrefs();
     @Test
     public void setGuiSettings_nullGuiSettings_throwsNullPointerException() {
         UserPrefs userPref = new UserPrefs();
@@ -37,7 +38,7 @@ public class UserPrefsTest {
         GradPad testGradPad = new GradPad();
         assertFalse(testUserPrefs.equals(testGradPad));
     }
-    
+
     @Test
     public void hashCode_validTest() {
         GuiSettings testGuiSettings = new GuiSettings();

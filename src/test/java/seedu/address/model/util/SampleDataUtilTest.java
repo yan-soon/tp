@@ -1,14 +1,15 @@
 package seedu.address.model.util;
 
-import org.junit.jupiter.api.Test;
-import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.model.ReadOnlyGradPad;
-import seedu.address.storage.JsonGradPadStorage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.nio.file.Paths;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import seedu.address.commons.exceptions.DataConversionException;
+import seedu.address.model.ReadOnlyGradPad;
+import seedu.address.storage.JsonGradPadStorage;
 
 class SampleDataUtilTest {
 

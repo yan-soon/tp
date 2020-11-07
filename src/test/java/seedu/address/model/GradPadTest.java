@@ -86,7 +86,7 @@ public class GradPadTest {
     public void getModuleList_modifyList_throwsUnsupportedOperationException() {
         Assertions.assertThrows(UnsupportedOperationException.class, () -> gradPad.getModuleList().remove(0));
     }
-    
+
     @Test
     public void hashCode_validTest() {
         UniqueModuleList testModuleList = new UniqueModuleList();

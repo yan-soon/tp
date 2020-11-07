@@ -120,5 +120,5 @@ public class UniqueTagMapTest {
     public void toStringMethod_validTest() {
         UniqueTagMap testMap = new UniqueTagMap();
         assertEquals(testMap.toString(), TEST_EMPTY_TAG_MAP);
-    } 
+    }
 }

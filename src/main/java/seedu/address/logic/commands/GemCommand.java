@@ -29,6 +29,7 @@ public class GemCommand extends Command {
 
     /**
      * Retrieves the attribute sem1Storage of a GemCommand object.
+     *
      * @return storage attribute of type GemCommandStorage.
      */
     public GemCommandStorage getSem1Storage() {
@@ -37,6 +38,7 @@ public class GemCommand extends Command {
 
     /**
      * Retrieves the attribute sem2Storage of a GemCommand object.
+     *
      * @return storage attribute of type GemCommandStorage.
      */
     public GemCommandStorage getSem2Storage() {
@@ -46,6 +48,7 @@ public class GemCommand extends Command {
     /**
      * Loads the sem1Storage attribute with Semester 1 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
+     *
      * @throws IOException When the path in invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -62,6 +65,7 @@ public class GemCommand extends Command {
     /**
      * Loads the sem2Storage attribute with Semester 2 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
+     *
      * @throws IOException When the path in invalid.
      * @throws IllegalValueException When the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
@@ -122,6 +126,9 @@ public class GemCommand extends Command {
 
     /**
      * Loads the compiledModules attribute with all the relevant GE modules in String form.
+     *
+     * @param storage Contains list of GE modules.
+     * @param model {@code Model} which the command should operate on.
      */
     public void setCompiledModules(GemCommandStorage storage, Model model) {
         compiledModules = "";
@@ -135,6 +142,7 @@ public class GemCommand extends Command {
 
     /**
      * Returns compiledModules attribute of GemCommandStorage object.
+     *
      * @return compiledModules attribute of type String.
      */
     public String getCompiledModules() {

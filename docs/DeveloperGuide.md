@@ -582,7 +582,7 @@ passing in the module code.
 10. The `ModuleInfo` of the searched module retrieved will then be accessed and formatted according to the display 
 requirement.
 
-10. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+11. Finally, a `CommandResult` is created to display the module information that has been retrieved.
 
 The following sequence diagram illustrates how the `search CS2103T` command is executed.
 

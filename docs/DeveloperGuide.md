@@ -644,10 +644,9 @@ The following sequence diagram illustrates how the `gem` command is executed.
 
 ![GemDiagram](images/GemSequenceDiagram.png)
 
-### [Implementation in progress] Search all modules feature
+### Search feature
 
-The `search` command allows users to search for any module within the NUS Computer Science curriculum and view
-its module details.
+The `search` command allows users to search for any module available in NUS and display the module details.
 
 To retrieve a module's information, the execution of this command interacts with the `Nusmods` component, which
 contains all logic related to the access of module data from the NUSMODS public API. We will not go into detail
@@ -663,17 +662,30 @@ Given below is a series of steps to show how a `search` operation behaves during
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
-4. `GradPadParser.parseCommand()` identifies the command as a search command and thus creates a `SearchCommand`
-object.
+4. `GradPadParser.parseCommand()` sees that this is a search command, and so uses the `SearchCommandParser.parse()` 
+method in `SearchCommandParser`.
 
-5. This command object is then passed back to the `LogicManager` in step 2.
+5. In `SearchCommandParser`, `SearchCommandParser.parse()` extracts the ModuleCode from the string input.
 
-6. `LogicManager` executes the newly created `SearchCommand`.
+6. A `SearchCommand` is then created with the ModuleCode, and is passed back to the
+`LogicManager` in step 2. 
 
-7. `SearchCommand.execute()` retrieves the corresponding module information by calling 
+7. `LogicManager` executes the newly created `SearchCommand`.
+
+8. `SearchCommand.execute()` then creates an instance of `ModuleInfoSearcher` to call the `searchModule()` method by
+passing in the module code.
+
+9. `searchModule()` method will then take in the module code and retrieve the `ModuleInfo` by calling
 `NusmodsData.getModuleInfo()` in the `Nusmods` package.
 
-9. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+10. The `ModuleInfo` of the searched module retrieved will then be accessed and formatted according to the display 
+requirement.
+
+11. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+
+The following sequence diagram illustrates how the `search CS2103T` command is executed.
+
+![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
 ### Tags feature
 
@@ -1043,7 +1055,7 @@ testers are expected to do more *exploratory* testing.
 1. Initial Launch
 
    1. Download the jar file and copy into an empty folder.
-
+   
    1. Double-click the jar file.<br>
       Expected: GUI runs with a set of sample modules. The window size may not be optimum.
 
@@ -1358,6 +1370,8 @@ Test Cases:
 1. Test case: `search`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
+1. Other invalid search commands to try: `search c/cs2103t`, `search 1`<br>
+   Expected: No module information is displayed. _Invalid module_ message is shown in the result display.
 1. Test case: `searchh cs2100`<br>
    Expected: No module information is displayed. _Unknown command_ message is shown in the result display.
 

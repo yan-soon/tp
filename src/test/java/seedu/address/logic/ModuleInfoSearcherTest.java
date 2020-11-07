@@ -11,6 +11,8 @@ import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.nusmods.ModuleInfo;
+import seedu.address.nusmods.NusmodsDataManager;
+import seedu.address.nusmods.NusmodsDataManagerTest;
 
 /**
  * Contains integration tests for {@code ModuleInfoSearcher}.
@@ -18,7 +20,6 @@ import seedu.address.nusmods.ModuleInfo;
 class ModuleInfoSearcherTest {
 
     private static final String CS1010X = "src/test/resources/NusmodsDataManagerTest/CS1010X.json";
-
 
     private ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
 
@@ -32,8 +33,8 @@ class ModuleInfoSearcherTest {
     @Test
     public void search_false_module() {
         String falseModule = "AA0000";
-        assertThrows(CommandException.class, ModuleInfoSearcher.MESSAGE_FAILED_TO_FIND_MODULE, ()
-            -> moduleInfoSearcher.searchModule(falseModule));
+        assertThrows(CommandException.class, String.format(ModuleInfoSearcher.MESSAGE_FAILED_TO_FIND_MODULE,
+                falseModule), () -> moduleInfoSearcher.searchModule(falseModule));
     }
 
     @Test
@@ -49,4 +50,10 @@ class ModuleInfoSearcherTest {
         assertEquals(actualModuleInfo, cs1010x);
     }
 
+    @Test
+    public void search_failed_throwsNusmodsException() {
+        NusmodsDataManager stubManager = new NusmodsDataManagerTest().getStubManager();
+        ModuleInfoSearcher moduleInfoSearcherStub = new ModuleInfoSearcher(stubManager);
+        assertThrows(CommandException.class, () -> moduleInfoSearcherStub.searchModule("CS2103T"));
+    }
 }

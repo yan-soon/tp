@@ -8,6 +8,7 @@ import java.util.Optional;
 import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.nusmods.ModuleInfo;
 
 /**
@@ -16,13 +17,13 @@ import seedu.address.nusmods.ModuleInfo;
  */
 public class SearchCommand extends Command {
 
-    private final String moduleCode;
+    private final ModuleCode moduleCode;
 
     /**
      * Creates a SearchCommand to search for a module from the Computer Science
      * curriculum {@code Module}
      */
-    public SearchCommand(String moduleCode) {
+    public SearchCommand(ModuleCode moduleCode) {
         requireNonNull(moduleCode);
         this.moduleCode = moduleCode;
     }
@@ -31,7 +32,7 @@ public class SearchCommand extends Command {
     public CommandResult execute(Model model) throws CommandException {
         requireNonNull(model);
         ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
-        ModuleInfo searchResult = moduleInfoSearcher.searchModule(moduleCode);
+        ModuleInfo searchResult = moduleInfoSearcher.searchModule(moduleCode.moduleCode);
 
         // preclusions and prerequisites could be null
         String preclusion = Optional.ofNullable(searchResult.getPreclusion()).orElse("None");

@@ -37,6 +37,10 @@ public class Messages {
     public static final String LINE = "----------------------------------------------------------------------"
         + "--------------------------------------\n\n";
 
+    // ModuleInfoSearcher
+    public static final String MESSAGE_FAILED_TO_FIND_MODULE = "Failed to find module: %s";
+    public static final String MESSAGE_EMPTY_SEARCH = "Search is empty";
+
     // add command
     public static final String ADD_COMMAND_WORD = "add";
     public static final String MESSAGE_ADD_USAGE = ADD_COMMAND_WORD + "\n\n"

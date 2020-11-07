@@ -7,6 +7,7 @@ import java.nio.file.Paths;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
 import seedu.address.logic.commands.exceptions.CommandException;
@@ -26,14 +27,14 @@ class ModuleInfoSearcherTest {
     @Test
     public void search_empty_module() {
         String emptyModule = "";
-        assertThrows(CommandException.class, ModuleInfoSearcher.MESSAGE_EMPTY_SEARCH, ()
+        assertThrows(CommandException.class, Messages.MESSAGE_EMPTY_SEARCH, ()
             -> moduleInfoSearcher.searchModule(emptyModule));
     }
 
     @Test
     public void search_false_module() {
         String falseModule = "AA0000";
-        assertThrows(CommandException.class, String.format(ModuleInfoSearcher.MESSAGE_FAILED_TO_FIND_MODULE,
+        assertThrows(CommandException.class, String.format(Messages.MESSAGE_FAILED_TO_FIND_MODULE,
                 falseModule), () -> moduleInfoSearcher.searchModule(falseModule));
     }
 
@@ -52,7 +53,7 @@ class ModuleInfoSearcherTest {
 
     @Test
     public void search_failed_throwsNusmodsException() {
-        NusmodsDataManager stubManager = new NusmodsDataManagerTest().getStubManager();
+        NusmodsDataManager stubManager = NusmodsDataManagerTest.getStubManager();
         ModuleInfoSearcher moduleInfoSearcherStub = new ModuleInfoSearcher(stubManager);
         assertThrows(CommandException.class, () -> moduleInfoSearcherStub.searchModule("CS2103T"));
     }

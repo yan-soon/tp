@@ -14,9 +14,9 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
@@ -59,7 +59,7 @@ public class SearchCommandTest {
         ModuleCode invalidModuleCode = new ModuleCode("AA0000");
         SearchCommand searchCommand = new SearchCommand(invalidModuleCode);
         assertCommandFailure(searchCommand, model,
-                String.format(ModuleInfoSearcher.MESSAGE_FAILED_TO_FIND_MODULE, invalidModuleCode.toString()));
+                String.format(Messages.MESSAGE_FAILED_TO_FIND_MODULE, invalidModuleCode.toString()));
     }
 
     @Test

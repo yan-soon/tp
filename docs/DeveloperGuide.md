@@ -149,13 +149,13 @@ The `Storage` component,
 
 ### Design considerations
 
-We chose to set up the Storage classes, with the sole purpose of extracting and parsing JSON data
-so that GradPad can interact with it.
+We chose to set up the module-specific Storage classes, with the sole purpose of extracting, parsing
+and finally writing the JSON data so that GradPad can interact with it.
 
 ### Rationale
 
-This is done so that the `RequiredCommand` and `GemCommand` classes do not have to worry about data retrieval and
-storage, such that they can focus on executing the command logic.
+This is done so that the `RequiredCommand`, `GemCommand` and `ScienceCommand` classes do not have to worry about
+data retrieval and storage, such that they can focus on executing the command logic.
 
 The two Storage classes are separated to avoid cluttering up `RequiredCommandStorage`, due to the hefty size of
 General Education Modules.
@@ -428,8 +428,8 @@ When the command is executed, it checks through the current modules in the `Comp
 that modules that have already been taken are not displayed in the list of remaining required modules.
 
 This is achieved with the `RequiredCommand` and `RequiredCommandStorage` class. The `RequiredCommandStorage` class
-handles the extracting and parsing of JSON module data while the `RequiredCommand` handles the logic behind filtering
-the undone modules.
+handles the extracting, parsing and writing of JSON module data while the `RequiredCommand` handles the logic
+behind filtering the undone modules.
 
 As with all operations in GradPad, the `RequiredCommand` class handles the execution of `required` operations.
 
@@ -446,8 +446,9 @@ object.
 
 5. This command object is then passed back to the `LogicManager` in step 2.
 
-6. `LogicManager` executes the newly created `RequiredCommand`, which will contain a list of `currentModules` in GradPad,
-all the `leftOverModules` and a `RequiredCommandStorage` to store all modules in the syllabus.
+6. `LogicManager` executes the newly created `RequiredCommand`, which will contain the following uninitialised attributes,
+list of `currentModules` in GradPad, all the `leftOverModules` and a `RequiredCommandStorage` to store all modules
+in the syllabus.
 
 7. Then, `RequiredCommand.execute()` retrieves the `GradPad` object stored within `Model` and accesses the `modules
 ` field within the `GradPad` with a few method calls, before storing it in `currentModules`.
@@ -494,12 +495,16 @@ object.
 
 5. This command object is then passed back to the `LogicManager` in step 2.
 
-6. `LogicManager` executes the newly created `ScienceCommand`, which will contain a list of `scienceModules` hard coded in.
+6. `LogicManager` executes the newly created `ScienceCommand`, which will contain an empty list of `scienceModules`,
+to be filled up by fetching a `RequiredCommandStorage` object.
 
-7. Then, the `ScienceCommand.execute()` calls its own method, `setScienceModules` which sets the `scienceModules` with 
-the list of available modules.
+7. Then, the `ScienceCommand.execute()` calls its own method, `setScienceModules()` which creates a
+`RequiredCommandStorage` object.
 
-8. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
+8. Inside the `setScienceModules()` method, the `setRequiredScience` method of the `RequiredCommandStorage` class
+is invoked, which sets `scienceModules` with the list of available Science modules.
+
+9. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
 
 The following sequence diagram illustrates how the `science` command is executed.
 
@@ -531,8 +536,8 @@ object.
 
 5. This command object is then passed back to the `LogicManager` in step 2.
 
-6. `LogicManager` executes the newly created `GemCommand`, which will contain 2 `GemCommandStorage` attributes,
-`sem1Storage` and `sem2Storage`.
+6. `LogicManager` executes the newly created `GemCommand`, which will contain 2  uninitialised
+`GemCommandStorage` attributes, used to store Semester 1 and 2 General Education Modules.
 
 7. `GemCommand.execute()` then calls its own method `setSem1Storage` and `setSem2Storage` to create 2 `GemCommandStorage`
 objects.

@@ -5,6 +5,7 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":GradPadParser" as GradPadParser LOGIC_COLOR
 participant "S:ScienceCommand" as ScienceCommand LOGIC_COLOR
+participant "Rs:RequiredCommandStorage" as RequiredCommandStorage LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
@@ -33,6 +34,19 @@ activate ScienceCommand
 
 ScienceCommand -> ScienceCommand : setScienceModules(SCIENCE_PATH)
 activate ScienceCommand
+
+create RequiredCommandStorage
+ScienceCommand -> RequiredCommandStorage : RequiredCommandStorage()
+activate RequiredCommandStorage
+
+RequiredCommandStorage --> ScienceCommand : Rs
+deactivate RequiredCommandStorage
+
+ScienceCommand -> RequiredCommandStorage : setRequiredScience(SCIENCE_PATH)
+activate RequiredCommandStorage
+
+RequiredCommandStorage --> ScienceCommand : scienceModules
+deactivate RequiredCommandStorage
 
 deactivate ScienceCommand
 

@@ -46,7 +46,7 @@ RequiredCommand -> RequiredCommand : setStorage()
 activate RequiredCommand
 
 create RequiredCommandStorage
-RequiredCommand -> RequiredCommandStorage : Rs
+RequiredCommand -> RequiredCommandStorage : RequiredCommandStorage()
 activate RequiredCommandStorage
 
 RequiredCommandStorage --> RequiredCommand :Rs
@@ -76,7 +76,7 @@ RequiredCommand -> RequiredCommand : compareScience(SCIENCE_PATH)
 RequiredCommand -> RequiredCommand : compareInternship(INTERNSHIP_PATH)
 
 create CommandResult
-RequiredCommand -> CommandResult : new CommandResult(leftOverModules)
+RequiredCommand -> CommandResult : CommandResult(leftOverModules)
 activate CommandResult
 
 CommandResult --> RequiredCommand

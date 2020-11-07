@@ -1,6 +1,8 @@
 package seedu.address.model.module;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 
@@ -41,5 +43,13 @@ public class ModuleCodeTest {
         assertTrue(ModuleCode.isValidModuleCode("CS2103T")); // with 1-letter suffix
         assertTrue(ModuleCode.isValidModuleCode("GER1000")); // 3-letter prefix
         assertTrue(ModuleCode.isValidModuleCode("GER1000H")); // 3-letter prefix with 1-letter suffix
+    }
+
+    @Test
+    public void hashCodeTest() {
+        ModuleCode code1 = new ModuleCode("cs2100");
+        ModuleCode code2 = new ModuleCode("CS2100");
+        assertEquals(code1.hashCode(), code1.hashCode());
+        assertNotEquals(code1.hashCode(), code2.hashCode());
     }
 }

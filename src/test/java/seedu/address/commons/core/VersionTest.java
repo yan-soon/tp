@@ -144,13 +144,13 @@ public class VersionTest {
     }
 
     @Test
-    public void equalsMethod_validTest() {
+    public void equalsMethodEmptyObject_validTest() {
         Version testVersion = new Version(1, 1, 1, true);
         assertFalse(testVersion.equals(null));
     }
 
     @Test
-    public void equalsMethodEmptyObject_validTest() {
+    public void equalsMethodDifferentObject_validTest() {
         Version testVersion = new Version(1, 1, 1, true);
         Config testConfig = new Config();
         assertFalse(testVersion.equals(testConfig));

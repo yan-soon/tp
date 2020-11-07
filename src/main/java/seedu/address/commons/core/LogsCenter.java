@@ -38,6 +38,7 @@ public class LogsCenter {
 
     /**
      * Retrieves the currentLogLevel attribute.
+     *
      * @return currentLogLevel attribute of type Level.
      */
     public Level getCurrentLogLevel() {

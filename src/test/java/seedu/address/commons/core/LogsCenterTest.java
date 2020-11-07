@@ -21,7 +21,7 @@ class LogsCenterTest {
     }
 
     @Test
-    public void getLogger_validTest() {
+    public void getLogger_invalidTest() {
         Logger expected = Logger.getLogger("");
         Logger actual = LogsCenter.getLogger((Class<Object>) null);
         assertEquals(expected, actual);

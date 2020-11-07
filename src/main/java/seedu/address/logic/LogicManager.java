@@ -136,14 +136,4 @@ public class LogicManager implements Logic {
     public void setGuiSettings(GuiSettings guiSettings) {
         model.setGuiSettings(guiSettings);
     }
-
-    @Override
-    public Command getStalledCommand() {
-        return stalledCommand;
-    }
-
-    @Override
-    public String getStalledCommandText() {
-        return stalledCommandText;
-    }
 }

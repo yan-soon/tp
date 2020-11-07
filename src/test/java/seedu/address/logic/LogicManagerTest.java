@@ -1,7 +1,6 @@
 package seedu.address.logic;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static seedu.address.commons.core.Messages.ADD_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.CLEAR_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
@@ -12,6 +11,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_CONFIRMATION_CANCEL;
 import static seedu.address.commons.core.Messages.MESSAGE_DELETE_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_EMPTY_GRADPAD;
 import static seedu.address.commons.core.Messages.MESSAGE_LIST_SUCCESS;
+import static seedu.address.commons.core.Messages.MESSAGE_NO_CONFIRMATION;
 import static seedu.address.commons.core.Messages.MESSAGE_UNKNOWN_COMMAND;
 import static seedu.address.commons.core.Messages.YES_COMMAND_WORD;
 import static seedu.address.logic.commands.CommandTestUtil.CODE_DESC_CS2103T;
@@ -27,7 +27,6 @@ import org.junit.jupiter.api.io.TempDir;
 
 import seedu.address.commons.core.GuiSettings;
 import seedu.address.commons.exceptions.DataConversionException;
-import seedu.address.logic.commands.Command;
 import seedu.address.logic.commands.CommandResult;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.exceptions.ParseException;
@@ -102,18 +101,6 @@ public class LogicManagerTest {
     }
 
     @Test
-    public void getStalledCommand_validTest() {
-        Command actual = logic.getStalledCommand();
-        assertNull(actual);
-    }
-
-    @Test
-    public void getStalledCommandText_validTest() {
-        String actual = logic.getStalledCommandText();
-        assertNull(actual);
-    }
-
-    @Test
     public void getGradPad_validTest() {
         ReadOnlyGradPad actual = logic.getGradPad();
         Model testModel = new ModelManager();
@@ -168,10 +155,11 @@ public class LogicManagerTest {
     @Test
     public void execute_confirmCommand_validTest() throws CommandException, ParseException {
         model.addModule(CS2103T);
+        CommandResult expected = new CommandResult(MESSAGE_NO_CONFIRMATION);
         logic.execute(CLEAR_COMMAND_WORD);
         logic.execute(YES_COMMAND_WORD);
-        Command actual = logic.getStalledCommand();
-        assertNull(actual);
+        CommandResult actual = logic.execute(YES_COMMAND_WORD);
+        assertEquals(expected, actual);
     }
 
     @Test

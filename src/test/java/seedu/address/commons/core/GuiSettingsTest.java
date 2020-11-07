@@ -3,6 +3,8 @@ package seedu.address.commons.core;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNull;
+import static seedu.address.commons.core.GuiSettings.DEFAULT_HEIGHT;
+import static seedu.address.commons.core.GuiSettings.DEFAULT_WIDTH;
 
 import java.awt.Point;
 import java.util.Objects;
@@ -14,16 +16,14 @@ class GuiSettingsTest {
     private final GuiSettings defaultGui = new GuiSettings();
     @Test
     public void getWindowWidth_validTest() {
-        double expected = 740;
         double actual = defaultGui.getWindowWidth();
-        assertEquals(expected, actual);
+        assertEquals(DEFAULT_WIDTH, actual);
     }
 
     @Test
     public void getWindowHeight_validTest() {
-        double expected = 600;
         double actual = defaultGui.getWindowHeight();
-        assertEquals(expected, actual);
+        assertEquals(DEFAULT_HEIGHT, actual);
     }
 
     @Test

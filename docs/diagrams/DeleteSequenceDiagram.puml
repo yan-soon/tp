@@ -14,10 +14,10 @@ box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("delete c/CS2103T")
+[-> LogicManager : execute("delete CS2103T")
 activate LogicManager
 
-LogicManager -> GradPadParser : parseCommand("delete c/CS2103T")
+LogicManager -> GradPadParser : parseCommand("delete CS2103T")
 activate GradPadParser
 
 create DeleteCommandParser
@@ -27,7 +27,7 @@ activate DeleteCommandParser
 DeleteCommandParser --> GradPadParser
 deactivate DeleteCommandParser
 
-GradPadParser -> DeleteCommandParser : parse("c/CS2103T")
+GradPadParser -> DeleteCommandParser : parse("CS2103T")
 activate DeleteCommandParser
 
 DeleteCommandParser -> ParserUtil : parseModuleCode("CS2103T")

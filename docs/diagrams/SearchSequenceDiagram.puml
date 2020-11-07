@@ -6,7 +6,7 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":GradPadParser" as GradPadParser LOGIC_COLOR
 participant ":SearchCommandParser" as SearchCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
-participant "d:SearchCommand" as SearchCommand LOGIC_COLOR
+participant "s:SearchCommand" as SearchCommand LOGIC_COLOR
 participant ":ModuleInfoSearcher" as ModuleInfoSearcher LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
@@ -30,11 +30,11 @@ activate SearchCommandParser
 SearchCommandParser -> ParserUtil : parseModuleCode("CS2103T")
 activate ParserUtil
 
-ParserUtil --> SearchCommandParser : code
+ParserUtil --> SearchCommandParser : ModuleCode
 deactivate ParserUtil
 
 create SearchCommand
-SearchCommandParser -> SearchCommand
+SearchCommandParser -> SearchCommand : SearchCommand("CS2103T")
 activate SearchCommand
 
 SearchCommand --> SearchCommandParser : s
@@ -59,14 +59,14 @@ activate ModuleInfoSearcher
 ModuleInfoSearcher --> SearchCommand
 deactivate ModuleInfoSearcher
 
-SearchCommand -> ModuleInfoSearcher : searchModule()
+SearchCommand -> ModuleInfoSearcher : searchModule("CS2103T)
 activate ModuleInfoSearcher
 
-ModuleInfoSearcher --> SearchCommand : r
+ModuleInfoSearcher --> SearchCommand : ModuleInfo
 deactivate ModuleInfoSearcher
 
 create CommandResult
-SearchCommand -> CommandResult : r
+SearchCommand -> CommandResult : ModuleInfo
 activate CommandResult
 
 CommandResult --> SearchCommand

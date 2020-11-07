@@ -563,10 +563,10 @@ Given below is a series of steps to show how a `search` operation behaves during
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
-4. `GradPadParser.parseCommand()` sees that this is an search command, and so uses the `SearchCommandParser`
-class to create a corresponding `SearchCommand`, using the `SearchCommandParser.parse()` method.
+4. `GradPadParser.parseCommand()` sees that this is a search command, and so uses the `SearchCommandParser.parse()` 
+method in `SearchCommandParser`.
 
-5. In `SearchCommandParser`, the ModuleCode is first extracted from the string input. 
+5. In `SearchCommandParser`, `SearchCommandParser.parse()` extracts the ModuleCode from the string input.
 
 6. A `SearchCommand` is then created with the ModuleCode, and is passed back to the
 `LogicManager` in step 2. 
@@ -1274,7 +1274,7 @@ Test Cases:
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
 1. Other invalid search commands to try: `search c/cs2103t`, `search 1`<br>
-   Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
+   Expected: No module information is displayed. _Invalid module_ message is shown in the result display.
 1. Test case: `searchh cs2100`<br>
    Expected: No module information is displayed. _Unknown command_ message is shown in the result display.
 

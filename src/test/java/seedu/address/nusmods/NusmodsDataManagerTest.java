@@ -23,6 +23,10 @@ public class NusmodsDataManagerTest {
     private NusmodsDataManager manager = new NusmodsDataManager(new ReadFromFileDataFetcherStub(),
                                                                 VALID_MAP_TEST_FILE_PATH);
 
+    public static NusmodsDataManager getStubManager() {
+        return new NusmodsDataManager(new ReadFromFileDataFetcherStub(), INVALID_MAP_TEST_FILE_PATH);
+    }
+
     @Test
     public void constructor_defaultWithNoArgs_storesDefaultFilePath() {
         manager = new NusmodsDataManager();

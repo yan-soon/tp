@@ -194,6 +194,105 @@ Classes used by multiple components are in the `seedu.addressbook.commons` packa
 
 This section describes some noteworthy details on how certain features are implemented.
 
+### Nusmods feature
+GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display
+to users. More specifically, GradPad can perform the following operations:
+
+* Retrieve information about a single module via the `/modules` API endpoint
+* Retrieve a list of all NUS modules via the `/moduleList` API endpoint
+* Store retrieved module information data from the aforementioned endpoints as local JSON files
+* Read pre-fetched module information from local JSON files
+
+The last 2 operations are crucial to allow GradPad to operate even without an internet connection. This will
+be elaborated further below.
+
+#### How a single module's data is retrieved (when connected to the internet)
+GradPad uses the `ModuleInfo` class to represent module information received from NUSMods. Besides storing the various
+schema fields in the API's JSON response as plain old Java objects (POJOs), it also handles the massaging of these
+fields when they are read. 
+For e.g. the raw numerical semesters "3" and "4" must be mapped to "Special Term I" and "Special Term II" when read.
+
+This is the flow of logic when a single module's data is fetched via the API:
+
+1. Some client code calls the `getModuleInfo` method in the `NusmodsDataManager` class and passes in a 
+module code as a string parameter.
+
+2. `getModuleInfo` calls the `fetchModuleInfo` method in the `DataFetcherManager` class.
+
+3. `fetchModuleInfo` then makes a HTTP GET request to the NUSMods `/modules` endpoint via the `makeGETRequest`
+utility method defined within the `HttpUtil` class. It also specifies the module code of the module it wants to fetch.
+
+4. The `makeGETRequest` method returns the HTTP response as a string. In this case, the response returned is a 
+JSON string. 
+
+5. `fetchModuleInfo` then parses this JSON string into a `ModuleInfo` object.
+
+Note: GradPad sets a 3s second timeout for all HTTP GET requests made. Adjust this where necessary.
+
+The following sequence diagram illustrates this flow:
+
+![NusmodsFetchModuleSequenceDiagram](images/NusmodsFetchModuleSequenceDiagram.png)
+
+#### How a single module's data is retrieved (when disconnected from the internet)
+Without an internet connection, GradPad clearly cannot retrieve module information via HTTP requests. Instead,
+GradPad provides a fallback by including pre-fetched CS curriculum modules in each app release. This is a compromise
+we choose to take. While pre-fetched data implies that it might not be up-to-date, we feel that this is better than
+completely disallowing users from using GradPad without an internet connection. On top of this, we only choose
+to pre-fetch CS curriculum modules as scraping and saving all 5800+ NUS modules means we'll have to make ungraceful
+API requests and bloat our releases. It is also not scalable in any way.
+
+This is the flow of logic when a single module's data is retrieved without an internet collection:
+
+1. Some client code calls the `getModuleInfo` method in the `NusmodsDataManager` class and passes in a 
+module code as a string parameter.
+
+2. `getModuleInfo` calls the `fetchModuleInfo` method in the `DataFetcherManager` class. However, as there is no
+ internet connection, this method call will fail with an exception.
+
+3. Catching this, `getModuleInfo` proceeds to call the `getModuleInfoFromFile` method within the same class instead.
+
+4. `getModuleInfoFromFile` then retrieves the local JSON file containing the module's information, reads it, and
+parses it into a `ModuleInfo` object.
+
+The following sequence diagram illustrates this flow:
+
+![NusmodsFetchLocalModuleSequenceDiagram](images/NusmodsFetchLocalModuleSequenceDiagram.png)
+
+#### How module data is scraped and saved locally
+As explained in the previous section, GradPad is able to access pre-fetched module information stored as local
+JSON files. This section will explain the script used to scrape and save the 100+ CS curriculum modules that runs 
+before shipping out GradPad releases.
+
+This is the script's flow of logic:
+1. The entry point of this flow is the `fetchAndSaveModules` method within the `DataFetcherManager` class. 
+
+2. `fetchAndSaveModules` starts by fetching a list of all modules from the `/moduleList` API endpoint via a call
+to the `fetchModuleSummaryList` method.
+
+3. `fetchModuleSummaryList` makes the HTTP GET request and parses the JSON string response into a list of
+ `ModuleSummary`
+objects. 
+
+4. This list of `ModuleSummary` objects are then filtered to remove all non-CS curriculum modules by passing it through
+the `filterModuleSummaries` method.
+
+5. Now that this list only contains `ModuleSummary` objects related to the CS curriculum, it is then passed to the
+`generateModuleInfoMap` method.
+
+6. `generateModuleInfoMap`'s main job is to create a map of module codes to `ModuleInfo` objects so that GradPad can 
+easily retrieve `ModuleInfo` objects given a module code. It does this by 
+iterating through every `ModuleSummary`, and fetching that module's module information from the `/modules` endpoint.
+It then parses each module's information into a `ModuleInfo` object and puts it in a hashmap.
+
+7. After this map is populated, it is then serialized and saved into a local JSON file.
+
+Note: GradPad rate-limits step 6 with a 100ms delay between successive hits to the `/modules` endpoint. Adjust where
+necessary.
+
+The following sequence diagram illustrates this flow:
+
+![NusmodsScrapeModuleSequenceDiagram](images/NusmodsScrapeModuleSequenceDiagram.png)
+
 ### Add feature
 GradPad allows users to add modules to their list.
 
@@ -545,10 +644,9 @@ The following sequence diagram illustrates how the `gem` command is executed.
 
 ![GemDiagram](images/GemSequenceDiagram.png)
 
-### [Implementation in progress] Search all modules feature
+### Search feature
 
-The `search` command allows users to search for any module within the NUS Computer Science curriculum and view
-its module details.
+The `search` command allows users to search for any module available in NUS and display the module details.
 
 To retrieve a module's information, the execution of this command interacts with the `Nusmods` component, which
 contains all logic related to the access of module data from the NUSMODS public API. We will not go into detail
@@ -564,17 +662,30 @@ Given below is a series of steps to show how a `search` operation behaves during
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
-4. `GradPadParser.parseCommand()` identifies the command as a search command and thus creates a `SearchCommand`
-object.
+4. `GradPadParser.parseCommand()` sees that this is a search command, and so uses the `SearchCommandParser.parse()` 
+method in `SearchCommandParser`.
 
-5. This command object is then passed back to the `LogicManager` in step 2.
+5. In `SearchCommandParser`, `SearchCommandParser.parse()` extracts the ModuleCode from the string input.
 
-6. `LogicManager` executes the newly created `SearchCommand`.
+6. A `SearchCommand` is then created with the ModuleCode, and is passed back to the
+`LogicManager` in step 2. 
 
-7. `SearchCommand.execute()` retrieves the corresponding module information by calling 
+7. `LogicManager` executes the newly created `SearchCommand`.
+
+8. `SearchCommand.execute()` then creates an instance of `ModuleInfoSearcher` to call the `searchModule()` method by
+passing in the module code.
+
+9. `searchModule()` method will then take in the module code and retrieve the `ModuleInfo` by calling
 `NusmodsData.getModuleInfo()` in the `Nusmods` package.
 
-9. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+10. The `ModuleInfo` of the searched module retrieved will then be accessed and formatted according to the display 
+requirement.
+
+11. Finally, a `CommandResult` is created to display the module information that has been retrieved.
+
+The following sequence diagram illustrates how the `search CS2103T` command is executed.
+
+![SearchSequenceDiagram](images/SearchSequenceDiagram.png)
 
 ### Tags feature
 
@@ -944,7 +1055,7 @@ testers are expected to do more *exploratory* testing.
 1. Initial Launch
 
    1. Download the jar file and copy into an empty folder.
-
+   
    1. Double-click the jar file.<br>
       Expected: GUI runs with a set of sample modules. The window size may not be optimum.
 
@@ -1259,6 +1370,8 @@ Test Cases:
 1. Test case: `search`<br>
    Expected: No module information is displayed. _Invalid command format_ message is shown in the result display.
 
+1. Other invalid search commands to try: `search c/cs2103t`, `search 1`<br>
+   Expected: No module information is displayed. _Invalid module_ message is shown in the result display.
 1. Test case: `searchh cs2100`<br>
    Expected: No module information is displayed. _Unknown command_ message is shown in the result display.
 

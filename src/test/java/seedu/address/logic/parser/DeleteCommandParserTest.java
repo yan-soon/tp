@@ -1,13 +1,16 @@
 package seedu.address.logic.parser;
 
+import static seedu.address.commons.core.Messages.DELETE_COMMAND_WORD;
 import static seedu.address.commons.core.Messages.MESSAGE_INVALID_MODULE_CODE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 
 import org.junit.jupiter.api.Test;
 
 import seedu.address.logic.commands.DeleteCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 
 /**
  * As we are only doing white-box testing, our test cases do not cover path variations
@@ -28,5 +31,10 @@ public class DeleteCommandParserTest {
     @Test
     public void parse_invalidArgs_throwsParseException() {
         assertParseFailure(parser, "a", String.format(MESSAGE_INVALID_MODULE_CODE, "A"));
+    }
+
+    @Test
+    public void parse_emptyArgs_throwsParseException() {
+        assertThrows(ParseException.class, () -> parser.parse(DELETE_COMMAND_WORD));
     }
 }

@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static seedu.address.commons.core.Messages.MESSAGE_SEARCH_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import java.nio.file.Paths;
@@ -12,12 +14,13 @@ import java.util.Optional;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.commons.core.Messages;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.util.JsonUtil;
-import seedu.address.logic.ModuleInfoSearcher;
 import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.nusmods.ModuleInfo;
 
 /**
@@ -31,17 +34,14 @@ public class SearchCommandTest {
 
     @Test
     public void equals() {
-        String firstPredicate = "first";
-        String secondPredicate = "second";
-
-        SearchCommand searchFirstCommand = new SearchCommand(firstPredicate);
-        SearchCommand searchSecondCommand = new SearchCommand(secondPredicate);
+        SearchCommand searchFirstCommand = new SearchCommand(CODE_FIRST_MODULE);
+        SearchCommand searchSecondCommand = new SearchCommand(CODE_SECOND_MODULE);
 
         // same object -> returns true
         assertEquals(searchFirstCommand, searchFirstCommand);
 
         // same values -> returns true
-        SearchCommand searchFirstCommandCopy = new SearchCommand(firstPredicate);
+        SearchCommand searchFirstCommandCopy = new SearchCommand(CODE_FIRST_MODULE);
         assertEquals(searchFirstCommand, searchFirstCommandCopy);
 
         // different types -> returns false
@@ -55,17 +55,16 @@ public class SearchCommandTest {
     }
 
     @Test
-    public void execute_zeroKeywords_noModuleFound() {
-        String expectedMessage = ModuleInfoSearcher.MESSAGE_EMPTY_SEARCH;
-        String moduleCode = "";
-        SearchCommand command = new SearchCommand(moduleCode);
-        assertCommandFailure(command, model, expectedMessage);
-
+    public void execute_invalidModuleCode_throwsCommandException() {
+        ModuleCode invalidModuleCode = new ModuleCode("AA0000");
+        SearchCommand searchCommand = new SearchCommand(invalidModuleCode);
+        assertCommandFailure(searchCommand, model,
+                String.format(Messages.MESSAGE_FAILED_TO_FIND_MODULE, invalidModuleCode.toString()));
     }
 
     @Test
     public void execute_searchCommand_success() throws DataConversionException {
-        String moduleCode = "CS1010X";
+        ModuleCode moduleCode = new ModuleCode("CS1010X");
         ModuleInfo cs1010x = JsonUtil.readJsonFile(Paths.get(CS1010X), ModuleInfo.class).get();
         SearchCommand command = new SearchCommand(moduleCode);
 

@@ -19,6 +19,7 @@ public class ScienceCommand extends Command {
 
     /**
      * Returns the scienceModules attribute of a given ScienceCommand object.
+     *
      * @return scienceModules attribute of type ObservableList<Module/>.
      */
     public ObservableList<Module> getScienceModules() {

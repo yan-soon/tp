@@ -17,32 +17,6 @@ GradPad requires that you have a Java SE Runtime Environment (JRE) installed on 
     - You can either double-click on the jar file, or
     - Execute this command from your terminal: `java -jar GradPad.jar`
 
-## Features
-#### Adding a module
-Command: ```add {module title} {modular credits}```
-
-Example usage: ```add CS2103T 4```
-
-#### Deleting a module
-Command: ```delete {module title}``` 
-
-Example usage: ```delete CS2103T```
-
-#### View all added modules
-Command: ```list```
-
-#### View total modular credits (MCs)
-Command: ```checkmc```
-
-#### Save session
-Command: ```save```
-
-#### View help
-Command: ```help```
-
-#### Exit
-Command: ```exit```
-
 ## Usage
 For detailed guidance on using GradPad, take a look at our user guide 
 [here](https://ay2021s1-cs2103t-t09-1.github.io/tp/UserGuide.html).

@@ -59,7 +59,7 @@ Follow the steps below to learn how to get started with GradPad!
 
 1. Double-click the file to start the app. The Main Page similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
 
-   ![Ui](images/Ui.png)
+   ![Ui](images/AnnotatedUi.png)
 
 1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
  display the help page.<br>

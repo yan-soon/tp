@@ -285,6 +285,13 @@ You have added several modules into your GradPad so far but you are unsure if th
 
 The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
 
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+The `required` command is able to identify equivalent and precluded Modules! (Eg. CS1010X and CS1101S)
+
+</div>
+
 To check required modules:
 
 1. Type `required` into the command box, press **Enter** to execute it.

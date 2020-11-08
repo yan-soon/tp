@@ -109,10 +109,10 @@ Given below are my contributions to the project.
 * **Review/mentoring contributions**:
   * PRs reviewed (with non-trivial review comments): [\#94](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/94), 
   [\#97](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/97), 
-  [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
+  [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111),
   [\#133](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/133), 
-  [\#169](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/169)
-  [\#176](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/176)
+  [\#169](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/169),
+  [\#176](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/176),
   [\#197](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/197)
   * Assisted teammates with any Git queries or issues.
   * Assisted in the program design of adding confirmation prompts when executing `delete` and `clear` commands.

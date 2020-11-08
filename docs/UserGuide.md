@@ -124,7 +124,7 @@ For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core
 ` is also acceptable.
 
 * When a command does not require parameters, e.g. `help`, adding extraneous words, e.g `help me` will not affect the
- command.
+ command, allowing the command to run as per normal.
 
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
 
@@ -349,7 +349,8 @@ from NUSMods database directly and displayed in the result display box.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-If your internet is down, you can only search for modules that are in the NUS Computer Science curriculum.
+If you are not connected to the internet, you can only search for modules that are in the NUS Computer Science
+ curriculum.
 
 </div>
 

@@ -1404,8 +1404,7 @@ Test Cases:
 
 ## **Appendix: Efforts**
 
-### 1. NusMods  
-![NUSMods](images/nusmods.png) <br>
+### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
 GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to
 users. This integration with NUSMods is definitely complex and not easy. Fortunately, one of our team member had some
 experience and managed to integrate the API into GradPad. This allows GradPad to constantly receive timely updates and 

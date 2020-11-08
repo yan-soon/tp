@@ -288,7 +288,7 @@ The `required` command allows you to check the modules of the Computer Science c
 <div markdown="block" class="alert alert-primary">
 
 **:bulb: Tip:**<br>
-The `required` command is able to identify Equivalent and Preclusion Modules! (Eg. CS1010X and CS1101S)
+The `required` command is able to identify equivalent and precluded Modules! (Eg. CS1010X and CS1101S)
 
 </div>
 

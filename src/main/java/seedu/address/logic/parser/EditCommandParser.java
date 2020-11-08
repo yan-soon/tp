@@ -25,6 +25,24 @@ import seedu.address.nusmods.ModuleInfo;
  * Parses input arguments and creates a new EditCommand object
  */
 public class EditCommandParser implements Parser<EditCommand> {
+    private final ModuleInfoSearcher moduleInfoSearcher;
+
+    /**
+     * Constructs an EditCommandParser.
+     */
+    public EditCommandParser() {
+        moduleInfoSearcher = new ModuleInfoSearcher();
+    }
+
+    /**
+     * Constructs an EditCommandParser with a custom ModuleInfoSearcher object.
+     * This is mainly used for stubbing.
+     *
+     * @param moduleInfoSearcher - the custom ModuleInfoSearcher
+     */
+    public EditCommandParser(ModuleInfoSearcher moduleInfoSearcher) {
+        this.moduleInfoSearcher = moduleInfoSearcher;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the EditCommand
@@ -43,7 +61,6 @@ public class EditCommandParser implements Parser<EditCommand> {
         }
 
         ModuleCode code = ParserUtil.parseModuleCode(argMultimap.getPreamble());
-        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         EditModuleDescriptor editModuleDescriptor = new EditModuleDescriptor();
         ModuleInfo moduleInfo;
 

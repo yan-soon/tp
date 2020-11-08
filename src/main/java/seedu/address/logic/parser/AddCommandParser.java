@@ -25,7 +25,7 @@ public class AddCommandParser implements Parser<AddCommand> {
     private final ModuleInfoSearcher moduleInfoSearcher;
 
     /**
-     * Constructs an AddCommandParer.
+     * Constructs an AddCommandParser.
      */
     public AddCommandParser() {
         moduleInfoSearcher = new ModuleInfoSearcher();

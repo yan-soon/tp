@@ -16,12 +16,15 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModules.CS2103T;
 import static seedu.address.testutil.TypicalModules.CS3216;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.ModuleInfoSearcherTest;
 import seedu.address.logic.commands.AddCommand;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.Module;
 import seedu.address.testutil.ModuleBuilder;
 
@@ -75,5 +78,12 @@ public class AddCommandParserTest {
         // two invalid values, only first invalid value reported
         assertParseFailure(parser, INVALID_CODE_DESC + INVALID_TAG_DESC,
             String.format(MESSAGE_INVALID_MODULE_CODE, INVALID_CODE_DESC.trim()));
+    }
+
+    @Test
+    public void parse_moduleSearchFailure_throwsCommandException() {
+        parser = new AddCommandParser(new ModuleInfoSearcherTest.ModuleInfoSearcherStub());
+        // still provide valid user input to enforce at-most-one-invalid-input heuristic
+        assertThrows(ParseException.class, () -> parser.parse(CODE_DESC_CS3216));
     }
 }

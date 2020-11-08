@@ -18,8 +18,8 @@ GradPad is a one-stop solution to **module management** for Computer Science Und
 Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
-[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of School of Computing, 
-which can be messy at times. 
+[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of the School of
+ Computing, which can be messy at times. 
 So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
 
@@ -61,7 +61,8 @@ Follow the steps below to learn how to get started with GradPad!
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+ display the help page.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all added modules.
@@ -70,7 +71,8 @@ Follow the steps below to learn how to get started with GradPad!
 
    * **`delete`** `CS2103T` : Deletes the module named `CS2103T` in the current list.
    
-   * **`search`** `CS2103T` : Search for module named `CS2103T` from NUSMods database(if internet is available) or from local saved file.
+   * **`search`** `CS2103T` : Searches for module named `CS2103T` from the NUSMods database 
+   (if connected to the internet) or from a local saved file.
 
    * **`exit`** : Exits the app.
    
@@ -79,15 +81,16 @@ Follow the steps below to learn how to get started with GradPad!
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-Detailed explanation of each command can be found [here](#commands).
-
-Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
+* You can still use GradPad without an internet connection. However, you will only be able to access modules
+within the NUS Computer Science [curriculum](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) while you're offline.
+* Detailed explanation of each command can be found [here](#commands).
+* Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Feature Summary List
-A consolidated view of GradPad feature list is listed below in a table form for easy reference.
+A consolidated view of GradPad's feature list is listed below in a table form for easy reference.
 
  Features                         |    Description
  ----------------------------------------|------------
@@ -120,6 +123,9 @@ Detailed explanations of each commands and their respective usage are listed und
 For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core`, `edit MODULE_CODE t/core c/NEW_MODULE_CODE
 ` is also acceptable.
 
+* When a command does not require parameters, e.g. `help`, adding extraneous words, e.g `help me` will not affect the
+ command, allowing the command to run as per normal.
+
 * Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
 
 </div>
@@ -141,6 +147,9 @@ automatically retrieves them for you using data from NUSMods.
 **:information_source: Note:**<br>
 * You cannot add a module that has been previously added as GradPad does not allow duplicate modules.
 * You can use multiple words in a tag. However, there should only be a single space between any 2 words.
+* Tags **within a single module** are case-insensitive, i.e. "core", "CORE", and "CoRe" are all considered the same.
+In such a case, only the first tag amongst a group of duplicates will be added. For e.g.
+`add cs2103t t/core t/CORE t/CoRe` results in only "core" being added.
 
 </div>
 
@@ -194,10 +203,11 @@ you actually think that the module was the best you'd taken in NUS.
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
 You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
-fields you wish to edit with their respective prefixes, `c/` for new module code, `t/` for new tag. You may edit multiple fields in a
+fields you wish to edit with their respective prefixes: `c/` for new module code, `t/` for new tag. You may edit
+ multiple fields in a
 single `edit` command. 
 
-Module title and modular credits for respective module code will be automatically updated with data from NUSMods.
+The respective module title and modular credits for a module code will be automatically updated with data from NUSMods.
  
  <div markdown="block" class="alert alert-info">
  
@@ -214,14 +224,16 @@ To edit the tag of an existing module:
 1. Type `edit cs2101 t/bestmodule` into the command box, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
 
-2. The result display box will display the message "The following module has been successfully edited", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.
+2. The result display box will display the message "The following module has been successfully edited", along with the 
+newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed 
+Modules list have been replaced.
 ![Edit2](images/Edit2.png)
 
 ### Finding a specific module or a group of modules: `find`
 
 Scenario:<br>
 Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you 
-have added. You want to check and see all CS-coded modules with the "core" tag.
+have added. You want to check and see all MA-coded modules with the "bestmodule" tag.
 
 The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. 
 You can do this by specifying parts of the module code of the module(s) you wish to display.
@@ -265,7 +277,7 @@ To delete the module:
 an average of 20 MCs per semester.
 
 Scenario:<br>
-You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
+You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirement.
 
 The `checkmc` command allows you to check the total amount of modular credits you have accumulated so far using this command.
 This gives you a rough gauge of the progress of your graduation planning.
@@ -344,7 +356,8 @@ from NUSMods database directly and displayed in the result display box.
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-If your internet is down, you can only search for modules that are of the Computer Science curriculum.
+If you are not connected to the internet, you can only search for modules that are in the NUS Computer Science
+ curriculum.
 
 </div>
 

@@ -1402,37 +1402,40 @@ Test Cases:
    1. Open the jar file `gradpad.jar`<br>
    Expected: Saved data will reset to sample data and will be shown in the Completed Modules list.
 
-## **Appendix: Efforts**
+## **Appendix: Effort**
 
 ### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
 GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to
-users. This integration with NUSMods is definitely complex and not easy. Fortunately, one of our team member had some
-experience and managed to integrate the API into GradPad. This allows GradPad to constantly receive timely updates and 
-retrieve up-to-date module data directly from GradPad, making GradPad more relevant and adaptable.
+users. This integration with NUSMods is definitely complex and not easy. Fortunately, one of our team members had some
+experience with web development and managed to integrate the API into GradPad. This allows GradPad to 
+retrieve up-to-date module data directly from NUSMods, making GradPad more relevant and adaptable.
 
-Module data from NUSMods are fetched using their API and stored locally in the JSON format we have designed, in GradPad
-local saved data file.
-
-**(@Sam What are the challenges you have faced when implementing this?)**
+As if integrating GradPad, a Java application, with a public web API isn't tedious enough, we also had to meet the
+project constraint that GradPad should be able to function even without an active connection to the API. Ideally,
+it would be straightforward for us to simply scrape data from the API and store it in our own database via a DBMS,
+which is generally done in other applications to reduce dependency on external APIs. However, the module also
+forbids the use of a DBMS, which meant we had to come up with a way to scrape and store data in local files instead.
+At the end of the day, we spent a considerable effort to write a script in Java that scrapes data from the API
+, transforms them into Java objects, and serializes them into human-readable JSON files.
 
 ### 2. NUS CS Curriculum
-Our target audience is Computer Science Undergraduates and so we had to get the list of NUS CS curriculum and utilize
+Our target audience is Computer Science Undergraduates and so we had to get the NUS CS curriculum and utilize
 this data in GradPad. Our initial idea was to just store the entire list of modules in the CS curriculum into GradPad.
 However, we soon realized that there are way more modules than we had anticipated as there is a list of GEMs and 
-science modules that we had initially missed out. Besides this, there are also preclusion in some modules and similar 
-modules with different module code. These are tough challenges that we had to brainstorm hard to come up with innovative
-solutions to address them. Fortunately, our team managed to address these fundamental problems in the final product.
+science modules that we had initially missed out. Besides this, there are also preclusions in some modules and
+equivalent modules with different module codes. These are tough challenges that we had to brainstorm hard to come up
+with innovative solutions to address them. Fortunately, our team managed to address these fundamental problems in the final product.
 
-### 3. Ui
-Our GradPad Team has spent considerable amount of effort on the Ui aspect, from choosing the position of the result
+### 3. UI
+Our GradPad Team has spent a considerable amount of effort on the UI aspect, from choosing the position of the result
 display and command box input, to the color theme that is the most pleasing to the audience. There should also be a
 special mention to Syafiq for coming up with the logo of GradPad from scratch, personalizing GradPad's Ui to our target
-audience. Our team absolutely love the color theme we have ended up with and we believe our target audience (Computer
+audience. Our team absolutely loves the color theme we have ended up with and we believe our target audience (Computer
 Science Undergraduate) will too.
 
 ### 4. Overall
-As a whole, we believed that even though this project was rather demanding and time-consuming, we thoroughly enjoyed 
-working with one another. Right from the start, we helped each other with setting up of Github and the process of the
-project's workflow. All of us were also very encouraging and constantly reviewed each other's Pull Requests with
+As a whole, we believe that even though this project was rather demanding and time-consuming, we thoroughly enjoyed 
+working with one another. Right from the start, we helped each other with the setting up of Github and the process of
+the project's workflow. All of us were also very encouraging and constantly reviewed each other's pull requests with
 comprehensive comments, allowing us to learn from each other's strengths in coding. We are definitely proud of GradPad
 , and believe that it will serve its purpose to the fullest potential.

@@ -78,7 +78,9 @@ Given below are my contributions to the project.
 
 * **Enhancements to existing features**:
   * Refactored the entire AB3 `Person` package and its containing classes to GradPad's `Module` package.
-  * Added assertions to the `NUSMods` package
+  * Added assertions to the `NUSMods` package.
+  * Allow multi-word tags and substring module searches by tags.
+  * Add case-insensitive check for duplicate tags when users add a module.
 
 * **Documentation**:
   * User Guide:
@@ -93,7 +95,11 @@ Given below are my contributions to the project.
   * Developer Guide:
     * Added architecture details and design considerations for the `NUSMods` component, including a class diagram.
     [\#78](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/78)
-    * Added implementation details of the `edit`, `list`, `checkmc`, `required`, `search` features, including
+    * Added implementation details of the `tags` feature, including sequence diagrams.
+    [\#192](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/192)
+    * Added implementations details of GradPad's NUSMods integration, including sequence diagrams.
+    [\#198](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/198)
+    * Added implementation details of the `edit`, `list`, `checkmc`, `required`, `search` command features, including
     all sequence diagrams.
     [\#78](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/78) & 
     [\#42](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/42)
@@ -101,10 +107,13 @@ Given below are my contributions to the project.
     [\#42](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/42)
 
 * **Review/mentoring contributions**:
-  * PRs reviewed (with non-trivial review comments): [\#97](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/97), 
-  [\#94](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/94), 
+  * PRs reviewed (with non-trivial review comments): [\#94](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/94), 
+  [\#97](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/97), 
+  [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111),
   [\#133](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/133), 
-  [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
+  [\#169](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/169),
+  [\#176](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/176),
+  [\#197](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/197)
   * Assisted teammates with any Git queries or issues.
   * Assisted in the program design of adding confirmation prompts when executing `delete` and `clear` commands.
   

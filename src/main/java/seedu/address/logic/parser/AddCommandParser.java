@@ -22,6 +22,24 @@ import seedu.address.nusmods.ModuleInfo;
  * Parses input arguments and creates a new AddCommand object
  */
 public class AddCommandParser implements Parser<AddCommand> {
+    private final ModuleInfoSearcher moduleInfoSearcher;
+
+    /**
+     * Constructs an AddCommandParer.
+     */
+    public AddCommandParser() {
+        moduleInfoSearcher = new ModuleInfoSearcher();
+    }
+
+    /**
+     * Constructs an AddCommandParser with a custom ModuleInfoSearcher object.
+     * This is mainly used for stubbing.
+     *
+     * @param moduleInfoSearcher - the custom ModuleInfoSearcher
+     */
+    public AddCommandParser(ModuleInfoSearcher moduleInfoSearcher) {
+        this.moduleInfoSearcher = moduleInfoSearcher;
+    }
 
     /**
      * Parses the given {@code String} of arguments in the context of the AddCommand
@@ -40,7 +58,6 @@ public class AddCommandParser implements Parser<AddCommand> {
         }
         ModuleCode moduleCode = ParserUtil.parseModuleCode(argMultimap.getPreamble());
         String moduleCodeText = StringUtil.ignoreCase(moduleCode.toString());
-        ModuleInfoSearcher moduleInfoSearcher = new ModuleInfoSearcher();
         ModuleInfo moduleInfo;
 
         try {

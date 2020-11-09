@@ -766,7 +766,7 @@ When editing a module's tags, the old tags are simply "removed" as when
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history,
-stored internally as an `gradPadStateList` and `currentStatePointer`. Additionally, it implements the 
+stored internally as a `gradPadStateList` and `currentStatePointer`. Additionally, it implements the 
 following operations:
 
 * `VersionedGradPad.commit()` — Saves the current GradPad state in its history.
@@ -950,6 +950,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
+* 1b. Module to be added does not exist in NUS.
+
+    * 1b1. GradPad shows an error message.
+    
+      Use case ends.    
+      
 **Use case : UC03 - View help**
 
 **MSS**
@@ -1034,7 +1040,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to view all available General Education Modules offered in NUS.
-2. GradPad displays the all available General Education modules onto the `Result Display`
+2. GradPad displays all available General Education modules onto the `Result Display`
 
     Use case ends.    
 
@@ -1043,7 +1049,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 **MSS**
 
 1. User requests to view all available Science modules in the CS curriculum.
-2. GradPad displays the all available Science modules in the CS curriculum onto the `Result Display`
+2. GradPad displays all available Science modules in the CS curriculum onto the `Result Display`
 
     Use case ends. 
     

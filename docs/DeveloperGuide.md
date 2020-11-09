@@ -298,7 +298,6 @@ GradPad allows users to add modules to their list.
 
 The following fields of a module are required (* for optional):
 * Module Code
-* Modular Credits
 * Tags*
 
 As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
@@ -314,15 +313,22 @@ Given below is how an add operation behaves at each step of its execution.
 
 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser` class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
-5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. module code, tags, etc.
 
-6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores the values that we want to add into our list.
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) from Nusmods.
 
-7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
+7. Once the module information is retrieved, a new `Module` object is created from the module information and tags. It now stores the values that we want to add into our list.
 
-8. `Logic Manager` executes the newly created `AddCommand`.
+8. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
 
-9. Finally, the `Model` is then updated by adding the new `Module` object.
+9. `Logic Manager` executes the newly created `AddCommand`.
+
+10. Finally, the `Model` is then updated by adding the new `Module` object.
+
+**Auto-Retrieval of Module Information**
+
+GradPad's `add` feature supports auto retrieval of module information from NUSMods, mainly a module's title and modular credits.
+This is to ensure that the modules added into GradPad are valid NUS modules, and the module information for each module is accurate.
 
 The following sequence diagram shows how the add command is executed.
 
@@ -333,7 +339,6 @@ GradPad allows users to edit modules that have already been added.
 
 The following fields of a module can be edited:
 * Module Code
-* Modular Credits
 * Tags
 
 As with all operations in GradPad, the `EditCommand` class handles the execution of edit operations.
@@ -357,18 +362,25 @@ class to create a corresponding `EditCommand`.
 
 5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) of the new module from Nusmods.
+
+7. Once the module information is retrieved, an `EditModuleDescriptor` object is created from the module information and tags. It now stores
 the new values that we want to update the target module with.
 
-7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
+8. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
 `LogicManager` in step 2.
 
-8. `LogicManager` executes the newly created `EditCommand`.
+9. `LogicManager` executes the newly created `EditCommand`.
 
-9. The target module to be edited is retrieved. A copy of it is made and using the populated
+10. The target module to be edited is retrieved. A copy of it is made and using the populated
  `EditModuleDescriptor`, the fields that are to be updated are replaced with their new values.
  
-10. The `Model` is then updated by replacing the target module with its new updated copy.
+11. The `Model` is then updated by replacing the target module with its new updated copy.
+
+**Auto-Retrieval of Module Information**
+
+When a user wishes to edit the module code of a module, GradPad's `edit` feature supports auto retrieval of the new module information from NUSMods, mainly the module's title and modular credits.
+This is to ensure that newly edited modules are valid NUS modules, and the module information for the edited module is accurate.
 
 The following sequence diagram shows how the edit command is executed.
 

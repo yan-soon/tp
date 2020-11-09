@@ -6,19 +6,30 @@ participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":GradPadParser" as GradPadParser LOGIC_COLOR
 participant ":AddCommandParser" as AddCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
+participant ":ModuleInfoSearcher" as ModuleInfoSearcher LOGIC_COLOR
+participant ":ModuleInfo" as ModuleInfo LOGIC_COLOR
 participant ":Module" as Module LOGIC_COLOR
-participant "e:AddCommand" as AddCommand LOGIC_COLOR
+participant "a:AddCommand" as AddCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Nusmods NUSMODS_COLOR_T1
+participant ":NusmodsDataManager" as NusmodsDataManager NUSMODS_COLOR
+participant ":DataFetcherManager" as DataFetcherManager NUSMODS_COLOR
+end box
+
+box Commons LOGIC_COLOR_T1
+participant ":HttpUtil" as HttpUtil LOGIC_COLOR_T3
 end box
 
 box Model MODEL_COLOR_T1
 participant ":Model" as Model MODEL_COLOR
 end box
 
-[-> LogicManager : execute("add c/CS1231 cr/4")
+[-> LogicManager : execute("add cs1231")
 activate LogicManager
 
-LogicManager -> GradPadParser : parseCommand("add c/CS1231 cr/4")
+LogicManager -> GradPadParser : parseCommand("add cs1231")
 activate GradPadParser
 
 create AddCommandParser
@@ -28,17 +39,59 @@ activate AddCommandParser
 AddCommandParser --> GradPadParser
 deactivate AddCommandParser
 
-GradPadParser -> AddCommandParser : parse("c/CS1231 cr/4")
+GradPadParser -> AddCommandParser : parse("cs1231")
 activate AddCommandParser
 
-AddCommandParser -> ParserUtil : parseModuleCode("CS1231")
+AddCommandParser -> ParserUtil : parseModuleCode("cs1231")
 activate ParserUtil
 
 ParserUtil --> AddCommandParser : code
 deactivate ParserUtil
 
-AddCommandParser -> ParserUtil : parseModularCredits("4")
+AddCommandParser -> ModuleInfoSearcher : searchModule(code)
+activate ModuleInfoSearcher
+
+ModuleInfoSearcher -> NusmodsDataManager : getModuleInfo(code)
+activate NusmodsDataManager
+
+NusmodsDataManager -> DataFetcherManager : fetchModuleInfo(code)
+activate DataFetcherManager
+
+DataFetcherManager -> HttpUtil : makeGETRequest(API_URL)
+activate HttpUtil
+
+HttpUtil --> DataFetcherManager : moduleJsonResponse
+deactivate HttpUtil
+
+DataFetcherManager --> NusmodsDataManager : moduleInfo
+deactivate DataFetcherManager
+
+NusmodsDataManager --> ModuleInfoSearcher : moduleInfo
+deactivate NusmodsDataManager
+
+ModuleInfoSearcher --> AddCommandParser : moduleInfo
+deactivate ModuleInfoSearcher
+
+AddCommandParser -> ParserUtil : parseModuleTitle()
 activate ParserUtil
+
+ParserUtil -> ModuleInfo : getTitle()
+activate ModuleInfo
+
+ModuleInfo --> ParserUtil : title
+deactivate ModuleInfo
+
+ParserUtil --> AddCommandParser : title
+deactivate ParserUtil
+
+AddCommandParser -> ParserUtil : parseModularCredits()
+activate ParserUtil
+
+ParserUtil -> ModuleInfo : getModuleCredit()
+activate ModuleInfo
+
+ModuleInfo --> ParserUtil : credits
+deactivate ModuleInfo
 
 ParserUtil --> AddCommandParser : credits
 deactivate ParserUtil
@@ -50,7 +103,7 @@ ParserUtil --> AddCommandParser : tagList
 deactivate ParserUtil
 
 create Module
-AddCommandParser -> Module : Module(code, credits, tagList)
+AddCommandParser -> Module : Module(code, title, credits, tagList)
 activate Module
 
 Module --> AddCommandParser

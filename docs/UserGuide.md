@@ -410,7 +410,7 @@ To clear all modules:
 <div markdown="block" class="alert alert-primary">
 
 :bulb: Tip:<br>
-For experienced users, you can use the fclear command instead, to bypass the confirmation step!
+For experienced users, you can use the `fclear` command instead, to bypass the confirmation step!
 
 </div>
 

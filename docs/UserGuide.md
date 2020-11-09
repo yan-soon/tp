@@ -61,7 +61,7 @@ Follow the steps below to learn how to get started with GradPad!
 
    ![Ui](images/AnnotatedUi.png)
 
-1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
+1. Type a command in the _Command Box_ and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
  display the help page.<br>
    Some other example commands you can try:
    

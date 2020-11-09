@@ -56,7 +56,7 @@ deactivate GradPadParser
 LogicManager -> FindCommand : execute()
 activate FindCommand
 
-FindCommand -> Model : updateFilteredModuleList()
+FindCommand -> Model : updateFilteredModuleList(c)
 activate Model
 
 Model --> FindCommand

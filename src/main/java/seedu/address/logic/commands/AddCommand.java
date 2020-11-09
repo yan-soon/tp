@@ -16,6 +16,8 @@ public class AddCommand extends Command {
 
     /**
      * Creates an AddCommand to add the specified {@code Module}
+     *
+     * @param module the module to be added.
      */
     public AddCommand(Module module) {
         requireNonNull(module);

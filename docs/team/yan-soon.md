@@ -33,36 +33,24 @@ Given below are my contributions to the project.
   
   * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
 
-* **New Feature**: Added `science` command to check all the available Science Modules under the Computer Science Curriculum.
+* **New Feature**: Added `science` and `gem` commands to check all the available Science and General Education Modules
+under the Computer Science Curriculum and in NUS respectively.
   
-  * What it does: Allows the user to check all the available Science modules in the curriculum.
+  * What it does: Allows the user to check all the undone and available Science and General Education modules
+  in the curriculum, based on their current list of modules accomplished.
   
   * Justification: This feature enhances the product as users no longer have to refer to the School website just to view
   the available Science Modules. It is separated from the `required` command from making the required command too
   cluttered, thus improving overall user experience. Separating the two commands also makes it easier to update our storage
-  as we can now update our database for science modules without touching the other databases.
+  as we can now update our database for science modules without touching the other databases. Furthermore, General Education
+  modules are also split according to Semester Availability which saves users more time.
   
   * Highlights: This enhancement is vital to GradPad as it is part of our core `required` command feature. The command deals
   with a fair bit of data and testing, making the implementation slightly difficult. Faced the same issue as described above 
   regarding accessing JSON files in our JAR release.
   
   * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
-  
-* **New Feature** Added `gem` command to check all the available General Education Modules available in NUS.
-
-  * What it does: Allows the users to check all the available General Education Modules, sorted according to their availability
-  by Semester.
-  
-  * Justification: Saves users the time from searching and sieving through NUS websites and databases. Also, having the modules
-  sorted by their Semester Availability saves the user even more time, thus greatly improving user experience. It is also
-  separated from other the above commands to remove clutter.
-  
-  * Highlights: This enhancement is vital to GradPad as it is part of our core `required` command feature. The command deals
-  with a fair bit of data and testing, making the implementation slightly difficult. Faced the same issue as described above 
-  regarding accessing JSON files in our JAR release.
-  
-  * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
-  
+ 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=yan-soon&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
 * **Project management**:

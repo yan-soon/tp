@@ -33,7 +33,6 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.RequiredCommandStorage;
 
 public class RequiredCommand extends Command {
-
     private ObservableList<Module> currentModules;
     private String leftOverModules = "";
     private RequiredCommandStorage storage;
@@ -59,8 +58,8 @@ public class RequiredCommand extends Command {
     /**
      * Sets up the storage attribute with all the relevant modules from various fields.
      *
-     * @throws IOException When path is invalid.
-     * @throws IllegalValueException When the data from the JSON file violates some constraints.
+     * @throws IOException when path is invalid.
+     * @throws IllegalValueException when the data from the JSON file violates some constraints.
      */
     public void setStorage() throws IOException, IllegalValueException {
         storage = new RequiredCommandStorage();

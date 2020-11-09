@@ -16,6 +16,7 @@ public class ForceDeleteCommandParser implements Parser<ForceDeleteCommand> {
     /**
      * Parses the given {@code String} of arguments in the context of the ForceDeleteCommand
      * and returns a ForceDeleteCommand object for execution.
+     *
      * @throws ParseException if the user input does not conform the expected format
      */
     public ForceDeleteCommand parse(String args) throws ParseException {
@@ -28,5 +29,4 @@ public class ForceDeleteCommandParser implements Parser<ForceDeleteCommand> {
         ModuleCode code = ParserUtil.parseModuleCode(args);
         return new ForceDeleteCommand(code);
     }
-
 }

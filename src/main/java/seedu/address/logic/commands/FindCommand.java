@@ -13,7 +13,6 @@ import seedu.address.model.module.Module;
  * Keyword matching is case insensitive.
  */
 public class FindCommand extends Command {
-
     private final Predicate<Module> predicate;
 
     /**

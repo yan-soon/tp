@@ -52,6 +52,18 @@ destroy DeleteCommandParser
 GradPadParser --> LogicManager : d
 deactivate GradPadParser
 
+LogicManager -> LogicManager : handleStall()
+activate LogicManager
+
+LogicManager --> LogicManager : confirmationPrompt
+deactivate LogicManager
+
+[<-- LogicManager : confirmationPrompt
+deactivate LogicManager
+
+[-> LogicManager : execute("yes")
+activate LogicManager
+
 LogicManager -> DeleteCommand : execute()
 activate DeleteCommand
 
@@ -71,6 +83,6 @@ deactivate CommandResult
 DeleteCommand --> LogicManager : result
 deactivate DeleteCommand
 
-[<--LogicManager
+[<--LogicManager : result
 deactivate LogicManager
 @enduml

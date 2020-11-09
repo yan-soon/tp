@@ -15,8 +15,9 @@ Given below are my contributions to the project.
 
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=mhdsyfq&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
-* **New Feature**: Added the ability to choose to `delete`/`clear` with a confirmation prompt, or to force delete or
-force clear using `fdelete`/`fclear`.
+* **New Features Implemented**: 
+  * Added the ability to choose to `delete`/`clear` with a confirmation prompt, or to force delete or
+  force clear using `fdelete`/`fclear`.
 
     * What it does:<br>
     Allows users to provide confirmation whether or not they want to proceed with deleting or clearing
@@ -31,21 +32,25 @@ force clear using `fdelete`/`fclear`.
     
     * Highlights:<br>
     This enhancement of adding a confirmation prompt affects some existing commands and commands to be 
-    added in future. The implementation was fairly challenging and it required an in-depth analysis of design alternatives as there was a need to stall the original 
-    command, prompt for a confirmation, and then execute or stop the execution of the command (based on the confirmation
-    provided). After figuring out the implementation, however, the extension to other existing commands was relatively
-    straightforward.
+    added in future. The implementation was fairly challenging and it required an in-depth analysis of design alternatives 
+    as there is a need to stall the original command, prompt for a confirmation, and then execute or stop the execution 
+    of the command (based on the confirmation provided). Also, there was a need to create a `YesCommand` which accepts any 
+    of `y`, `ye`, or `yes` as a confirmation. After figuring out the implementation, however, the extension to other 
+    existing commands was relatively straightforward.
 
-* **New Feature**: Added the ability to check accumulated Modular Credits (MCs) using `checkmc`.
+  * Added the ability to check accumulated Modular Credits (MCs) using `checkmc`.
 
-  * What it does:<br>
-  Allows users to check how many Modular Credits they have attained based on the modules that they have
-  completed/added into GradPad.
+    * What it does:<br>
+    Allows users to check how many Modular Credits they have attained based on the modules that they have
+    completed/added into GradPad.
   
-  * Justification:<br>
-  This feature improves the application slightly as users might want to occasionally check how much 
-  MCs they have attained so far so as to gauge how close they are to graduation without having to check the MCs for each
-  module and manually count. 
+    * Justification:<br>
+    This feature improves the application slightly as users might want to occasionally check how much 
+    MCs they have attained so far so as to gauge how close they are to graduation without having to check the MCs for each
+    module and manually calculate. 
+    
+* **Enhancements to features implemented by peers**:
+  * Improved `gem` and `science` features to support auto update [\#182](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/182)
     
 * **Enhancements to existing features**:
 
@@ -54,10 +59,11 @@ force clear using `fdelete`/`fclear`.
   * Improved implementation of `add` and `edit` features [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
   * Added a 1.5 second delay before closing GradPad window for `exit` feature [\#95](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/95)
   * Added assertions to the `core`, `logic` and `module` packages [\#92](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/92)
+  * Refactored Index package [\#219](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/219)
   * Changed the entire outlook of the Graphical User Interface (GUI)
-      * Changed arrangement of GUI components [\#51](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/51)
-      * Updated GUI color scheme [\#66](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/66)
-      * Added introduction display with original GradPad logo [\#127](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/127)
+    * Changed arrangement of GUI components [\#51](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/51)
+    * Updated GUI color scheme [\#66](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/66)
+    * Added introduction display with original GradPad logo [\#127](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/127)
 
 * **Contributions to team-based tasks**:
   * Came up with product name
@@ -66,6 +72,9 @@ force clear using `fdelete`/`fclear`.
   * Designed and added images with mark-ups for the User Guide
   * Documented Non-Functional Requirements and Glossary to the Developer Guide
   * Consolidated all messages into a single class
+  * Updated User Guide according to peers' and tutor's comments
+  * Improved readability and clarity for result display messages
+  * Standardised JavaDoc comments
   
 * **Documentation**:
   * User Guide:
@@ -74,12 +83,16 @@ force clear using `fdelete`/`fclear`.
     
   * Developer Guide:
     * Added documentation for `find` feature, including sequence diagram [\#62](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/62)
-    * Updated `Ui` component documentation, including class diagram [\#62](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/62)
-    * Updated manual testing [\#87](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/87)
+    * Added documentation for integration of NUSMods for `add` and `edit` features [\#214](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/214)
+    * Added documentation for Command Stalling feature [\#217](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/217)
+    * Updated documentation for `Ui` component, including class diagram [\#62](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/62)
+    * Updated documentation for manual testing [\#87](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/87)   
+    * Updated documentation for `find` feature [\#215](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/215) 
+    * Updated documentation for `delete` feature [\#217](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/217)
     
 
 * **Community**:
-  * Assisted in testing and reporting bugs for another team's product:
+  * Assisted in testing and reporting bugs for another team's product:<br>
   [\#1](https://github.com/mhdsyfq/ped/issues/1),
   [\#2](https://github.com/mhdsyfq/ped/issues/2),
   [\#3](https://github.com/mhdsyfq/ped/issues/3),

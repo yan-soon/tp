@@ -49,6 +49,8 @@ Given below are my contributions to the project.
     retain the original functionality of searching by module code keywords, I had to come up with a way to combine
     both search predicates. In order to make things more extensible, I decided to create a new compound predicate class
     that handles the chaining of multiple predicates.      
+    
+<div style="page-break-after: always;"></div>
      
 * **New Feature**: Added a command to allow users to view all tags in GradPad
     * What it does: Allows users to view a list of all the tags they've added.

@@ -54,7 +54,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
@@ -62,7 +62,7 @@ The rest of the App consists of four components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 * [**`Nusmods`**](#nusmods-component): Reads data from the NUSMODS public API.
 
-Each of the four components,
+Each of the first four components,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.
@@ -293,12 +293,41 @@ The following sequence diagram illustrates this flow:
 
 ![NusmodsScrapeModuleSequenceDiagram](images/NusmodsScrapeModuleSequenceDiagram.png)
 
+### Command Stalling feature
+
+GradPad stalls certain commands that erase data so that users can provide confirmation as to
+whether or not they wish to proceed with the commands. This feature relies heavily on each commands' `requiresStall()` method.
+
+This is the general flow of logic when handling commands:
+
+![StalledActivityDiagram](images/StalledActivityDiagram.png)
+
+
+1. If a command `requiresStall`, `LogicManager` will self-invoke its `handleStall()` to store the command to be stalled.
+
+2. `handleStall()` will then return a `CommandResult` which prompts the user for a confirmation.
+
+The following sequence diagram illustrates this flow:
+
+![StalledSequenceDiagram](images/StalledSequenceDiagram.png)
+
+If the user provides a `YesCommand`, the `stalledCommand` is executed.
+
+The following sequence diagram illustrates this flow:
+
+![ConfirmStalledSequenceDiagram](images/ConfirmStalledSequenceDiagram.png)
+
+However, if the user does not provide a `YesCommand`, the stalledCommand will be set to null, after which an abort message will be displayed.
+
+The following sequence diagram illustrates this flow:
+
+![CancelStalledSequenceDiagram](images/CancelStalledSequenceDiagram.png)
+
 ### Add feature
 GradPad allows users to add modules to their list.
 
 The following fields of a module are required (* for optional):
 * Module Code
-* Modular Credits
 * Tags*
 
 As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
@@ -314,15 +343,22 @@ Given below is how an add operation behaves at each step of its execution.
 
 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser` class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
-5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. module code, tags, etc.
 
-6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores the values that we want to add into our list.
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) from Nusmods.
 
-7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
+7. Once the module information is retrieved, a new `Module` object is created from the module information and tags. It now stores the values that we want to add into our list.
 
-8. `Logic Manager` executes the newly created `AddCommand`.
+8. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
 
-9. Finally, the `Model` is then updated by adding the new `Module` object.
+9. `Logic Manager` executes the newly created `AddCommand`.
+
+10. Finally, the `Model` is then updated by adding the new `Module` object.
+
+**Auto-Retrieval of Module Information**
+
+GradPad's `add` feature supports auto retrieval of module information from NUSMods, mainly a module's title and modular credits.
+This is to ensure that the modules added into GradPad are valid NUS modules, and the module information for each module is accurate.
 
 The following sequence diagram shows how the add command is executed.
 
@@ -333,16 +369,15 @@ GradPad allows users to edit modules that have already been added.
 
 The following fields of a module can be edited:
 * Module Code
-* Modular Credits
 * Tags
 
 As with all operations in GradPad, the `EditCommand` class handles the execution of edit operations.
 The `EditCommandParser` class helps to parse a user's input before creating the correct edit command.
 
 GradPad uses the `EditModuleDescriptor` class to facilitate edit operations. An `EditModuleDescriptor` is
-a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode`,
-`ModularCredit`, and `Tags` of an `EditModuleDescriptor`. It is also fine to omit any of them, which is important
-as we don't want to be overly-concerned with which fields are to be edited and which are not.
+a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode` and `Tags` of an `EditModuleDescriptor`,
+whereas the `ModuleTitle` and `ModularCredits` of a module will be retrieved automatically via NUSMods. 
+At least one field (`ModuleCode` or `Tags`) must be specified to successfully edit a module.
 
 Given below is how an edit operation behaves at each step of its execution.
 
@@ -357,18 +392,25 @@ class to create a corresponding `EditCommand`.
 
 5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) of the new module from Nusmods.
+
+7. Once the module information is retrieved, an `EditModuleDescriptor` object is created from the module information and tags. It now stores
 the new values that we want to update the target module with.
 
-7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
+8. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
 `LogicManager` in step 2.
 
-8. `LogicManager` executes the newly created `EditCommand`.
+9. `LogicManager` executes the newly created `EditCommand`.
 
-9. The target module to be edited is retrieved. A copy of it is made and using the populated
+10. The target module to be edited is retrieved. A copy of it is made and using the populated
  `EditModuleDescriptor`, the fields that are to be updated are replaced with their new values.
  
-10. The `Model` is then updated by replacing the target module with its new updated copy.
+11. The `Model` is then updated by replacing the target module with its new updated copy.
+
+**Auto-Retrieval of Module Information**
+
+When a user wishes to edit the module code of a module, GradPad's `edit` feature supports auto retrieval of the new module information from NUSMods, mainly the module's title and modular credits.
+This is to ensure that newly edited modules are valid NUS modules, and the module information for the edited module is accurate.
 
 The following sequence diagram shows how the edit command is executed.
 
@@ -396,40 +438,52 @@ class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.
 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
 `LogicManager` in step 2.
 
-7. `LogicManager` executes the newly created `DeleteCommand`.
+7. `LogicManager` self-invokes its `handleStall()` method and returns a `CommandResult` which prompts the user for a confirmation.
 
-8. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
+8. When the user enters a `YesCommand`, `LogicManager` executes the stalled `DeleteCommand`.
+
+9. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
  
-9. The `Model` is then updated by removing the target module.
+10. The `Model` is then updated by removing the target module.
 
 The following sequence diagram shows how the delete command is executed.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user performs a Force Delete Operation, 
+the `LogicManager` will skip the part where it self-invokes its `handleStall()` method, and execute the command immediately.
+
+</div>
+
 ### Find feature
-GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
+GradPad allows users to find a specific module or a group of modules with common tags or sequence of characters. This feature is especially useful 
 if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
-entire list to find the module they are looking for.  
+entire list to look for specific module(s). 
 
 As with all operations in GradPad, the `FindCommand` class handles the execution of find operations.
 The `FindCommandParser` class helps to parse a user's input before creating the correct find command.
 
 Given below is a series of steps to show how a find operation behaves during its execution.
 
-1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+1. The user types in a command string corresponding to a find operation, e.g. "find cs foundation".
 
 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
-class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
+class to extract the string input as a list of keywords and create a `CompoundFindPredicate` with said list.
+
+5. `CompoundFindPredicate` will test every keyword in the list against the logical union of both predicates 
+`ModuleCodeContainsKeywordsPredicate` and `ModuleContainsTagsPredicate`, and returns the result.
+
+6. A corresponding `FindCommand` will then be created using this `CompoundFindPredicate`.
 
 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
 
 6. `LogicManager` executes the newly created `FindCommand`.
 
-7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate(s).
 
 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
 
@@ -566,11 +620,11 @@ The following sequence diagram illustrates how the `required` command is execute
 
 The `science` command allows users to view all available Science modules available on the Computer Science curriculum.
 
-When the command is executed, a list of all available Science modules will be displayed on the `Command Line Display`.
+When the command is executed, a list of all available Science modules will be displayed on the `Result Display`.
 
 This is achieved by tapping into the `RequiredCommandStorage` class to extract and parse the Science modules, while the
 `ScienceCommand` class handles the logic of displaying the modules. This command is separated from the `required`
-command to avoid cluttering of the `Command Line Display`. 
+command to avoid cluttering of the `Result Display`. 
 
 As with all operations in GradPad, the `ScienceCommand` class handles the execution of `science` operations.
 
@@ -596,7 +650,10 @@ to be filled up by fetching a `RequiredCommandStorage` object.
 8. Inside the `setScienceModules()` method, the `setRequiredScience` method of the `RequiredCommandStorage` class
 is invoked, which sets `scienceModules` with the list of available Science modules.
 
-9. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
+9. Then, `ScienceCommand.execute()` calls for `Model` to filter out all existing Science modules in GradPad from
+`scienceModules`, via the `hasModule()` method.
+
+10. Finally, a `CommandResult` is created with the `filteredScienceModules` to display the modules.
 
 The following sequence diagram illustrates how the `science` command is executed.
 
@@ -606,11 +663,11 @@ The following sequence diagram illustrates how the `science` command is executed
 
 The `gem` command allows users to view all available General Education (GE) modules available in NUS.
 
-When the command is executed, a list of all available GE modules will be displayed on the `Command Line Display`.
+When the command is executed, a list of all available GE modules will be displayed on the `Result Display`.
 
 This is achieved with the `GemCommand` and `GemCommandStorage` class. The `GemCommandStorage` class
 handles the extracting and parsing of JSON module data while the `GemCommand` handles the logic of displaying the
-modules. This command is separated from `required` to avoid cluttering up the `Command Line Display` due to the hefty
+modules. This command is separated from `required` to avoid cluttering up the `Result Display` due to the hefty
 amount of GE modules displayed.
 
 As with all operations in GradPad, the `GemCommand` class handles the execution of `gem` operations.
@@ -637,7 +694,10 @@ objects.
 8. Within the `setSem1Storage` and `setSem2Storage` methods, various method calls are made for each GE pillar (Eg. GET, GER)
 to set up the `sem1Storage` and `sem2Storage` objects with the all the relevant `sem1GeModules` and `sem2GeModules`.
 
-9. Finally, a `CommandResult` is created with both the `sem1GeModules` and `sem2GeModules`, displaying all the available
+9. Then, `GemCommand.execute()` calls for `Model` to filter out all existing GE modules in GradPad from both
+`sem1GeModules` and `sem2GeModules`, via the `hasModule()` method.
+
+10. Finally, a `CommandResult` is created with all the filtered GE modules, displaying all the available
 GE modules by Semester.
 
 The following sequence diagram illustrates how the `gem` command is executed.
@@ -765,37 +825,50 @@ When editing a module's tags, the old tags are simply "removed" as when
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history, stored internally as an `gradPadStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history,
+stored internally as a `gradPadStateList` and `currentStatePointer`. Additionally, it implements the 
+following operations:
 
-* `VersionedGradPad#commit()` — Saves the current GradPad state in its history.
-* `VersionedGradPad#undo()` — Restores the previous GradPad state from its history.
-* `VersionedGradPad#redo()` — Restores a previously undone GradPad state from its history.
+* `VersionedGradPad.commit()` — Saves the current GradPad state in its history.
+* `VersionedGradPad.undo()` — Restores the previous GradPad state from its history.
+* `VersionedGradPad.redo()` — Restores a previously undone GradPad state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitGradPad()`, `Model#undoGradPad()` and `Model#redoGradPad()` respectively.
+These operations are exposed in the `Model` interface as `Model.commitGradPad()`, `Model.undoGradPad()` 
+and `Model.redoGradPad()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedGradPad` will be initialized with the initial GradPad state, and the `currentStatePointer` pointing to that single GradPad state.
+Step 1. The user launches the application for the first time. The `VersionedGradPad` will be initialized with 
+the initial GradPad state, and the `currentStatePointer` pointing to that single GradPad state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete c/CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The `delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete c/CS2103T` command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted GradPad state.
+Step 2. The user executes `delete CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The 
+`delete` command calls `Model.commitGradPad()`, causing the modified state of the GradPad after the `delete CS2103T` 
+command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted 
+GradPad state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add c/CS2100 …​` to add a new module. The `add` command also calls `Model#commitGradPad()`, causing another modified GradPad state to be saved into the `gradPadStateList`.
+Step 3. The user executes `add CS2100` to add a new module. The `add` command also calls `Model.commitGradPad()`, 
+causing another modified GradPad state to be saved into the `gradPadStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitGradPad()`, so the GradPad state will not be saved into the `gradPadStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it 
+will not call `Model.commitGradPad()`, so the GradPad state will not be saved into the `gradPadStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGradPad()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous GradPad state, and restores the GradPad to that state.
+Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the 
+`undo` command. The `undo` command will call `Model.undoGradPad()`, which will shift the `currentStatePointer` once 
+to the left, pointing it to the previous GradPad state, and restores the GradPad to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial GradPad state, then there are no previous GradPad states to restore. The `undo` command uses `Model#canUndoGradPad()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 
+0, pointing to the initial GradPad state, then there are no previous GradPad states to restore. The `undo` command 
+uses `Model.canUndoGradPad()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -804,21 +877,31 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoGradPad()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the GradPad to that state.
+The `redo` command does the opposite — it calls `Model.redoGradPad()`, which shifts the `currentStatePointer` once 
+to the right, pointing to the previously undone state, and restores the GradPad to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `gradPadStateList.size() - 1`, pointing to the latest GradPad state, then there are no undone GradPad states to restore. The `redo` command uses `Model#canRedoGradPad()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 
+`gradPadStateList.size() - 1`, pointing to the latest GradPad state, then there are no undone GradPad states to restore. 
+The `redo` command uses `Model.canRedoGradPad()` to check if this is the case. If so, it will return an error to the 
+user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the GradPad, such as `list`, will usually not call `Model#commitGradPad()`, `Model#undoGradPad()` or `Model#redoGradPad()`. Thus, the `gradPadStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the GradPad, such as `list`, 
+will usually not call `Model.commitGradPad()`, `Model.undoGradPad()` or `Model.redoGradPad()`. Thus, the 
+`gradPadStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitGradPad()`. Since the `currentStatePointer` is not pointing at the end of the `gradPadStateList`, all GradPad states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add c/CS2100 …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model.commitGradPad()`. Since the `currentStatePointer` is not pointing 
+at the end of the `gradPadStateList`, all GradPad states after the `currentStatePointer` will be purged. Reason: It no 
+longer makes sense to redo the `add CS2100` command. This is the behavior that most modern desktop 
+applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -839,8 +922,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   * Pros: Will use less memory (e.g. for `delete`, just save the module being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
 
-_{more aspects and alternatives to be added}_
-
 --------------------------------------------------------------------------------------------------------------------
 
 ## **Documentation, logging, testing, configuration, dev-ops**
@@ -853,7 +934,7 @@ _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -882,19 +963,18 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 | `* *`    | first-time user                            | access the available commands  | use the app efficiently                |
 | `* *`    | user                                     | save and load my Module data   | keep track of my Modular progress                                            |
 
-*{More to be added}*
 
 ### Use cases
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete a Module from `Completed Modules`**
+**Use case: UC01 - Delete a module from `Completed Modules`**
 
 **MSS**
 
 1.  User requests to delete a specific Module in the `Completed Modules`
 2.  GradPad deletes the module
-3.  GradPad displays the deleted module onto the `Command Line Display`
+3.  GradPad displays the deleted module onto the `Result Display`
 
     Use case ends.
 
@@ -902,7 +982,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The module does not exist in `Completed Modules`.
 
-  Use case ends.
+    * 1a1. GradPad shows an error message.
+    
+        Use case ends.
 
 * 2a. The given module code is invalid.
 
@@ -910,13 +992,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
       
-**Use case : UC02 - Add a Module into `Completed Modules`**
+**Use case : UC02 - Add a module into `Completed Modules`**
 
 **MSS**
 
 1. User requests to add a module into the `Completed Modules`
 2. GradPad adds the module into `Completed Modules`
-3. GradPad displays the module added onto the `Command Line Display`
+3. GradPad displays the module added onto the `Result Display`
 
     Use case ends.
     
@@ -928,6 +1010,12 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
+* 1b. Module to be added does not exist in NUS.
+
+    * 1b1. GradPad shows an error message.
+    
+      Use case ends.    
+      
 **Use case : UC03 - View help**
 
 **MSS**
@@ -937,7 +1025,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case : UC04 - View all current modules**
+**Use case : UC04 - View all `Completed Modules`**
 
 **MSS**
 
@@ -946,66 +1034,113 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case: UC05 - Edit a Module in `Completed Modules`**
+**Use case: UC05 - Edit a module in `Completed Modules`**
 
-1. User requests to list all modules in `Completed Modules`
-2. GradPad shows the list of modules in `Completed Modules`
-3. User requests to edit a module in `Completed Modules`
-4. Module is replaced with updated fields
+1. User requests to edit a module in `Completed Modules`
+2. Module is replaced with updated fields
+3. GradPad displays the module edited onto the `Result Display`
     
     Use case ends.
 
 **Extensions**
 
-* 2a. The list of modules in `Completed Modules` is empty.
+* 1a. The module does not exist in `Completed Modules`.
+
+    * 1a1. GradPad shows an error message.
+    
+        Use case ends.
+
+* 1b. No field is edited for the module.
+
+    * 1b1. GradPad shows an error message.
+       
+        Use case ends.
+    
+* 1c. Edited module does not exist in NUS.
+
+    * 1c1. GradPad shows an error message.
+    
+        Use case ends.
+    
+        
+* 1d. The input fields format is invalid.
+    
+    * 1d1. GradPad shows an error message.
+        
+        Use case ends.
+        
+**Use case : UC06 - Find modules in `Completed Modules`**
+
+**MSS**
+
+1. User requests to find modules in `Completed Modules` using keywords.
+2. GradPad displays the modules found onto the `Result Display`
 
     Use case ends.
     
-* 3a. The given index is invalid.
-    
-    * 3a1. GradPad shows an error message.
-    
-        Use case resumes at step 2.
-        
-* 3b. The input fields format is invalid.
-    
-    * 3b1. GradPad shows an error message.
-        
-        Use case resumes at step 2.
+**Extensions**
 
-**Use case : UC06 - View required modules in CS curriculum**
+* 1a. No modules or tag found.
+    
+    * 1a1. GradPad displays no modules found message onto `Result Display`.
+    
+        Use case ends.       
+
+**Use case : UC07 - View required modules in CS curriculum**
 
 **MSS**
 
 1. User requests to view all required modules in CS curriculum
-2. GradPad displays the required modules in CS curriculum onto the `Command Line Display`
+2. GradPad displays the required modules in CS curriculum onto the `Result Display`
 
     Use case ends.
-  
-**Use case : UC07 - Search for module details**
+    
+**Use case : UC08 - View all available General Education Modules offered in NUS**
 
 **MSS**
 
-1. User requests to search for a module in the CS curriculum.
-2. GradPad displays the module details in the `Command Line Display`
+1. User requests to view all available General Education Modules offered in NUS.
+2. GradPad displays all available General Education modules onto the `Result Display`
+
+    Use case ends.    
+
+**Use case : UC09 - View all available Science modules in the CS curriculum**
+
+**MSS**
+
+1. User requests to view all available Science modules in the CS curriculum.
+2. GradPad displays all available Science modules in the CS curriculum onto the `Result Display`
+
+    Use case ends. 
+    
+  
+**Use case : UC010 - Search for module details**
+
+**MSS**
+
+1. User requests to search for a module in NUS.
+2. GradPad displays the module details in the `Result Display`
 
     Use case ends.
     
 **Extensions**
-  
-* 1a. The input command format is invalid.
+
+* 1a. The module searched does not exist in NUS.
 
     * 1a1. GradPad shows an error message.
-    
-      Use case ends.  
-
-* 2a. The module searched does not exist in the required module list.
-
-    * 2a1. GradPad shows an error message.
         
-        Use case ends.
-        
-**Use case : UC08 - exit GradPad**
+        Use case ends.              
+
+**Use case : UC011 - Check total modular credits**
+
+**MSS**
+
+1. User requests to view total modular credits achieved.
+2. GradPad displays the total modular credits in the `Result Display`
+
+    Use case ends.
+
+**Use case : UC12 - exit GradPad**
 
 **MSS**
 
@@ -1014,7 +1149,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 
@@ -1041,7 +1175,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for Manual Testing**
+## **Appendix B: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1391,6 +1525,51 @@ Test Cases:
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Corrupt the current saved data file under `./data/gradpad.json`. One way is to add `-` into one of the module 
+   code.
+      
+   1. Open the jar file `gradpad.jar`<br>
+   Expected: No data shown in the Completed Modules list.
+   
+   1. Delete the data folder `./data`
+   
+   1. Open the jar file `gradpad.jar`<br>
+   Expected: Saved data will reset to sample data and will be shown in the Completed Modules list.
 
-1. _{ more test cases …​ }_
+## **Appendix C: Effort**
+
+### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
+GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to
+users. This integration with NUSMods is definitely complex and not easy. Fortunately, one of our team members had some
+experience with web development and managed to integrate the API into GradPad. This allows GradPad to 
+retrieve up-to-date module data directly from NUSMods, making GradPad more relevant and adaptable.
+
+As if integrating GradPad, a Java application, with a public web API isn't tedious enough, we also had to meet the
+project constraint that GradPad should be able to function even without an active connection to the API. Ideally,
+it would be straightforward for us to simply scrape data from the API and store it in our own database via a DBMS,
+which is generally done in other applications to reduce dependency on external APIs. However, the module also
+forbids the use of a DBMS, which meant we had to come up with a way to scrape and store data in local files instead.
+At the end of the day, we spent a considerable effort to write a script in Java that scrapes data from the API
+, transforms them into Java objects, and serializes them into human-readable JSON files.
+
+### 2. NUS CS Curriculum
+Our target audience is Computer Science Undergraduates and so we had to get the NUS CS curriculum and utilize
+this data in GradPad. Our initial idea was to just store the entire list of modules in the CS curriculum into GradPad.
+However, we soon realized that there are way more modules than we had anticipated as there is a list of GEMs and 
+science modules that we had initially missed out. Besides this, there are also preclusions in some modules and
+equivalent modules with different module codes. These are tough challenges that we had to brainstorm hard to come up
+with innovative solutions to address them. Fortunately, our team managed to address these fundamental problems in the final product.
+
+### 3. UI
+Our GradPad Team has spent a considerable amount of effort on the UI aspect, from choosing the position of the result
+display and command box input, to the color theme that is the most pleasing to the audience. There should also be a
+special mention to Syafiq for coming up with the logo of GradPad from scratch, personalizing GradPad's Ui to our target
+audience. Our team absolutely loves the color theme we have ended up with and we believe our target audience (Computer
+Science Undergraduate) will too.
+
+### 4. Overall
+As a whole, we believe that even though this project was rather demanding and time-consuming, we thoroughly enjoyed 
+working with one another. Right from the start, we helped each other with the setting up of Github and the process of
+the project's workflow. All of us were also very encouraging and constantly reviewed each other's pull requests with
+comprehensive comments, allowing us to learn from each other's strengths in coding. We are definitely proud of GradPad
+, and believe that it will serve its purpose to the fullest potential.

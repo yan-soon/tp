@@ -21,6 +21,7 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.UniqueModuleList;
 import seedu.address.model.module.exceptions.DuplicateModuleException;
 import seedu.address.model.tag.UniqueTagMap;
 import seedu.address.testutil.ModuleBuilder;
@@ -84,6 +85,14 @@ public class GradPadTest {
     @Test
     public void getModuleList_modifyList_throwsUnsupportedOperationException() {
         Assertions.assertThrows(UnsupportedOperationException.class, () -> gradPad.getModuleList().remove(0));
+    }
+
+    @Test
+    public void hashCode_validTest() {
+        UniqueModuleList testModuleList = new UniqueModuleList();
+        int expected = testModuleList.hashCode();
+        int actual = gradPad.hashCode();
+        assertEquals(expected, actual);
     }
 
     /**

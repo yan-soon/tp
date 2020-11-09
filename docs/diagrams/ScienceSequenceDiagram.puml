@@ -53,8 +53,14 @@ deactivate RequiredCommandStorage
 
 deactivate ScienceCommand
 
+ScienceCommand -> Model : hasModule(scienceModules)
+activate Model
+
+Model --> ScienceCommand : filteredScienceModules
+deactivate Model
+
 create CommandResult
-ScienceCommand -> CommandResult : scienceModules
+ScienceCommand -> CommandResult : filteredScienceModules
 activate CommandResult
 
 CommandResult --> ScienceCommand

@@ -72,8 +72,14 @@ deactivate GemCommandStorage2
 
 deactivate GemCommand
 
+GemCommand -> Model : hasModule(semXXXGeModules)
+activate Model
+
+Model --> GemCommand : filteredSemXXXGeModules
+deactivate Model
+
 create CommandResult
-GemCommand -> CommandResult : sem1GeModules + sem2GeModules
+GemCommand -> CommandResult : filteredSemXXXGeModules
 activate CommandResult
 
 CommandResult --> GemCommand

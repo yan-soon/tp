@@ -295,7 +295,7 @@ The following sequence diagram illustrates this flow:
 
 ### Command Stalling feature
 
-GradPad stalls certain commands that mutate/erase data so that users can provide confirmation as to
+GradPad stalls certain commands that erase data so that users can provide confirmation as to
 whether or not they wish to proceed with the commands. This feature relies heavily on each commands' `requiresStall()` method.
 
 This is the general flow of logic when handling commands:
@@ -303,7 +303,7 @@ This is the general flow of logic when handling commands:
 ![StalledActivityDiagram](images/StalledActivityDiagram.png)
 
 
-1. If a command `requiresStall`, `LogicManager` will self-invoke its `handleStall()` to store the the command to be stalled.
+1. If a command `requiresStall`, `LogicManager` will self-invoke its `handleStall()` to store the command to be stalled.
 
 2. `handleStall()` will then return a `CommandResult` which prompts the user for a confirmation.
 

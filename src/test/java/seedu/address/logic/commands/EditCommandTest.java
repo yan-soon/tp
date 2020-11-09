@@ -16,8 +16,7 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TAG_NON_CORE;
 import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_CS3216;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandFailure;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+import static seedu.address.logic.commands.CommandTestUtil.showModuleWithCode;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
@@ -108,7 +107,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_filteredList_success() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleWithCode(model, CODE_FIRST_MODULE);
 
         Module moduleInFilteredList = getModuleFromFilteredList(CODE_FIRST_MODULE);
         Module editedModule = new ModuleBuilder(moduleInFilteredList)
@@ -136,7 +135,7 @@ public class EditCommandTest {
 
     @Test
     public void execute_duplicateModuleFilteredList_failure() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleWithCode(model, CODE_FIRST_MODULE);
 
         // edit module in filtered list into a duplicate in GradPad
         Module moduleInList = getModuleFromModel(CODE_SECOND_MODULE);
@@ -163,7 +162,7 @@ public class EditCommandTest {
      */
     @Test
     public void execute_moduleNotYetAddedFilteredList_failure() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleWithCode(model, CODE_FIRST_MODULE);
         ModuleCode moduleNotYetAdded = new ModuleCode("CS2108");
 
         EditCommand editCommand = new EditCommand(moduleNotYetAdded,

@@ -10,11 +10,11 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import seedu.address.commons.core.index.Index;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.GradPad;
 import seedu.address.model.Model;
 import seedu.address.model.module.Module;
+import seedu.address.model.module.ModuleCode;
 import seedu.address.model.module.ModuleCodeContainsKeywordsPredicate;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
@@ -105,10 +105,13 @@ public class CommandTestUtil {
      * Updates {@code model}'s filtered list to show only the module at the given {@code targetIndex} in the
      * {@code model}'s GradPad.
      */
-    public static void showModuleAtIndex(Model model, Index targetIndex) {
-        assertTrue(targetIndex.getZeroBased() < model.getFilteredModuleList().size());
+    public static void showModuleWithCode(Model model, ModuleCode targetCode) {
+        assertTrue(targetCode != null);
 
-        Module module = model.getFilteredModuleList().get(targetIndex.getZeroBased());
+        Module module = model.getFilteredModuleList().get(model.getFilteredModuleList().indexOf(
+            model.getFilteredModuleList().stream().filter(x -> x.getModuleCode().equals(targetCode))
+            .findFirst().get()));
+
         final String[] splitName = module.getModuleCode().toString().split("\\s+");
         model.updateFilteredModuleList(new ModuleCodeContainsKeywordsPredicate(Arrays.asList(splitName[0])));
 

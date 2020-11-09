@@ -407,7 +407,7 @@ The following sequence diagram shows how the delete command is executed.
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 ### Find feature
-GradPad allows users to find a specific module or a group of module with common tags or sequence of characters. This feature is especially useful 
+GradPad allows users to find a specific module or a group of modules with common tags or sequence of characters. This feature is especially useful 
 if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
 entire list to look for specific module(s). 
 
@@ -425,8 +425,8 @@ Given below is a series of steps to show how a find operation behaves during its
 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
 class to extract the string input as a list of keywords and create a `CompoundFindPredicate` with said list.
 
-5. The `CompoundFindPredicate` will then identify each keyword in the list as individual predicates. They can be either a
-`ModuleCodeContainsKeywordsPredicate` or `ModuleContainsTagsPredicate`.
+5. `CompoundFindPredicate` will test every keyword in the list against the logical union of both predicates 
+`ModuleCodeContainsKeywordsPredicate` and `ModuleContainsTagsPredicate`, and returns the result.
 
 6. A corresponding `FindCommand` will then be created using this `CompoundFindPredicate`.
 

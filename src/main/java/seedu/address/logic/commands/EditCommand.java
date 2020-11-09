@@ -26,13 +26,14 @@ import seedu.address.model.tag.Tag;
  * Edits the details of an existing module in the GradPad.
  */
 public class EditCommand extends Command {
-
     private final ModuleCode code;
     private final EditModuleDescriptor editModuleDescriptor;
 
     /**
-     * @param code of the module in GradPad to edit
-     * @param editModuleDescriptor details to edit the module with
+     * Creates an EditCommand to edit the module with the specified {@code EditModuleDescriptor}.
+     *
+     * @param code the module code of the module in GradPad to edit.
+     * @param editModuleDescriptor the descriptor which contains details to edit the module with.
      */
     public EditCommand(ModuleCode code, EditModuleDescriptor editModuleDescriptor) {
         requireNonNull(code);
@@ -71,6 +72,10 @@ public class EditCommand extends Command {
     /**
      * Creates and returns a {@code Module} with the details of {@code moduleToEdit}
      * edited with {@code editModuleDescriptor}.
+     *
+     * @param moduleToEdit the module to edit.
+     * @param editModuleDescriptor
+     * @return
      */
     private static Module createEditedModule(Module moduleToEdit, EditModuleDescriptor editModuleDescriptor) {
         assert moduleToEdit != null;

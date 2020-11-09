@@ -14,7 +14,6 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.RequiredCommandStorage;
 
 public class ScienceCommand extends Command {
-
     private ObservableList<Module> scienceModules;
 
     /**

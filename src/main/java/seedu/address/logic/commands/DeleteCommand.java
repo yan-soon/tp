@@ -14,13 +14,15 @@ import seedu.address.model.module.ModuleCode;
 
 /**
  * Deletes a Module identified using a Module's ModuleCode.
+ * This delete operation requires a confirmation to be given.
  */
 public class DeleteCommand extends Command {
-
     private final ModuleCode code;
 
     /**
      * Creates a DeleteCommand to delete the module with the specified {@code ModuleCode}
+     *
+     * @param code
      */
     public DeleteCommand(ModuleCode code) {
         this.code = code;
@@ -29,8 +31,8 @@ public class DeleteCommand extends Command {
     /**
      * Retrieves the module to be deleted.
      *
-     * @param model The Model which the command operates on.
-     * @return The module to be deleted.
+     * @param model the Model which the command operates on.
+     * @return the module to be deleted.
      * @throws CommandException if the module cannot be found in Completed Modules.
      */
     public Module getModuleToDelete(Model model) throws CommandException {

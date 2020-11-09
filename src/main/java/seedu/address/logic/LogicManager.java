@@ -30,9 +30,7 @@ import seedu.address.storage.Storage;
  * The main LogicManager of the app.
  */
 public class LogicManager implements Logic {
-
     private final Logger logger = LogsCenter.getLogger(LogicManager.class);
-
     private final Model model;
     private final Storage storage;
     private final GradPadParser gradPadParser;
@@ -42,6 +40,9 @@ public class LogicManager implements Logic {
 
     /**
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
+     *
+     * @param model {@code Model} which the LogicManager should operate on.
+     * @param storage the given storage to be operated on.
      */
     public LogicManager(Model model, Storage storage) {
         assert (model != null && storage != null);

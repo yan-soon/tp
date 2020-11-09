@@ -5,7 +5,7 @@ import static seedu.address.commons.core.Messages.MESSAGE_NO_CONFIRMATION;
 import seedu.address.model.Model;
 
 /**
- * Confirms a command that requires confirmation.
+ * Represents a confirmation.
  */
 public class YesCommand extends Command {
 

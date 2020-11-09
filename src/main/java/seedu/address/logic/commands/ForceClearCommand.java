@@ -1,7 +1,7 @@
 package seedu.address.logic.commands;
 
 /**
- * Force clears the GradPad.
+ * Force-clears the GradPad.
  */
 public class ForceClearCommand extends ClearCommand {
 

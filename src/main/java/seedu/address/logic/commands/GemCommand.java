@@ -22,7 +22,6 @@ import seedu.address.model.module.Module;
 import seedu.address.storage.GemCommandStorage;
 
 public class GemCommand extends Command {
-
     private GemCommandStorage sem1Storage;
     private GemCommandStorage sem2Storage;
     private String compiledModules;
@@ -49,8 +48,8 @@ public class GemCommand extends Command {
      * Loads the sem1Storage attribute with Semester 1 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
      *
-     * @throws IOException When the path in invalid.
-     * @throws IllegalValueException When the data from the JSON file does not match the
+     * @throws IOException when the path in invalid.
+     * @throws IllegalValueException when the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setSem1Storage() throws IOException, IllegalValueException {
@@ -66,8 +65,8 @@ public class GemCommand extends Command {
      * Loads the sem2Storage attribute with Semester 2 GE Modules by using
      * the various set() methods from the GemCommandStorage class.
      *
-     * @throws IOException When the path in invalid.
-     * @throws IllegalValueException When the data from the JSON file does not match the
+     * @throws IOException when the path in invalid.
+     * @throws IllegalValueException when the data from the JSON file does not match the
      * specific field headers of the JsonAdaptedModule class (Eg.'moduleCode', 'modularCredits').
      */
     public void setSem2Storage() throws IOException, IllegalValueException {

@@ -12,7 +12,6 @@ import seedu.address.nusmods.exceptions.NusmodsException;
  * Logic for searching a module from the Computer Science curriculum.
  */
 public class ModuleInfoSearcher {
-
     private NusmodsDataManager dataManager;
 
     public ModuleInfoSearcher() {
@@ -25,6 +24,7 @@ public class ModuleInfoSearcher {
 
     /**
      * Perform search function on NUSMods using dataManager.
+     *
      * @param moduleCode from SearchCommandParser.
      * @return ModuleInfo of the module searched.
      * @throws CommandException if an error occurs during the search process.

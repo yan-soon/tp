@@ -16,12 +16,13 @@ import seedu.address.nusmods.ModuleInfo;
  * Module Code matching is case insensitive.
  */
 public class SearchCommand extends Command {
-
     private final ModuleCode moduleCode;
 
     /**
      * Creates a SearchCommand to search for a module from the Computer Science
-     * curriculum {@code Module}
+     * curriculum {@code Module}.
+     *
+     * @param moduleCode the module code of the module to be searched.
      */
     public SearchCommand(ModuleCode moduleCode) {
         requireNonNull(moduleCode);

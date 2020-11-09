@@ -54,7 +54,7 @@ The ***Architecture Diagram*** given above explains the high-level design of the
 
 [**`Commons`**](#common-classes) represents a collection of classes used by multiple other components.
 
-The rest of the App consists of four components.
+The rest of the App consists of five components.
 
 * [**`UI`**](#ui-component): The UI of the App.
 * [**`Logic`**](#logic-component): The command executor.
@@ -62,7 +62,7 @@ The rest of the App consists of four components.
 * [**`Storage`**](#storage-component): Reads data from, and writes data to, the hard disk.
 * [**`Nusmods`**](#nusmods-component): Reads data from the NUSMODS public API.
 
-Each of the four components,
+Each of the first four components,
 
 * defines its *API* in an `interface` with the same name as the Component.
 * exposes its functionality using a concrete `{Component Name}Manager` class (which implements the corresponding API `interface` mentioned in the previous point.

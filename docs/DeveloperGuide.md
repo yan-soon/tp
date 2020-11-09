@@ -293,14 +293,35 @@ The following sequence diagram illustrates this flow:
 
 ![NusmodsScrapeModuleSequenceDiagram](images/NusmodsScrapeModuleSequenceDiagram.png)
 
-### Stalled feature
+### Command Stalling feature
 
 GradPad stalls certain commands that mutate/erase data so that users can provide confirmation as to
 whether or not they wish to proceed with the commands. This feature relies heavily on each commands' `requiresStall()` method.
 
-This is the flow of logic when stalling commands:
+This is the general flow of logic when handling commands:
+
+![StalledActivityDiagram](images/StalledActivityDiagram.png)
 
 
+1. If a command `requiresStall`, `LogicManager` will self-invoke its `handleStall()` to store the the command to be stalled.
+
+2. `handleStall()` will then return a `CommandResult` which prompts the user for a confirmation.
+
+The following sequence diagram illustrates this flow:
+
+![StalledSequenceDiagram](images/StalledSequenceDiagram.png)
+
+If the user provides a `YesCommand`, the `stalledCommand` is executed.
+
+The following sequence diagram illustrates this flow:
+
+![ConfirmStalledSequenceDiagram](images/ConfirmStalledSequenceDiagram.png)
+
+However, if the user does not provide a `YesCommand`, the stalledCommand will be set to null, after which an abort message will be displayed.
+
+The following sequence diagram illustrates this flow:
+
+![CancelStalledSequenceDiagram](images/CancelStalledSequenceDiagram.png)
 
 ### Add feature
 GradPad allows users to add modules to their list.
@@ -405,15 +426,22 @@ class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.
 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
 `LogicManager` in step 2.
 
-7. `LogicManager` executes the newly created `DeleteCommand`.
+7. `LogicManager` self-invokes its `handleStall()` method and returns a `CommandResult` which prompts the user for a confirmation.
 
-8. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
+8. When the user enters a `YesCommand`, `LogicManager` executes the stalled `DeleteCommand`.
+
+9. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
  
-9. The `Model` is then updated by removing the target module.
+10. The `Model` is then updated by removing the target module.
 
 The following sequence diagram shows how the delete command is executed.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
+
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user performs a Force Delete Operation, 
+the `LogicManager` will skip the part where it self-invokes its `handleStall()` method, and execute the command immediately.
+
+</div>
 
 ### Find feature
 GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 

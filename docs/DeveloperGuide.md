@@ -922,7 +922,9 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 * 1a. The module does not exist in `Completed Modules`.
 
-  Use case ends.
+    * 1a1. GradPad shows an error message.
+    
+        Use case ends.
 
 * 2a. The given module code is invalid.
 
@@ -1468,7 +1470,7 @@ Test Cases:
    1. Open the jar file `gradpad.jar`<br>
    Expected: Saved data will reset to sample data and will be shown in the Completed Modules list.
 
-## **Appendix D: Effort**
+## **Appendix C: Effort**
 
 ### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
 GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to

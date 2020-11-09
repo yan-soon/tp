@@ -65,4 +65,10 @@ public class StorageManagerTest {
         assertNotNull(storageManager.getGradPadFilePath());
     }
 
+    @Test
+    public void getUserPrefsFilePath_validTest() {
+        Path expected = getTempFilePath("prefs");
+        Path actual = storageManager.getUserPrefsFilePath();
+        assertEquals(expected, actual);
+    }
 }

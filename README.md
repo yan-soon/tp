@@ -1,9 +1,19 @@
-[![CI Status](https://github.com/se-edu/addressbook-level3/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103T-T09-1/tp/actions)
+[![CI Status](https://github.com/AY2021S1-CS2103T-T09-1/tp/workflows/Java%20CI/badge.svg)](https://github.com/AY2021S1-CS2103T-T09-1/tp/actions)
 
 # GradPad
 
-Keep track of your degree progress and modules taken during your time in NUS with ease. Faster and more 
-lightweight than traditional GUI applications, view and update your progress by issuing simple text commands. 
+GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
+Planning for modules has always been a tedious process but it does not have to be.
+
+The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
+[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of the School of
+ Computing, which can be messy at times. 
+So, the GradPad team has come up with the idea of an **easy-to-use**, **all-in-one application** that
+can ease the process of **module management** for Computer Science Undergraduates.
+
+GradPad **consolidates** the modules you have taken and **displays** the remaining required modules to
+ease your module planning process. A **module searching platform** is also included in GradPad, providing easy
+**navigation** of modules.
 
 ![Ui](docs/images/Ui.png)
 
@@ -16,32 +26,6 @@ GradPad requires that you have a Java SE Runtime Environment (JRE) installed on 
 2. Run the downloaded jar file
     - You can either double-click on the jar file, or
     - Execute this command from your terminal: `java -jar GradPad.jar`
-
-## Features
-#### Adding a module
-Command: ```add {module title} {modular credits}```
-
-Example usage: ```add CS2103T 4```
-
-#### Deleting a module
-Command: ```delete {module title}``` 
-
-Example usage: ```delete CS2103T```
-
-#### View all added modules
-Command: ```list```
-
-#### View total modular credits (MCs)
-Command: ```checkmc```
-
-#### Save session
-Command: ```save```
-
-#### View help
-Command: ```help```
-
-#### Exit
-Command: ```exit```
 
 ## Usage
 For detailed guidance on using GradPad, take a look at our user guide 

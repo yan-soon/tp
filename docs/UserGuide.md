@@ -32,9 +32,7 @@ it includes a [quick start guide](#quick-start) that walks you through the insta
 With this guide, you'll be ready to use GradPad in no time.
 
 --------------------------------------------------------------------------------------------------------------------
-## NUSMods integration  
-
-![NUSMods](images/nusmods.png)
+## ![NUSMods](images/nusmods.png) integration
 
 To streamline your module searching process with added convenience, GradPad integrates data from [NUSMods](https://nusmods.com/). With this, 
 you no longer have to visit NUSMods separately to look up module information. Instead, GradPad offers you all that data 

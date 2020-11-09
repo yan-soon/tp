@@ -407,29 +407,34 @@ The following sequence diagram shows how the delete command is executed.
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
 ### Find feature
-GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
+GradPad allows users to find a specific module or a group of module with common tags or sequence of characters. This feature is especially useful 
 if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
-entire list to find the module they are looking for.  
+entire list to look for specific module(s). 
 
 As with all operations in GradPad, the `FindCommand` class handles the execution of find operations.
 The `FindCommandParser` class helps to parse a user's input before creating the correct find command.
 
 Given below is a series of steps to show how a find operation behaves during its execution.
 
-1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+1. The user types in a command string corresponding to a find operation, e.g. "find cs foundation".
 
 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
-class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
+class to extract the string input as a list of keywords and create a `CompoundFindPredicate` with said list.
+
+5. The `CompoundFindPredicate` will then identify each keyword in the list as individual predicates. They can be either a
+`ModuleCodeContainsKeywordsPredicate` or `ModuleContainsTagsPredicate`.
+
+6. A corresponding `FindCommand` will then be created using this `CompoundFindPredicate`.
 
 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
 
 6. `LogicManager` executes the newly created `FindCommand`.
 
-7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate(s).
 
 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
 

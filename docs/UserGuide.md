@@ -96,23 +96,23 @@ A consolidated view of GradPad's features is listed in the table below for easy 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Note:**<br>
-* Italicised words (e.g. *Completed Modules*) refer to actual sections on the GradPad user interface.
+* Italicised words (e.g. *Completed Modules List*) refer to actual sections on the GradPad user interface.
 </div>
 
  Features                         |    Description
  ----------------------------------------|------------
- Add a Module                            | Allows you to add any module of choice to the *Completed Modules* list for tracking purposes
- View Added Modules                      | Allows you to check all the modules you've added  to *Completed Modules*
- Find Modules in Completed Modules       | Allows you to look for modules in *Completed Modules* using keywords
- Delete a Module                         | Allows you to delete unwanted modules from *Completed Modules*
- Edit a Module                           | Allows you to edit the details of a module you've already added to *Completed Modules*
+ Add a Module                            | Allows you to add any module of choice to the *Completed Modules List* for tracking purposes
+ View Added Modules                      | Allows you to check all the modules you've added  to *Completed Modules List*
+ Find Modules in Completed Modules       | Allows you to look for modules in *Completed Modules List* using keywords
+ Delete a Module                         | Allows you to delete unwanted modules from *Completed Modules List*
+ Edit a Module                           | Allows you to edit the details of a module you've already added to *Completed Modules List*
  Check Modular Credits                   | Allows you to check your current modular credit tally
  View all Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the *Result Display Box*
  View all General Education Modules      | Allows you to display all available General Education Modules offered in NUS onto the *Result Display Box*
  View all Science Modules                | Allows you to display all available Science modules in the Computer Science curriculum onto the *Result Display Box*
  Search for a Module                     | Allows you to search for any module available in NUS and display the module details onto the *Result Display Box*
- Find Tags from Completed Modules        | Allows you to check all tags that are used in *Completed Modules*
- Clear all Modules                       | Allows you to delete all the modules from *Completed Modules*
+ Find Tags from Completed Modules        | Allows you to check all tags that are used in *Completed Modules List*
+ Clear all Modules                       | Allows you to delete all the modules from *Completed Modules List*
  View Help                               | Allows you to view a list of all possible commands
  Exit the Program                        | Allows you to exit GradPad
 
@@ -139,7 +139,7 @@ For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core
 
 * Highlighted words (e.g. `this`) refer to actual commands.
 
-* Italicised words (e.g. *Completed Modules*) refer to actual sections on the GradPad user interface.
+* Italicised words (e.g. *Completed Modules List*) refer to actual sections on the GradPad user interface.
 
 </div>
 
@@ -149,7 +149,7 @@ Scenario:<br>
 You have just completed the CS2101 module, and you want to add the module into GradPad to track your academic progress. 
 You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
 
-The `add` command allows you to add a module you have completed into the *Completed Modules* list.
+The `add` command allows you to add a module you have completed into the *Completed Modules List*.
 
 You can add a module by specifying a valid module code. You can also include multiple tags using the prefix `t/` but they are optional.
 Conveniently, you don't have to specify the module title or modular credits of the module you are adding - GradPad
@@ -172,8 +172,8 @@ To add the module:
 ![Add1](images/Add1.png)
 
 2. The *Result Display Box* will display the message "The following module has been successfully added", along with
- the details of the module. You will then be able to see the CS2101 module at the bottom of the *Completed Modules*
-  list.<br>
+ the details of the module. You will then be able to see the CS2101 module at the bottom of the *Completed Modules List*
+ .<br>
 ![Add2](images/Add2.png)
 
 ### Viewing all added modules: `list`
@@ -393,7 +393,7 @@ Scenario: <br>
 You used GradPad to draft a plan for the modules you're going to take, but now you wish to erase all of that and
  start a new plan. Instead of deleting every module one by one, you can simply delete them all at one go.
 
-The Clear command allows you to erase all modules from the *Completed Modules* list at one go with a single command.
+The Clear command allows you to erase all modules from the *Completed Modules List* at one go with a single command.
 
 To clear all modules:
 
@@ -404,7 +404,7 @@ To clear all modules:
 ![Clear2](images/Clear2.png)
 
 3. The *Result Display Box* will then display the message "GradPad has been cleared!" and the 
-`Completed Modules` list will now be empty, as shown below.
+*Completed Modules List* will now be empty, as shown below.
 ![Clear3](images/Clear3.png)
 
 <div markdown="block" class="alert alert-primary">

@@ -9,7 +9,7 @@ GradPad is an offline computer application meant to help Computer Science studen
 National University of Singapore (NUS) plan their modules with more ease. All module information is
 displayed through our simple and organised Graphical User Interface (GUI) created with JavaFX.
 GradPad is also optimised for users who prefer working on a Command Line Interface (CLI). It is written
-in Java, and has about 11k LoC.
+in Java, and has about 13k LoC.
 
 
 Given below are my contributions to the project.
@@ -26,9 +26,12 @@ Given below are my contributions to the project.
   
   * Highlights: This enhancement is a vital selling point of GradPad and will affect our future features. As the command
   deals with a lot of data and functionality, it required an in-depth analysis of design alternatives and OOP. The implementation
-  was also tedious as it required a lot of testing.
+  was also tedious as it required a lot of testing. Initially, we used the provided JsonGradPadStorage class to read JSON
+  file paths. However, we realised that our JAR release was not able to load the JSON files properly in runtime, due to
+  pathing issues. Hence, with help from fellow teammate Lau Siaw Sam and some further study, we managed to find another
+  way to read JSON files during runtime with the help of a ClassLoader, allowing our app to run smoothly during our release.
   
-  * Credits: *{mention here if you reused any code/ideas from elsewhere or if a third-party library is heavily used in the feature so that a reader can make a more accurate judgement of how much effort went into the feature}*
+  * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
 
 * **New Feature**: Added `science` command to check all the available Science Modules under the Computer Science Curriculum.
   
@@ -40,9 +43,10 @@ Given below are my contributions to the project.
   as we can now update our database for science modules without touching the other databases.
   
   * Highlights: This enhancement is vital to GradPad as it is part of our core `required` command feature. The command deals
-  with a fair bit of data and testing, making the implementation slightly difficult.
+  with a fair bit of data and testing, making the implementation slightly difficult. Faced the same issue as described above 
+  regarding accessing JSON files in our JAR release.
   
-  * Credits:
+  * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
   
 * **New Feature** Added `gem` command to check all the available General Education Modules available in NUS.
 
@@ -50,12 +54,14 @@ Given below are my contributions to the project.
   by Semester.
   
   * Justification: Saves users the time from searching and sieving through NUS websites and databases. Also, having the modules
-  sorted by their Semester Availability saves the user even more time, thus greatly improving user experience.
+  sorted by their Semester Availability saves the user even more time, thus greatly improving user experience. It is also
+  separated from other the above commands to remove clutter.
   
   * Highlights: This enhancement is vital to GradPad as it is part of our core `required` command feature. The command deals
-  with a fair bit of data and testing, making the implementation slightly difficult.
+  with a fair bit of data and testing, making the implementation slightly difficult. Faced the same issue as described above 
+  regarding accessing JSON files in our JAR release.
   
-  * Credits: 
+  * Credits: [Read a file from resources folder](https://mkyong.com/java/java-read-a-file-from-resources-folder/)
   
 * **Code contributed**: [RepoSense link](https://nus-cs2103-ay2021s1.github.io/tp-dashboard/#breakdown=true&search=yan-soon&sort=groupTitle&sortWithin=title&since=2020-08-14&timeframe=commit&mergegroup=&groupSelect=groupByRepos&checkedFileTypes=docs~functional-code~test-code~other)
 
@@ -63,7 +69,7 @@ Given below are my contributions to the project.
   * Minutes Taker during meetings and consultations.
   * Assign weekly workload to team.
   * Provide feedback constantly, to teammate's code.
-  [(Example: #111)](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
+  [Comments made](https://nus-cs2103-ay2021s1.github.io/dashboards/contents/tp-comments.html)
 
 * **Enhancements to existing features**:
   * Refactored `Command`, `Parser` and `Storage` Component of AB3 code base
@@ -72,6 +78,9 @@ Given below are my contributions to the project.
   (Pull request [\#70](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/70))
   * Added Assertions to Model Component.
   (Pull request [\#99](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/99))
+  * Added tests to existing features to improve overall Test Coverage.
+  (Pull requests [\#197](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/197),
+  [\#204](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/204))
 
 * **Documentation**:
   * User Guide:
@@ -80,7 +89,8 @@ Given below are my contributions to the project.
     [\#117](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/117),
     [\#134](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/134))
     * Used Markdown to write Tips and Notes to make UG more visually stunning.
-    (Pull requests [\#134](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/134))
+    (Pull requests [\#134](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/134),
+    [\#218](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/218))
     * Improved sentence structuring and language use in UG to make it more user-centric.
     (Pull requests [\#45](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/45),
     [\#70](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/70),
@@ -88,12 +98,17 @@ Given below are my contributions to the project.
     [\#134](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/134))
     
   * Developer Guide:
-    * Added implementation details for the features `add`, `required`, `science` and `gem`.
-    (Pull requests [\#45](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/45))
+    * Added implementation details for the features `add`, `required`, `science` and `gem`
+    and the Storage Component.
+    (Pull requests [\#45](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/45),
+    [\#180](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/180)
+    [\#218](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/218))
     * Added Introduction and 'About This Guide' section to the DG.
     (Pull request [\#70](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/70))
     * Added Target User Profile, Value Proposition, User Stories and Use Cases to the DG.
     (Pull request [\#19](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/19))
+    * Added Manual Testing for all features to the DG.
+    (Pull request [\#180](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/180))
     * Refactored `Logic` component portion of DG.
     (Pull request [\#45](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/45))
 
@@ -101,7 +116,6 @@ Given below are my contributions to the project.
   * PRs reviewed (with non-trivial review comments):
   [\#100](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/100),
   [\#111](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/111)
-  * Contributed to forum discussions (examples: [1](), [2](), [3](), [4]())
   * Reported bugs and suggestions for other teams in the class
   (examples: [\#1](https://github.com/yan-soon/ped/issues/1),
   [\#2](https://github.com/yan-soon/ped/issues/2),
@@ -113,5 +127,3 @@ Given below are my contributions to the project.
   [\#8](https://github.com/yan-soon/ped/issues/8),
   [\#9](https://github.com/yan-soon/ped/issues/9),
   [\#10](https://github.com/yan-soon/ped/issues/10))
-
-* _{you can add/remove categories in the list above}_

@@ -293,6 +293,15 @@ The following sequence diagram illustrates this flow:
 
 ![NusmodsScrapeModuleSequenceDiagram](images/NusmodsScrapeModuleSequenceDiagram.png)
 
+### Stalled feature
+
+GradPad stalls certain commands that mutate/erase data so that users can provide confirmation as to
+whether or not they wish to proceed with the commands. This feature relies heavily on each commands' `requiresStall()` method.
+
+This is the flow of logic when stalling commands:
+
+
+
 ### Add feature
 GradPad allows users to add modules to their list.
 

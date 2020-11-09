@@ -643,7 +643,7 @@ to set up the `sem1Storage` and `sem2Storage` objects with the all the relevant 
 9. Then, `GemCommand.execute()` calls for `Model` to filter out all existing GE modules in GradPad from both
 `sem1GeModules` and `sem2GeModules`, via the `hasModule()` method.
 
-10. Finally, a `CommandResult` is created with both filtered semester GE modules, displaying all the available
+10. Finally, a `CommandResult` is created with all the filtered GE modules, displaying all the available
 GE modules by Semester.
 
 The following sequence diagram illustrates how the `gem` command is executed.

@@ -32,7 +32,7 @@ public class JsonGradPadStorage implements GradPadStorage {
     }
 
     @Override
-    public Optional<ReadOnlyGradPad> readGradPad() throws DataConversionException, IOException {
+    public Optional<ReadOnlyGradPad> readGradPad() throws DataConversionException {
         return readGradPad(filePath);
     }
 

@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
 import javafx.collections.ObservableList;
 import seedu.address.commons.exceptions.DataConversionException;
 import seedu.address.commons.exceptions.IllegalValueException;
-import seedu.address.logic.commands.GemCommand;
-import seedu.address.model.Model;
 import seedu.address.model.ReadOnlyGradPad;
 import seedu.address.model.module.Module;
 
@@ -24,10 +22,8 @@ public class GemCommandStorageTest {
     public static final String TEST_FOUNDATION_PATH = "src/main/resources/data/foundationmodules.json";
     private GemCommandStorage storage = new GemCommandStorage();
     private ObservableList<Module> testModules;
-    private Model model;
-    private GemCommand gemCommand = new GemCommand();
 
-    public void setUpTestModules(Path path) throws IOException, DataConversionException {
+    public void setUpTestModules(Path path) throws DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(path);
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         testModules = gradPad.getModuleList();

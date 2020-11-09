@@ -27,7 +27,7 @@ public class RequiredCommandStorageTest {
     private RequiredCommandStorage storage = new RequiredCommandStorage();
     private ObservableList<Module> requiredFoundation;
     private Map preclusionMap;
-    public void setUpRequiredFoundation() throws IOException, DataConversionException {
+    public void setUpRequiredFoundation() throws DataConversionException {
         JsonGradPadStorage storage = new JsonGradPadStorage(Paths.get(TEST_FOUNDATION_PATH));
         ReadOnlyGradPad gradPad = storage.readGradPad().get();
         requiredFoundation = gradPad.getModuleList();

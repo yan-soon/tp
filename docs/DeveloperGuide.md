@@ -566,11 +566,11 @@ The following sequence diagram illustrates how the `required` command is execute
 
 The `science` command allows users to view all available Science modules available on the Computer Science curriculum.
 
-When the command is executed, a list of all available Science modules will be displayed on the `Command Line Display`.
+When the command is executed, a list of all available Science modules will be displayed on the `Result Display`.
 
 This is achieved by tapping into the `RequiredCommandStorage` class to extract and parse the Science modules, while the
 `ScienceCommand` class handles the logic of displaying the modules. This command is separated from the `required`
-command to avoid cluttering of the `Command Line Display`. 
+command to avoid cluttering of the `Result Display`. 
 
 As with all operations in GradPad, the `ScienceCommand` class handles the execution of `science` operations.
 
@@ -606,11 +606,11 @@ The following sequence diagram illustrates how the `science` command is executed
 
 The `gem` command allows users to view all available General Education (GE) modules available in NUS.
 
-When the command is executed, a list of all available GE modules will be displayed on the `Command Line Display`.
+When the command is executed, a list of all available GE modules will be displayed on the `Result Display`.
 
 This is achieved with the `GemCommand` and `GemCommandStorage` class. The `GemCommandStorage` class
 handles the extracting and parsing of JSON module data while the `GemCommand` handles the logic of displaying the
-modules. This command is separated from `required` to avoid cluttering up the `Command Line Display` due to the hefty
+modules. This command is separated from `required` to avoid cluttering up the `Result Display` due to the hefty
 amount of GE modules displayed.
 
 As with all operations in GradPad, the `GemCommand` class handles the execution of `gem` operations.
@@ -909,13 +909,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-**Use case: UC01 - Delete a Module from `Completed Modules`**
+####**Use case: UC01 - Delete a module from `Completed Modules`**
 
 **MSS**
 
 1.  User requests to delete a specific Module in the `Completed Modules`
 2.  GradPad deletes the module
-3.  GradPad displays the deleted module onto the `Command Line Display`
+3.  GradPad displays the deleted module onto the `Result Display`
 
     Use case ends.
 
@@ -931,13 +931,13 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
       
-**Use case : UC02 - Add a Module into `Completed Modules`**
+####**Use case : UC02 - Add a module into `Completed Modules`**
 
 **MSS**
 
 1. User requests to add a module into the `Completed Modules`
 2. GradPad adds the module into `Completed Modules`
-3. GradPad displays the module added onto the `Command Line Display`
+3. GradPad displays the module added onto the `Result Display`
 
     Use case ends.
     
@@ -949,7 +949,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
-**Use case : UC03 - View help**
+####**Use case : UC03 - View help**
 
 **MSS**
 
@@ -958,7 +958,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case : UC04 - View all current modules**
+####**Use case : UC04 - View all `Completed Modules`**
 
 **MSS**
 
@@ -967,66 +967,104 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-**Use case: UC05 - Edit a Module in `Completed Modules`**
+####**Use case: UC05 - Edit a module in `Completed Modules`**
 
-1. User requests to list all modules in `Completed Modules`
-2. GradPad shows the list of modules in `Completed Modules`
-3. User requests to edit a module in `Completed Modules`
-4. Module is replaced with updated fields
+1. User requests to edit a module in `Completed Modules`
+2. Module is replaced with updated fields
+3. GradPad displays the module edited onto the `Result Display`
     
     Use case ends.
 
 **Extensions**
 
-* 2a. The list of modules in `Completed Modules` is empty.
+* 1a. The module does not exist in `Completed Modules`.
+
+    * 1a1. GradPad shows an error message.
+    
+        Use case ends.
+
+* 1b. No field is edited for the module.
+
+    * 1b1. GradPad shows an error message.
+       
+        Use case ends.
+    
+* 1c. Edited module does not exist in NUS.
+
+    * 1c1. GradPad shows an error message.
+    
+        Use case ends.
+    
+        
+* 1d. The input fields format is invalid.
+    
+    * 1d1. GradPad shows an error message.
+        
+        Use case ends.
+        
+####**Use case : UC06 - Find modules in `Completed Modules`**
+
+**MSS**
+
+1. User requests to find modules in `Completed Modules` using keywords.
+2. GradPad displays the modules found onto the `Result Display`
 
     Use case ends.
     
-* 3a. The given index is invalid.
-    
-    * 3a1. GradPad shows an error message.
-    
-        Use case resumes at step 2.
-        
-* 3b. The input fields format is invalid.
-    
-    * 3b1. GradPad shows an error message.
-        
-        Use case resumes at step 2.
+**Extensions**
 
-**Use case : UC06 - View required modules in CS curriculum**
+* 1a. No modules or tag found.
+    
+    * 1a1. GradPad displays no modules found message onto `Result Display`.
+    
+        Use case ends.       
+
+####**Use case : UC07 - View required modules in CS curriculum**
 
 **MSS**
 
 1. User requests to view all required modules in CS curriculum
-2. GradPad displays the required modules in CS curriculum onto the `Command Line Display`
+2. GradPad displays the required modules in CS curriculum onto the `Result Display`
 
     Use case ends.
-  
-**Use case : UC07 - Search for module details**
+    
+####**Use case : UC08 - View all available General Education Modules offered in NUS**
 
 **MSS**
 
-1. User requests to search for a module in the CS curriculum.
-2. GradPad displays the module details in the `Command Line Display`
+1. User requests to view all available General Education Modules offered in NUS.
+2. GradPad displays the all available General Education modules onto the `Result Display`
+
+    Use case ends.    
+
+####**Use case : UC09 - View all available Science modules in the CS curriculum**
+
+**MSS**
+
+1. User requests to view all available Science modules in the CS curriculum.
+2. GradPad displays the all available Science modules in the CS curriculum onto the `Result Display`
+
+    Use case ends. 
+    
+  
+####**Use case : UC010 - Search for module details**
+
+**MSS**
+
+1. User requests to search for a module in NUS.
+2. GradPad displays the module details in the `Result Display`
 
     Use case ends.
     
 **Extensions**
-  
-* 1a. The input command format is invalid.
+
+* 1a. The module searched does not exist in NUS.
 
     * 1a1. GradPad shows an error message.
-    
-      Use case ends.  
-
-* 2a. The module searched does not exist in the required module list.
-
-    * 2a1. GradPad shows an error message.
         
-        Use case ends.
-        
-**Use case : UC08 - exit GradPad**
+        Use case ends.              
+
+####**Use case : UC11 - exit GradPad**
 
 **MSS**
 
@@ -1035,7 +1073,6 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-*{More to be added}*
 
 ### Non-Functional Requirements
 

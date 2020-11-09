@@ -446,7 +446,14 @@ To exit:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GradPad home folder.
+**A**:
+1. In your old computer, find the `gradPad.json` file within your GradPad home folder and transfer this file
+to your new computer.
+
+2. On your new computer, launch GradPad once. In GradPad's home folder, you should now see that
+an empty `gradPad.json` file has been created.
+
+3. Delete this empty file and replace it with the `gradPad.json` file from your old computer.
 
 --------------------------------------------------------------------------------------------------------------------
 

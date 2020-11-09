@@ -55,8 +55,8 @@ Given below are my contributions to the project.
 * **New Feature**: Added a command to allow users to view all tags in GradPad
     * What it does: Allows users to view a list of all the tags they've added.
     
-    * Justification: This feature allows user check if a certain tag exists. This is especially useful when they need
-    to know what tags they can use to filter their list of modules (see feature above).
+    * Justification: This feature allows users to check if a certain tag exists. This is especially useful when they
+     need to know what tags they can use to filter their list of modules (see feature above).
     
     * Highlights: The implementation of this feature is not as straightforward as it sounds. In the original AB3
     project, a module's tags were implemented by storing a list of `Tag` objects within each `Module`.
@@ -64,7 +64,7 @@ Given below are my contributions to the project.
     have to iterate through every module in GradPad, iterate through each module's list of `Tag` objects, filter them,
     and then display them.
     As such, I re-implemented the tags feature by creating a central class to hold a collection of unique tags in
-    GradPad. All `Module` objects thus referenced unique `Tag` objects within this collection, rather than store their
+    GradPad. All `Module` objects thus reference unique `Tag` objects within this collection, rather than store their
     own duplicate copies of `Tag`s. Printing out all tags would just involve printing this collection out. This
     also meant that I had to rework the implementation for the addition, editing, and deletion of modules to use
     this new collection of unique tags.
@@ -88,6 +88,7 @@ Given below are my contributions to the project.
   * User Guide:
     * Added documentation for the feature `tag` [\#131](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/131)
     * Added documentation for the feature `edit` [\#64](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/64)
+    * Added documentation for the feature `clear` [\#216](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/216)
     * Added documentation to explain the automatic addition of module titles and modular credits 
     [\#83](https://github.com/AY2021S1-CS2103T-T09-1/tp/pull/64)
     * Updated documentation for the features `add`, `find`, `edit` 

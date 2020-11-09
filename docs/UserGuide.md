@@ -11,37 +11,36 @@ title: User Guide
 ## GradPad
 
 We are a team of **Computer Science Undergraduates** working together to solve **module management** and **graduation planning** problems
-faced by fellow Computer Science students. Below is the detailed User Guide for effective use of GradPad which can help you
+faced by fellow Computer Science students. Below is the detailed User Guide for effective use of GradPad which can 
 ease and improve your **module planning process**.
 
 GradPad is a one-stop solution to **module management** for Computer Science Undergraduates.
 Planning for modules has always been a tedious process but it does not have to be.
 
 The current approach to planning and tracking graduation requirements is to open up tabs after tabs of NUS resources such as 
-[NUSMods](https://nusmods.com/) and [websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) of the School of
- Computing, which can be messy at times. 
+[NUSMods](https://nusmods.com/) and  School of Computing 
+[websites](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/), which can be messy at times. 
 So, our team has come up with the idea of an **easy-to-use**, **all-in-one application** that
 can ease the process of **module management** for Computer Science Undergraduates.
 
 GradPad **consolidates** the modules you have taken and **displays** the remaining required modules to
 ease your module planning process. A **module searching platform** is also included in GradPad, providing easy
-**navigation** of modules.
+**access** to module information.
 
 This user guide introduces what you can do with GradPad and the steps needed to do them. In addition,
 it includes a [quick start guide](#quick-start) that walks you through the installation and set-up process.
 With this guide, you'll be ready to use GradPad in no time.
 
 --------------------------------------------------------------------------------------------------------------------
-## NUSMods integration  
-
-![NUSMods](images/nusmods.png)
+## NUSMods integration
+![NUSMods](images/nusmods.png) 
 
 To streamline your module searching process with added convenience, GradPad integrates data from [NUSMods](https://nusmods.com/). With this, 
 you no longer have to visit NUSMods separately to look up module information. Instead, GradPad offers you all that data 
-in the same app you use to plan your modules itself.
+in the same app you use to plan your modules.
 
-We have requested and was granted permission from NUSMods to utilise their platform to retrieve data such as NUS course catalogues
-and **module information**. These data are retrieved on the go in **realtime**, directly from NUSMods.
+We have requested and was granted permission from NUSMods to utilise their platform to retrieve module data. These data
+are retrieved in **realtime**, directly from NUSMods.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -51,28 +50,29 @@ Follow the steps below to learn how to get started with GradPad!
 
 1. Ensure you have Java `11` or above installed in your Computer.
 
-1. Download the latest `GradPad.jar` from [here](https://github.com/AY2021S1-CS2103T-T09-1/tp/releases).
+1. Download the latest `gradPad.jar` from [here](https://github.com/AY2021S1-CS2103T-T09-1/tp/releases).
 
 1. Copy the file to the folder you want to use as the _home folder_ for your GradPad.
 
 1. Ensure you have **internet connectivity** to fully utilise GradPad with the latest data from [NUSMods](https://nusmods.com/).
 
-1. Double-click the file to start the app. The Main Page similar to the below should appear in a few seconds. Note how the app contains some sample data.<br>
+1. Double-click the file to start the app. The Main Page similar to the image below should appear in a few seconds. Note
+ how the app contains some sample data.<br>
 
    ![Ui](images/AnnotatedUi.png)
 
 1. Type a command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will
  display the help page.<br>
-   Some example commands you can try:
-
-   * **`list`** : Lists all added modules.
+   Some other example commands you can try:
+   
+   * **`required`** : Shows a list of required modules in the CS curriculum.
+   
+   * **`search`** `CS2103T` : Searches for module named `CS2103T` from the NUSMods database 
+   (if connected to the internet) or from a local saved file.
 
    * **`add`** `CS2103T` : Adds a module named `CS2103T` to the GradPad.
 
    * **`delete`** `CS2103T` : Deletes the module named `CS2103T` in the current list.
-   
-   * **`search`** `CS2103T` : Searches for module named `CS2103T` from the NUSMods database 
-   (if connected to the internet) or from a local saved file.
 
    * **`exit`** : Exits the app.
    
@@ -84,37 +84,47 @@ Follow the steps below to learn how to get started with GradPad!
 * You can still use GradPad without an internet connection. However, you will only be able to access modules
 within the NUS Computer Science [curriculum](https://www.comp.nus.edu.sg/programmes/ug/cs/curr/) while you're offline.
 * Detailed explanation of each command can be found [here](#commands).
-* Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all commands.
+* Refer to the [Feature Summary List](#feature-summary-list) below for a summary of all features.
 </div>
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## Feature Summary List
-A consolidated view of GradPad's feature list is listed below in a table form for easy reference.
+A consolidated view of GradPad's features is listed in the table below for easy reference.
+
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+* Italicised words (e.g. *Completed Modules List*) refer to actual sections on the GradPad user interface.
+</div>
 
  Features                         |    Description
  ----------------------------------------|------------
- Add a Module                            | Allows you to add any module of choice to the `Completed Modules` list for tracking purposes
- View Added Modules                      | Allows you to check all the modules you've added  to `Completed Modules`
- Find Modules from Completed Modules     | Allows you to look for modules in `Completed Modules` using keywords
- Delete a Module                         | Allows you to delete unwanted modules in `Completed Modules`
- Edit a Module                           | Allows you to edit the details of a module you've already added to `Completed Modules`
+ Add a Module                            | Allows you to add any module of choice to the *Completed Modules List* for tracking purposes
+ View Added Modules                      | Allows you to check all the modules you've added  to *Completed Modules List*
+ Find Modules in Completed Modules       | Allows you to look for modules in *Completed Modules List* using keywords
+ Delete a Module                         | Allows you to delete unwanted modules from *Completed Modules List*
+ Edit a Module                           | Allows you to edit the details of a module you've already added to *Completed Modules List*
  Check Modular Credits                   | Allows you to check your current modular credit tally
- View all Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the `Result Display`
- View all General Education Modules      | Allows you to display all available General Education Modules offered in NUS, onto the `Result Display`
- View all Science Modules                | Allows you to display all viable Science modules in the Computer Science curriculum onto the `Result Display`
- Search for a Module                     | Allows you to search for any module available in NUS and display the module details in the `Result Display`
- Find Tags from Completed Modules        | Allows you to check all tags that are used in `Completed Modules`
+ View all Required Modules               | Allows you to display all required modules in the Computer Science curriculum onto the *Result Display Box*
+ View all General Education Modules      | Allows you to display all available General Education Modules offered in NUS onto the *Result Display Box*
+ View all Science Modules                | Allows you to display all available Science modules in the Computer Science curriculum onto the *Result Display Box*
+ Search for a Module                     | Allows you to search for any module available in NUS and display the module details onto the *Result Display Box*
+ Find Tags from Completed Modules        | Allows you to check all tags that are used in *Completed Modules List*
+ Clear all Modules                       | Allows you to delete all the modules from *Completed Modules List*
  View Help                               | Allows you to view a list of all possible commands
- Exit the Program                        | Allows you to terminate the GradPad program
+ Exit the Program                        | Allows you to exit GradPad
 
 
 Refer to [Commands](#commands) below for details on all commands.
 
 ## Commands
 
-Detailed explanations of each commands and their respective usage are listed under this section.
+This section contains detailed explanations of all commands and their respective usages.
 
+Each command explanation starts with a usage scenario, followed by an explanation of what the command does, and ends
+off by showing you how to use it. 
+ 
 <div markdown="block" class="alert alert-info">
 
 **:information_source: Notes about the Command Format and Feature Descriptions:**<br>
@@ -126,7 +136,9 @@ For example, if the command specifies `edit MODULE_CODE c/NEW_MODULE_CODE t/core
 * When a command does not require parameters, e.g. `help`, adding extraneous words, e.g `help me` will not affect the
  command, allowing the command to run as per normal.
 
-* Highlighted words (e.g. `this`) refer to actual commands or sections on the GradPad user interface.
+* Highlighted words (e.g. `this`) refer to actual commands.
+
+* Italicised words (e.g. *Completed Modules List*) refer to actual sections on the GradPad user interface.
 
 </div>
 
@@ -136,7 +148,7 @@ Scenario:<br>
 You have just completed the CS2101 module, and you want to add the module into GradPad to track your academic progress. 
 You found the module to be enjoyable so you would like to add tags to remind yourself of how fun the module was.
 
-The `add` command allows you to add a module you have completed into the Completed Modules list.
+The `add` command allows you to add a module you have completed into the *Completed Modules List*.
 
 You can add a module by specifying a valid module code. You can also include multiple tags using the prefix `t/` but they are optional.
 Conveniently, you don't have to specify the module title or modular credits of the module you are adding - GradPad
@@ -155,10 +167,12 @@ In such a case, only the first tag amongst a group of duplicates will be added. 
 
 To add the module:
 
-1. Type `add cs2101 t/superbmodule t/superfun` into the command box, and press **Enter** to execute it.<br>
+1. Type `add cs2101 t/superbmodule t/superfun` into the *Command Box*, and press **Enter** to execute it.<br>
 ![Add1](images/Add1.png)
 
-2. The result display box will display the message "The following module has been successfully added", along with the details of the module. You will then be able to see the CS2101 module at the bottom of the Completed Modules list.<br>
+2. The *Result Display Box* will display the message "The following module has been successfully added", along with
+ the details of the module. You will then be able to see the CS2101 module at the bottom of the *Completed Modules List*
+ .<br>
 ![Add2](images/Add2.png)
 
 ### Viewing all added modules: `list`
@@ -273,8 +287,13 @@ To delete the module:
 
 ### Checking total modular credits: `checkmc`
 
-**Note:** A **Modular Credit** (MC) is a unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload, with
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Note:**<br>
+A **Modular Credit** (MC) is a unit of the effort, stated in terms of time, expected of a typical student in managing his/her workload, with
 an average of 20 MCs per semester.
+
+</div>
 
 Scenario:<br>
 You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirement.
@@ -367,6 +386,32 @@ If you are not connected to the internet, you can only search for modules that a
 2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
 ![Search2](images/Search2.png)
 
+### Clearing all modules in GradPad: `clear`
+
+Scenario: <br>
+You used GradPad to draft a plan for the modules you're going to take, but now you wish to erase all of that and
+ start a new plan. Instead of deleting every module one by one, you can simply delete them all at one go.
+
+The Clear command allows you to erase all modules from the *Completed Modules List* at one go with a single command.
+
+To clear all modules:
+
+1. Type `clear` into the command box, and press **Enter** to execute it.<br>
+![Clear1](images/Clear1.png)
+
+2. When you are prompted for a confirmation, type `yes` into the command box, and press **Enter**.<br>
+![Clear2](images/Clear2.png)
+
+3. The *Result Display Box* will then display the message "GradPad has been cleared!" and the 
+*Completed Modules List* will now be empty, as shown below.
+![Clear3](images/Clear3.png)
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Tip:<br>
+For experienced users, you can use the `fclear` command instead, to bypass the confirmation step!
+
+</div>
 
 ### Showing the help display: `help`
 
@@ -400,7 +445,14 @@ To exit:
 ## FAQ
 
 **Q**: How do I transfer my data to another Computer?<br>
-**A**: Install the app in the other computer and overwrite the empty data file it creates with the file that contains the data of your previous GradPad home folder.
+**A**:
+1. In your old computer, find the `gradPad.json` file within your GradPad home folder and transfer this file
+to your new computer.
+
+2. On your new computer, launch GradPad once. In GradPad's home folder, you should now see that
+an empty `gradPad.json` file has been created.
+
+3. Delete this empty file and replace it with the `gradPad.json` file from your old computer.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -416,6 +468,8 @@ This section is the table of all the commands available and their respective usa
 
 * Words in square brackets (e.g. `[c/module code]`) refers to **optional** input that can be entered.
 
+* For the `edit` command, at least the module code or tag is required for the command to function.
+
 </div>
 
 Action | Format | Example
@@ -423,13 +477,16 @@ Action | Format | Example
 **Add** | `add {module code} [t/tags]` | `add CS2100 t/core`
 **Edit** | `edit {module code} [c/module code] [t/tags]` | `edit cs2103 c/CS2103T t/core`
 **Delete** | `delete {module code}` | `delete CS2103T`
-**Completed Modules** | `list`
+**Force Delete** | `fdelete {module code}` | `fdelete CS2103T`
+**Completed Modules** | `list` | `list`
 **Find** | `find {module code or tag}` | `find CS2103T foundation fun`
-**Check MCs** | `checkmc`
-**Required Modules** | `required`
-**General Education Modules** | `gem`
-**Science Modules** | `science`
+**Check MCs** | `checkmc` | `checkmc`
+**Required Modules** | `required` | `required`
+**General Education Modules** | `gem` | `gem`
+**Science Modules** | `science` | `science`
 **Search module details** | `search {module code}` | `search CS2103T`
-**Check existing Tags** | `tags`
-**Help** | `help`
-**Exit** | `exit`
+**Check existing Tags** | `tags` | `tags`
+**Clear** | `clear` | `clear`
+**Force Clear** | `fclear` | `fclear`
+**Help** | `help` | `help`
+**Exit** | `exit` | `exit`

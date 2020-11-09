@@ -387,6 +387,32 @@ If you are not connected to the internet, you can only search for modules that a
 2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
 ![Search2](images/Search2.png)
 
+### Clearing all modules in GradPad: `clear`
+
+Scenario: <br>
+You used GradPad to draft a plan for the modules you're going to take, but now you wish to erase all of that and
+ start a new plan. Instead of deleting every module one by one, you can simply delete them all at one go.
+
+The Clear command allows you to erase all modules from the *Completed Modules* list at one go with a single command.
+
+To clear all modules:
+
+1. Type `clear` into the command box, and press **Enter** to execute it.<br>
+![Clear1](images/Clear1.png)
+
+2. When you are prompted for a confirmation, type `yes` into the command box, and press **Enter**.<br>
+![Clear2](images/Clear2.png)
+
+3. The *Result Display Box* will then display the message "GradPad has been cleared!" and the 
+`Completed Modules` list will now be empty, as shown below.
+![Clear3](images/Clear3.png)
+
+<div markdown="block" class="alert alert-primary">
+
+:bulb: Tip:<br>
+For experienced users, you can use the fclear command instead, to bypass the confirmation step!
+
+</div>
 
 ### Showing the help display: `help`
 

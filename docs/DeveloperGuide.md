@@ -765,37 +765,50 @@ When editing a module's tags, the old tags are simply "removed" as when
 
 #### Proposed Implementation
 
-The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history, stored internally as an `gradPadStateList` and `currentStatePointer`. Additionally, it implements the following operations:
+The proposed undo/redo mechanism is facilitated by `VersionedGradPad`. It extends `GradPad` with an undo/redo history,
+stored internally as an `gradPadStateList` and `currentStatePointer`. Additionally, it implements the 
+following operations:
 
 * `VersionedGradPad#commit()` — Saves the current GradPad state in its history.
 * `VersionedGradPad#undo()` — Restores the previous GradPad state from its history.
 * `VersionedGradPad#redo()` — Restores a previously undone GradPad state from its history.
 
-These operations are exposed in the `Model` interface as `Model#commitGradPad()`, `Model#undoGradPad()` and `Model#redoGradPad()` respectively.
+These operations are exposed in the `Model` interface as `Model#commitGradPad()`, `Model#undoGradPad()` 
+and `Model#redoGradPad()` respectively.
 
 Given below is an example usage scenario and how the undo/redo mechanism behaves at each step.
 
-Step 1. The user launches the application for the first time. The `VersionedGradPad` will be initialized with the initial GradPad state, and the `currentStatePointer` pointing to that single GradPad state.
+Step 1. The user launches the application for the first time. The `VersionedGradPad` will be initialized with 
+the initial GradPad state, and the `currentStatePointer` pointing to that single GradPad state.
 
 ![UndoRedoState0](images/UndoRedoState0.png)
 
-Step 2. The user executes `delete c/CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The `delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete c/CS2103T` command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted GradPad state.
+Step 2. The user executes `delete CS2103T` command to delete the `CS2103T` Module from the Completed Modules. The 
+`delete` command calls `Model#commitGradPad()`, causing the modified state of the GradPad after the `delete CS2103T` 
+command executes to be saved in the `gradPadStateList`, and the `currentStatePointer` is shifted to the newly inserted 
+GradPad state.
 
 ![UndoRedoState1](images/UndoRedoState1.png)
 
-Step 3. The user executes `add c/CS2100 …​` to add a new module. The `add` command also calls `Model#commitGradPad()`, causing another modified GradPad state to be saved into the `gradPadStateList`.
+Step 3. The user executes `add CS2100` to add a new module. The `add` command also calls `Model#commitGradPad()`, 
+causing another modified GradPad state to be saved into the `gradPadStateList`.
 
 ![UndoRedoState2](images/UndoRedoState2.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it will not call `Model#commitGradPad()`, so the GradPad state will not be saved into the `gradPadStateList`.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If a command fails its execution, it 
+will not call `Model#commitGradPad()`, so the GradPad state will not be saved into the `gradPadStateList`.
 
 </div>
 
-Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the `undo` command. The `undo` command will call `Model#undoGradPad()`, which will shift the `currentStatePointer` once to the left, pointing it to the previous GradPad state, and restores the GradPad to that state.
+Step 4. The user now decides that adding the module was a mistake, and decides to undo that action by executing the 
+`undo` command. The `undo` command will call `Model#undoGradPad()`, which will shift the `currentStatePointer` once 
+to the left, pointing it to the previous GradPad state, and restores the GradPad to that state.
 
 ![UndoRedoState3](images/UndoRedoState3.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 0, pointing to the initial GradPad state, then there are no previous GradPad states to restore. The `undo` command uses `Model#canUndoGradPad()` to check if this is the case. If so, it will return an error to the user rather
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 
+0, pointing to the initial GradPad state, then there are no previous GradPad states to restore. The `undo` command 
+uses `Model#canUndoGradPad()` to check if this is the case. If so, it will return an error to the user rather
 than attempting to perform the undo.
 
 </div>
@@ -804,21 +817,31 @@ The following sequence diagram shows how the undo operation works:
 
 ![UndoSequenceDiagram](images/UndoSequenceDiagram.png)
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** The lifeline for `UndoCommand` should 
+end at the destroy marker (X) but due to a limitation of PlantUML, the lifeline reaches the end of diagram.
 
 </div>
 
-The `redo` command does the opposite — it calls `Model#redoGradPad()`, which shifts the `currentStatePointer` once to the right, pointing to the previously undone state, and restores the GradPad to that state.
+The `redo` command does the opposite — it calls `Model#redoGradPad()`, which shifts the `currentStatePointer` once 
+to the right, pointing to the previously undone state, and restores the GradPad to that state.
 
-<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index `gradPadStateList.size() - 1`, pointing to the latest GradPad state, then there are no undone GradPad states to restore. The `redo` command uses `Model#canRedoGradPad()` to check if this is the case. If so, it will return an error to the user rather than attempting to perform the redo.
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the `currentStatePointer` is at index 
+`gradPadStateList.size() - 1`, pointing to the latest GradPad state, then there are no undone GradPad states to restore. 
+The `redo` command uses `Model#canRedoGradPad()` to check if this is the case. If so, it will return an error to the 
+user rather than attempting to perform the redo.
 
 </div>
 
-Step 5. The user then decides to execute the command `list`. Commands that do not modify the GradPad, such as `list`, will usually not call `Model#commitGradPad()`, `Model#undoGradPad()` or `Model#redoGradPad()`. Thus, the `gradPadStateList` remains unchanged.
+Step 5. The user then decides to execute the command `list`. Commands that do not modify the GradPad, such as `list`, 
+will usually not call `Model#commitGradPad()`, `Model#undoGradPad()` or `Model#redoGradPad()`. Thus, the 
+`gradPadStateList` remains unchanged.
 
 ![UndoRedoState4](images/UndoRedoState4.png)
 
-Step 6. The user executes `clear`, which calls `Model#commitGradPad()`. Since the `currentStatePointer` is not pointing at the end of the `gradPadStateList`, all GradPad states after the `currentStatePointer` will be purged. Reason: It no longer makes sense to redo the `add c/CS2100 …​` command. This is the behavior that most modern desktop applications follow.
+Step 6. The user executes `clear`, which calls `Model#commitGradPad()`. Since the `currentStatePointer` is not pointing 
+at the end of the `gradPadStateList`, all GradPad states after the `currentStatePointer` will be purged. Reason: It no 
+longer makes sense to redo the `add CS2100` command. This is the behavior that most modern desktop 
+applications follow.
 
 ![UndoRedoState5](images/UndoRedoState5.png)
 
@@ -838,8 +861,6 @@ The following activity diagram summarizes what happens when a user executes a ne
   itself.
   * Pros: Will use less memory (e.g. for `delete`, just save the module being deleted).
   * Cons: We must ensure that the implementation of each individual command are correct.
-
-_{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 

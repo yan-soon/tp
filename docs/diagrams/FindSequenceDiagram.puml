@@ -10,7 +10,7 @@ participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Model MODEL_COLOR_T1
-participant ":CompoundFindPredicate" as CompoundFindPredicate MODEL_COLOR
+participant "c:CompoundFindPredicate" as CompoundFindPredicate MODEL_COLOR
 participant ":Model" as Model MODEL_COLOR
 end box
 
@@ -30,16 +30,16 @@ deactivate FindCommandParser
 GradPadParser -> FindCommandParser : parse("cs foundation")
 activate FindCommandParser
 
-create FindCommand
-FindCommandParser -> FindCommand
-activate FindCommand
-
 create CompoundFindPredicate
-FindCommand -> CompoundFindPredicate
+FindCommandParser -> CompoundFindPredicate
 activate CompoundFindPredicate
 
-CompoundFindPredicate --> FindCommand
+CompoundFindPredicate --> FindCommandParser : c
 deactivate CompoundFindPredicate
+
+create FindCommand
+FindCommandParser -> FindCommand : new FindCommand(c)
+activate FindCommand
 
 FindCommand --> FindCommandParser : f
 deactivate FindCommand

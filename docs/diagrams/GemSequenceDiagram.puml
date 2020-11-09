@@ -5,9 +5,12 @@ box Logic LOGIC_COLOR_T1
 participant ":LogicManager" as LogicManager LOGIC_COLOR
 participant ":GradPadParser" as GradPadParser LOGIC_COLOR
 participant "G:GemCommand" as GemCommand LOGIC_COLOR
-participant "sem1Storage:GemCommandStorage" as GemCommandStorage LOGIC_COLOR
-participant "sem2Storage:GemCommandStorage" as GemCommandStorage2 LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
+end box
+
+box Storage STORAGE_COLOR_T1
+participant "sem1Storage:GemCommandStorage" as GemCommandStorage STORAGE_COLOR
+participant "sem2Storage:GemCommandStorage" as GemCommandStorage2 STORAGE_COLOR
 end box
 
 box Model MODEL_COLOR_T1

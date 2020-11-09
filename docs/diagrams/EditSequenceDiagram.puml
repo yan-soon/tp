@@ -8,18 +8,13 @@ participant ":EditCommandParser" as EditCommandParser LOGIC_COLOR
 participant ":ParserUtil" as ParserUtil LOGIC_COLOR
 participant ":EditModuleDescriptor" as EditModuleDescriptor LOGIC_COLOR
 participant ":ModuleInfoSearcher" as ModuleInfoSearcher LOGIC_COLOR
-participant ":ModuleInfo" as ModuleInfo LOGIC_COLOR
 participant "e:EditCommand" as EditCommand LOGIC_COLOR
 participant ":CommandResult" as CommandResult LOGIC_COLOR
 end box
 
 box Nusmods NUSMODS_COLOR_T1
 participant ":NusmodsDataManager" as NusmodsDataManager NUSMODS_COLOR
-participant ":DataFetcherManager" as DataFetcherManager NUSMODS_COLOR
-end box
-
-box Commons LOGIC_COLOR_T1
-participant ":HttpUtil" as HttpUtil LOGIC_COLOR_T3
+participant ":ModuleInfo" as ModuleInfo NUSMODS_COLOR
 end box
 
 box Model MODEL_COLOR_T1
@@ -66,18 +61,6 @@ activate ModuleInfoSearcher
 
 ModuleInfoSearcher -> NusmodsDataManager : getModuleInfo(code)
 activate NusmodsDataManager
-
-NusmodsDataManager -> DataFetcherManager : fetchModuleInfo(code)
-activate DataFetcherManager
-
-DataFetcherManager -> HttpUtil : makeGETRequest(API_URL)
-activate HttpUtil
-
-HttpUtil --> DataFetcherManager : moduleJsonResponse
-deactivate HttpUtil
-
-DataFetcherManager --> NusmodsDataManager : moduleInfo
-deactivate DataFetcherManager
 
 NusmodsDataManager --> ModuleInfoSearcher : moduleInfo
 deactivate NusmodsDataManager

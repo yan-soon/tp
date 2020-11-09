@@ -2,8 +2,8 @@ package seedu.address.logic.commands;
 
 import static seedu.address.commons.core.Messages.MESSAGE_LIST_SUCCESS;
 import static seedu.address.logic.commands.CommandTestUtil.assertCommandSuccess;
-import static seedu.address.logic.commands.CommandTestUtil.showModuleAtIndex;
-import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_MODULE;
+import static seedu.address.logic.commands.CommandTestUtil.showModuleWithCode;
+import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 import static seedu.address.testutil.TypicalModules.getTypicalGradPad;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -34,7 +34,7 @@ public class ListCommandTest {
 
     @Test
     public void execute_listIsFiltered_showsEverything() {
-        showModuleAtIndex(model, INDEX_FIRST_MODULE);
+        showModuleWithCode(model, CODE_FIRST_MODULE);
         assertCommandSuccess(new ListCommand(), model, MESSAGE_LIST_SUCCESS, expectedModel);
     }
 }

@@ -650,7 +650,10 @@ to be filled up by fetching a `RequiredCommandStorage` object.
 8. Inside the `setScienceModules()` method, the `setRequiredScience` method of the `RequiredCommandStorage` class
 is invoked, which sets `scienceModules` with the list of available Science modules.
 
-9. Finally, a `CommandResult` is created with the `scienceModules` to display the modules.
+9. Then, `ScienceCommand.execute()` calls for `Model` to filter out all existing Science modules in GradPad from
+`scienceModules`, via the `hasModule()` method.
+
+10. Finally, a `CommandResult` is created with the `filteredScienceModules` to display the modules.
 
 The following sequence diagram illustrates how the `science` command is executed.
 
@@ -691,7 +694,10 @@ objects.
 8. Within the `setSem1Storage` and `setSem2Storage` methods, various method calls are made for each GE pillar (Eg. GET, GER)
 to set up the `sem1Storage` and `sem2Storage` objects with the all the relevant `sem1GeModules` and `sem2GeModules`.
 
-9. Finally, a `CommandResult` is created with both the `sem1GeModules` and `sem2GeModules`, displaying all the available
+9. Then, `GemCommand.execute()` calls for `Model` to filter out all existing GE modules in GradPad from both
+`sem1GeModules` and `sem2GeModules`, via the `hasModule()` method.
+
+10. Finally, a `CommandResult` is created with all the filtered GE modules, displaying all the available
 GE modules by Semester.
 
 The following sequence diagram illustrates how the `gem` command is executed.

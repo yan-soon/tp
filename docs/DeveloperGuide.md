@@ -909,7 +909,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 (For all use cases below, the **System** is the `GradPad` and the **Actor** is the `user`, unless specified otherwise)
 
-####**Use case: UC01 - Delete a module from `Completed Modules`**
+**Use case: UC01 - Delete a module from `Completed Modules`**
 
 **MSS**
 
@@ -931,7 +931,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
       Use case resumes at step 1.
       
-####**Use case : UC02 - Add a module into `Completed Modules`**
+**Use case : UC02 - Add a module into `Completed Modules`**
 
 **MSS**
 
@@ -949,7 +949,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
       Use case ends.
       
-####**Use case : UC03 - View help**
+**Use case : UC03 - View help**
 
 **MSS**
 
@@ -958,7 +958,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-####**Use case : UC04 - View all `Completed Modules`**
+**Use case : UC04 - View all `Completed Modules`**
 
 **MSS**
 
@@ -967,7 +967,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-####**Use case: UC05 - Edit a module in `Completed Modules`**
+**Use case: UC05 - Edit a module in `Completed Modules`**
 
 1. User requests to edit a module in `Completed Modules`
 2. Module is replaced with updated fields
@@ -1002,7 +1002,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case ends.
         
-####**Use case : UC06 - Find modules in `Completed Modules`**
+**Use case : UC06 - Find modules in `Completed Modules`**
 
 **MSS**
 
@@ -1019,7 +1019,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     
         Use case ends.       
 
-####**Use case : UC07 - View required modules in CS curriculum**
+**Use case : UC07 - View required modules in CS curriculum**
 
 **MSS**
 
@@ -1028,7 +1028,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
     
-####**Use case : UC08 - View all available General Education Modules offered in NUS**
+**Use case : UC08 - View all available General Education Modules offered in NUS**
 
 **MSS**
 
@@ -1037,7 +1037,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.    
 
-####**Use case : UC09 - View all available Science modules in the CS curriculum**
+**Use case : UC09 - View all available Science modules in the CS curriculum**
 
 **MSS**
 
@@ -1047,7 +1047,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
     Use case ends. 
     
   
-####**Use case : UC010 - Search for module details**
+**Use case : UC010 - Search for module details**
 
 **MSS**
 
@@ -1064,7 +1064,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case ends.              
 
-####**Use case : UC011 - Check total modular credits**
+**Use case : UC011 - Check total modular credits**
 
 **MSS**
 
@@ -1073,7 +1073,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
     Use case ends.
 
-####**Use case : UC12 - exit GradPad**
+**Use case : UC12 - exit GradPad**
 
 **MSS**
 

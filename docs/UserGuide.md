@@ -61,7 +61,7 @@ Follow the steps below to learn how to get started with GradPad!
 
    ![Ui](images/Ui.png)
 
-1. Type the command in the command box and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
+1. Type the command in the _Command Box_ and press Enter to execute it. e.g. typing **`help`** and pressing Enter will open the help window.<br>
    Some example commands you can try:
 
    * **`list`** : Lists all added modules.
@@ -155,34 +155,37 @@ To add the module:
 ### Viewing all added modules: `list`
 
 Scenario:<br>
-You have filtered the Completed Modules list to show modules whose module codes contain 'cs1', and you wish to restore the list to view all the modules you have added.
+You have filtered the _Completed Modules List_ to show modules whose module codes contain 'cs1', and you wish to
+restore the list to view all the modules you have added.
 
-The `list` command allows you to view all the modules you have added into the Completed Modules list in GradPad using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`) and you wish to restore the list to its original state.
+The `list` command allows you to view all the modules you have added into the _Completed Modules List_ in GradPad
+using this command. This is especially useful when you have previously used a command that filters the list (i.e. `find`), and you wish to restore the list to its original state.
 
 To view all modules:
 
-1. Type `list` into the command box, and press **Enter** to execute it.
+1. Type `list` into the _Command Box_, and press **Enter** to execute it.
 ![List1](images/List1.png)
 
-2. The result display box will display the message "All your modules have been listed!", and you will be able to view all your previously added modules in the Completed Modules list.
+2. The _Result Display Box_ will display the message "All your modules have been listed!", and you will be able to
+view all your previously added modules in the _Completed Modules List_.
 ![List2](images/List2.png)
 
 ### Viewing all added tags: `tags`
 
 Scenario:<br>
-You wish to filter your `Completed Modules` list to display modules tagged as "foundation". However, you've added
+You wish to filter your _Completed Modules List_ to display modules tagged as "foundation". However, you've added
 tons of tags to tons of modules and so you can't remember if this tag actually exists. 
 
-The `tags` command allows you to view all the tags currently in your `Completed Modules` list in
- GradPad. This is useful when you want to see what tags you can filter your `Completed Modules` by (see the 
+The `tags` command allows you to view all the tags currently in your _Completed Modules List_ in
+ GradPad. This is useful when you want to see what tags you can filter your _Completed Modules List_ by (see the 
  `find` command below).
 
 To view all tags:
 
-1. Type `tags` into the command box, and press **Enter** to execute it.
+1. Type `tags` into the _Command Box_, and press **Enter** to execute it.
 ![Tags1](images/Tags1.png)
 
-2. The result display box will display a list of all existing tags.
+2. The _Result Display Box_ will display a list of all existing tags.
 ![Tag2](images/Tags2.png)
 
 ### Editing module details: `edit`
@@ -193,9 +196,9 @@ you actually think that the module was the best you'd taken in NUS.
 
 The `edit` command allows you to edit the details of a module that you have added into GradPad.
 
-You can edit a module by specifying the module code of the module in the Completed Modules list, followed by the
-fields you wish to edit with their respective prefixes, `c/` for new module code, `t/` for new tag. You may edit multiple fields in a
-single `edit` command. 
+You can edit a module by specifying the module code of the module in the _Completed Modules List_, followed by the
+fields you wish to edit with their respective prefixes, `c/` for new module code, `t/` for new tag. You may edit
+multiple fields in a single `edit` command. 
 
 Module title and modular credits for respective module code will be automatically updated with data from NUSMods.
  
@@ -211,10 +214,12 @@ Module title and modular credits for respective module code will be automaticall
 
 To edit the tag of an existing module:
 
-1. Type `edit cs2101 t/bestmodule` into the command box, and press **Enter** to execute it.<br>
+1. Type `edit cs2101 t/bestmodule` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Edit1](images/Edit1.png)
 
-2. The result display box will display the message "The following module has been successfully edited", along with the newly edited details of the module. You will also be able to see that the tags of the module displayed in the Completed Modules list has been replaced.
+2. The _Result Display Box_ will display the message "The following module has been successfully edited",
+along with the newly edited details of the module. You will also be able to see that the tags of the
+module displayed in the _Completed Modules List_ has been replaced.
 ![Edit2](images/Edit2.png)
 
 ### Finding a specific module or a group of modules: `find`
@@ -223,26 +228,29 @@ Scenario:<br>
 Let's say you have been adding a huge number of modules into GradPad, and you have lost track of the modules you 
 have added. You want to check and see all CS-coded modules with the "core" tag.
 
-The `find` command allows you to filter the Completed Modules list to display the modules that you want to see. 
+The `find` command allows you to filter the _Completed Modules List_ to display the modules that you want to see. 
 You can do this by specifying parts of the module code of the module(s) you wish to display.
 Additionally, you can also specify the tags of the module(s) you wish to display. Likewise, you can also simply
 specify parts of a tag instead of the entire tag.
 
-Instead of scrolling through the long Completed Modules list and checking the modules one by one, you can easily filter the list to display that module by `find`-ing said module.
+Instead of scrolling through the long _Completed Modules List_ and checking the modules one by one, you can easily
+filter the list to display that module by `find`-ing said module.
 
 To find the module:
 
-1. Type `find ma bestmodule` into the command box, and press **Enter** to execute it.<br>
+1. Type `find ma bestmodule` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Find1](images/Find1.png)
 
-2. The result display box will display the message "2 modules found!" and you will be able to see only the modules 
-whose module codes contain "ma" and modules with "bestmodule" as a tag in the Completed Modules list.
+2. The _Result Display Box_ will display the message "2 modules found!" and you will be able to see only the modules 
+whose module codes contain "ma" and modules with "bestmodule" as a tag in the _Completed Modules List_.
 ![Find2](images/Find2.png)
 
 ### Deleting a Module: `delete`
 
 Scenario:<br>
-You have added several modules into GradPad but you realised that you accidentally added an additional module 'CS2107' that you have not completed yet. If you no longer want that module in your Completed Modules list, you can simply delete it.
+You have added several modules into GradPad but you realised that you accidentally added an additional module 'CS2107'
+that you have not completed yet. If you no longer want that module in your _Completed Modules List_,
+you can simply delete it.
 
 The `delete` command allows you to remove a module you have added into GradPad.
 
@@ -250,14 +258,22 @@ You can delete a module by specifying the **module code** of the module. (Case i
 
 To delete the module:
 
-1. Type `delete cs2107` into the command box, and press **Enter** to execute it.<br>
+1. Type `delete cs2107` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Delete1](images/Delete1.png)
 
-2. When you are prompted for a confirmation, type `yes` into the command box, and press **Enter**.<br>
+2. When you are prompted for a confirmation, type `yes` into the _Command Box_, and press **Enter**.<br>
 ![Delete2](images/Delete2.png)
 
-3. The result display will display the message "The following module has been successfully deleted" along with the details of the module you deleted.
+3. The _Result Display Box_ will display the message "The following module has been successfully deleted" along
+with the details of the module you deleted.
 ![Delete3](images/Delete3.png)
+
+<div markdown="block" class="alert alert-primary">
+
+**:bulb: Tip:**<br>
+For experienced users, you can use the `fdelete` command instead, to bypass the confirmation step!
+
+</div>
 
 ### Checking total modular credits: `checkmc`
 
@@ -265,25 +281,28 @@ To delete the module:
 an average of 20 MCs per semester.
 
 Scenario:<br>
-You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or the 160MCs graduation requirements.
+You want to make sure you have hit the minimum criteria of 70MCs required for applying internship modules or
+the 160MCs graduation requirements.
 
 The `checkmc` command allows you to check the total amount of modular credits you have accumulated so far using this command.
 This gives you a rough gauge of the progress of your graduation planning.
 
 To check total modular credits:
 
-1. Type `checkmc` into the command box, and press **Enter** to execute it.
+1. Type `checkmc` into the _Command Box_, and press **Enter** to execute it.
 ![CheckMc1](images/CheckMc1.png)
 
-2. The result display box will display a message telling you how many modular credits you have accumulated so far.
+2. The _Result Display Box_ will display a message telling you how many modular credits you have accumulated so far.
 ![CheckMc2](images/CheckMc2.png)
 
 ### Checking required modules: `required`
 
 Scenario: <br>
-You have added several modules into your GradPad so far but you are unsure if they are part of the Computer Science curriculum. You can simply check by using the `required` command.
+You have added several modules into your GradPad so far but you are unsure if they are part of
+the Computer Science curriculum. You can simply check by using the `required` command.
 
-The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take, based on your `Completed Modules` list.
+The `required` command allows you to check the modules of the Computer Science curriculum you have yet to take,
+based on your _Completed Modules List_.
 
 <div markdown="block" class="alert alert-primary">
 
@@ -294,40 +313,44 @@ The `required` command is able to identify equivalent and precluded Modules! (Eg
 
 To check required modules:
 
-1. Type `required` into the command box, press **Enter** to execute it.
+1. Type `required` into the _Command Box_, press **Enter** to execute it.
 ![Required1](images/Required1.png)
 
-2. The result display box will then display all the modules you have yet to take for each particular field, as shown below.
+2. The _Result Display Box_ will then display all the modules you have yet to take for each particular field, as shown below.
 ![Required2](images/Required2.png)
 
 ### Checking General Education Modules: `gem`
 
 Scenario: <br>
-You wish to take some GE modules to clear your GE requirement, but you are unsure what modules are available. You can simply check by using the `gem` command.
+You wish to take some GE modules to clear your GE requirement, but you are unsure what modules are available.
+You can simply check by using the `gem` command.
 
-The `gem` command allows you to check all the available General Education (GE) modules that are available in NUS. To ease your planning, the `gem` command indicates which modules are available in Semester 1 and/or 2.
+The `gem` command allows you to check all the available General Education (GE) modules that are available in NUS.
+To ease your planning, the `gem` command indicates which modules are available in Semester 1 and/or 2.
 
 To check GE modules:
 
-1. Type `gem` into the command box, press **Enter** to execute it.
+1. Type `gem` into the _Command Box_, press **Enter** to execute it.
 ![Gem1](images/Gem1.png)
 
-2. The result display box will then display all the available GE modules that you can take, categorised into Semester 1 and 2, as shown below.
+2. The _Result Display Box_ will then display all the available GE modules that you can take,
+categorised into Semester 1 and 2, as shown below.
 ![Gem2](images/Gem2.png)
 
 ### Checking Science modules: `science`
 
 Scenario: <br>
-You wish to take a Science module to clear your Science requirement, but you forgot what modules are available. You can simply check by using the `science` command.
+You wish to take a Science module to clear your Science requirement, but you forgot what modules are available.
+You can simply check by using the `science` command.
 
 The `science` command allows you to check all the available Science modules of the Computer Science curriculum.
 
 To check Science modules:
 
-1. Type `science` into the command box, press **Enter** to execute it.
+1. Type `science` into the _Command Box_, press **Enter** to execute it.
 ![Science1](images/Science1.png)
 
-2. The result display box will then display all the available Science modules that you can take, as shown below.
+2. The _Result Display Box_ will then display all the available Science modules that you can take, as shown below.
 ![Science2](images/Science2.png)
 
 ### Searching for a module: `search`
@@ -339,7 +362,7 @@ Do they have any pre-requisites?). You can simply look up those details by using
 The `search` command allows you to search for any module available in NUS.
 
 You can search for a module by specifying the module code of the module. The essential module details will then be retrieved 
-from NUSMods database directly and displayed in the result display box.
+from NUSMods database directly and displayed in the _Result Display Box_.
 
 <div markdown="block" class="alert alert-info">
 
@@ -348,38 +371,40 @@ If your internet is down, you can only search for modules that are of the Comput
 
 </div>
 
-1. Type `search MA1521` into the command box, press **Enter** to execute it.
+1. Type `search MA1521` into the _Command Box_, press **Enter** to execute it.
 ![Search1](images/Search1.png)
 
-2. The result display box will then display all the relevant information about the module "MA1521", as shown below.
+2. The _Result Display Box_ will then display all the relevant information about the module "MA1521", as shown below.
 ![Search2](images/Search2.png)
 
 
 ### Showing the help display: `help`
 
 Scenario: <br>
-You are in the midst of planning your modules, but you suddenly forgot what commands are available to you. Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
+You are in the midst of planning your modules, but you suddenly forgot what commands are available to you.
+Simply refresh your memory by using the `help` command to see all available commands and their respective functions.
 
-The `help` command displays all of GradPad's available commands and how to use them, to you. This command is useful for first-timers or users who generally do not know how to use GradPad.
+The `help` command displays all of GradPad's available commands and how to use them, to you.
+This command is useful for first-timers or users who generally do not know how to use GradPad.
 
 To show the help display:
 
-1. Type `help` into the command box, and press **Enter** to execute it.<br>
+1. Type `help` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Help1](images/Help1.png)
 
-1. The result display box will display all of GradPad's commands along with examples on how to use them.<br>
+1. The _Result Display Box_ will display all of GradPad's commands along with examples on how to use them.<br>
 ![Help2](images/Help2.png)
 
 ### Exiting GradPad: `exit`
 
-Besides clicking the "close" button (red button) at the top of the GradPad window, you can exit GradPad using the `exit` command.
+Apart from clicking the "close" button (red button) at the top of the GradPad window, you can exit GradPad using the `exit` command.
 
 To exit:
 
-1. Type `exit` into the command box, and press **Enter** to execute it.<br>
+1. Type `exit` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Exit](images/Exit1.png)
 
-2. The result display box will display the message "Take care!" and after a 1.5 second delay, the application will terminate.<br>
+2. The _Result Display Box_ will display the message "Take care!" and after a 1.5 second delay, the application will terminate.<br>
 ![Exit2](images/Exit2.png)
 
 --------------------------------------------------------------------------------------------------------------------
@@ -393,7 +418,7 @@ To exit:
 
 ## Command summary
 
-This section is the table of all the commands available and their respective usage example in GradPad.
+This section is the table of all the commands available, and their respective usage example in GradPad.
 
 <div markdown="block" class="alert alert-info">
 

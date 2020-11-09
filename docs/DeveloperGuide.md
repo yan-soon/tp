@@ -853,7 +853,7 @@ _{more aspects and alternatives to be added}_
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Requirements**
+## **Appendix A: Requirements**
 
 ### Product scope
 
@@ -1041,7 +1041,7 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
 
 --------------------------------------------------------------------------------------------------------------------
 
-## **Appendix: Instructions for Manual Testing**
+## **Appendix B: Instructions for Manual Testing**
 
 Given below are instructions to test the app manually.
 
@@ -1402,7 +1402,7 @@ Test Cases:
    1. Open the jar file `gradpad.jar`<br>
    Expected: Saved data will reset to sample data and will be shown in the Completed Modules list.
 
-## **Appendix: Effort**
+## **Appendix D: Effort**
 
 ### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
 GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to

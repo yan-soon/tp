@@ -1064,7 +1064,16 @@ Priorities: High (must have) - `* * *`, Medium (nice to have) - `* *`, Low (unli
         
         Use case ends.              
 
-####**Use case : UC11 - exit GradPad**
+####**Use case : UC011 - Check total modular credits**
+
+**MSS**
+
+1. User requests to view total modular credits achieved.
+2. GradPad displays the total modular credits in the `Result Display`
+
+    Use case ends.
+
+####**Use case : UC12 - exit GradPad**
 
 **MSS**
 

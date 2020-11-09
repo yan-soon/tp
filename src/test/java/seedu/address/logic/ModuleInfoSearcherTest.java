@@ -18,7 +18,7 @@ import seedu.address.nusmods.NusmodsDataManagerTest;
 /**
  * Contains integration tests for {@code ModuleInfoSearcher}.
  */
-class ModuleInfoSearcherTest {
+public class ModuleInfoSearcherTest {
 
     private static final String CS1010X = "src/test/resources/NusmodsDataManagerTest/CS1010X.json";
 
@@ -56,5 +56,12 @@ class ModuleInfoSearcherTest {
         NusmodsDataManager stubManager = NusmodsDataManagerTest.getStubManager();
         ModuleInfoSearcher moduleInfoSearcherStub = new ModuleInfoSearcher(stubManager);
         assertThrows(CommandException.class, () -> moduleInfoSearcherStub.searchModule("CS2103T"));
+    }
+
+    public static class ModuleInfoSearcherStub extends ModuleInfoSearcher {
+        @Override
+        public ModuleInfo searchModule(String moduleCode) throws CommandException {
+            throw new CommandException("stub exception message");
+        }
     }
 }

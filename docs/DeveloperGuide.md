@@ -293,12 +293,41 @@ The following sequence diagram illustrates this flow:
 
 ![NusmodsScrapeModuleSequenceDiagram](images/NusmodsScrapeModuleSequenceDiagram.png)
 
+### Command Stalling feature
+
+GradPad stalls certain commands that erase data so that users can provide confirmation as to
+whether or not they wish to proceed with the commands. This feature relies heavily on each commands' `requiresStall()` method.
+
+This is the general flow of logic when handling commands:
+
+![StalledActivityDiagram](images/StalledActivityDiagram.png)
+
+
+1. If a command `requiresStall`, `LogicManager` will self-invoke its `handleStall()` to store the command to be stalled.
+
+2. `handleStall()` will then return a `CommandResult` which prompts the user for a confirmation.
+
+The following sequence diagram illustrates this flow:
+
+![StalledSequenceDiagram](images/StalledSequenceDiagram.png)
+
+If the user provides a `YesCommand`, the `stalledCommand` is executed.
+
+The following sequence diagram illustrates this flow:
+
+![ConfirmStalledSequenceDiagram](images/ConfirmStalledSequenceDiagram.png)
+
+However, if the user does not provide a `YesCommand`, the stalledCommand will be set to null, after which an abort message will be displayed.
+
+The following sequence diagram illustrates this flow:
+
+![CancelStalledSequenceDiagram](images/CancelStalledSequenceDiagram.png)
+
 ### Add feature
 GradPad allows users to add modules to their list.
 
 The following fields of a module are required (* for optional):
 * Module Code
-* Modular Credits
 * Tags*
 
 As with all operations in GradPad, the `AddCommand` class handles the execution of add operations.
@@ -314,15 +343,22 @@ Given below is how an add operation behaves at each step of its execution.
 
 4. `gradPadParser.parseCommand()` sees that this is an add command, and so uses the `AddCommandParser` class to create a corresponding `AddCommand`, using the `AddCommandParser.parse()` method.
 
-5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. new module code, new tags, etc.
+5. In `AddCommandParser.parse()`, the string input is first split into tokens, i.e. module code, tags, etc.
 
-6. Then, in the same method call, a new `Module` object is created from these tokens. It now stores the values that we want to add into our list.
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) from Nusmods.
 
-7. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
+7. Once the module information is retrieved, a new `Module` object is created from the module information and tags. It now stores the values that we want to add into our list.
 
-8. `Logic Manager` executes the newly created `AddCommand`.
+8. Lastly, in the same method call, an `AddCommand` is created with the new populated `Module`, and is passed back to the `LogicManager` in step 2.
 
-9. Finally, the `Model` is then updated by adding the new `Module` object.
+9. `Logic Manager` executes the newly created `AddCommand`.
+
+10. Finally, the `Model` is then updated by adding the new `Module` object.
+
+**Auto-Retrieval of Module Information**
+
+GradPad's `add` feature supports auto retrieval of module information from NUSMods, mainly a module's title and modular credits.
+This is to ensure that the modules added into GradPad are valid NUS modules, and the module information for each module is accurate.
 
 The following sequence diagram shows how the add command is executed.
 
@@ -333,16 +369,15 @@ GradPad allows users to edit modules that have already been added.
 
 The following fields of a module can be edited:
 * Module Code
-* Modular Credits
 * Tags
 
 As with all operations in GradPad, the `EditCommand` class handles the execution of edit operations.
 The `EditCommandParser` class helps to parse a user's input before creating the correct edit command.
 
 GradPad uses the `EditModuleDescriptor` class to facilitate edit operations. An `EditModuleDescriptor` is
-a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode`,
-`ModularCredit`, and `Tags` of an `EditModuleDescriptor`. It is also fine to omit any of them, which is important
-as we don't want to be overly-concerned with which fields are to be edited and which are not.
+a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode` and `Tags` of an `EditModuleDescriptor`,
+whereas the `ModuleTitle` and `ModularCredits` of a module will be retrieved automatically via NUSMods. 
+At least one field (`ModuleCode` or `Tags`) must be specified to successfully edit a module.
 
 Given below is how an edit operation behaves at each step of its execution.
 
@@ -357,18 +392,25 @@ class to create a corresponding `EditCommand`.
 
 5. In `EditCommandParser`, the string input is first split into tokens, i.e. new module code, new tags, etc.
 
-6. Then, in the same method call, an `EditModuleDescriptor` object is created from these tokens. It now stores
+6. The `ModuleInfoSearcher.searchModule()` is then called to retrieve module information (module title, modular credits, etc.) of the new module from Nusmods.
+
+7. Once the module information is retrieved, an `EditModuleDescriptor` object is created from the module information and tags. It now stores
 the new values that we want to update the target module with.
 
-7. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
+8. An `EditCommand` is then created with this populated `EditModuleDescriptor`, and is passed back to the
 `LogicManager` in step 2.
 
-8. `LogicManager` executes the newly created `EditCommand`.
+9. `LogicManager` executes the newly created `EditCommand`.
 
-9. The target module to be edited is retrieved. A copy of it is made and using the populated
+10. The target module to be edited is retrieved. A copy of it is made and using the populated
  `EditModuleDescriptor`, the fields that are to be updated are replaced with their new values.
  
-10. The `Model` is then updated by replacing the target module with its new updated copy.
+11. The `Model` is then updated by replacing the target module with its new updated copy.
+
+**Auto-Retrieval of Module Information**
+
+When a user wishes to edit the module code of a module, GradPad's `edit` feature supports auto retrieval of the new module information from NUSMods, mainly the module's title and modular credits.
+This is to ensure that newly edited modules are valid NUS modules, and the module information for the edited module is accurate.
 
 The following sequence diagram shows how the edit command is executed.
 
@@ -396,40 +438,52 @@ class to create a corresponding `DeleteCommand`, using the `DeleteCommandParser.
 6. A `DeleteCommand` is then created with the ModuleCode, and is passed back to the
 `LogicManager` in step 2.
 
-7. `LogicManager` executes the newly created `DeleteCommand`.
+7. `LogicManager` self-invokes its `handleStall()` method and returns a `CommandResult` which prompts the user for a confirmation.
 
-8. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
+8. When the user enters a `YesCommand`, `LogicManager` executes the stalled `DeleteCommand`.
+
+9. The target module to be deleted is retrieved, if it exists in the Completed Modules of GradPad. 
  
-9. The `Model` is then updated by removing the target module.
+10. The `Model` is then updated by removing the target module.
 
 The following sequence diagram shows how the delete command is executed.
 
 ![DeleteSequenceDiagram](images/DeleteSequenceDiagram.png)
 
+<div markdown="span" class="alert alert-info">:information_source: **Note:** If the user performs a Force Delete Operation, 
+the `LogicManager` will skip the part where it self-invokes its `handleStall()` method, and execute the command immediately.
+
+</div>
+
 ### Find feature
-GradPad allows users to find a specific module to check if that module has been added. This feature is especially useful 
+GradPad allows users to find a specific module or a group of modules with common tags or sequence of characters. This feature is especially useful 
 if there is a long list of modules currently in GradPad and users want to avoid the hassle of scrolling through the 
-entire list to find the module they are looking for.  
+entire list to look for specific module(s). 
 
 As with all operations in GradPad, the `FindCommand` class handles the execution of find operations.
 The `FindCommandParser` class helps to parse a user's input before creating the correct find command.
 
 Given below is a series of steps to show how a find operation behaves during its execution.
 
-1. The user types in a command string corresponding to a find operation, e.g. "find CS2103T".
+1. The user types in a command string corresponding to a find operation, e.g. "find cs foundation".
 
 2. This calls the `execute` method of the `LogicManager` class. The user input is passed in as a string.
 
 3. `Logic.execute()` then calls the `parseCommand`  method of the `GradPadParser` class to parse the string input.
 
 4. `GradPadParser.parseCommand()` identifies the command as a find command, and thus uses the `FindCommandParser`
-class to extract the string input as a predicate and subsequently create a corresponding `FindCommand` with said predicate.
+class to extract the string input as a list of keywords and create a `CompoundFindPredicate` with said list.
+
+5. `CompoundFindPredicate` will test every keyword in the list against the logical union of both predicates 
+`ModuleCodeContainsKeywordsPredicate` and `ModuleContainsTagsPredicate`, and returns the result.
+
+6. A corresponding `FindCommand` will then be created using this `CompoundFindPredicate`.
 
 5. This `FindCommand` is then passed back to the`LogicManager` in step 2.
 
 6. `LogicManager` executes the newly created `FindCommand`.
 
-7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate.
+7. `FindCommand.execute()` calls for `Model` to filter the GradPad list based on the given predicate(s).
 
 8. Finally, a `CommandResult` is created and returned to show the result of the execution.
 
@@ -1391,6 +1445,51 @@ Test Cases:
 
 1. Dealing with missing/corrupted data files
 
-   1. _{explain how to simulate a missing/corrupted file, and the expected behavior}_
+   1. Corrupt the current saved data file under `./data/gradpad.json`. One way is to add `-` into one of the module 
+   code.
+      
+   1. Open the jar file `gradpad.jar`<br>
+   Expected: No data shown in the Completed Modules list.
+   
+   1. Delete the data folder `./data`
+   
+   1. Open the jar file `gradpad.jar`<br>
+   Expected: Saved data will reset to sample data and will be shown in the Completed Modules list.
 
-1. _{ more test cases …​ }_
+## **Appendix: Effort**
+
+### 1. NusMods  ![NUSMods](images/nusmods_small.png) <br>
+GradPad is tightly integrated with the NUSMods public API by using it to retrieve NUS module information to display to
+users. This integration with NUSMods is definitely complex and not easy. Fortunately, one of our team members had some
+experience with web development and managed to integrate the API into GradPad. This allows GradPad to 
+retrieve up-to-date module data directly from NUSMods, making GradPad more relevant and adaptable.
+
+As if integrating GradPad, a Java application, with a public web API isn't tedious enough, we also had to meet the
+project constraint that GradPad should be able to function even without an active connection to the API. Ideally,
+it would be straightforward for us to simply scrape data from the API and store it in our own database via a DBMS,
+which is generally done in other applications to reduce dependency on external APIs. However, the module also
+forbids the use of a DBMS, which meant we had to come up with a way to scrape and store data in local files instead.
+At the end of the day, we spent a considerable effort to write a script in Java that scrapes data from the API
+, transforms them into Java objects, and serializes them into human-readable JSON files.
+
+### 2. NUS CS Curriculum
+Our target audience is Computer Science Undergraduates and so we had to get the NUS CS curriculum and utilize
+this data in GradPad. Our initial idea was to just store the entire list of modules in the CS curriculum into GradPad.
+However, we soon realized that there are way more modules than we had anticipated as there is a list of GEMs and 
+science modules that we had initially missed out. Besides this, there are also preclusions in some modules and
+equivalent modules with different module codes. These are tough challenges that we had to brainstorm hard to come up
+with innovative solutions to address them. Fortunately, our team managed to address these fundamental problems in the final product.
+
+### 3. UI
+Our GradPad Team has spent a considerable amount of effort on the UI aspect, from choosing the position of the result
+display and command box input, to the color theme that is the most pleasing to the audience. There should also be a
+special mention to Syafiq for coming up with the logo of GradPad from scratch, personalizing GradPad's Ui to our target
+audience. Our team absolutely loves the color theme we have ended up with and we believe our target audience (Computer
+Science Undergraduate) will too.
+
+### 4. Overall
+As a whole, we believe that even though this project was rather demanding and time-consuming, we thoroughly enjoyed 
+working with one another. Right from the start, we helped each other with the setting up of Github and the process of
+the project's workflow. All of us were also very encouraging and constantly reviewed each other's pull requests with
+comprehensive comments, allowing us to learn from each other's strengths in coding. We are definitely proud of GradPad
+, and believe that it will serve its purpose to the fullest potential.

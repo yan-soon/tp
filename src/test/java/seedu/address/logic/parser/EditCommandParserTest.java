@@ -25,14 +25,17 @@ import static seedu.address.logic.commands.CommandTestUtil.VALID_TITLE_CS3216;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_TAG;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseFailure;
 import static seedu.address.logic.parser.CommandParserTestUtil.assertParseSuccess;
+import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_FIRST_MODULE;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_SECOND_MODULE;
 import static seedu.address.testutil.TypicalModuleCodes.CODE_THIRD_MODULE;
 
 import org.junit.jupiter.api.Test;
 
+import seedu.address.logic.ModuleInfoSearcherTest;
 import seedu.address.logic.commands.EditCommand;
 import seedu.address.logic.commands.EditCommand.EditModuleDescriptor;
+import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.module.ModuleCode;
 import seedu.address.testutil.EditModuleDescriptorBuilder;
 
@@ -189,5 +192,14 @@ public class EditCommandParserTest {
         EditCommand expectedCommand = new EditCommand(targetCode, descriptor);
 
         assertParseSuccess(parser, userInput, expectedCommand);
+    }
+
+    @Test
+    public void parse_moduleSearchFailure_throwsCommandException() {
+        parser = new EditCommandParser(new ModuleInfoSearcherTest.ModuleInfoSearcherStub());
+
+        // still provide valid user input to enforce at-most-one-invalid-input heuristic
+        String userInput = CODE_FIRST_MODULE + CODE_DESC_CS2103T_WITH_PREFIX;
+        assertThrows(ParseException.class, () -> parser.parse(userInput));
     }
 }

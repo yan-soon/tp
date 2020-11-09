@@ -418,10 +418,10 @@ The Clear command allows you to erase all modules from the *Completed Modules Li
 
 To clear all modules:
 
-1. Type `clear` into the command box, and press **Enter** to execute it.<br>
+1. Type `clear` into the _Command Box_, and press **Enter** to execute it.<br>
 ![Clear1](images/Clear1.png)
 
-2. When you are prompted for a confirmation, type `yes` into the command box, and press **Enter**.<br>
+2. When you are prompted for a confirmation, type `yes` into the _Command Box_, and press **Enter**.<br>
 ![Clear2](images/Clear2.png)
 
 3. The *Result Display Box* will then display the message "GradPad has been cleared!" and the 

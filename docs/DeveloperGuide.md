@@ -345,9 +345,9 @@ As with all operations in GradPad, the `EditCommand` class handles the execution
 The `EditCommandParser` class helps to parse a user's input before creating the correct edit command.
 
 GradPad uses the `EditModuleDescriptor` class to facilitate edit operations. An `EditModuleDescriptor` is
-a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode`,
-`ModularCredit`, and `Tags` of an `EditModuleDescriptor`. It is also fine to omit any of them, which is important
-as we don't want to be overly-concerned with which fields are to be edited and which are not.
+a temporary bridge that holds the newly-edited fields of a module. You can set the `ModuleCode` and `Tags` of an `EditModuleDescriptor`,
+whereas the `ModuleTitle` and `ModularCredits` of a module will be retrieved automatically via NUSMods. 
+At least one field (`ModuleCode` or `Tags`) must be specified to successfully edit a module.
 
 Given below is how an edit operation behaves at each step of its execution.
 
